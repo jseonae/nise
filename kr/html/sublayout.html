@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="ko" data-krds-mode="light">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="format-detection" content="telephone=no">
+  <title>서브 레이아웃 | 사용자</title>
+
+  <!-- 파비콘 (KRDS 1.1.0) -->
+  <link rel="icon" type="image/svg+xml" href="../../krds/resources/img/component/favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="512x512" href="../../krds/resources/img/component/favicon/favicon-512x512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../../krds/resources/img/component/favicon/favicon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../krds/resources/img/component/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="../../krds/resources/img/component/favicon/favicon-192x192.png">
+
+  <!-- css : KRDS (원본, 수정 금지) -->
+  <!-- output.css = common.css + component.css 통합본. component.css는 일부 이미지 경로(img/img/...)가 잘못되어 있어 샘플과 같이 output.css를 사용합니다. -->
+  <link rel="stylesheet" href="../../krds/resources/css/plugin/swiper-bundle.min.css">
+  <link rel="stylesheet" href="../../krds/resources/css/component/output.css">
+  <!-- css : 커스텀 (PretendardGOV 폰트 @font-face 포함) -->
+  <link rel="stylesheet" href="../../_common/resources/css/krds-custom.css">
+  <link rel="stylesheet" href="../css/krds-theme.css">
+  <link rel="stylesheet" href="../css/user-custom.css">
+
+  <!-- script : 글자·화면 표시 설정 (화면 깜빡임 방지를 위해 head에서 불러옴) -->
+  <script src="../../_common/resources/js/krds-display.js"></script>
+</head>
+
+<body>
+  <!--
+    ==================================================================
+    서브 레이아웃 인덱스 (KRDS 샘플 sample_sub_01 기준)
+    ==================================================================
+    [S] #wrap                          전체 레이아웃 래퍼
+      [01] 본문 바로가기               #krds-skip-link          → 헤더 템플릿
+      [02] 공식 누리집 배너            #krds-masthead           → 헤더 템플릿
+      [03] 헤더                        #krds-header             → 헤더 템플릿
+        [03-1]   헤더 컨텐츠           .header-in
+        [03-1-1] 헤더 상단             .header-container (유틸리티 메뉴 · 로고 · 헤더 버튼)
+        [03-1-2] 메인메뉴(GNB) PC      .krds-main-menu
+        [03-2]   메인메뉴(GNB) 모바일  #mobile-nav
+      [04] 컨테이너                    #container               → 페이지별 컨텐츠
+        [04-1]   컨텐츠                .inner
+      [05] 푸터                        #krds-footer             → 푸터 템플릿
+    [E] #wrap
+    [06] 모달                          .modal-wrap (#wrap 바깥) → 푸터 템플릿
+      [06-1]   글자·화면 표시 설정     #modal_adjust_display
+    [07] 스크립트                                              → 푸터 템플릿
+
+    템플릿 분기 기준
+      - kr/tmpl/header.html : <body> 다음 ~ [03] 헤더 끝 (#wrap 여는 태그 포함)
+      - 페이지 컨텐츠       : [04] 컨테이너
+      - kr/tmpl/footer.html : [05] 푸터 ~ [07] 스크립트 (#wrap 닫는 태그 포함)
+    ==================================================================
+  -->
+
+  <!-- [S] #wrap : 전체 레이아웃 래퍼 (헤더 템플릿에서 열고 푸터 템플릿에서 닫음) -->
+  <div id="wrap">
+    <!-- ============================================================
+         [01] 본문 바로가기 : #krds-skip-link
+         분기: 헤더 템플릿 (kr/tmpl/header.html)
+         ============================================================ -->
+    <div id="krds-skip-link">
+      <a href="#container">본문 바로가기</a>
+    </div>
+    <!-- //[01] 본문 바로가기 -->
+
+    <!-- ============================================================
+         [02] 공식 누리집 배너 : #krds-masthead
+         분기: 헤더 템플릿 (kr/tmpl/header.html)
+         ============================================================ -->
+    <div id="krds-masthead">
+      <div class="toggle-wrap">
+        <div class="toggle-head">
+          <div class="inner">
+            <span class="nuri-txt">이 누리집은 대한민국 공식 전자정부 누리집입니다.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- //[02] 공식 누리집 배너 -->
+
+    <!-- ============================================================
+         [03] 헤더 : #krds-header
+         분기: 헤더 템플릿 (kr/tmpl/header.html)
+         ============================================================ -->
+    <header id="krds-header">
+      <!-- [03-1] 헤더 컨텐츠 : .header-in -->
+      <div class="header-in">
+        <!-- [03-1-1] 헤더 상단 : .header-container (유틸리티 메뉴 · 로고 · 헤더 버튼) -->
+        <div class="header-container">
+          <div class="inner">
+            <!-- 유틸리티 메뉴 : .header-utility (언어 · 지원 · 글자·화면 설정) -->
+            <div class="header-utility">
+              <ul class="utility-list">
+                <li>
+                  <!-- 언어 변경 : .krds-language -->
+                  <div class="krds-drop-wrap krds-language">
+                    <button type="button" class="krds-btn small text drop-btn">
+                      <i class="svg-icon ico-global"></i>
+                      Language
+                      <i class="svg-icon ico-toggle"></i>
+                    </button>
+                    <div class="drop-menu">
+                      <div class="drop-in">
+                        <ul class="drop-list">
+                          <li><a href="#" class="item-link active" lang="ko">한국어</a></li>
+                          <li><a href="#" class="item-link" lang="en">English (영어)</a></li>
+                          <li><a href="#" class="item-link" lang="zh">中文 (중국어)</a></li>
+                          <li><a href="#" class="item-link" lang="ja">日本語 (일본어)</a></li>
+                          <li><a href="#" class="item-link" lang="fr">français (프랑스어)</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- //언어 변경 -->
+                </li>
+                <li>
+                  <div class="krds-drop-wrap">
+                    <button type="button" class="krds-btn small text drop-btn">
+                      지원 <i class="svg-icon ico-toggle"></i>
+                    </button>
+                    <div class="drop-menu">
+                      <div class="drop-in">
+                        <ul class="drop-list">
+                          <li><a href="#" class="item-link">인증센터</a></li>
+                          <li><a href="#" class="item-link">누리집안내지도</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="krds-btn small text open-modal" data-target="modal_adjust_display">
+                    <i class="svg-icon ico-view-mode"></i> 글자·화면 설정
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <!-- 로고 · 헤더 버튼 : .header-branding -->
+            <div class="header-branding">
+              <h2 class="logo">
+                <a href="#">
+                  <span class="sr-only">대한민국정부</span>
+                </a>
+              </h2>
+              <!-- 헤더 버튼 : .header-actions (통합검색 · 로그인 · 회원가입 · 나의 GOV · 전체메뉴) -->
+              <div class="header-actions">
+                <button type="button" class="btn-navi sch open-modal" title="통합검색 레이어" data-target="popTotalSch">통합검색</button><!-- 통합검색 모달(#popTotalSch)은 [06] 모달 영역에 추가 예정 -->
+                <a href="#" class="btn-navi login">로그인</a>
+                <button type="button" class="btn-navi join">회원가입</button>
+                <div class="krds-drop-wrap my-drop">
+                  <button type="button" class="btn-navi my drop-btn">나의 GOV</button>
+                  <div class="drop-menu">
+                    <div class="drop-in">
+                      <div class="drop-top">
+                        <p class="my-name">홍길동님</p>
+                        <dl class="my-time">
+                          <dt>로그아웃까지 남은 시간</dt>
+                          <dd>
+                            <span class="time">12:00</span>
+                            <button type="button" class="krds-btn small text h-auto">시간 연장</button>
+                          </dd>
+                        </dl>
+                      </div>
+                      <ul class="drop-list">
+                        <li><a href="#" class="item-link">나의 GOV 홈</a></li>
+                        <li><a href="#" class="item-link">나의 신청내역</a></li>
+                        <li><a href="#" class="item-link">나의 생활정보</a></li>
+                        <li><a href="#" class="item-link">나의 정보관리</a></li>
+                      </ul>
+                      <div class="drop-bottom">
+                        <button type="button" class="krds-btn medium text">
+                          <i class="svg-icon ico-logout"></i> 로그아웃
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="btn-navi all" aria-controls="mobile-nav">전체메뉴</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- //[03-1-1] 헤더 상단 -->
+
+        <!-- [03-1-2] 메인메뉴(GNB) PC : .krds-main-menu -->
+        <nav class="krds-main-menu">
+          <div class="inner">
+            <ul class="gnb-menu">
+              <!-- 1Depth : 민원 -->
+              <li>
+                <button type="button" class="gnb-main-trigger" data-trigger="gnb">민원</button>
+                <!-- gnb-toggle-wrap -->
+                <div class="gnb-toggle-wrap">
+                  <!-- gnb-main-list -->
+                  <div class="gnb-main-list" data-has-submenu="true">
+                    <ul>
+                      <li>
+                        <button type="button" class="gnb-sub-trigger" data-trigger="gnb">2Depth</button>
+                        <!-- gnb-sub-list -->
+                        <div class="gnb-sub-list">
+                          <div class="gnb-sub-content">
+                            <h2 class="sub-title">
+                              2Depth title
+                              <a href="#" class="krds-btn link basic small">
+                                <span class="underline">바로가기</span>
+                                <i class="svg-icon ico-angle right"></i>
+                              </a>
+                            </h2>
+                            <ul>
+                              <li><button type="button">Last depth</button></li>
+                              <li><a href="#">Last depth</a></li>
+                            </ul>
+                          </div>
+                          <div class="gnb-sub-banner">
+                            <span class="krds-badge bg-secondary">신규 서비스</span>
+                            <button type="button" class="krds-btn medium text">메뉴명 <i class="svg-icon ico-angle right"></i></button>
+                          </div>
+                        </div>
+                        <!-- //gnb-sub-list -->
+                      </li>
+                      <li>
+                        <button type="button" class="gnb-sub-trigger" data-trigger="gnb">2Depth</button>
+                        <!-- gnb-sub-list -->
+                        <div class="gnb-sub-list between">
+                          <div class="gnb-sub-content">
+                            <h2 class="sub-title"><span>2Depth title</span></h2>
+                            <ul>
+                              <li><button type="button">Last depth</button></li>
+                              <li><a href="#">Last depth</a></li>
+                            </ul>
+                          </div>
+                          <div class="gnb-sub-banner">
+                            <span class="krds-badge bg-secondary">신규 서비스</span>
+                            <button type="button" class="krds-btn medium text">메뉴명 <i class="svg-icon ico-angle right"></i></button>
+                          </div>
+                        </div>
+                        <!-- //gnb-sub-list -->
+                      </li>
+                      <li>
+                        <a href="#" class="gnb-sub-trigger is-link" data-trigger="gnb">2Depth</a>
+                      </li>
+                      <li>
+                        <a href="#" class="gnb-sub-trigger is-link external-link" data-trigger="gnb" target="_blank" title="새 창 열림">2Depth</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- //gnb-main-list -->
+                </div>
+                <!-- //gnb-toggle-wrap -->
+              </li>
+              <!-- //1Depth : 민원 -->
+
+              <!-- 1Depth : 서비스신청 -->
+              <li>
+                <button type="button" class="gnb-main-trigger" data-trigger="gnb">서비스신청</button>
+                <!-- gnb-toggle-wrap -->
+                <div class="gnb-toggle-wrap">
+                  <!-- gnb-main-list -->
+                  <div class="gnb-main-list" data-has-submenu="true">
+                    <ul>
+                      <li>
+                        <button type="button" class="gnb-sub-trigger" data-trigger="gnb">2Depth</button>
+                        <!-- gnb-sub-list -->
+                        <div class="gnb-sub-list">
+                          <div class="gnb-sub-content">
+                            <h2 class="sub-title"><span>2Depth title</span></h2>
+                            <ul class="type-description">
+                              <li>
+                                <h3 class="tit">
+                                  <a href="#" target="_blank" title="새 창 열림">3Depth title <i class="svg-icon ico-go"></i></a>
+                                </h3>
+                                <p class="txt">메뉴명과 메뉴에 관한 간략한 설명이 표시되는 스타일입니다.</p>
+                              </li>
+                              <li>
+                                <h3 class="tit">
+                                  <a href="#" target="_blank" title="새 창 열림">3Depth title <i class="svg-icon ico-go"></i></a>
+                                </h3>
+                                <p class="txt">메뉴명과 메뉴에 관한 간략한 설명이 표시되는 스타일입니다.</p>
+                              </li>
+                              <li>
+                                <h3 class="tit">
+                                  <a href="#" target="_blank" title="새 창 열림">3Depth title <i class="svg-icon ico-go"></i></a>
+                                </h3>
+                                <p class="txt">메뉴명과 메뉴에 관한 간략한 설명이 표시되는 스타일입니다.</p>
+                              </li>
+                              <li>
+                                <h3 class="tit">
+                                  <a href="#" target="_blank" title="새 창 열림">3Depth title <i class="svg-icon ico-go"></i></a>
+                                </h3>
+                                <p class="txt">메뉴명과 메뉴에 관한 간략한 설명이 표시되는 스타일입니다.</p>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="gnb-sub-banner">
+                            <span class="krds-badge bg-secondary">신규 서비스</span>
+                            <button type="button" class="krds-btn medium text">메뉴명 <i class="svg-icon ico-angle right"></i></button>
+                          </div>
+                        </div>
+                        <!-- //gnb-sub-list -->
+                      </li>
+                      <li>
+                        <button type="button" class="gnb-sub-trigger" data-trigger="gnb">2Depth</button>
+                        <!-- gnb-sub-list -->
+                        <div class="gnb-sub-list between">
+                          <div class="gnb-sub-content">
+                            <h2 class="sub-title"><span>2Depth title</span></h2>
+                            <ul class="type-description">
+                              <li>
+                                <h3 class="tit">
+                                  <a href="#" target="_blank" title="새 창 열림">3Depth title <i class="svg-icon ico-go"></i></a>
+                                </h3>
+                                <p class="txt">메뉴명과 메뉴에 관한 간략한 설명이 표시되는 스타일입니다.</p>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="gnb-sub-banner">
+                            <span class="krds-badge bg-secondary">신규 서비스</span>
+                            <button type="button" class="krds-btn medium text">메뉴명 <i class="svg-icon ico-angle right"></i></button>
+                          </div>
+                        </div>
+                        <!-- //gnb-sub-list -->
+                      </li>
+                      <li>
+                        <a href="#" class="gnb-sub-trigger is-link" data-trigger="gnb">2Depth</a>
+                      </li>
+                      <li>
+                        <a href="#" class="gnb-sub-trigger is-link external-link" data-trigger="gnb" target="_blank" title="새 창 열림">2Depth</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- //gnb-main-list -->
+                </div>
+                <!-- //gnb-toggle-wrap -->
+              </li>
+              <!-- //1Depth : 서비스신청 -->
+
+              <!-- 1Depth : 정책정보 -->
+              <li>
+                <button type="button" class="gnb-main-trigger" data-trigger="gnb">정책정보</button>
+                <!-- gnb-toggle-wrap -->
+                <div class="gnb-toggle-wrap">
+                  <!-- gnb-main-list -->
+                  <div class="gnb-main-list">
+                    <!-- gnb-sub-list -->
+                    <div class="gnb-sub-list single-list between">
+                      <div class="gnb-sub-content">
+                        <h2 class="sub-title"><span>2Depth title</span></h2>
+                        <ul>
+                          <li><a href="#">Last depth</a></li>
+                          <li><a href="#">Last depth</a></li>
+                          <li><a href="#">Last depth</a></li>
+                          <li><a href="#">Last depth</a></li>
+                          <li><a href="#">Last depth</a></li>
+                          <li><a href="#">Last depth</a></li>
+                          <li><a href="#">Last depth</a></li>
+                          <li><a href="#">Last depth</a></li>
+                          <li><a href="#">Last depth</a></li>
+                          <li><a href="#">Last depth</a></li>
+                        </ul>
+                      </div>
+                      <div class="gnb-sub-banner">
+                        <span class="krds-badge bg-secondary">신규 서비스</span>
+                        <button type="button" class="krds-btn medium text">메뉴명 <i class="svg-icon ico-angle right"></i></button>
+                      </div>
+                    </div>
+                    <!-- //gnb-sub-list -->
+                  </div>
+                  <!-- //gnb-main-list -->
+                </div>
+                <!-- //gnb-toggle-wrap -->
+              </li>
+              <!-- //1Depth : 정책정보 -->
+
+              <!-- 1Depth : 기관소개 -->
+              <li>
+                <button type="button" class="gnb-main-trigger" data-trigger="gnb">기관소개</button>
+                <!-- gnb-toggle-wrap -->
+                <div class="gnb-toggle-wrap">
+                  <!-- gnb-main-list -->
+                  <div class="gnb-main-list" data-has-submenu="true">
+                    <ul>
+                      <li>
+                        <button type="button" class="gnb-sub-trigger" data-trigger="gnb">2Depth</button>
+                        <!-- gnb-sub-list -->
+                        <div class="gnb-sub-list">
+                          <div class="gnb-sub-content">
+                            <h2 class="sub-title"><span>2Depth title</span></h2>
+                            <ul class="type-description">
+                              <li>
+                                <h3 class="tit">
+                                  <a href="#" target="_blank" title="새 창 열림">3Depth title <i class="svg-icon ico-go"></i></a>
+                                </h3>
+                                <p class="txt">메뉴명과 메뉴에 관한 간략한 설명이 표시되는 스타일입니다.</p>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <!-- //gnb-sub-list -->
+                      </li>
+                      <li>
+                        <button type="button" class="gnb-sub-trigger" data-trigger="gnb">2Depth</button>
+                        <!-- gnb-sub-list -->
+                        <div class="gnb-sub-list">
+                          <div class="gnb-sub-content">
+                            <h2 class="sub-title"><span>2Depth title</span></h2>
+                            <ul>
+                              <li><a href="#">Last depth</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                        <!-- //gnb-sub-list -->
+                      </li>
+                      <li>
+                        <a href="#" class="gnb-sub-trigger is-link" data-trigger="gnb">2Depth</a>
+                      </li>
+                      <li>
+                        <a href="#" class="gnb-sub-trigger is-link external-link" data-trigger="gnb" target="_blank" title="새 창 열림">2Depth</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- //gnb-main-list -->
+                </div>
+                <!-- //gnb-toggle-wrap -->
+              </li>
+              <!-- //1Depth : 기관소개 -->
+
+              <!-- 1Depth : 고객센터 -->
+              <li>
+                <button type="button" class="gnb-main-trigger" data-trigger="gnb">고객센터</button>
+                <!-- gnb-toggle-wrap -->
+                <div class="gnb-toggle-wrap">
+                  <!-- gnb-main-list -->
+                  <div class="gnb-main-list" data-has-submenu="true">
+                    <ul>
+                      <li>
+                        <button type="button" class="gnb-sub-trigger" data-trigger="gnb">2Depth</button>
+                        <!-- gnb-sub-list -->
+                        <div class="gnb-sub-list">
+                          <div class="gnb-sub-content">
+                            <h2 class="sub-title"><span>2Depth title</span></h2>
+                            <ul>
+                              <li><a href="#">Last depth</a></li>
+                            </ul>
+                          </div>
+                          <div class="gnb-sub-banner">
+                            <span class="krds-badge bg-secondary">신규 서비스</span>
+                            <button type="button" class="krds-btn medium text">메뉴명 <i class="svg-icon ico-angle right"></i></button>
+                          </div>
+                        </div>
+                        <!-- //gnb-sub-list -->
+                      </li>
+                      <li>
+                        <a href="#" class="gnb-sub-trigger is-link" data-trigger="gnb">2Depth</a>
+                      </li>
+                      <li>
+                        <a href="#" class="gnb-sub-trigger is-link" data-trigger="gnb">2Depth</a>
+                      </li>
+                      <li>
+                        <a href="#" class="gnb-sub-trigger is-link external-link" data-trigger="gnb" target="_blank" title="새 창 열림">2Depth</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- //gnb-main-list -->
+                </div>
+                <!-- //gnb-toggle-wrap -->
+              </li>
+              <!-- //1Depth : 고객센터 -->
+            </ul>
+          </div>
+        </nav>
+
+        <!-- //[03-1-2] 메인메뉴(GNB) PC -->
+      </div>
+      <!-- //[03-1] 헤더 컨텐츠 -->
+
+      <!-- [03-2] 메인메뉴(GNB) 모바일 : #mobile-nav (헤더 .btn-navi.all 버튼의 aria-controls와 id 일치 필요) -->
+      <div id="mobile-nav" class="krds-main-menu-mobile">
+        <div class="gnb-wrap">
+          <!-- gnb-header -->
+          <div class="gnb-header">
+            <!-- gnb-utils -->
+            <div class="gnb-utils">
+              <ul class="utility-list">
+                <li>
+                  <div class="krds-drop-wrap">
+                    <button type="button" class="krds-btn small text drop-btn">
+                      지원 <i class="svg-icon ico-toggle"></i>
+                    </button>
+                    <div class="drop-menu">
+                      <div class="drop-in">
+                        <ul class="drop-list">
+                          <li><a href="#" class="item-link">인증센터</a></li>
+                          <li><a href="#" class="item-link">누리집안내지도</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+
+                  <!-- 언어 변경 : .krds-language -->
+                  <div class="krds-drop-wrap krds-language">
+                    <button type="button" class="krds-btn small text drop-btn">
+                      <i class="svg-icon ico-global"></i>
+                      Language
+                      <i class="svg-icon ico-toggle"></i>
+                    </button>
+                    <div class="drop-menu">
+                      <div class="drop-in">
+                        <ul class="drop-list">
+                          <li><a href="#" class="item-link active" lang="ko">한국어</a></li>
+                          <li><a href="#" class="item-link" lang="en">English (영어)</a></li>
+                          <li><a href="#" class="item-link" lang="zh">中文 (중국어)</a></li>
+                          <li><a href="#" class="item-link" lang="ja">日本語 (일본어)</a></li>
+                          <li><a href="#" class="item-link" lang="fr">français (프랑스어)</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- //언어 변경 -->
+
+                </li>
+              </ul>
+            </div>
+            <!-- //gnb-utils -->
+            <!-- gnb-login -->
+            <div class="gnb-login">
+              <!-- <span class="user">홍길동님</span>
+                <button type="button" class="krds-btn large text"><i class="svg-icon ico-logout"></i> 로그아웃</button> -->
+              <button type="button" class="krds-btn large text"><i class="svg-icon ico-log"></i> 로그인을 해주세요</button>
+            </div>
+            <!-- //gnb-login -->
+            <!-- gnb-service-menu -->
+            <div class="gnb-service-menu">
+              <a href="#" class="link">메뉴명</a>
+              <a href="#" class="link">메뉴명</a>
+              <a href="#" class="link">메뉴명</a>
+              <a href="#" class="link">메뉴명</a>
+            </div>
+            <!-- //gnb-service-menu -->
+            <!-- 검색 -->
+            <div class="sch-input">
+              <input type="text" class="krds-input" placeholder="찾고자 하는 메뉴명을 입력해 주세요" title="찾고자 하는 메뉴명 입력">
+              <button type="button" class="krds-btn medium icon ico-search">
+                <span class="sr-only">검색</span>
+                <i class="svg-icon ico-sch"></i>
+              </button>
+            </div>
+            <!-- //검색 -->
+          </div>
+          <!-- //gnb-header -->
+
+          <!-- gnb-body -->
+          <div class="gnb-body">
+            <!-- gnb-menu -->
+            <div class="gnb-menu">
+              <div class="menu-wrap">
+                <ul>
+                  <li>
+                    <a href="#mGnb-anchor1" class="gnb-main-trigger">MyGOV</a>
+                  </li>
+                  <li>
+                    <a href="#mGnb-anchor2" class="gnb-main-trigger">민원서비스</a>
+                  </li>
+                  <li>
+                    <a href="#mGnb-anchor3" class="gnb-main-trigger">보조금24</a>
+                  </li>
+                  <li>
+                    <a href="#mGnb-anchor4" class="gnb-main-trigger">정책정보</a>
+                  </li>
+                  <li>
+                    <a href="#mGnb-anchor5" class="gnb-main-trigger">고객센터</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="submenu-wrap">
+                <div class="gnb-sub-list" id="mGnb-anchor1">
+                  <h2 class="sub-title">MyGOV</h2>
+                  <ul>
+                    <li><a href="#" class="gnb-sub-trigger">MyGOV 홈</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">나의 신청내역</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">나의 생활정보</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">나의 정보관리</a></li>
+                  </ul>
+                </div>
+                <div class="gnb-sub-list" id="mGnb-anchor2">
+                  <h2 class="sub-title">민원서비스</h2>
+                  <ul>
+                    <li><a href="#" class="gnb-sub-trigger">민원 신청·안내</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">사실/진위 확인</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">원스톱 서비스</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">분야별 서비스</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">기업/단체 서비스</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">돌봄시설 등 위치 찾기</a></li>
+                  </ul>
+                </div>
+                <div class="gnb-sub-list" id="mGnb-anchor3">
+                  <h2 class="sub-title">보조금24</h2>
+                  <ul>
+                    <li><a href="#" class="gnb-sub-trigger">보조금24 홈</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">나의 혜택</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">간편 찾기</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">전체 혜택</a></li>
+                    <li>
+                      <a href="#" class="gnb-sub-trigger has-depth3">보조금24란</a>
+                      <div class="depth3-wrap">
+                        <ul>
+                          <li>
+                            <a href="#" class="depth3-trigger has-depth4">소개(4depth)</a>
+                            <div class="depth4-wrap">
+                              <div class="depth4-head">
+                                <button type="button" class="krds-btn icon trigger-prev">
+                                  <span class="sr-only">이전화면</span>
+                                  <i class="svg-icon ico-angle left"></i>
+                                </button>
+                                <button type="button" class="krds-btn icon trigger-close">
+                                  <span class="sr-only">전체메뉴 닫기</span>
+                                  <i class="svg-icon ico-popup-close"></i>
+                                </button>
+                              </div>
+                              <ul class="depth4-body">
+                                <h4 class="sub-title">4depth title</h4>
+                                <ul class="depth4-ul">
+                                  <li><a href="#">depth title</a></li>
+                                  <li><a href="#">depth title</a></li>
+                                  <li><a href="#">depth title</a></li>
+                                  <li><a href="#">depth title</a></li>
+                                </ul>
+                              </ul>
+                            </div>
+                          </li>
+                          <li><a href="#" class="depth3-trigger">이용안내</a></li>
+                          <li><a href="#" class="depth3-trigger">자주묻는 질문</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="gnb-sub-list" id="mGnb-anchor4">
+                  <h2 class="sub-title">정책정보</h2>
+                  <ul>
+                    <li><a href="#" class="gnb-sub-trigger">분야별 정책정보</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">정부/지자체 조직도</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">정부/지자체 누리집</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">지자체 소식</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">공모전</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">공공자원공유</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">국고보조금 부정수급 신고</a></li>
+                  </ul>
+                </div>
+                <div class="gnb-sub-list" id="mGnb-anchor5">
+                  <h2 class="sub-title">고객센터</h2>
+                  <ul>
+                    <li><a href="#" class="gnb-sub-trigger">공지사항</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">이용안내</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">자주 묻는 질문(FAQ)</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">자료실</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">상담 예약</a></li>
+                    <li><a href="#" class="gnb-sub-trigger">개선 의견</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- //gnb-menu -->
+            <!-- gnb-bottom -->
+            <div class="gnb-bottom">
+              <a href="#" class="krds-btn small text">인증 센터 <i class="svg-icon ico-angle right"></i></a>
+              <a href="#" class="krds-btn small text" target="_blank" title="새 창 열기"> 어린이 정부포털 <i class="svg-icon ico-go"></i></a>
+            </div>
+            <!-- //gnb-bottom -->
+          </div>
+          <!-- //gnb-body -->
+
+          <!-- gnb-close -->
+          <button type="button" class="krds-btn medium icon" id="close-nav">
+            <span class="sr-only">전체메뉴 닫기</span>
+            <i class="svg-icon ico-popup-close"></i>
+          </button>
+          <!-- //gnb-close -->
+        </div>
+      </div>
+
+      <!-- //[03-2] 메인메뉴(GNB) 모바일 -->
+    </header>
+    <!-- //[03] 헤더 -->
+
+    <!-- ============================================================
+         [04] 컨테이너 : #container
+         분기: 페이지별 컨텐츠 (본문 바로가기 링크의 이동 위치)
+         ============================================================ -->
+    <div id="container">
+
+      <!-- [04-1] 컨텐츠 : .inner (브레드크럼 · 페이지 제목 · 본문) -->
+      <div class="inner">
+        컨텐츠 영역
+      </div>
+      <!-- //[04-1] 컨텐츠 -->
+    </div>
+    <!-- //[04] 컨테이너 -->
+
+    <!-- ============================================================
+         [05] 푸터 : #krds-footer
+         분기: 푸터 템플릿 (kr/tmpl/footer.html)
+         ============================================================ -->
+    <footer id="krds-footer">
+      <!-- inner -->
+      <div class="inner">
+        <!-- 푸터 로고 : .f-logo -->
+        <div class="f-logo">
+          <span class="sr-only">대한민국정부</span>
+        </div>
+        <div class="f-cnt">
+          <!-- 기관 정보 : .f-info (주소 · 대표전화) -->
+          <div class="f-info">
+            <p class="info-addr">(04383) 서울특별시 용산구 이태원로 22</p>
+            <ul class="info-cs">
+              <li>
+                <strong class="key-info">대표전화 <span>1234-5678</span></strong>
+                <span class="more-info">(유료, 평일 09시-18시)</span>
+              </li>
+              <li>
+                <strong class="key-info">해외이용 <span>+82-1234-5678</span></strong>
+                <span class="more-info">(유료, 평일 09시-18시)</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 바로가기 · SNS : .f-link -->
+          <div class="f-link">
+            <div class="link-go">
+              <a href="#" class="krds-btn text">이용안내 <i class="svg-icon ico-angle right"></i></a>
+              <a href="#" class="krds-btn text">찾아오시는 길 <i class="svg-icon ico-angle right"></i></a>
+            </div>
+            <div class="link-sns">
+              <a href="#" class="krds-btn xlarge icon border" target="_blank" title="새 창 열기">
+                <span class="sr-only">인스타그램</span>
+                <i class="svg-icon ico-instagram"></i>
+              </a>
+              <a href="#" class="krds-btn xlarge icon border" target="_blank" title="새 창 열기">
+                <span class="sr-only">유튜브</span>
+                <i class="svg-icon ico-youtube"></i>
+              </a>
+              <a href="#" class="krds-btn xlarge icon border" target="_blank" title="새 창 열기">
+                <span class="sr-only">X</span>
+                <i class="svg-icon ico-sns-x"></i>
+              </a>
+              <a href="#" class="krds-btn xlarge icon border" target="_blank" title="새 창 열기">
+                <span class="sr-only">페이스북</span>
+                <i class="svg-icon ico-facebook"></i>
+              </a>
+              <a href="#" class="krds-btn xlarge icon border" target="_blank" title="새 창 열기">
+                <span class="sr-only">블로그</span>
+                <i class="svg-icon ico-blog"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 푸터 하단 : .f-btm (정책 메뉴 · 저작권 · 정부 누리집 식별자) -->
+        <div class="f-btm">
+          <div class="f-btm-text">
+            <div class="f-menu">
+              <a href="#" class="krds-btn small text">이용안내</a>
+              <a href="#" class="krds-btn small text">개인정보처리방침</a>
+              <a href="#" class="krds-btn small text">저작권 정책</a>
+              <a href="#" class="krds-btn small text">웹 접근성 품질인증 마크 획득</a>
+            </div>
+            <p class="f-copy">© 2023 National Health Insurance Service. All rights reserved.The Government of the Republic of Korea. All rights reserved.</p>
+          </div>
+          <!-- 정부 누리집 식별자 : .krds-identifier -->
+          <div class="krds-identifier">
+            <span class="logo">
+              <span class="sr-only">대한민국정부</span>
+            </span>
+            <span class="ban-txt">이 누리집은 정부 누리집입니다.</span>
+          </div>
+        </div>
+      </div>
+      <!-- //inner -->
+    </footer>
+    <!-- //[05] 푸터 -->
+  </div>
+  <!-- [E] #wrap -->
+
+
+  <!-- ============================================================
+       [06] 모달 : .modal-wrap
+       #wrap 바깥에 둡니다 (모달이 열리면 KRDS가 #wrap에 inert를 겁니다). 분기: 푸터 템플릿
+       ============================================================ -->
+  <div class="modal-wrap">
+    <!-- [06-1] 글자·화면 표시 설정 : #modal_adjust_display (_common/resources/js/krds-display.js 연동, id·value 변경 금지) -->
+    <section id="modal_adjust_display" class="krds-modal fade" aria-labelledby="tit_modal_adjust_display">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- modal title -->
+          <div class="modal-header">
+            <h2 id="tit_modal_adjust_display" class="modal-title">글자·화면 표시 설정</h2>
+          </div>
+          <!-- //modal title -->
+          <!-- modal contents -->
+          <div class="modal-conts">
+            <div class="conts-area">
+              <!-- adjust_display -->
+              <div class="adjust_display">
+                <!-- 글자 / 화면 표시 설정 -->
+                <div class="fieldset adjust_scale">
+                  <div class="form-group scale-options">
+                    <h3>글자·화면 표시 설정</h3>
+                    <div class="form-conts">
+                      <div class="krds-check-area chk-column">
+                        <div class="krds-form-check">
+                          <input type="radio" name="scale_level" id="scale_level_small" value="small">
+                          <label for="scale_level_small">작게</label>
+                        </div>
+                        <div class="krds-form-check">
+                          <input type="radio" name="scale_level" id="scale_level_medium" value="medium" checked>
+                          <label for="scale_level_medium">보통</label>
+                        </div>
+                        <div class="krds-form-check">
+                          <input type="radio" name="scale_level" id="scale_level_large" value="large">
+                          <label for="scale_level_large">조금 크게</label>
+                        </div>
+                        <div class="krds-form-check">
+                          <input type="radio" name="scale_level" id="scale_level_xlarge" value="xlarge">
+                          <label for="scale_level_xlarge">크게</label>
+                        </div>
+                        <div class="krds-form-check">
+                          <input type="radio" name="scale_level" id="scale_level_xxlarge" value="xxlarge">
+                          <label for="scale_level_xxlarge">가장 크게</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 화면 표시 모드 -->
+                <div class="fieldset">
+                  <div class="form-group view-mode-options">
+                    <h3>화면 표시 모드</h3>
+                    <div class="form-conts">
+                      <div class="krds-check-area chk-column">
+                        <div class="krds-form-check view-mode-light">
+                          <input type="radio" name="view_mode" id="view_mode_light" value="light" checked>
+                          <label for="view_mode_light">기본 (밝은 배경)</label>
+                        </div>
+                        <div class="krds-form-check view-mode-dark">
+                          <input type="radio" name="view_mode" id="view_mode_dark" value="high-contrast">
+                          <label for="view_mode_dark">선명하게 (어두운 배경)</label>
+                        </div>
+                        <div class="krds-form-check view-mode-default">
+                          <input type="radio" name="view_mode" id="view_mode_default" value="theme">
+                          <label for="view_mode_default">시스템 설정</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- //adjust_display -->
+            </div>
+          </div>
+          <!-- //modal contents -->
+          <!-- modal btn -->
+          <div class="modal-btn btn-wrap">
+            <button type="button" class="krds-btn medium tertiary close-modal" id="reset_display">초기화</button>
+            <button type="button" class="krds-btn medium primary close-modal">닫기</button>
+          </div>
+          <!-- //modal btn -->
+          <!-- close button -->
+          <button type="button" class="krds-btn medium icon btn-close close-modal">
+            <span class="sr-only">닫기</span>
+            <i class="svg-icon ico-popup-close"></i>
+          </button>
+          <!-- //close button -->
+        </div>
+      </div>
+      <div class="modal-back"></div>
+    </section>
+    <!-- //[06-1] 글자·화면 표시 설정 -->
+  </div>
+  <!-- //[06] 모달 -->
+
+
+  <!-- ============================================================
+       [07] 스크립트
+       분기: 푸터 템플릿 (kr/tmpl/footer.html)
+       ============================================================ -->
+  <script src="../../krds/resources/js/plugin/swiper-bundle.min.js"></script>
+  <script src="../../krds/resources/js/component/ui-script.js"></script>
+  <script src="../js/user-custom.js"></script>
+  <!-- //[07] 스크립트 -->
+</body>
+</html>
