@@ -1,21 +1,1720 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>스타일가이드</title>
-  <!-- KRDS (원본, 수정 금지) -->
-  <link rel="stylesheet" href="../../krds/resources/css/component/output.css"><!-- common.css + component.css 통합본 (component.css의 잘못된 이미지 경로 보정) -->
-  <!-- 커스텀 -->
-  <link rel="stylesheet" href="../../_common/resources/css/krds-custom.css">
-  <link rel="stylesheet" href="styleguide.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="특수교육원" />
+    <title>스타일가이드</title>
+
+    <link rel="icon" href="../../krds/resources/img/component/favicon/favicon.svg" type="image/svg+xml" />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Default KRDS JS -->
+    <script src="../../krds/resources/js/component/ui-script.js" defer></script>
+    <script src="../../krds/resources/js/plugin/swiper-bundle.min.js" defer></script>
+    <!-- Default KRDS CSS -->
+    <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov-dynamic-subset.min.css" crossorigin/>
+    <link rel="stylesheet" href="../../krds/resources/css/plugin/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="../../krds/resources/css/component/output.css" /><!-- common.css + component.css 통합본 (component.css의 잘못된 이미지 경로 보정) -->
+
+    <!-- Custom -->
+    <script src="../../adm/js/adm-custom.js" defer></script>
+    <link rel="stylesheet" href="../resources/css/krds-custom.css">
+    <link rel="stylesheet" href="../../adm/css/admin-custom.css">
+
+    <!-- styleguide -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <script src="../styleguide/prism.js" defer></script>
+
+    <link rel="stylesheet" href="../styleguide/prism.css">
+    <link rel="stylesheet" href="../styleguide/styleguide.css">
 </head>
+
 <body>
-  <div id="wrap">
+
+<div id="wrap" class="g-wrap styleguide">
     <main id="container">
+        <div class="inner">
+            <div class="contents contents-box contents-box-shadow">
+
+                <!-- ==========================================================
+                    컴포넌트 코드 조회 순서: 사이트(kr, adm) → 공통(_common) → KRDS 원본(krds)
+                    - KRDS 원본: krds/html/code/컴포넌트명.html (수정 금지)
+                    - 변형: 원본명--변형명.html / 신규: ext_이름.html
+                    - 변형 섹션은 해당 KRDS 원본 섹션 바로 뒤에 추가합니다.
+                ========================================================== -->
+
+                <!-- [신규 컴포넌트 샘플] _common/html/code/ext_icon.html (추가 시 주석 해제)
+                <section class="g-conts-area">
+                    <h4 class="con-tit">ext_icon <small>(_common)</small></h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example bg-dark-gray includeJs" data-include-file="../html/code/ext_icon.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../html/code/ext_icon.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                -->
+
+                <!-- KRDS: accordion -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">accordion</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/accordion.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/accordion.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: accordion_line -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">accordion_line</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/accordion_line.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/accordion_line.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: badge -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">badge</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/badge.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/badge.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: badge_number -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">badge_number</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/badge_number.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/badge_number.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: badge_size -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">badge_size</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/badge_size.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/badge_size.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: breadcrumb -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">breadcrumb</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/breadcrumb.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/breadcrumb.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: button -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">button</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/button.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/button.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- [변형 샘플] _common: html/code/button--sample.html (변형 시 주석 해제)
+                <section class="g-conts-area">
+                    <h4 class="con-tit">button--sample <small>(_common)</small></h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../html/code/button--sample.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../html/code/button--sample.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                -->
+
+                <!-- [변형 샘플] kr: kr/html/code/button--sample.html (변형 시 주석 해제)
+                <section class="g-conts-area">
+                    <h4 class="con-tit">button--sample <small>(kr)</small></h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../kr/html/code/button--sample.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../kr/html/code/button--sample.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                -->
+
+                <!-- [변형 샘플] adm: adm/html/code/button--sample.html (변형 시 주석 해제)
+                <section class="g-conts-area">
+                    <h4 class="con-tit">button--sample <small>(adm)</small></h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../adm/html/code/button--sample.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../adm/html/code/button--sample.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                -->
+
+                <!-- KRDS: button_hierarchy -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">button_hierarchy</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/button_hierarchy.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/button_hierarchy.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: button_icon -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">button_icon</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/button_icon.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/button_icon.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: button_size -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">button_size</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/button_size.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/button_size.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: button_text -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">button_text</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/button_text.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/button_text.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: button_with_icon -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">button_with_icon</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/button_with_icon.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/button_with_icon.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: calendar -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">calendar</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/calendar.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/calendar.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: calendar_range -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">calendar_range</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/calendar_range.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/calendar_range.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: carousel -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">carousel</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/carousel.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/carousel.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: carousel_banner -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">carousel_banner</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/carousel_banner.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/carousel_banner.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: checkbox -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">checkbox</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/checkbox.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/checkbox.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: checkbox_chip -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">checkbox_chip</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/checkbox_chip.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/checkbox_chip.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: checkbox_size -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">checkbox_size</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/checkbox_size.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/checkbox_size.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: coach_mark -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">coach_mark</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/coach_mark.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/coach_mark.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: contextual_help -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">contextual_help</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/contextual_help.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/contextual_help.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: critical_alerts -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">critical_alerts</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/critical_alerts.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/critical_alerts.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: date_input -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">date_input</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/date_input.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/date_input.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: disclosure -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">disclosure</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/disclosure.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/disclosure.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: file_upload -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">file_upload</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/file_upload.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/file_upload.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: footer -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">footer</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/footer.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/footer.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: header -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">header</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/header.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/header.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: help_panel -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">help_panel</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/help_panel.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/help_panel.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: identifier -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">identifier</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/identifier.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/identifier.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: in_page_navigation -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">in_page_navigation</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/in_page_navigation.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/in_page_navigation.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: language_switcher -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">language_switcher</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/language_switcher.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/language_switcher.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: language_switcher_page -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">language_switcher_page</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/language_switcher_page.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/language_switcher_page.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: link -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">link</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/link.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/link.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: main_menu_mobile -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">main_menu_mobile</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/main_menu_mobile.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/main_menu_mobile.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: main_menu_pc -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">main_menu_pc</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/main_menu_pc.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/main_menu_pc.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: masthead -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">masthead</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/masthead.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/masthead.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: modal -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">modal</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/modal.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/modal.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: modal_sample -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">modal_sample</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/modal_sample.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/modal_sample.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: pagination -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">pagination</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/pagination.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/pagination.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: radio_button -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">radio_button</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/radio_button.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/radio_button.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: radio_chip -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">radio_chip</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/radio_chip.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/radio_chip.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: radio_size -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">radio_size</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/radio_size.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/radio_size.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: resize -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">resize</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/resize.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/resize.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: select -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">select</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/select.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/select.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: select_size -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">select_size</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/select_size.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/select_size.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: select_sorting -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">select_sorting</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/select_sorting.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/select_sorting.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: select_state -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">select_state</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/select_state.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/select_state.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: side_navigation -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">side_navigation</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/side_navigation.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/side_navigation.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: skip_link -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">skip_link</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/skip_link.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/skip_link.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: spinner -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">spinner</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/spinner.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/spinner.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: step_indicator -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">step_indicator</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/step_indicator.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/step_indicator.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: structured_list -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">structured_list</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/structured_list.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/structured_list.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: tab -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">tab</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/tab.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/tab.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: table -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">table</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/table.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/table.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: tag -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">tag</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/tag.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/tag.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: tag_link -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">tag_link</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/tag_link.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/tag_link.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: text_input -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">text_input</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/text_input.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/text_input.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: text_input_icon -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">text_input_icon</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/text_input_icon.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/text_input_icon.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: text_input_size -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">text_input_size</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/text_input_size.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/text_input_size.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: text_input_state -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">text_input_state</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/text_input_state.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/text_input_state.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: text_list -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">text_list</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/text_list.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/text_list.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: text_list_ordered -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">text_list_ordered</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/text_list_ordered.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/text_list_ordered.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: textarea -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">textarea</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/textarea.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/textarea.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: toggle_switch -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">toggle_switch</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/toggle_switch.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/toggle_switch.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: toggle_switch_size -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">toggle_switch_size</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/toggle_switch_size.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/toggle_switch_size.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: tooltip -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">tooltip</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/tooltip.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/tooltip.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: tooltip_box -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">tooltip_box</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/tooltip_box.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/tooltip_box.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: tooltip_vertical -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">tooltip_vertical</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/tooltip_vertical.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/tooltip_vertical.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- KRDS: tutorial_panel -->
+                <section class="g-conts-area">
+                    <h4 class="con-tit">tutorial_panel</h4>
+                    <div class="g-example-wrap">
+                        <div class="g-example includeJs" data-include-file="../../krds/html/code/tutorial_panel.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderSample01" aria-controls="accordionCollapseSample01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="aaccordionCollapseSample01" aria-labelledby="accordionHeaderSample01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../../krds/html/code/tutorial_panel.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
     </main>
-  </div>
-  <script src="../../krds/resources/js/component/ui-script.js"></script>
-  <script src="styleguide.js"></script>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+    // prism toolbar title 추가
+    if (typeof Prism !== "undefined") {
+        Prism.hooks.add("complete", function (env) {
+        const toolbar = env.element.closest(".code-toolbar");
+        if (!toolbar) return;
+
+        const preTag = toolbar.querySelector("pre");
+        if (!preTag) return;
+
+        // data-title 읽기
+        const dataTitle = preTag.getAttribute("data-title");
+        const existingTitle = toolbar.querySelector(".toolbar-title");
+
+        // 중복 방지 (이미 있으면 다시 안 추가)
+        if (!existingTitle) {
+            const titleTag = document.createElement("h5");
+            titleTag.classList.add("toolbar-title");
+            titleTag.textContent = dataTitle ? dataTitle : "코드 예시";
+            toolbar.prepend(titleTag);
+        }
+        });
+    }
+    });
+
+    (async function(){
+        async function includeHtml() {
+            const includeTarget = document.querySelectorAll('.includeJs');
+            for (let el of includeTarget) {
+            const targetFile = el.dataset.includeFile;
+            if (targetFile) {
+                try {
+                    const response = await fetch(targetFile);
+                    if (!response.ok) { // 성공적인 응답이 아닐 경우 에러 처리
+                        throw new Error('include not found.');
+                    }
+                    const html = await response.text(); // 응답 본문을 텍스트로 변환
+                    el.innerHTML = html; // 받은 HTML을 대상 요소에 삽입
+                } catch (error) {
+                    el.innerHTML = error.message; // 에러가 발생하면 메시지를 대상 요소에 삽입
+                }
+            }
+        }
+        };
+    
+        await includeHtml();
+    })();
+</script>
+
+
 </body>
+
 </html>
+
+
