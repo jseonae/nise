@@ -36,6 +36,11 @@
 
 /* 아이콘 */
 .g-example-inner .svg-icon {width: var(--krds-size-height-5);height: var(--krds-size-height-5);}
+/* 아이콘 페이지(icon.html): 클래스명 표시 + 눌러서 코드 복사 */
+.g-wrap .g-example-wrap .g-example .g-example-inner:has(.g-icon-item) {display: grid;grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));gap: var(--krds-gap-3);align-items: stretch;}
+.g-wrap .g-icon-item {display: flex;flex-direction: column;align-items: center;justify-content: center;gap: var(--krds-gap-3);min-height: 10rem;padding: var(--krds-padding-4) var(--krds-padding-3);border: var(--krds-light-border-width-static-regular) solid var(--krds-light-color-border-gray-light);border-radius: var(--krds-radius-medium2);background-color: var(--krds-light-color-surface-white);cursor: pointer;}
+.g-wrap .g-icon-item:hover {border-color: var(--krds-light-color-border-primary);}
+.g-wrap .g-icon-item .g-icon-name {font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;font-size: var(--krds-pc-font-size-label-xsmall);line-height: 1.4;color: var(--krds-light-color-text-subtle);overflow-wrap: anywhere;text-align: center;}
 
 /* 고정 위치(fixed) 컴포넌트(모달, 모바일 메뉴, 도움 패널 등)를 미리보기 영역 안에 표시 */
 .g-wrap .g-example-wrap .g-example {position: relative;transform: translateZ(0);}

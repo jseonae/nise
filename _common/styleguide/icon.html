@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="특수교육원" />
+    <title>스타일가이드 - 아이콘</title>
+
+    <link rel="icon" href="../../krds/resources/img/component/favicon/favicon.svg" type="image/svg+xml" />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Default KRDS JS -->
+    <script src="../../krds/resources/js/component/ui-script.js" defer></script>
+    <!-- Default KRDS CSS -->
+    <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov-dynamic-subset.min.css" crossorigin/>
+    <link rel="stylesheet" href="../../krds/resources/css/component/output.css" /><!-- common.css + component.css 통합본 -->
+
+    <!-- Custom -->
+    <link rel="stylesheet" href="../resources/css/krds-custom.css">
+
+    <!-- styleguide -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <script src="../styleguide/prism.js" defer></script>
+
+    <link rel="stylesheet" href="../styleguide/prism.css">
+    <link rel="stylesheet" href="../styleguide/styleguide.css">
+</head>
+
+<body>
+
+<div id="wrap" class="g-wrap styleguide">
+    <main id="container">
+        <div class="inner">
+            <div class="contents contents-box contents-box-shadow">
+
+                <!-- ==========================================================
+                    아이콘(Icon)
+                    - KRDS 기본 아이콘: _common/resources/html/icon.html
+                      (krds/resources/css/common/common.css의 .svg-icon.ico-* 클래스, KRDS 업그레이드 시 함께 갱신)
+                    - 사업 추가 아이콘: _common/html/code/ext_icon.html (클래스 접두어 cm-)
+                    - 미리보기의 아이콘을 누르면 해당 아이콘 코드 한 줄이 복사됩니다.
+                ========================================================== -->
+
+                <nav class="g-sg-nav" aria-label="스타일가이드 메뉴">
+                    <h1 class="g-sg-title">아이콘</h1>
+                    <a href="styleguide.html" class="krds-btn small secondary">컴포넌트</a>
+                    <a href="color.html" class="krds-btn small secondary">색상</a>
+                    <a href="typography.html" class="krds-btn small secondary">타이포그래피</a>
+                    <a href="icon.html" class="krds-btn small" aria-current="page">아이콘</a>
+                </nav>
+
+                <!-- KRDS: icon -->
+                <section class="g-conts-area">
+                    <h2 class="con-tit">KRDS 기본 아이콘</h2>
+                    <p class="g-desc">KRDS는 아이콘을 <code class="g-token">&lt;i class="svg-icon ico-이름"&gt;&lt;/i&gt;</code> 형태로 사용합니다. 마스크 아이콘은 <code class="g-token">background-color</code>로 색을 바꿀 수 있고, 이미지 아이콘은 색이 고정되어 있습니다.</p>
+                    <div class="g-example-wrap">
+                        <div class="g-example bg-dark-gray includeJs" data-include-file="../resources/html/icon.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderIcon01" aria-controls="accordionCollapseIcon01">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="accordionCollapseIcon01" aria-labelledby="accordionHeaderIcon01">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../resources/html/icon.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- [사업 추가 아이콘] _common/html/code/ext_icon.html (추가 시 주석 해제)
+                <section class="g-conts-area">
+                    <h2 class="con-tit">사업 추가 아이콘 <small>(_common/html/code/ext_icon.html)</small></h2>
+                    <div class="g-example-wrap">
+                        <div class="g-example bg-dark-gray includeJs" data-include-file="../html/code/ext_icon.html"></div>
+                        <div class="g-code-wrap krds-accordion">
+                            <div class="accordion-item">
+                                <h5 class="accordion-header">
+                                    <button type="button" class="btn-accordion" aria-expanded="true" id="accordionHeaderIcon02" aria-controls="accordionCollapseIcon02">코드 확인하기</button>
+                                </h5>
+                                <div class="accordion-collapse collapse" role="region" id="accordionCollapseIcon02" aria-labelledby="accordionHeaderIcon02">
+                                    <div class="accordion-body">
+                                        <div class="g-code-box">
+                                            <pre data-src="../html/code/ext_icon.html"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                -->
+
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    (async function(){
+        async function includeHtml() {
+            const includeTarget = document.querySelectorAll('.includeJs');
+            for (let el of includeTarget) {
+                const targetFile = el.dataset.includeFile;
+                if (targetFile) {
+                    try {
+                        const response = await fetch(targetFile);
+                        if (!response.ok) {
+                            throw new Error('include not found.');
+                        }
+                        el.innerHTML = await response.text();
+                    } catch (error) {
+                        el.innerHTML = error.message;
+                    }
+                }
+            }
+        }
+
+        // 미리보기 아이콘마다 클래스명을 표시하고, 누르면 아이콘 코드 한 줄을 복사
+        function labelIcons() {
+            document.querySelectorAll('.includeJs .g-example-inner > .svg-icon').forEach(function(icon) {
+                const name = icon.className.replace('svg-icon', '').trim();
+                const code = icon.outerHTML;
+                const item = document.createElement('button');
+                item.type = 'button';
+                item.className = 'g-icon-item';
+                item.title = code + ' 복사';
+                icon.setAttribute('aria-hidden', 'true');
+                icon.replaceWith(item);
+                const label = document.createElement('span');
+                label.className = 'g-icon-name';
+                label.textContent = name;
+                item.append(icon, label);
+                item.addEventListener('click', function() {
+                    copyText(code).then(function() {
+                        label.textContent = '복사됨';
+                        setTimeout(function() { label.textContent = name; }, 1200);
+                    });
+                });
+            });
+        }
+
+        function copyText(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                return navigator.clipboard.writeText(text);
+            }
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            ta.remove();
+            return Promise.resolve();
+        }
+
+        await includeHtml();
+        labelIcons();
+    })();
+</script>
+
+</body>
+
+</html>
