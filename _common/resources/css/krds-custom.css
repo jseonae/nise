@@ -1,0 +1,32 @@
+@charset "UTF-8";
+/* ==========================================================================
+   KRDS 추가 스타일 (공통)
+   - KRDS 원본(krds/)은 수정하지 않고, 부족한 스타일은 이 파일에 추가합니다.
+   - KRDS CSS 다음에 불러옵니다.
+   ========================================================================== */
+
+/* PretendardGOV 폰트 (KRDS CSS에는 @font-face 선언이 없어 여기서 정의) */
+@font-face {
+  font-family: "Pretendard GOV";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("../../../krds/resources/fonts/PretendardGOV-Regular.subset.woff2") format("woff2"),
+       url("../../../krds/resources/fonts/PretendardGOV-Regular.subset.woff") format("woff");
+}
+@font-face {
+  font-family: "Pretendard GOV";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("../../../krds/resources/fonts/PretendardGOV-Medium.subset.woff2") format("woff2"),
+       url("../../../krds/resources/fonts/PretendardGOV-Medium.subset.woff") format("woff");
+}
+@font-face {
+  font-family: "Pretendard GOV";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("../../../krds/resources/fonts/PretendardGOV-Bold.subset.woff2") format("woff2"),
+       url("../../../krds/resources/fonts/PretendardGOV-Bold.subset.woff") format("woff");
+}
