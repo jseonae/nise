@@ -30,3 +30,19 @@
   src: url("../../../krds/resources/fonts/PretendardGOV-Bold.subset.woff2") format("woff2"),
        url("../../../krds/resources/fonts/PretendardGOV-Bold.subset.woff") format("woff");
 }
+
+/* ==========================================================================
+   글자·화면 표시 설정 (_common/resources/js/krds-display.js)
+   ========================================================================== */
+
+/* 설정 모달 내부 간격 (KRDS 사이트 전용 클래스라 KRDS CSS에 없음) */
+#modal_adjust_display .adjust_display {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-8);
+}
+#modal_adjust_display .form-group h3 {
+  margin-bottom: var(--krds-gap-4);
+  font-size: var(--krds-pc-font-size-heading-xsmall);
+  font-weight: var(--krds-font-weight-bold);
+}
