@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="특수교육원" />
+    <title>스타일가이드 - 타이포그래피</title>
+
+    <link rel="icon" href="../../krds/resources/img/component/favicon/favicon.svg" type="image/svg+xml" />
+
+    <!-- Default KRDS CSS -->
+    <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov-dynamic-subset.min.css" crossorigin/>
+    <link rel="stylesheet" href="../../krds/resources/css/component/output.css" /><!-- common.css + component.css 통합본 -->
+
+    <!-- Custom -->
+    <link rel="stylesheet" href="../resources/css/krds-custom.css">
+
+    <!-- styleguide -->
+    <link rel="stylesheet" href="../styleguide/styleguide.css">
+    <script src="../styleguide/foundation.js" defer></script>
+</head>
+
+<body>
+
+<div id="wrap" class="g-wrap styleguide">
+    <main id="container">
+        <div class="inner">
+            <div class="contents contents-box contents-box-shadow">
+
+                <!-- ==========================================================
+                    타이포그래피(Typography) 파운데이션
+                    - 기준: KRDS 1.0.6 krds_tokens.css (RESPONSIVE-PC / RESPONSIVE-MOBILE), common.css :root
+                      크기 값은 foundation.js가 원본에서 읽어 표시
+                    - 규정 문구, 굵기·줄 간격·자간 기준: krds.go.kr 스타일 > 타이포그래피 (html/site/style/style_03.html)
+                    - 견본은 화면 폭 767px 이하에서 모바일 크기로 바뀝니다.
+                ========================================================== -->
+
+                <nav class="g-sg-nav" aria-label="스타일가이드 메뉴">
+                    <h1 class="g-sg-title">타이포그래피</h1>
+                    <a href="styleguide.html" class="krds-btn small secondary">컴포넌트</a>
+                    <a href="color.html" class="krds-btn small secondary">색상</a>
+                    <a href="typography.html" class="krds-btn small" aria-current="page">타이포그래피</a>
+                </nav>
+
+                <p class="g-foundation-error" hidden>토큰 파일을 불러오지 못했습니다. 로컬 서버(http://)에서 페이지를 열어 주세요.</p>
+
+                <!-- 글꼴 -->
+                <section class="g-conts-area">
+                    <h2 class="con-tit">글꼴</h2>
+                    <p class="g-desc">표준형 스타일은 국문과 영문 모두 Pretendard GOV 서체를 기본으로 사용한다. 확장형은 가독성이 높은 고딕 계열 서체(노토 산스, 나눔 고딕, 스포카 한 산스 등)를 권장한다.</p>
+                    <div class="krds-table-wrap">
+                        <table class="tbl col data">
+                            <caption>글꼴 기본 토큰과 값</caption>
+                            <colgroup><col style="width: 34%;"><col style="width: 24%;"><col></colgroup>
+                            <thead>
+                            <tr><th scope="col">토큰</th><th scope="col">값</th><th scope="col">설명</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr><th scope="row"><code class="g-token">--krds-font-family-base</code></th><td data-sg-token="--krds-font-family-base"></td><td>html, body 기본 글꼴 (<code class="g-token">--krds-typo-font-type</code> 참조). @font-face는 _common/resources/css/krds-custom.css에 정의</td></tr>
+                            <tr><th scope="row"><code class="g-token">--krds-font-size-base</code></th><td data-sg-token="--krds-font-size-base"></td><td>html 글자 크기. 브라우저 기본 16px 기준 1rem = 10px</td></tr>
+                            <tr><th scope="row"><code class="g-token">--krds-pc-font-size-body-medium</code></th><td data-sg-token="--krds-pc-font-size-body-medium"></td><td>body 기본 글자 크기. 본문 최소 16px 이상, Pretendard GOV는 상대적으로 작아 17px을 기본으로 한다</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="g-source">크기는 다양한 글자 크기 설정에 대응하도록 px이 아닌 rem, em, % 등 상대 단위를 사용한다.</p>
+                </section>
+
+                <!-- 굵기 -->
+                <section class="g-conts-area">
+                    <h2 class="con-tit">글자 굵기</h2>
+                    <p class="g-desc">텍스트 두께 사용은 최대 4가지 정도로 제한한다. 지나치게 얇은 두께(light, thin)는 배경과의 구분이 어렵고, 지나치게 두꺼운 두께(extra bold)는 시각적 피로를 유발한다.</p>
+                    <div class="g-type-weights">
+                        <div>
+                            <p class="g-type-sample regular">Regular 가나다 Aa 123</p>
+                            <p><code class="g-token">--krds-font-weight-regular</code> <span class="g-hex" data-sg-token="--krds-font-weight-regular"></span></p>
+                            <p class="g-desc">본문에 사용하여 기본 가독성을 보장한다.</p>
+                        </div>
+                        <div>
+                            <p class="g-type-sample bold">Bold 가나다 Aa 123</p>
+                            <p><code class="g-token">--krds-font-weight-bold</code> <span class="g-hex" data-sg-token="--krds-font-weight-bold"></span></p>
+                            <p class="g-desc">강조가 필요한 제목이나 중요한 내용에 사용한다.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 줄 간격·자간 -->
+                <section class="g-conts-area">
+                    <h2 class="con-tit">줄 간격과 자간</h2>
+                    <p class="g-desc">줄 간격은 가독성과 접근성을 위해 최소 150% 이상으로 설정한다. 줄 간격이 좁을수록 시각적 피로를 느끼게 하며 정보 전달의 효율성이 떨어진다.</p>
+                    <div class="krds-table-wrap">
+                        <table class="tbl col data">
+                            <caption>줄 간격과 자간 토큰, 값, 사용처</caption>
+                            <colgroup><col style="width: 34%;"><col style="width: 24%;"><col></colgroup>
+                            <thead>
+                            <tr><th scope="col">토큰</th><th scope="col">값</th><th scope="col">사용처</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr><th scope="row"><code class="g-token">--krds-line-height-base</code></th><td data-sg-token="--krds-line-height-base"></td><td>모든 텍스트 스타일의 기본 줄 간격 (150%)</td></tr>
+                            <tr><th scope="row"><code class="g-token">--krds-line-height-none</code></th><td data-sg-token="--krds-line-height-none"></td><td>아이콘, 배지 등 한 줄 요소의 정렬용. 본문에는 사용하지 않는다</td></tr>
+                            <tr><th scope="row"><code class="g-token">--krds-letter-spacing-none</code></th><td data-sg-token="--krds-letter-spacing-none"></td><td>기본 자간 (0)</td></tr>
+                            <tr><th scope="row"><code class="g-token">--krds-letter-spacing-wide</code></th><td data-sg-token="--krds-letter-spacing-wide"></td><td>Display 전체, Heading xlarge·large (1px)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="g-lh-demo" aria-hidden="true">
+                        <p style="--g-lh: 1.2;">줄 간격 120%. 줄 간격이 좁을수록 시각적 피로를 느끼게 하며 정보 전달의 효율성이 떨어진다. (사용 금지)</p>
+                        <p style="--g-lh: 1.5;">줄 간격 150%. 줄 간격이 좁을수록 시각적 피로를 느끼게 하며 정보 전달의 효율성이 떨어진다. (KRDS 기준)</p>
+                    </div>
+                </section>
+
+                <!-- 스타일 토큰 -->
+                <section class="g-conts-area">
+                    <h2 class="con-tit">스타일 토큰</h2>
+                    <p class="g-desc">타이포그래피는 display, heading, body로 계층을 구성하고 컴포넌트용 label, navigation을 둔다. 크기는 반응형 토큰으로 PC(<code class="g-token">--krds-pc-font-size-*</code>)와 모바일(<code class="g-token">--krds-mobile-font-size-*</code>, 767px 이하)을 나누어 쓴다. 굵기, 줄 간격, 자간은 스타일별 토큰이 없어 KRDS 가이드 표의 값을 표시했다. 코드에서는 굵기 <code class="g-token">--krds-font-weight-{regular|bold}</code>, 줄 간격 <code class="g-token">--krds-line-height-base</code>(모든 스타일 150%), 자간 <code class="g-token">--krds-letter-spacing-{none|wide}</code>를 사용한다.</p>
+                    <p class="g-source">크기 / 줄 높이 = 토큰 크기 × <code class="g-token">--krds-line-height-base</code>(1.5)</p>
+                </section>
+
+                <!-- Display -->
+                <section class="g-conts-area">
+                    <h2 class="con-tit">Display</h2>
+                    <p class="g-desc">대형 배너, 메인 비주얼 등 시각적 효과가 필요한 가장 큰 텍스트</p>
+                    <div class="krds-table-wrap">
+                        <table class="tbl col data">
+                            <caption>Display 스타일별 토큰, 견본, PC·모바일 크기와 줄 높이, 굵기, 자간</caption>
+                            <colgroup><col style="width: 25%;"><col><col style="width: 12%;"><col style="width: 12%;"><col style="width: 10%;"><col style="width: 6%;"></colgroup>
+                            <thead>
+                            <tr><th scope="col">토큰</th><th scope="col">견본</th><th scope="col">PC<br>크기 / 줄 높이</th><th scope="col">모바일<br>크기 / 줄 높이</th><th scope="col">굵기</th><th scope="col">자간</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row"><strong>display-large</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-display-large</code></th>
+                                <td><p class="g-type-sample bold wide" style="--g-type-pc: var(--krds-pc-font-size-display-large); --g-type-mo: var(--krds-mobile-font-size-display-large);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-display-large" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-display-large" data-sg-lh></td>
+                                <td>Bold 700</td>
+                                <td>1px</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>display-medium</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-display-medium</code></th>
+                                <td><p class="g-type-sample bold wide" style="--g-type-pc: var(--krds-pc-font-size-display-medium); --g-type-mo: var(--krds-mobile-font-size-display-medium);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-display-medium" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-display-medium" data-sg-lh></td>
+                                <td>Bold 700</td>
+                                <td>1px</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>display-small</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-display-small</code></th>
+                                <td><p class="g-type-sample bold wide" style="--g-type-pc: var(--krds-pc-font-size-display-small); --g-type-mo: var(--krds-mobile-font-size-display-small);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-display-small" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-display-small" data-sg-lh></td>
+                                <td>Bold 700</td>
+                                <td>1px</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Heading -->
+                <section class="g-conts-area">
+                    <h2 class="con-tit">Heading</h2>
+                    <p class="g-desc">페이지·섹션 제목. h1~h5 계층은 아래 “계층 구조” 참고</p>
+                    <div class="krds-table-wrap">
+                        <table class="tbl col data">
+                            <caption>Heading 스타일별 토큰, 견본, PC·모바일 크기와 줄 높이, 굵기, 자간</caption>
+                            <colgroup><col style="width: 25%;"><col><col style="width: 12%;"><col style="width: 12%;"><col style="width: 10%;"><col style="width: 6%;"></colgroup>
+                            <thead>
+                            <tr><th scope="col">토큰</th><th scope="col">견본</th><th scope="col">PC<br>크기 / 줄 높이</th><th scope="col">모바일<br>크기 / 줄 높이</th><th scope="col">굵기</th><th scope="col">자간</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row"><strong>heading-xlarge</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-heading-xlarge</code></th>
+                                <td><p class="g-type-sample bold wide" style="--g-type-pc: var(--krds-pc-font-size-heading-xlarge); --g-type-mo: var(--krds-mobile-font-size-heading-xlarge);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-heading-xlarge" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-heading-xlarge" data-sg-lh></td>
+                                <td>Bold 700</td>
+                                <td>1px</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>heading-large</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-heading-large</code></th>
+                                <td><p class="g-type-sample bold wide" style="--g-type-pc: var(--krds-pc-font-size-heading-large); --g-type-mo: var(--krds-mobile-font-size-heading-large);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-heading-large" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-heading-large" data-sg-lh></td>
+                                <td>Bold 700</td>
+                                <td>1px</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>heading-medium</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-heading-medium</code></th>
+                                <td><p class="g-type-sample bold" style="--g-type-pc: var(--krds-pc-font-size-heading-medium); --g-type-mo: var(--krds-mobile-font-size-heading-medium);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-heading-medium" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-heading-medium" data-sg-lh></td>
+                                <td>Bold 700</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>heading-small</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-heading-small</code></th>
+                                <td><p class="g-type-sample bold" style="--g-type-pc: var(--krds-pc-font-size-heading-small); --g-type-mo: var(--krds-mobile-font-size-heading-small);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-heading-small" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-heading-small" data-sg-lh></td>
+                                <td>Bold 700</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>heading-xsmall</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-heading-xsmall</code></th>
+                                <td><p class="g-type-sample bold" style="--g-type-pc: var(--krds-pc-font-size-heading-xsmall); --g-type-mo: var(--krds-mobile-font-size-heading-xsmall);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-heading-xsmall" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-heading-xsmall" data-sg-lh></td>
+                                <td>Bold 700</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>heading-xxsmall</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-heading-xxsmall</code></th>
+                                <td><p class="g-type-sample bold" style="--g-type-pc: var(--krds-pc-font-size-heading-xxsmall); --g-type-mo: var(--krds-mobile-font-size-heading-xxsmall);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-heading-xxsmall" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-heading-xxsmall" data-sg-lh></td>
+                                <td>Bold 700</td>
+                                <td>0</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Body -->
+                <section class="g-conts-area">
+                    <h2 class="con-tit">Body</h2>
+                    <p class="g-desc">본문. large 요약·중요 정보, medium 표준 본문(기본 17px), small 부가 설명, xsmall 주석·보조 정보. 강조가 필요하면 같은 크기에 Bold(700)를 적용한다(KRDS 가이드의 body-*-bold 스타일).</p>
+                    <div class="krds-table-wrap">
+                        <table class="tbl col data">
+                            <caption>Body 스타일별 토큰, 견본, PC·모바일 크기와 줄 높이, 굵기, 자간</caption>
+                            <colgroup><col style="width: 25%;"><col><col style="width: 12%;"><col style="width: 12%;"><col style="width: 10%;"><col style="width: 6%;"></colgroup>
+                            <thead>
+                            <tr><th scope="col">토큰</th><th scope="col">견본</th><th scope="col">PC<br>크기 / 줄 높이</th><th scope="col">모바일<br>크기 / 줄 높이</th><th scope="col">굵기</th><th scope="col">자간</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row"><strong>body-large</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-body-large</code></th>
+                                <td><p class="g-type-sample regular" style="--g-type-pc: var(--krds-pc-font-size-body-large); --g-type-mo: var(--krds-mobile-font-size-body-large);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-body-large" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-body-large" data-sg-lh></td>
+                                <td>Regular 400</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>body-medium</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-body-medium</code></th>
+                                <td><p class="g-type-sample regular" style="--g-type-pc: var(--krds-pc-font-size-body-medium); --g-type-mo: var(--krds-mobile-font-size-body-medium);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-body-medium" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-body-medium" data-sg-lh></td>
+                                <td>Regular 400</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>body-small</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-body-small</code></th>
+                                <td><p class="g-type-sample regular" style="--g-type-pc: var(--krds-pc-font-size-body-small); --g-type-mo: var(--krds-mobile-font-size-body-small);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-body-small" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-body-small" data-sg-lh></td>
+                                <td>Regular 400</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>body-xsmall</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-body-xsmall</code></th>
+                                <td><p class="g-type-sample regular" style="--g-type-pc: var(--krds-pc-font-size-body-xsmall); --g-type-mo: var(--krds-mobile-font-size-body-xsmall);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-body-xsmall" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-body-xsmall" data-sg-lh></td>
+                                <td>Regular 400</td>
+                                <td>0</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Label -->
+                <section class="g-conts-area">
+                    <h2 class="con-tit">Label</h2>
+                    <p class="g-desc">컴포넌트 구성 내 label, placeholder 등</p>
+                    <div class="krds-table-wrap">
+                        <table class="tbl col data">
+                            <caption>Label 스타일별 토큰, 견본, PC·모바일 크기와 줄 높이, 굵기, 자간</caption>
+                            <colgroup><col style="width: 25%;"><col><col style="width: 12%;"><col style="width: 12%;"><col style="width: 10%;"><col style="width: 6%;"></colgroup>
+                            <thead>
+                            <tr><th scope="col">토큰</th><th scope="col">견본</th><th scope="col">PC<br>크기 / 줄 높이</th><th scope="col">모바일<br>크기 / 줄 높이</th><th scope="col">굵기</th><th scope="col">자간</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row"><strong>label-large</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-label-large</code></th>
+                                <td><p class="g-type-sample regular" style="--g-type-pc: var(--krds-pc-font-size-label-large); --g-type-mo: var(--krds-mobile-font-size-label-large);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-label-large" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-label-large" data-sg-lh></td>
+                                <td>Regular 400</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>label-medium</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-label-medium</code></th>
+                                <td><p class="g-type-sample regular" style="--g-type-pc: var(--krds-pc-font-size-label-medium); --g-type-mo: var(--krds-mobile-font-size-label-medium);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-label-medium" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-label-medium" data-sg-lh></td>
+                                <td>Regular 400</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>label-small</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-label-small</code></th>
+                                <td><p class="g-type-sample regular" style="--g-type-pc: var(--krds-pc-font-size-label-small); --g-type-mo: var(--krds-mobile-font-size-label-small);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-label-small" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-label-small" data-sg-lh></td>
+                                <td>Regular 400</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>label-xsmall</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-label-xsmall</code></th>
+                                <td><p class="g-type-sample regular" style="--g-type-pc: var(--krds-pc-font-size-label-xsmall); --g-type-mo: var(--krds-mobile-font-size-label-xsmall);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-label-xsmall" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-label-xsmall" data-sg-lh></td>
+                                <td>Regular 400</td>
+                                <td>0</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <section class="g-conts-area">
+                    <h2 class="con-tit">Navigation</h2>
+                    <p class="g-desc">사이트 내 이정표 역할을 하는 컴포넌트(메뉴, 사이드 내비게이션 등) 내에서 사용</p>
+                    <div class="krds-table-wrap">
+                        <table class="tbl col data">
+                            <caption>Navigation 스타일별 토큰, 견본, PC·모바일 크기와 줄 높이, 굵기, 자간</caption>
+                            <colgroup><col style="width: 25%;"><col><col style="width: 12%;"><col style="width: 12%;"><col style="width: 10%;"><col style="width: 6%;"></colgroup>
+                            <thead>
+                            <tr><th scope="col">토큰</th><th scope="col">견본</th><th scope="col">PC<br>크기 / 줄 높이</th><th scope="col">모바일<br>크기 / 줄 높이</th><th scope="col">굵기</th><th scope="col">자간</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row"><strong>navigation-title-medium</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-navigation-title-medium</code></th>
+                                <td><p class="g-type-sample bold" style="--g-type-pc: var(--krds-pc-font-size-navigation-title-medium); --g-type-mo: var(--krds-mobile-font-size-navigation-title-medium);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-navigation-title-medium" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-navigation-title-medium" data-sg-lh></td>
+                                <td>Bold 700</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>navigation-title-small</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-navigation-title-small</code></th>
+                                <td><p class="g-type-sample bold" style="--g-type-pc: var(--krds-pc-font-size-navigation-title-small); --g-type-mo: var(--krds-mobile-font-size-navigation-title-small);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-navigation-title-small" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-navigation-title-small" data-sg-lh></td>
+                                <td>Bold 700</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>navigation-depth-medium-bold</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-navigation-depth-medium-bold</code></th>
+                                <td><p class="g-type-sample bold" style="--g-type-pc: var(--krds-pc-font-size-navigation-depth-medium-bold); --g-type-mo: var(--krds-mobile-font-size-navigation-depth-medium-bold);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-navigation-depth-medium-bold" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-navigation-depth-medium-bold" data-sg-lh></td>
+                                <td>Bold 700</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>navigation-depth-medium</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-navigation-depth-medium</code></th>
+                                <td><p class="g-type-sample regular" style="--g-type-pc: var(--krds-pc-font-size-navigation-depth-medium); --g-type-mo: var(--krds-mobile-font-size-navigation-depth-medium);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-navigation-depth-medium" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-navigation-depth-medium" data-sg-lh></td>
+                                <td>Regular 400</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>navigation-depth-small-bold</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-navigation-depth-small-bold</code></th>
+                                <td><p class="g-type-sample bold" style="--g-type-pc: var(--krds-pc-font-size-navigation-depth-small-bold); --g-type-mo: var(--krds-mobile-font-size-navigation-depth-small-bold);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-navigation-depth-small-bold" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-navigation-depth-small-bold" data-sg-lh></td>
+                                <td>Bold 700</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><strong>navigation-depth-small</strong><br><code class="g-token">--krds-{pc|mobile}-font-size-navigation-depth-small</code></th>
+                                <td><p class="g-type-sample regular" style="--g-type-pc: var(--krds-pc-font-size-navigation-depth-small); --g-type-mo: var(--krds-mobile-font-size-navigation-depth-small);">특수교육 Aa</p></td>
+                                <td class="g-num" data-sg-token="--krds-pc-font-size-navigation-depth-small" data-sg-lh></td>
+                                <td class="g-num" data-sg-token="--krds-mobile-font-size-navigation-depth-small" data-sg-lh></td>
+                                <td>Regular 400</td>
+                                <td>0</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="g-source">krds.go.kr 타이포그래피 표는 title-large(24/22px), title-small(19/17px)로 표기하지만, KRDS 1.0.6 코드 토큰은 title-medium(24/22px), title-small(19/19px)이다. 이 표는 코드 토큰 값을 따른다.</p>
+                </section>
+
+                <!-- 계층 구조 -->
+                <section class="g-conts-area">
+                    <h2 class="con-tit">계층 구조</h2>
+                    <p class="g-desc">계층 구조는 사용자에게 정보의 중요도를 명확히 전달한다. 이상적인 heading과 body 간의 글자 크기 차이는 1.25~1.5배로 설정한다. 정보 구조가 단순하면 heading을 단순화할 수 있고, 본문과 heading 크기가 같아지는 구간은 굵기로 구분한다.</p>
+                    <div class="krds-table-wrap">
+                        <table class="tbl col data">
+                            <caption>제목 요소별 heading 스타일 범위와 사용처</caption>
+                            <colgroup><col style="width: 10%;"><col style="width: 22%;"><col></colgroup>
+                            <thead>
+                            <tr><th scope="col">구조</th><th scope="col">스타일 범위</th><th scope="col">사용</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr><th scope="row">h1</th><td>heading-xlarge ~ large</td><td>페이지나 섹션의 가장 중요한 제목으로, 주요 주제를 강조하는 데 사용</td></tr>
+                            <tr><th scope="row">h2</th><td>heading-large ~ medium</td><td>콘텐츠의 주요 섹션을 구분하여 h1보다 작은 부제목 역할</td></tr>
+                            <tr><th scope="row">h3</th><td>heading-medium ~ small</td><td>세부 섹션을 나타내는 제목으로, h1과 h2보다 작은 크기로 사용</td></tr>
+                            <tr><th scope="row">h4</th><td>heading-small ~ xsmall</td><td>본문과 비슷한 크기의 제목으로, 세부적인 콘텐츠에 대한 설명에 사용</td></tr>
+                            <tr><th scope="row">h5</th><td>heading-xsmall ~ xxsmall</td><td>가장 작은 제목으로, 부차적인 정보나 보조 설명을 위해 사용</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="sub-tit">제목·본문 간격</h3>
+                    <p class="g-desc">제목과 제목, 제목과 본문 사이 간격은 레이아웃 간격 토큰(<code class="g-token">--krds-{pc|mobile}-gap-layout-*</code>)을 사용한다.</p>
+                    <div class="krds-table-wrap">
+                        <table class="tbl col data">
+                            <caption>제목과 본문 사이 레이아웃 간격 토큰의 PC·모바일 값</caption>
+                            <colgroup><col style="width: 40%;"><col><col><col style="width: 30%;"></colgroup>
+                            <thead>
+                            <tr><th scope="col">토큰 (PC / 모바일 공통 이름)</th><th scope="col">PC</th><th scope="col">모바일</th><th scope="col">위치</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr><th scope="row"><code class="g-token">gap-layout-h1-h2</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-h1-h2" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-h1-h2" data-sg-short></td><td>h1 아래 h2</td></tr>
+                            <tr><th scope="row"><code class="g-token">gap-layout-h2-h2</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-h2-h2" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-h2-h2" data-sg-short></td><td>h2 섹션 사이</td></tr>
+                            <tr><th scope="row"><code class="g-token">gap-layout-h2-h3</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-h2-h3" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-h2-h3" data-sg-short></td><td>h2 아래 h3</td></tr>
+                            <tr><th scope="row"><code class="g-token">gap-layout-h3-h3</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-h3-h3" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-h3-h3" data-sg-short></td><td>h3 섹션 사이</td></tr>
+                            <tr><th scope="row"><code class="g-token">gap-layout-h3-h4</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-h3-h4" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-h3-h4" data-sg-short></td><td>h3 아래 h4</td></tr>
+                            <tr><th scope="row"><code class="g-token">gap-layout-h4-h4</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-h4-h4" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-h4-h4" data-sg-short></td><td>h4 섹션 사이</td></tr>
+                            <tr><th scope="row"><code class="g-token">gap-layout-h4-h5</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-h4-h5" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-h4-h5" data-sg-short></td><td>h4 아래 h5</td></tr>
+                            <tr><th scope="row"><code class="g-token">gap-layout-h5-h5</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-h5-h5" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-h5-h5" data-sg-short></td><td>h5 섹션 사이</td></tr>
+                            <tr><th scope="row"><code class="g-token">gap-layout-title-body-large</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-title-body-large" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-title-body-large" data-sg-short></td><td>큰 제목과 본문</td></tr>
+                            <tr><th scope="row"><code class="g-token">gap-layout-title-body-medium</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-title-body-medium" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-title-body-medium" data-sg-short></td><td>중간 제목과 본문</td></tr>
+                            <tr><th scope="row"><code class="g-token">gap-layout-title-body-small</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-title-body-small" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-title-body-small" data-sg-short></td><td>작은 제목과 본문</td></tr>
+                            <tr><th scope="row"><code class="g-token">gap-layout-text-text-large</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-text-text-large" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-text-text-large" data-sg-short></td><td>문단과 문단 (넓게)</td></tr>
+                            <tr><th scope="row"><code class="g-token">gap-layout-text-text-medium</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-text-text-medium" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-text-text-medium" data-sg-short></td><td>문단과 문단</td></tr>
+                            <tr><th scope="row"><code class="g-token">gap-layout-text-text-small</code></th><td class="g-num" data-sg-token="--krds-pc-gap-layout-text-text-small" data-sg-short></td><td class="g-num" data-sg-token="--krds-mobile-gap-layout-text-text-small" data-sg-short></td><td>문단과 문단 (좁게)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="sub-tit">적용 예시</h3>
+                    <p class="g-desc">h1~h5에 heading 토큰과 간격 토큰을 적용한 예시다. 오른쪽 위 파란 글씨는 윗요소와의 간격 토큰이다.</p>
+                    <div class="g-hierarchy" aria-hidden="true">
+                        <p class="h1"><strong>h1 heading-xlarge 페이지 제목</strong></p>
+                        <p data-gap="title-body-large">본문 body-medium. 제목과 본문은 시각적 위계가 유지되도록 한다.</p>
+                        <p class="h2" data-gap="h1-h2"><strong>h2 heading-large 주요 섹션</strong></p>
+                        <p data-gap="title-body-large">본문 body-medium. 대체로 본문보다 제목의 글자 크기를 크게 사용한다.</p>
+                        <p class="h3" data-gap="h2-h3"><strong>h3 heading-medium 세부 섹션</strong></p>
+                        <p data-gap="title-body-medium">본문 body-medium. 제목과 본문의 크기가 같으면 두께로 중요도를 반영한다.</p>
+                        <p class="h4" data-gap="h3-h4"><strong>h4 heading-small 세부 콘텐츠 제목</strong></p>
+                        <p data-gap="title-body-small">본문 body-medium.</p>
+                        <p class="h5" data-gap="h4-h5"><strong>h5 heading-xsmall 보조 제목</strong></p>
+                        <p data-gap="title-body-small">본문 body-medium.</p>
+                    </div>
+                </section>
+
+                <!-- 글자 색상 접근성 -->
+                <section class="g-conts-area">
+                    <h2 class="con-tit">글자 색상 접근성</h2>
+                    <p class="g-desc">글자 색상은 가독성과 접근성을 고려해 사용한다. 본문은 주로 그레이 계열을 유지하며, 색상 토큰은 <a href="color.html" class="krds-btn small link"><span class="underline">색상</span></a> 페이지를 참고한다.</p>
+                    <div class="krds-table-wrap">
+                        <table class="tbl col data">
+                            <caption>텍스트 크기별 명도 대비 기준</caption>
+                            <colgroup><col style="width: 14%;"><col><col></colgroup>
+                            <thead>
+                            <tr><th scope="col">등급</th><th scope="col">큰 텍스트</th><th scope="col">일반 텍스트</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr><th scope="row">AA (최소)</th><td>3:1 (매직넘버 40)</td><td>4.5:1 (매직넘버 50)</td></tr>
+                            <tr><th scope="row">AAA (강화)</th><td>4.5:1 (매직넘버 50)</td><td>7:1 (매직넘버 70)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul class="krds-info-list">
+                        <li>큰 텍스트: 24px(18pt) 이상, 굵게 표시된 경우 18.66px(14pt) 이상</li>
+                        <li>일반 텍스트: 24px(18pt) 미만, 굵게 표시된 경우 18.66px(14pt) 미만</li>
+                        <li>선명한 화면 모드: 본문 15:1, 헤딩·레이블 등의 텍스트와 아이콘 7:1, 시각적 보조 수단 4.5:1</li>
+                    </ul>
+                </section>
+
+                <!-- 사용 원칙 -->
+                <section class="g-conts-area">
+                    <h2 class="con-tit">사용 원칙</h2>
+                    <ul class="krds-info-list">
+                        <li>타이틀과 본문은 시각적 위계가 유지되도록 한다. 크기가 같으면 두께로 중요도를 구분한다.</li>
+                        <li>밑줄은 텍스트 링크에만 사용하며 강조에 사용하지 않는다. 강조는 색상이나 굵기를 이용한다.</li>
+                        <li>고딕 계열이 아닌 자체 개발 폰트는 디스플레이나 배너에만 사용한다.</li>
+                        <li>화면 코드에서는 px 값 대신 <code class="g-token">--krds-pc-font-size-*</code>, <code class="g-token">--krds-mobile-font-size-*</code> 토큰을 사용하고, 767px 이하에서 모바일 토큰으로 바꾼다.</li>
+                    </ul>
+                    <p class="g-source">출처: KRDS 1.0.6 krds_tokens.css, common.css, krds.go.kr 스타일 &gt; 타이포그래피</p>
+                </section>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+</body>
+
+</html>
