@@ -6,6 +6,7 @@
 - 출처: https://github.com/KRDS-uiux/krds-uiux
 - 버전: 태그 `1.0.6` (commit `508e961bc65ab1aa6660270c7cddcc650d91ead0`, 2025-09-05)
 - 가져온 파일: `resources/{cdn,css,fonts,img,js}`, `package.json` (그대로 복사)
+- 예외: `resources/img/component/favicon/`은 1.0.6에 없어 태그 `1.1.0` (commit `d6bb184c823e4757f05807ea4646a23e3133b6e6`, 2026-01-12)에서 그대로 가져옴
 - 제외: 원본의 `resources/scss`, `html`(컴포넌트 예제 코드), `tokens`
 
 참고: `cdn/krds.min.css`는 이미지 경로가 krds.go.kr 원격 주소로 되어 있어,
