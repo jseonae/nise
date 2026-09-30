@@ -11,12 +11,114 @@
   <link rel="stylesheet" href="../../_common/resources/css/krds-custom.css">
   <link rel="stylesheet" href="../css/krds-theme.css">
   <link rel="stylesheet" href="../css/user-custom.css">
+  <!-- 글자·화면 표시 설정 (화면 깜빡임 방지를 위해 head에서 불러옴) -->
+  <script src="../../_common/resources/js/krds-display.js"></script>
 </head>
 <body>
   <div id="wrap">
+    <header id="header">
+      <!-- 글자·화면 표시 설정 열기 버튼 (모달 마크업: _common/resources/html/display-settings.html, #wrap 바깥에 배치) -->
+      <button type="button" class="krds-btn small text open-modal" data-target="modal_adjust_display">
+        <i class="svg-icon ico-view-mode"></i> 화면 설정
+      </button>
+    </header>
     <main id="container">
     </main>
   </div>
+
+  <!-- 글자·화면 표시 설정 모달 (krds.go.kr 사이트 마크업) -->
+  <section id="modal_adjust_display" class="krds-modal fade" aria-labelledby="tit_modal_adjust_display" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- modal title -->
+        <div class="modal-header">
+          <h2 id="tit_modal_adjust_display" class="modal-title">
+            글자·화면 표시 설정
+          </h2>
+        </div>
+        <!-- //modal title -->
+        <!-- modal contents -->
+        <div class="modal-conts">
+          <div class="conts-area">
+
+            <!-- adjust_display -->
+            <div class="adjust_display">
+              <!-- 글자 / 화면 표시 설정 -->
+              <div class="fieldset adjust_scale">
+                <div class="form-group scale-options">
+                  <h3>글자·화면 표시 설정</h3>
+                  <div class="form-conts">
+                    <div class="krds-check-area chk-column">
+                      <div class="krds-form-check">
+                        <input type="radio" name="scale_level" id="scale_level_small" value="small">
+                        <label for="scale_level_small">작게</label>
+                      </div>
+                      <div class="krds-form-check">
+                        <input type="radio" name="scale_level" id="scale_level_medium" value="medium" checked>
+                        <label for="scale_level_medium">보통</label>
+                      </div>
+                      <div class="krds-form-check">
+                        <input type="radio" name="scale_level" id="scale_level_large" value="large">
+                        <label for="scale_level_large">조금 크게</label>
+                      </div>
+                      <div class="krds-form-check">
+                        <input type="radio" name="scale_level" id="scale_level_xlarge" value="xlarge">
+                        <label for="scale_level_xlarge">크게</label>
+                      </div>
+                      <div class="krds-form-check">
+                        <input type="radio" name="scale_level" id="scale_level_xxlarge" value="xxlarge">
+                        <label for="scale_level_xxlarge">가장 크게</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 화면 표시 모드 -->
+              <div class="fieldset">
+                <div class="form-group view-mode-options">
+                  <h3>화면 표시 모드</h3>
+                  <div class="form-conts">
+                    <div class="krds-check-area chk-column">
+                      <div class="krds-form-check view-mode-light">
+                        <input type="radio" name="view_mode" id="view_mode_light" value="light" checked>
+                        <label for="view_mode_light">기본 (밝은 배경)</label>
+                      </div>
+                      <div class="krds-form-check view-mode-dark">
+                        <input type="radio" name="view_mode" id="view_mode_dark" value="high-contrast">
+                        <label for="view_mode_dark">선명하게 (어두운 배경)</label>
+                      </div>
+                      <div class="krds-form-check view-mode-default">
+                        <input type="radio" name="view_mode" id="view_mode_default" value="theme">
+                        <label for="view_mode_default">시스템 설정</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- //adjust_display -->
+
+          </div>
+        </div>
+        <!-- //modal contents -->
+        <!-- modal btn -->
+        <div class="modal-btn btn-wrap">
+          <button type="button" class="krds-btn medium tertiary close-modal" id="reset_display">초기화</button>
+          <button type="button" class="krds-btn medium primary close-modal">닫기</button>
+        </div>
+        <!-- //modal btn -->
+        <!-- close button -->
+        <button type="button" class="krds-btn medium icon btn-close close-modal">
+          <span class="sr-only">닫기</span>
+          <i class="svg-icon ico-popup-close"></i>
+        </button>
+        <!-- //close button -->
+      </div>
+    </div>
+    <div class="modal-back"></div>
+  </section>
+  <!-- //글자·화면 표시 설정 모달 -->
+
   <script src="../../krds/resources/js/component/ui-script.js"></script>
   <script src="../js/user-custom.js"></script>
 </body>
