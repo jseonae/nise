@@ -1,0 +1,87 @@
+<!--
+  사용자 공통 모달 : [06] 모달 (#wrap 바깥)
+  - 페이지의 <div data-include="modal"></div> 자리에 들어갑니다.
+-->
+
+<!-- ============================================================
+     [06] 모달 : .modal-wrap (#wrap 바깥)
+     ============================================================ -->
+<div class="modal-wrap">
+  <!-- [06-1] 글자·화면 표시 설정 : #modal_adjust_display (_common/resources/js/krds-display.js 연동, id·value 변경 금지) -->
+  <section id="modal_adjust_display" class="krds-modal fade" aria-labelledby="tit_modal_adjust_display">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="tit_modal_adjust_display" class="modal-title">글자·화면 표시 설정</h2>
+        </div>
+        <div class="modal-conts">
+          <div class="conts-area">
+            <div class="adjust_display">
+              <div class="fieldset adjust_scale">
+                <div class="form-group scale-options">
+                  <h3>글자·화면 표시 설정</h3>
+                  <div class="form-conts">
+                    <div class="krds-check-area chk-column">
+                      <div class="krds-form-check">
+                        <input type="radio" name="scale_level" id="scale_level_small" value="small">
+                        <label for="scale_level_small">작게</label>
+                      </div>
+                      <div class="krds-form-check">
+                        <input type="radio" name="scale_level" id="scale_level_medium" value="medium" checked>
+                        <label for="scale_level_medium">보통</label>
+                      </div>
+                      <div class="krds-form-check">
+                        <input type="radio" name="scale_level" id="scale_level_large" value="large">
+                        <label for="scale_level_large">조금 크게</label>
+                      </div>
+                      <div class="krds-form-check">
+                        <input type="radio" name="scale_level" id="scale_level_xlarge" value="xlarge">
+                        <label for="scale_level_xlarge">크게</label>
+                      </div>
+                      <div class="krds-form-check">
+                        <input type="radio" name="scale_level" id="scale_level_xxlarge" value="xxlarge">
+                        <label for="scale_level_xxlarge">가장 크게</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="fieldset">
+                <div class="form-group view-mode-options">
+                  <h3>화면 표시 모드</h3>
+                  <div class="form-conts">
+                    <div class="krds-check-area chk-column">
+                      <div class="krds-form-check view-mode-light">
+                        <input type="radio" name="view_mode" id="view_mode_light" value="light" checked>
+                        <label for="view_mode_light">기본 (밝은 배경)</label>
+                      </div>
+                      <div class="krds-form-check view-mode-dark">
+                        <input type="radio" name="view_mode" id="view_mode_dark" value="high-contrast">
+                        <label for="view_mode_dark">선명하게 (어두운 배경)</label>
+                      </div>
+                      <div class="krds-form-check view-mode-default">
+                        <input type="radio" name="view_mode" id="view_mode_default" value="theme">
+                        <label for="view_mode_default">시스템 설정</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-btn btn-wrap">
+          <button type="button" class="krds-btn medium tertiary close-modal" id="reset_display">초기화</button>
+          <button type="button" class="krds-btn medium primary close-modal">설정</button>
+        </div>
+        <button type="button" class="krds-btn medium icon btn-close close-modal">
+          <span class="sr-only">닫기</span>
+          <i class="svg-icon ico-popup-close"></i>
+        </button>
+      </div>
+    </div>
+    <div class="modal-back"></div>
+  </section>
+  <!-- //[06-1] 글자·화면 표시 설정 -->
+</div>
+<!-- //[06] 모달 -->
