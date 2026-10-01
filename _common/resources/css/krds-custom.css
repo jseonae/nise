@@ -63,8 +63,9 @@
   --cm-color-divider-light: var(--krds-light-color-divider-gray-light);
   --cm-color-border-light: var(--krds-light-color-border-gray-light);
   --cm-color-surface-white: var(--krds-light-color-background-white);
-  --cm-color-row-notice: var(--krds-color-light-secondary-10);
-  --cm-color-row-notice-sub: var(--krds-light-color-surface-secondary-subtler);
+  --cm-color-row-notice: var(--krds-light-color-surface-secondary-subtler);
+  --cm-color-row-notice-border: var(--krds-light-color-surface-gray-subtler);
+  --cm-color-row-notice-hover: var(--krds-color-light-secondary-10);
   --cm-color-row-hover: var(--krds-light-color-surface-primary-subtler);
   --cm-color-row-hover-border: var(--krds-light-color-border-primary);
   --cm-color-top-btn: var(--krds-color-light-primary-70);
@@ -337,10 +338,15 @@
   line-height: 1.5;
   transition: var(--krds-transition-base);
 }
+/* 일반 행 hover : primary-subtler 배경 · primary 보더 · 번호 text-secondary */
 .cm-board-list .search-item > a:hover,
 .cm-board-list .search-item > a:focus {
   border-color: var(--cm-color-row-hover-border);
   background-color: var(--cm-color-row-hover);
+}
+.cm-board-list .search-item > a:hover .category,
+.cm-board-list .search-item > a:focus .category {
+  color: var(--cm-color-text-secondary);
 }
 .cm-board-list .search-item .category {
   flex: 0 0 8rem;
@@ -373,13 +379,9 @@
   text-align: center;
   color: var(--cm-color-text-subtle);
 }
-/* 공지 행 (Figma 공지 행 두 개의 배경색이 달라 첫 행은 secondary-10, 나머지는 surface-secondary-subtler) */
+/* 공지 행 (Figma 목록 행 컴포넌트 : 공지 기본 surface-secondary-subtler / 공지 hover secondary-10) */
 .cm-board-list .search-item.is-notice > a {
-  border-color: var(--cm-color-row-notice-sub);
-  background-color: var(--cm-color-row-notice-sub);
-}
-.cm-board-list .search-item.is-notice:first-child > a {
-  border-color: var(--cm-color-row-notice);
+  border-color: var(--cm-color-row-notice-border);
   background-color: var(--cm-color-row-notice);
 }
 .cm-board-list .search-item.is-notice .category {
@@ -388,8 +390,8 @@
 }
 .cm-board-list .search-item.is-notice > a:hover,
 .cm-board-list .search-item.is-notice > a:focus {
-  border-color: var(--cm-color-row-hover-border);
-  background-color: var(--cm-color-row-hover);
+  border-color: var(--cm-color-row-notice-hover);
+  background-color: var(--cm-color-row-notice-hover);
 }
 
 /* [푸터] 사이트 로고 · 기관 정보 한 줄 배치 · 웹 접근성 인증마크 · TOP 버튼 */
@@ -499,7 +501,8 @@
   --cm-color-border-light: var(--krds-high-contrast-color-border-gray-light);
   --cm-color-surface-white: var(--krds-high-contrast-color-background-white);
   --cm-color-row-notice: var(--krds-high-contrast-color-surface-secondary-subtler);
-  --cm-color-row-notice-sub: var(--krds-high-contrast-color-surface-secondary-subtler);
+  --cm-color-row-notice-border: var(--krds-high-contrast-color-surface-gray-subtler);
+  --cm-color-row-notice-hover: var(--krds-color-high-contrast-secondary-10);
   --cm-color-row-hover: var(--krds-high-contrast-color-surface-primary-subtler);
   --cm-color-row-hover-border: var(--krds-high-contrast-color-border-primary);
   --cm-color-icon: var(--krds-high-contrast-color-text-basic);
@@ -517,7 +520,8 @@
     --cm-color-border-light: var(--krds-high-contrast-color-border-gray-light);
     --cm-color-surface-white: var(--krds-high-contrast-color-background-white);
     --cm-color-row-notice: var(--krds-high-contrast-color-surface-secondary-subtler);
-    --cm-color-row-notice-sub: var(--krds-high-contrast-color-surface-secondary-subtler);
+    --cm-color-row-notice-border: var(--krds-high-contrast-color-surface-gray-subtler);
+    --cm-color-row-notice-hover: var(--krds-color-high-contrast-secondary-10);
     --cm-color-row-hover: var(--krds-high-contrast-color-surface-primary-subtler);
     --cm-color-row-hover-border: var(--krds-high-contrast-color-border-primary);
     --cm-color-icon: var(--krds-high-contrast-color-text-basic);
