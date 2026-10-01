@@ -34,3 +34,28 @@ document.addEventListener("click", (event) => {
   }
   if (shareUrls[type]) button.setAttribute("href", shareUrls[type]);
 });
+
+/* [퍼블리싱 확인용] 시계열 시각화 목록 주제 칩 (kr/html/stat/timeseries_list.html)
+   고른 주제의 카드만 보여 줍니다. 개발 시 서버 조회로 바꾸고 이 코드는 지웁니다.
+   전체 : data-all 카드(Figma 시계열시각화-list), 그 밖 : data-topic 이 같은 카드(Figma 시계열시각화-list-교육과정) */
+const cmTsFilter = {
+  init() {
+    const radios = document.querySelectorAll('input[name="ts_topic"]');
+    const cards = document.querySelectorAll(".cm-ts-list > .cm-ts-card");
+    if (!radios.length || !cards.length) return;
+    radios.forEach((radio) =>
+      radio.addEventListener("change", () => {
+        const value = radio.value;
+        cards.forEach((card) => {
+          card.hidden = value === "all" ? card.dataset.all !== "y" : card.dataset.topic !== value;
+        });
+        const count = document.querySelector(".cm-timeseries .cm-board-count");
+        if (count) {
+          count.querySelector(".total .num").textContent = radio.dataset.total;
+          count.querySelector(".page .last").textContent = radio.dataset.pages;
+        }
+      })
+    );
+  },
+};
+document.addEventListener("DOMContentLoaded", () => cmTsFilter.init());
