@@ -486,31 +486,41 @@
 .cm-board-view .cm-attach .file-info .btn-wrap {
   gap: var(--krds-gap-5);
 }
-/* 공공누리 */
-.cm-board-view .cm-kogl {
+/* 공공누리 (kr/tmpl/kogl/ : 한국문화정보원 공통코드 .codeView01~04 · 09 · AI 의 인라인 스타일을 Figma 디자인으로 대체) */
+.cm-kogl {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--krds-gap-7);
   padding: var(--krds-padding-8) var(--krds-number-12);
   border: 0.1rem solid var(--cm-color-border-light);
   border-radius: var(--krds-radius-medium3);
   background-color: var(--cm-color-box-surface);
+  font-size: var(--krds-pc-font-size-heading-xsmall);
+  font-weight: var(--krds-font-weight-bold);
   line-height: 1.5;
   color: var(--cm-color-text-subtle);
 }
-.cm-board-view .cm-kogl img {
-  flex: 0 0 14.4rem;
-  width: 14.4rem;
-  margin-top: var(--krds-padding-2);
-  background-color: var(--krds-light-color-surface-white); /* 공공누리 마크는 투명 배경 검은 글자라 어두운 모드에서도 흰 바탕 유지 (Figma 동일) */
+.cm-kogl img {
+  flex: 0 0 auto;
+  height: 3.6rem;
+  width: auto;
+  background-color: var(--krds-light-color-surface-white); /* 마크가 투명 배경 검은 글자라 어두운 모드에서도 흰 바탕 유지 */
 }
-.cm-board-view .cm-kogl dt {
-  font-size: var(--krds-pc-font-size-heading-xsmall);
-  font-weight: var(--krds-font-weight-bold);
+/* 인공지능 학습용 : 다른 유형 바로 아래에 붙여 표시 (제공 코드와 같이 위 테두리 점선) */
+.cm-kogl + .cm-kogl-ai {
+  margin-top: -0.1rem;
+  border-top-style: dashed;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
-.cm-board-view .cm-kogl dd {
-  font-size: var(--krds-pc-font-size-body-medium);
+.cm-board-view .conts-area .cm-kogl + .cm-kogl-ai {
+  margin-top: calc(var(--krds-gap-6) * -1 - 0.1rem); /* 상세 본문 영역의 세로 간격(gap)만큼 당겨 붙임 */
 }
+.cm-kogl:has(+ .cm-kogl-ai) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 /* 이전글 · 다음글 · 목록 (KRDS 사이트 .page-btn-wrap.both 배치) */
 .cm-board-view .page-btn-wrap {
   display: flex;
@@ -531,8 +541,9 @@
     flex-direction: column;
     align-items: flex-start;
   }
-  .cm-board-view .cm-kogl {
+  .cm-kogl {
     flex-direction: column;
+    align-items: flex-start;
   }
 }
 
