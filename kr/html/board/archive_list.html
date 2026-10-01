@@ -53,10 +53,230 @@
       <!-- 페이지 상단 : 브레드크럼 · 공유/인쇄 · 페이지 제목 -->
       <div data-include="page-top"></div>
 
-      <!-- [04-1] 컨텐츠 : .inner -->
-      <div class="inner cm-contents">
-        <!-- TODO: 자료실 목록(list) 퍼블리싱 (Figma: 컨텐츠 > s03알림마당_자료실 list / view) -->
-        <p class="cm-todo">자료실 목록(list) 컨텐츠 영역</p>
+      <!-- [04-1] 컨텐츠 : .inner (Figma: 컨텐츠 > s03알림마당_자료실 list) -->
+      <div class="inner cm-contents cm-archive">
+        <!-- 분류 탭 : KRDS 탭(fill full). 개발 시 탭마다 같은 목록 구조로 분류별 자료 출력 -->
+        <div class="krds-tab-area layer">
+          <div class="tab fill full">
+            <ul role="tablist">
+              <li id="tab_archive_01" role="tab" aria-selected="true" aria-controls="panel_archive_01" class="active">
+                <button type="button" class="btn-tab">실태조사 <i class="sr-only created"> 선택됨</i></button>
+              </li>
+              <li id="tab_archive_02" role="tab" aria-selected="false" aria-controls="panel_archive_02">
+                <button type="button" class="btn-tab">종단연구</button>
+              </li>
+              <li id="tab_archive_03" role="tab" aria-selected="false" aria-controls="panel_archive_03">
+                <button type="button" class="btn-tab">특수교육통계</button>
+              </li>
+            </ul>
+          </div>
+
+          <div class="tab-conts-wrap">
+            <section id="panel_archive_01" aria-labelledby="tab_archive_01" class="tab-conts active" data-quick-nav="false">
+              <h2 class="sr-only">실태조사 자료 목록</h2>
+              <!-- 목록 상단 : 게시물 수 · 목록 표시 개수 · 검색 (공지사항 목록과 같은 구조) -->
+              <div class="cm-board-top">
+                <div class="cm-board-count" aria-live="polite">
+                  <p class="total">총 <span class="num">38</span>개</p>
+                  <p class="page"><span class="sr-only">현재 페이지</span><span class="current">1</span> / <span class="sr-only">전체 페이지</span>24</p>
+                </div>
+                <div class="cm-board-search">
+                  <div class="cm-select-sort">
+                    <label for="list_size_archive">목록 표시 개수</label>
+                    <select id="list_size_archive" class="krds-form-select-sort medium">
+                      <option value="15" selected>15개</option>
+                      <option value="30">30개</option>
+                      <option value="50">50개</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-conts btn-ico-wrap">
+                      <input type="text" id="search_archive" class="krds-input" placeholder="검색어를 입력해주세요." title="검색어 입력">
+                      <button type="button" class="krds-btn medium icon">
+                        <span class="sr-only">검색</span>
+                        <i class="svg-icon ico-sch"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 표지 카드 목록 -->
+              <ul class="cm-cover-list">
+                <li class="cm-cover-item">
+                  <div class="thumb"><img src="../../img/board/archive/cover_01.png" alt="2026 특수교육 실태조사 보고서 표지"></div>
+                  <div class="info">
+                    <span class="krds-badge bg-light-primary">실태조사 보고서</span>
+                    <h3 class="tit">2026 특수교육 실태조사 보고서</h3>
+                  </div>
+                  <div class="btns">
+                    <a href="archive_view.html?idx=1" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2026 특수교육 실태조사 보고서</span></a>
+                    <button type="button" class="krds-btn medium tertiary">미리보기<span class="sr-only"> : 2026 특수교육 실태조사 보고서</span></button>
+                    <a href="#" class="krds-btn medium icon border"><span class="sr-only">2026 특수교육 실태조사 보고서 내려받기</span><i class="svg-icon ico-down"></i></a>
+                  </div>
+                </li>
+                <li class="cm-cover-item">
+                  <div class="thumb no-img"><img src="../../../_common/resources/img/common/cm_cover_default.png" alt=""></div><!-- 표지 없는 자료 : 기본 표지 -->
+                  <div class="info">
+                    <span class="krds-badge bg-light-primary">이슈페이퍼</span>
+                    <h3 class="tit">2026년 진로 이슈페이퍼 1호</h3>
+                  </div>
+                  <div class="btns">
+                    <a href="archive_view.html?idx=2" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2026년 진로 이슈페이퍼 1호</span></a>
+                    <button type="button" class="krds-btn medium tertiary">미리보기<span class="sr-only"> : 2026년 진로 이슈페이퍼 1호</span></button>
+                    <a href="#" class="krds-btn medium icon border"><span class="sr-only">2026년 진로 이슈페이퍼 1호 내려받기</span><i class="svg-icon ico-down"></i></a>
+                  </div>
+                </li>
+                <li class="cm-cover-item">
+                  <div class="thumb"><img src="../../img/board/archive/cover_03.png" alt="2025 특수교육통계 표지"></div>
+                  <div class="info">
+                    <span class="krds-badge bg-light-primary">통계자료</span>
+                    <h3 class="tit">2025 특수교육통계</h3>
+                  </div>
+                  <div class="btns">
+                    <a href="archive_view.html?idx=3" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2025 특수교육통계</span></a>
+                    <button type="button" class="krds-btn medium tertiary">미리보기<span class="sr-only"> : 2025 특수교육통계</span></button>
+                    <a href="#" class="krds-btn medium icon border"><span class="sr-only">2025 특수교육통계 내려받기</span><i class="svg-icon ico-down"></i></a>
+                  </div>
+                </li>
+                <li class="cm-cover-item">
+                  <div class="thumb"><img src="../../img/board/archive/cover_04.png" alt="2023년 특수교육 실태조사 보고서 표지"></div>
+                  <div class="info">
+                    <span class="krds-badge bg-light-primary">실태조사 보고서</span>
+                    <h3 class="tit">2023년 특수교육 실태조사 보고서</h3>
+                  </div>
+                  <div class="btns">
+                    <a href="archive_view.html?idx=4" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2023년 특수교육 실태조사 보고서</span></a>
+                    <button type="button" class="krds-btn medium tertiary">미리보기<span class="sr-only"> : 2023년 특수교육 실태조사 보고서</span></button>
+                    <a href="#" class="krds-btn medium icon border"><span class="sr-only">2023년 특수교육 실태조사 보고서 내려받기</span><i class="svg-icon ico-down"></i></a>
+                  </div>
+                </li>
+                <li class="cm-cover-item">
+                  <div class="thumb no-img"><img src="../../../_common/resources/img/common/cm_cover_default.png" alt=""></div><!-- 표지 없는 자료 : 기본 표지 -->
+                  <div class="info">
+                    <span class="krds-badge bg-light-primary">정책자료</span>
+                    <h3 class="tit">제6차 특수교육 발전 5개년 계획</h3>
+                  </div>
+                  <div class="btns">
+                    <a href="archive_view.html?idx=5" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 제6차 특수교육 발전 5개년 계획</span></a>
+                    <button type="button" class="krds-btn medium tertiary">미리보기<span class="sr-only"> : 제6차 특수교육 발전 5개년 계획</span></button>
+                    <a href="#" class="krds-btn medium icon border"><span class="sr-only">제6차 특수교육 발전 5개년 계획 내려받기</span><i class="svg-icon ico-down"></i></a>
+                  </div>
+                </li>
+                <li class="cm-cover-item">
+                  <div class="thumb"><img src="../../img/board/archive/cover_06.png" alt="2020년 특수교육 실태조사 보고서 표지"></div>
+                  <div class="info">
+                    <span class="krds-badge bg-light-primary">실태조사 보고서</span>
+                    <h3 class="tit">2020년 특수교육 실태조사 보고서</h3>
+                  </div>
+                  <div class="btns">
+                    <a href="archive_view.html?idx=6" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2020년 특수교육 실태조사 보고서</span></a>
+                    <button type="button" class="krds-btn medium tertiary">미리보기<span class="sr-only"> : 2020년 특수교육 실태조사 보고서</span></button>
+                    <a href="#" class="krds-btn medium icon border"><span class="sr-only">2020년 특수교육 실태조사 보고서 내려받기</span><i class="svg-icon ico-down"></i></a>
+                  </div>
+                </li>
+                <li class="cm-cover-item">
+                  <div class="thumb"><img src="../../img/board/archive/cover_07.png" alt="2017년 특수교육 실태조사 보고서 표지"></div>
+                  <div class="info">
+                    <span class="krds-badge bg-light-primary">실태조사 보고서</span>
+                    <h3 class="tit">2017년 특수교육 실태조사 보고서</h3>
+                  </div>
+                  <div class="btns">
+                    <a href="archive_view.html?idx=7" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2017년 특수교육 실태조사 보고서</span></a>
+                    <button type="button" class="krds-btn medium tertiary">미리보기<span class="sr-only"> : 2017년 특수교육 실태조사 보고서</span></button>
+                    <a href="#" class="krds-btn medium icon border"><span class="sr-only">2017년 특수교육 실태조사 보고서 내려받기</span><i class="svg-icon ico-down"></i></a>
+                  </div>
+                </li>
+                <li class="cm-cover-item">
+                  <div class="thumb"><img src="../../img/board/archive/cover_08.png" alt="2014년 특수교육 실태조사 보고서 표지"></div>
+                  <div class="info">
+                    <span class="krds-badge bg-light-primary">실태조사 보고서</span>
+                    <h3 class="tit">2014년 특수교육 실태조사 보고서</h3>
+                  </div>
+                  <div class="btns">
+                    <a href="archive_view.html?idx=8" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2014년 특수교육 실태조사 보고서</span></a>
+                    <button type="button" class="krds-btn medium tertiary">미리보기<span class="sr-only"> : 2014년 특수교육 실태조사 보고서</span></button>
+                    <a href="#" class="krds-btn medium icon border"><span class="sr-only">2014년 특수교육 실태조사 보고서 내려받기</span><i class="svg-icon ico-down"></i></a>
+                  </div>
+                </li>
+                <li class="cm-cover-item">
+                  <div class="thumb"><img src="../../img/board/archive/cover_09.png" alt="2011년 특수교육 실태조사 보고서 표지"></div>
+                  <div class="info">
+                    <span class="krds-badge bg-light-primary">실태조사 보고서</span>
+                    <h3 class="tit">2011년 특수교육 실태조사 보고서</h3>
+                  </div>
+                  <div class="btns">
+                    <a href="archive_view.html?idx=9" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2011년 특수교육 실태조사 보고서</span></a>
+                    <button type="button" class="krds-btn medium tertiary">미리보기<span class="sr-only"> : 2011년 특수교육 실태조사 보고서</span></button>
+                    <a href="#" class="krds-btn medium icon border"><span class="sr-only">2011년 특수교육 실태조사 보고서 내려받기</span><i class="svg-icon ico-down"></i></a>
+                  </div>
+                </li>
+                <li class="cm-cover-item">
+                  <div class="thumb"><img src="../../img/board/archive/cover_10.png" alt="2008년 특수교육 실태조사 보고서 표지"></div>
+                  <div class="info">
+                    <span class="krds-badge bg-light-primary">실태조사 보고서</span>
+                    <h3 class="tit">2008년 특수교육 실태조사 보고서</h3>
+                  </div>
+                  <div class="btns">
+                    <a href="archive_view.html?idx=10" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2008년 특수교육 실태조사 보고서</span></a>
+                    <button type="button" class="krds-btn medium tertiary">미리보기<span class="sr-only"> : 2008년 특수교육 실태조사 보고서</span></button>
+                    <a href="#" class="krds-btn medium icon border"><span class="sr-only">2008년 특수교육 실태조사 보고서 내려받기</span><i class="svg-icon ico-down"></i></a>
+                  </div>
+                </li>
+                <li class="cm-cover-item">
+                  <div class="thumb no-img"><img src="../../../_common/resources/img/common/cm_cover_default.png" alt=""></div><!-- 표지 없는 자료 : 기본 표지 -->
+                  <div class="info">
+                    <span class="krds-badge bg-light-primary">실태조사 보고서</span>
+                    <h3 class="tit">2014년 특수교육 실태조사 보고서</h3>
+                  </div>
+                  <div class="btns">
+                    <a href="archive_view.html?idx=11" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2014년 특수교육 실태조사 보고서</span></a>
+                    <button type="button" class="krds-btn medium tertiary">미리보기<span class="sr-only"> : 2014년 특수교육 실태조사 보고서</span></button>
+                    <a href="#" class="krds-btn medium icon border"><span class="sr-only">2014년 특수교육 실태조사 보고서 내려받기</span><i class="svg-icon ico-down"></i></a>
+                  </div>
+                </li>
+                <li class="cm-cover-item">
+                  <div class="thumb no-img"><img src="../../../_common/resources/img/common/cm_cover_default.png" alt=""></div><!-- 표지 없는 자료 : 기본 표지 -->
+                  <div class="info">
+                    <span class="krds-badge bg-light-primary">실태조사 보고서</span>
+                    <h3 class="tit">2014년 특수교육 실태조사 보고서</h3>
+                  </div>
+                  <div class="btns">
+                    <a href="archive_view.html?idx=12" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2014년 특수교육 실태조사 보고서</span></a>
+                    <button type="button" class="krds-btn medium tertiary">미리보기<span class="sr-only"> : 2014년 특수교육 실태조사 보고서</span></button>
+                    <a href="#" class="krds-btn medium icon border"><span class="sr-only">2014년 특수교육 실태조사 보고서 내려받기</span><i class="svg-icon ico-down"></i></a>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section id="panel_archive_02" aria-labelledby="tab_archive_02" class="tab-conts" data-quick-nav="false">
+              <h2 class="sr-only">종단연구 자료 목록</h2>
+              <p class="cm-todo">종단연구 자료 목록 (실태조사 탭과 같은 구조)</p>
+            </section>
+            <section id="panel_archive_03" aria-labelledby="tab_archive_03" class="tab-conts" data-quick-nav="false">
+              <h2 class="sr-only">특수교육통계 자료 목록</h2>
+              <p class="cm-todo">특수교육통계 자료 목록 (실태조사 탭과 같은 구조)</p>
+            </section>
+          </div>
+        </div>
+
+        <!-- 페이지네이션 : KRDS pagination -->
+        <div class="krds-pagination">
+          <span class="page-navi prev disabled">이전</span>
+          <div class="page-links">
+            <a class="page-link active" href="#"><span class="sr-only">현재페이지 </span>1</a>
+            <a class="page-link" href="#">2</a>
+            <a class="page-link" href="#">3</a>
+            <a class="page-link" href="#">4</a>
+            <a class="page-link" href="#">5</a>
+            <a class="page-link" href="#">6</a>
+            <a class="page-link" href="#">7</a>
+            <a class="page-link" href="#">8</a>
+            <a class="page-link" href="#">9</a>
+            <a class="page-link" href="#">10</a>
+          </div>
+          <a class="page-navi next" href="#">다음</a>
+        </div>
       </div>
       <!-- //[04-1] 컨텐츠 -->
     </div>

@@ -551,6 +551,91 @@
   }
 }
 
+/* [게시판] 표지 카드 목록 (Figma: 컨텐츠 > s03알림마당_자료실 list / listItem) */
+.cm-cover-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--krds-number-16) var(--krds-gap-9);
+}
+.cm-cover-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-5);
+  min-width: 0;
+}
+.cm-cover-item .thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 26.4rem; /* Figma thumbBox 270×264 */
+  padding: var(--krds-padding-8);
+  border: 0.1rem solid var(--cm-color-attach-border);
+  background-color: var(--cm-color-row-notice); /* surface-secondary-subtler */
+}
+.cm-cover-item .thumb.no-img {
+  background-color: var(--cm-color-box-surface); /* 표지 없는 자료 : surface-gray-subtler + 기본 표지 */
+}
+.cm-cover-item .thumb img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  box-shadow: 0 0 0.2rem 0 var(--krds-light-color-alpha-shadow1), 0 0.4rem 0.8rem 0 var(--krds-light-color-alpha-shadow2);
+}
+.cm-cover-item .info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--krds-gap-4);
+}
+.cm-cover-item .tit {
+  overflow: hidden;
+  max-width: 100%;
+  font-size: var(--krds-pc-font-size-heading-small);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cm-cover-item .btns {
+  display: flex;
+  gap: var(--krds-gap-2);
+}
+.cm-cover-item .btns .krds-btn {
+  border-color: var(--cm-color-border-light);
+}
+.cm-cover-item .btns .krds-btn.tertiary {
+  flex: 1 1 0;
+  min-width: 0;
+  padding-left: var(--krds-padding-3);
+  padding-right: var(--krds-padding-3);
+}
+.cm-cover-item .btns .krds-btn.icon {
+  flex: 0 0 auto;
+  width: var(--krds-size-height-7);
+  height: var(--krds-size-height-7);
+  border-radius: var(--krds-radius-medium1);
+}
+.cm-cover-item .btns .krds-btn.icon .svg-icon {
+  width: var(--krds-icon--size-medium);
+  height: var(--krds-icon--size-medium);
+}
+/* 자료실 분류 탭 : KRDS 탭(fill full), 탭과 목록 사이 간격 40px (Figma) */
+.cm-archive .krds-tab-area {
+  gap: var(--krds-gap-9);
+}
+@media (max-width: 1023px) {
+  .cm-cover-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--krds-gap-9) var(--krds-gap-7);
+  }
+}
+@media (max-width: 767px) {
+  .cm-cover-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* [알림마당] 조사개요 (Figma: 컨텐츠 > s03알림마당_조사개요) */
 .cm-overview {
   gap: var(--krds-number-18);
