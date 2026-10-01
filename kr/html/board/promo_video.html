@@ -53,10 +53,46 @@
       <!-- 페이지 상단 : 브레드크럼 · 공유/인쇄 · 페이지 제목 -->
       <div data-include="page-top"></div>
 
-      <!-- [04-1] 컨텐츠 : .inner -->
-      <div class="inner cm-contents">
-        <!-- TODO: 홍보영상 본문 퍼블리싱 (Figma: 컨텐츠 > s03알림마당_홍보영상 view) -->
-        <p class="cm-todo">홍보영상 본문 컨텐츠 영역</p>
+      <!-- [04-1] 컨텐츠 : .inner (Figma: 컨텐츠 > s03알림마당_홍보영상 view) -->
+      <div class="inner cm-contents cm-board-view cm-video-view">
+        <h2 class="cm-video-tit">특수교육 실태조사 데이터 활용 시스템 소개</h2>
+
+        <!-- 동영상 : 브라우저 기본 재생기(controls). 개발 시 src 에 영상 파일, track 에 자막 파일(vtt) 연결 -->
+        <div class="cm-video-player">
+          <video controls preload="none" poster="../../img/board/video/poster_system_intro.jpg" aria-describedby="video_script">
+            <source src="" type="video/mp4">
+            <!-- <track kind="captions" srclang="ko" label="한국어" src="자막파일.vtt" default> -->
+            동영상을 재생할 수 없는 브라우저입니다. 아래 자막(대본)을 확인해 주세요.
+          </video>
+        </div>
+
+        <!-- 자막(대본) : 내용이 길면 상자 안에서 스크롤 (키보드로도 스크롤되도록 tabindex) -->
+        <div class="cm-video-script" id="video_script" tabindex="0" role="region" aria-label="영상 자막">
+          <p>[자막] #특별한 거래관계 편</p>
+          <p>특별한 거래관계에서 발생한 불공정 행위 공정위에 신고 가능한지 아닌지, 헷갈리시나요? 사례를 통해 함께 알아볼까요?</p>
+          <p>건설자재 제작을 하는 A업체는 대기업에 알루미늄 거푸집을 납품하기로 했습니다. A업체의 작업 시작 후 2개월이 지나 하도급 단가, 하도급대금 지급 방법 등이 기재된 계약서면을 발급한 대기업! 게다가 거푸집 납품까지 마쳤지만, 하도급대금을 주지 않아 고민입니다. 하도급 거래에서 원사업자는 수급사업자에게 제조 등의 위탁을 하는 경우 일정한 사항을 기재한 서면을 작업 시작 전에 수급사업자에게 교부해야 합니다.</p>
+          <p>하도급대금, 지연이자, 어음할인료 등을 미지급한 경우 하도급법 위반입니다.</p>
+          <p>(특별한 거래관계 불공정 행위 예시 - 1.하도급거래 공정화에 관한 법률 위반행위, 2.가맹사업거래의 공정화에 관한 법률 위반행위, 3.대규모유통업에서의 거래 공정화에 관한 법률 위반행위, 4.대리점거래의 공정화에 관한 법률 위반행위) 신고인이 경험한 불공정한 행위가 법령에 따른 위반행위가 맞는지 헷갈리시나요? 이를 쉽게 확인할 수 있도록 체크리스트 형식의 사전점검표를 보고 신고서를 작성하시면 됩니다.</p>
+          <p>(1.신고서 작성 안내서를 참고하여 법률 위반행위 신고서 작성, 2.위반행위 사전점검표를 통해 위반행위 사실과 해당 여부 확인, 3.신고서 작성 예시를 참고하여, 육하원칙에 맞게 신고내용 작성(육하원칙에 맞게 상세히 작성, 증거자료 첨부가능))</p>
+        </div>
+
+        <!-- 이용 매뉴얼 : 공지사항 상세 첨부파일과 같은 KRDS file_upload 목록 -->
+        <div class="krds-file-upload cm-attach">
+          <h2 class="cm-attach-tit">이용 매뉴얼</h2>
+          <div class="file-list">
+            <ul class="upload-list">
+              <li>
+                <div class="file-info">
+                  <div class="file-name">특수교육 실태조사 데이터 활용 시스템 이용 매뉴얼.pdf [PDF, 4.2 MB]</div>
+                  <div class="btn-wrap">
+                    <button type="button" class="krds-btn medium text">다운로드 <i class="svg-icon ico-down"></i></button>
+                    <a href="#" class="krds-btn medium text" target="_blank" title="새 창 열림">바로보기 <i class="svg-icon ico-angle right"></i></a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       <!-- //[04-1] 컨텐츠 -->
     </div>
