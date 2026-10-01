@@ -28,6 +28,11 @@
   --cm-color-row-hover: var(--krds-light-color-surface-primary-subtler);
   --cm-color-row-hover-border: var(--krds-light-color-border-primary);
   --cm-color-icon: var(--krds-light-color-text-basic);
+  --cm-color-line-strong: var(--krds-light-color-element-gray);
+  --cm-color-attach-surface: var(--krds-light-color-surface-secondary-subtler);
+  --cm-color-attach-border: var(--krds-light-color-border-secondary-light);
+  --cm-color-attach-item: var(--krds-light-color-surface-white-subtle);
+  --cm-color-box-surface: var(--krds-light-color-surface-gray-subtler);
 }
 
 /* [헤더] 사이트 로고 (KRDS 기본 로고 이미지 교체) */
@@ -398,6 +403,139 @@
   background-color: var(--cm-color-row-notice-hover);
 }
 
+/* [게시판] 상세 (마크업: KRDS 사이트 새소식 상세 community_01_01, 스타일: Figma s03알림마당_공지사항 view) */
+.cm-board-view {
+  gap: 0;
+}
+.cm-board-view .community-page-title {
+  padding-bottom: var(--krds-number-14);
+  border-bottom: 0.1rem solid var(--cm-color-line-strong);
+}
+.cm-board-view .community-page-title .tit {
+  font-size: var(--krds-pc-font-size-heading-large);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+.cm-board-view .community-page-title .info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--krds-gap-3);
+  padding-top: var(--krds-gap-3);
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-subtle);
+}
+.cm-board-view .community-page-title .info span + span::before {
+  content: "";
+  display: inline-block;
+  width: 0.1rem;
+  height: 1.2rem;
+  margin-right: var(--krds-gap-3);
+  background-color: var(--cm-color-divider-light);
+  vertical-align: middle;
+}
+.cm-board-view .community-page-title .category {
+  font-size: var(--krds-pc-font-size-heading-xsmall);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-secondary);
+}
+.cm-board-view .conts-area {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-6);
+  padding-top: var(--krds-number-14);
+}
+.cm-board-view .g-description-area {
+  margin-bottom: var(--krds-gap-6);
+  padding-bottom: var(--krds-number-14);
+  border-bottom: 0.1rem solid var(--cm-color-border-light);
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+}
+.cm-board-view .g-description-area p + p {
+  margin-top: 1.5em;
+}
+/* 첨부파일 : KRDS file_upload 목록을 Figma 박스형으로 */
+.cm-board-view .cm-attach {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-4);
+  padding: var(--krds-number-12);
+  border: 0.1rem solid var(--cm-color-attach-border);
+  border-radius: var(--krds-radius-medium4);
+  background-color: var(--cm-color-attach-surface);
+}
+.cm-board-view .cm-attach-tit {
+  font-size: var(--krds-pc-font-size-heading-small);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+}
+.cm-board-view .cm-attach .file-list .upload-list > li {
+  border-color: var(--cm-color-border-light);
+  border-radius: var(--krds-radius-medium4);
+  background-color: var(--cm-color-attach-item);
+}
+.cm-board-view .cm-attach .file-info .file-name {
+  font-size: var(--krds-pc-font-size-body-medium);
+  color: var(--cm-color-text-bolder);
+}
+.cm-board-view .cm-attach .file-info .btn-wrap {
+  gap: var(--krds-gap-5);
+}
+/* 공공누리 */
+.cm-board-view .cm-kogl {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--krds-gap-7);
+  padding: var(--krds-padding-8) var(--krds-number-12);
+  border: 0.1rem solid var(--cm-color-border-light);
+  border-radius: var(--krds-radius-medium3);
+  background-color: var(--cm-color-box-surface);
+  line-height: 1.5;
+  color: var(--cm-color-text-subtle);
+}
+.cm-board-view .cm-kogl img {
+  flex: 0 0 14.4rem;
+  width: 14.4rem;
+  margin-top: var(--krds-padding-2);
+  background-color: var(--krds-light-color-surface-white); /* 공공누리 마크는 투명 배경 검은 글자라 어두운 모드에서도 흰 바탕 유지 (Figma 동일) */
+}
+.cm-board-view .cm-kogl dt {
+  font-size: var(--krds-pc-font-size-heading-xsmall);
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-board-view .cm-kogl dd {
+  font-size: var(--krds-pc-font-size-body-medium);
+}
+/* 이전글 · 다음글 · 목록 (KRDS 사이트 .page-btn-wrap.both 배치) */
+.cm-board-view .page-btn-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--krds-gap-9);
+  padding-top: var(--krds-padding-8);
+}
+.cm-board-view .page-btn-wrap .btn-wrap {
+  display: flex;
+  gap: var(--krds-gap-3);
+}
+@media (max-width: 767px) {
+  .cm-board-view .community-page-title .tit {
+    font-size: var(--krds-mobile-font-size-heading-large);
+  }
+  .cm-board-view .cm-attach .file-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cm-board-view .cm-kogl {
+    flex-direction: column;
+  }
+}
+
 /* [푸터] 사이트 로고 · 기관 정보 한 줄 배치 · 웹 접근성 인증마크 */
 @media (min-width: 1024px) {
   #krds-footer > .inner {
@@ -493,6 +631,11 @@
   --cm-color-row-hover: var(--krds-high-contrast-color-surface-primary-subtler);
   --cm-color-row-hover-border: var(--krds-high-contrast-color-border-primary);
   --cm-color-icon: var(--krds-high-contrast-color-text-basic);
+  --cm-color-line-strong: var(--krds-high-contrast-color-element-gray);
+  --cm-color-attach-surface: var(--krds-high-contrast-color-surface-secondary-subtler);
+  --cm-color-attach-border: var(--krds-high-contrast-color-border-secondary-light);
+  --cm-color-attach-item: var(--krds-high-contrast-color-surface-white-subtle);
+  --cm-color-box-surface: var(--krds-high-contrast-color-surface-gray-subtler);
 }
 @media (prefers-color-scheme: dark) {
   [data-krds-mode=theme] {
@@ -512,5 +655,10 @@
     --cm-color-row-hover: var(--krds-high-contrast-color-surface-primary-subtler);
     --cm-color-row-hover-border: var(--krds-high-contrast-color-border-primary);
     --cm-color-icon: var(--krds-high-contrast-color-text-basic);
+    --cm-color-line-strong: var(--krds-high-contrast-color-element-gray);
+    --cm-color-attach-surface: var(--krds-high-contrast-color-surface-secondary-subtler);
+    --cm-color-attach-border: var(--krds-high-contrast-color-border-secondary-light);
+    --cm-color-attach-item: var(--krds-high-contrast-color-surface-white-subtle);
+    --cm-color-box-surface: var(--krds-high-contrast-color-surface-gray-subtler);
   }
 }
