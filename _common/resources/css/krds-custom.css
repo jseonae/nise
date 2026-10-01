@@ -35,16 +35,62 @@
    글자·화면 표시 설정 (_common/resources/js/krds-display.js)
    ========================================================================== */
 
-/* 설정 모달 내부 간격 (KRDS 사이트 전용 클래스라 KRDS CSS에 없음) */
+/* 글자·화면 표시 설정 모달 (#modal_adjust_display)
+   - 마크업은 krds.go.kr 사이트의 설정 팝업이고, 스타일은 KRDS 패키지(output.css)가 아닌 사이트 전용 CSS에만 있어 필요한 규칙만 옮겨 옴
+   - 기준: krds.go.kr resources/css/site/output.css ".adjust_display" + Figma 컨텐츠 > modal (11268:156067) */
 #modal_adjust_display .adjust_display {
   display: flex;
-  flex-direction: column;
-  gap: var(--krds-gap-8);
+  align-items: flex-start;
+  gap: var(--krds-gap-7);
 }
 #modal_adjust_display .form-group h3 {
-  margin-bottom: var(--krds-gap-4);
-  font-size: var(--krds-pc-font-size-heading-xsmall);
+  margin-bottom: var(--krds-gap-5);
+  font-size: var(--krds-pc-font-size-heading-xxsmall);
   font-weight: var(--krds-font-weight-bold);
+  color: var(--krds-light-color-text-bolder);
+}
+#modal_adjust_display .adjust_scale {
+  flex: 0 0 24rem;
+}
+#modal_adjust_display .adjust_scale + .fieldset {
+  flex: 1 1 auto;
+}
+#modal_adjust_display .view-mode-options .krds-form-check {
+  display: flex;
+  align-items: center;
+}
+#modal_adjust_display .view-mode-options .krds-form-check::before {
+  content: "";
+  flex: 0 0 12rem;
+  height: 6.4rem;
+  margin-right: var(--krds-gap-5);
+  border-radius: var(--krds-radius-medium4);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+#modal_adjust_display .view-mode-options .view-mode-light::before {
+  background-image: url(../img/common/view_mode_light.svg);
+}
+#modal_adjust_display .view-mode-options .view-mode-dark::before {
+  background-image: url(../img/common/view_mode_dark.svg);
+}
+#modal_adjust_display .view-mode-options .view-mode-default::before {
+  background-image: url(../img/common/view_mode_default.svg);
+}
+[data-krds-mode=high-contrast] #modal_adjust_display .form-group h3 {
+  color: var(--krds-high-contrast-color-text-bolder);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] #modal_adjust_display .form-group h3 {
+    color: var(--krds-high-contrast-color-text-bolder);
+  }
+}
+/* 태블릿·모바일 : KRDS 사이트와 같이 글자 크기 설정은 숨기고(브라우저 확대 사용) 화면 표시 모드만 표시 */
+@media (max-width: 1023px) {
+  #modal_adjust_display .adjust_scale {
+    display: none;
+  }
 }
 
 /* ==========================================================================
