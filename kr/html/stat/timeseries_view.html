@@ -32,7 +32,7 @@
 <body>
   <!--
     ==================================================================
-    시계열 시각화 상세 (Figma: 컨텐츠 > 시계열시각화-list / view)
+    시계열 시각화 상세 (Figma: 컨텐츠 > 시계열시각화-view, node 10611:48727)
     공통 영역은 kr/tmpl 에서 인클루드합니다 (kr/js/include.js). 이 파일에는 페이지 컨텐츠만 둡니다.
       [01]~[03] 헤더             : kr/tmpl/header.html
       페이지 상단(브레드크럼·제목) : kr/tmpl/page-top.html (제목·설명은 메뉴 데이터, data-title · data-desc 로 변경 가능)
@@ -51,14 +51,257 @@
          ============================================================ -->
     <div id="container">
       <!-- 페이지 상단 : 브레드크럼 · 공유/인쇄 · 페이지 제목 -->
-      <div data-include="page-top"></div>
+      <div data-include="page-top" data-crumb="특수학급 교육활동 및 평가결과의 학교생활기록부 반영 정도"></div>
 
-      <!-- [04-1] 컨텐츠 : .inner -->
-      <div class="inner cm-contents">
-        <h1 class="sr-only">시계열 시각화 상세</h1><!-- 게시물 제목 퍼블리싱 시 실제 제목(h1)으로 교체 -->
-        <!-- TODO: 시계열 시각화 상세(view) 퍼블리싱 (Figma: 컨텐츠 > 시계열시각화-list / view) -->
-        <!-- 목록으로 : timeseries_list.html -->
-        <p class="cm-todo">시계열 시각화 상세(view) 컨텐츠 영역</p>
+      <!-- [04-1] 컨텐츠 : .inner (Figma: 컨텐츠 > 시계열시각화-view, node 10611:48727) -->
+      <div class="inner cm-contents cm-ts-view">
+        <!-- 그래프 -->
+        <section id="section_01" class="cm-ts-graph">
+          <div class="cm-ts-head">
+            <div class="cm-ts-head-tit">
+              <div class="cm-ts-badges">
+                <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+                <ul class="cm-ts-target" aria-label="조사대상자">
+                  <li><span class="krds-badge small outline-gray">보호자</span></li>
+                </ul>
+              </div>
+              <h1 class="tit">특수학급 교육활동 및 평가결과의 학교생활기록부 반영 정도</h1>
+            </div>
+            <!-- 그래프 종류 : 하나만 고르는 누름 버튼 (aria-pressed) -->
+            <div class="cm-ts-type" role="group" aria-label="그래프 종류">
+              <button type="button" class="krds-btn small secondary" aria-pressed="true"><i class="svg-icon cm-ico-chart-bar"></i>세로막대 그래프</button>
+              <button type="button" class="krds-btn small tertiary" aria-pressed="false"><span class="sr-only">가로막대 그래프</span><i class="svg-icon cm-ico-chart-bar-horizontal"></i></button>
+              <button type="button" class="krds-btn small tertiary" aria-pressed="false"><span class="sr-only">꺾은선 그래프</span><i class="svg-icon cm-ico-chart-line"></i></button>
+            </div>
+          </div>
+
+          <h2 class="sr-only">그래프</h2>
+          <!-- 그래프 조회 도구 : KRDS 선택·라디오 칩·토글 스위치·버튼 -->
+          <div class="cm-ts-tool">
+            <div class="cm-ts-tool-filter">
+              <div class="cm-ts-select">
+                <label for="ts_feature">특성별 조회</label>
+                <select id="ts_feature" class="krds-form-select small">
+                  <option value="course" selected>학교과정별</option>
+                  <option value="place">배치유형별</option>
+                  <option value="disability">장애유형별</option>
+                </select>
+              </div>
+              <fieldset class="krds-check-area cm-ts-chips">
+                <legend class="sr-only">학교과정 선택</legend>
+                  <div class="krds-form-chip small">
+                    <input type="radio" class="radio" name="ts_course" id="ts_course_0" value="0">
+                    <label class="krds-form-chip-outline" for="ts_course_0">유<span class="sr-only">치원</span></label>
+                  </div>
+                  <div class="krds-form-chip small">
+                    <input type="radio" class="radio" name="ts_course" id="ts_course_1" value="1" checked>
+                    <label class="krds-form-chip-outline" for="ts_course_1">초<span class="sr-only">등학교</span></label>
+                  </div>
+                  <div class="krds-form-chip small">
+                    <input type="radio" class="radio" name="ts_course" id="ts_course_2" value="2">
+                    <label class="krds-form-chip-outline" for="ts_course_2">중<span class="sr-only">학교</span></label>
+                  </div>
+                  <div class="krds-form-chip small">
+                    <input type="radio" class="radio" name="ts_course" id="ts_course_3" value="3">
+                    <label class="krds-form-chip-outline" for="ts_course_3">고<span class="sr-only">등학교</span></label>
+                  </div>
+              </fieldset>
+            </div>
+            <div class="cm-ts-tool-btns">
+              <div class="krds-form-toggle-switch medium">
+                <input type="checkbox" id="ts_pattern" checked>
+                <label for="ts_pattern"><span class="switch-toggle"><i></i></span>패턴 적용</label>
+              </div>
+              <div class="krds-form-toggle-switch medium">
+                <input type="checkbox" id="ts_label" checked>
+                <label for="ts_label"><span class="switch-toggle"><i></i></span>레이블 보기</label>
+              </div>
+              <button type="button" class="krds-btn small tertiary">차트 확대</button>
+              <button type="button" class="krds-btn small tertiary">다운로드</button>
+              <button type="button" class="krds-btn small tertiary">인쇄</button>
+            </div>
+          </div>
+
+          <!-- 차트 : 범례는 HTML(계열 보이기·숨기기 누름 버튼), 그래프는 개발 시 차트 라이브러리로 그림
+               퍼블리싱에서는 Figma 그래프 이미지(kr/img/stat/sample_chart_bar.png)를 예시로 둠. 같은 값은 아래 통계표에 있음 -->
+          <div class="cm-chart-box">
+            <ul class="cm-chart-legend" aria-label="범례">
+              <li><button type="button" aria-pressed="true"><span class="swatch y1" aria-hidden="true"></span>2017년</button></li>
+              <li><button type="button" aria-pressed="true"><span class="swatch y2" aria-hidden="true"></span>2020년</button></li>
+              <li><button type="button" aria-pressed="true"><span class="swatch y3" aria-hidden="true"></span>2023년</button></li>
+            </ul>
+            <div class="cm-chart-area">
+              <img src="../../img/stat/sample_chart_bar.png" alt="학교과정 초등학교 기준 거주 형태별 비율 세로막대 그래프. 자세한 값은 아래 통계표를 참고하세요.">
+            </div>
+          </div>
+        </section>
+
+        <!-- 통계표 -->
+        <section id="section_02" class="cm-ts-section">
+          <div class="cm-ts-section-top">
+            <h2 class="tit">통계표</h2>
+            <p class="unit">[단위 : %]</p>
+          </div>
+          <div class="krds-table-wrap cm-stat-table">
+            <table class="tbl col data">
+              <caption>특수학급 교육활동 및 평가결과의 학교생활기록부 반영 정도 통계표로 구분, 2017년, 2020년, 2023년 비율로 구성되어 있습니다.</caption>
+              <colgroup>
+                <col style="width: 25%;">
+                <col style="width: 25%;">
+                <col style="width: 25%;">
+                <col style="width: 25%;">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">구분</th>
+                  <th scope="col">2017</th>
+                  <th scope="col">2020</th>
+                  <th scope="col">2023</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">시설</th>
+                  <td>8.2%</td>
+                  <td>3.4%</td>
+                  <td>2.6%</td>
+                </tr>
+                <tr>
+                  <th scope="row">자택</th>
+                  <td>91.2%</td>
+                  <td>95.8%</td>
+                  <td>97.1%</td>
+                </tr>
+                <tr>
+                  <th scope="row">기숙사</th>
+                  <td>0.3%</td>
+                  <td>0.5%</td>
+                  <td>0.4%</td>
+                </tr>
+                <tr>
+                  <th scope="row">기타</th>
+                  <td>0.3%</td>
+                  <td>0.2%</td>
+                  <td>0.0%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 지표정보 -->
+        <section id="section_03" class="cm-ts-section">
+          <h2 class="tit">지표정보</h2>
+          <dl class="cm-indicator">
+            <div>
+              <dt>모집단</dt>
+              <dd>2011년 전체 79,438명 • 2014년 전체 82,535명 • 2017년 전체 75,021명 • 2020년 전체 89,530명 • 2023년 전체 104,087명</dd>
+            </div>
+            <div>
+              <dt>통계표명</dt>
+              <dd>2011년 『사교육 유무(2011)』, 2014년 『사교육 여부』, 2017년 「사교육 여부」, 2020년 「사교육 여부」, 2023년 「사교육 여부」</dd>
+            </div>
+            <div>
+              <dt>연도별 표기 변경</dt>
+              <dd>
+                <ul>
+                  <li>2014년 「학교유형별」 → 2017년 「배치유형별」로 표기 변경</li>
+                  <li>2014년 「정신지체」 → 2017년 「지적장애」로 표기 변경</li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+          <ul class="cm-refer-list">
+            <li>용어가 바뀐 항목은 같은 대상으로 보고 시계열로 연결함</li>
+            <li>모집단 수치는 표본조사 결과에 가중치를 적용해 전체 규모로 추정한 값입니다.</li>
+            <li>가중치 적용으로 소수점에 의해 합계 등의 수치가 일치하지 않을 수 있습니다.</li>
+          </ul>
+          <p class="cm-source"><strong>출처 -</strong> 국립특수교육원 특수교육 실태조사(국가승인통계 제112014호)</p>
+        </section>
+
+        <!-- 용어해설 : KRDS 표(table data) -->
+        <section id="section_04" class="cm-ts-section">
+          <h2 class="tit">용어해설</h2>
+          <div class="krds-table-wrap cm-term-table">
+            <table class="tbl col data">
+              <caption>용어해설 표로 용어와 정의로 구성되어 있습니다.</caption>
+              <colgroup>
+                <col style="width: 14rem;">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">용어</th>
+                  <th scope="col">정의</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">건강장애</th>
+                  <td>만성질환으로 인하여 3개월 이상의 장기입원 또는 통원치료 등 계속적인 의료적 지원이 필요하여 학교생활 및 학업 수행 등에 교육 지원을 지속적으로 받아야 하는 장애</td>
+                </tr>
+                <tr>
+                  <th scope="row">발달지체</th>
+                  <td>신체, 인지, 의사소통, 사회·정서, 적응행동 중 하나 이상의 발달이 또래에 비하여 현저하게 지체되어 특별한 교육적 조치가 필요한 영아 및 9세 미만의 아동, 발달장애와는 구분됨</td>
+                </tr>
+                <tr>
+                  <th scope="row">자폐성장애</th>
+                  <td>사회적 상호작용과 의사소통에 결함이 있고, 제한적이고 반복적인 관심과 활동을 보임으로써 교육적 성취 및 일상생활 적응에 도움이 필요한 사람</td>
+                </tr>
+                <tr>
+                  <th scope="row">지적장애</th>
+                  <td>지적 기능과 적응행동의 어려움이 함께 존재하여 교육적 성취와 일상생활에서 제한이 따르는 발달장애</td>
+                </tr>
+                <tr>
+                  <th scope="row">특수학교</th>
+                  <td>장애학생의 교육을 위해 일반학교와 분리된 형태로 설립된 교육시설</td>
+                </tr>
+                <tr>
+                  <th scope="row">정서·행동장애</th>
+                  <td>
+                    <p>정서 및 행동이 또래 집단의 규준에서 심각하게 일탈하여 학업 및 일상생활 등에서 자신 및 타인을 곤란하게 하는 장애. 「장애인 등에 대한 특수교육법」에는 정서 및 행동이 또래 집단의 규준 혹은 기대 수준을 심하게 벗어나 일반적인 환경하에서 사회적 관계, 감정 조절, 활동 수준, 주의 집중력 등의 곤란으로 자신 및 타인의 기능을 방해하며, 학업, 대인관계, 일상생활에 부정적인 영향을 미치는 상태로 정의</p>
+                    <p>장기간에 걸쳐 다음 각 목의 어느 하나에 해당하여, 특별한 교육적 조치가 필요한 사람</p>
+                    <ol class="cm-term-sub">
+                      <li>가. 지적·감각적·건강상의 이유로 설명할 수 없는 학습상의 어려움을 지닌 사람</li>
+                      <li>나. 또래나 교사와의 대인관계에 어려움이 있어 학습에 어려움을 겪는 사람</li>
+                      <li>다. 일반적인 상황에서 부적절한 행동이나 감정을 나타내어 학습에 어려움이 있는 사람</li>
+                      <li>라. 전반적인 불행감이나 우울증을 나타내어 학습에 어려움이 있는 사람</li>
+                      <li>마. 학교나 개인 문제에 관련된 신체적인 통증이나 공포를 나타내어 학습에 어려움이 있는 사람</li>
+                    </ol>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cm-source"><strong>출처 -</strong> 국가통계포털(KOSIS) 통계설명자료 · 국가승인통계 제112014호 주요 용어해설</p>
+        </section>
+
+        <!-- 이전글 · 다음글 · 목록 -->
+        <div class="page-btn-wrap both">
+          <div class="btn-wrap">
+            <a href="timeseries_view.html" class="krds-btn medium tertiary"><i class="svg-icon ico-angle left"></i> 이전글</a>
+            <a href="timeseries_view.html" class="krds-btn medium tertiary">다음글 <i class="svg-icon ico-angle right"></i></a>
+          </div>
+          <a href="timeseries_list.html" class="krds-btn medium tertiary">목록으로</a>
+        </div>
+
+        <!-- 콘텐츠 내 탐색 : KRDS in_page_navigation (화면 오른쪽 고정) -->
+        <div class="krds-in-page-navigation-type">
+          <div class="krds-in-page-navigation-area">
+            <div class="in-page-navigation-header">
+              <p class="quick-caption">이 페이지의 구성</p>
+              <p class="quick-title">특수학급 교육활동 및 평가결과의 학교생활기록부 반영 정도</p>
+            </div>
+            <nav class="in-page-navigation-list" aria-label="이 페이지의 구성">
+              <ul>
+                <li><a href="#section_01" class="active">그래프</a></li>
+                <li><a href="#section_02">통계표</a></li>
+                <li><a href="#section_03">지표정보</a></li>
+                <li><a href="#section_04">용어해설</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
       <!-- //[04-1] 컨텐츠 -->
     </div>

@@ -104,6 +104,10 @@
       html += `<li><a href="${pageUrl(current.section, current.section.items[0])}" class="txt">${current.section.name}</a></li>`;
       html += `<li><a href="${pageUrl(current.section, current.item)}" class="txt">${current.item.name}</a></li>`;
     }
+    // 상세 화면 : data-crumb 가 있으면 현재 글 제목을 마지막 경로로 붙임 (KRDS 브레드크럼과 같은 a.txt, 현재 위치 표시)
+    if (dataset.crumb) {
+      html += `<li><a href="${location.pathname.split("/").pop()}" class="txt" aria-current="page">${dataset.crumb}</a></li>`;
+    }
     crumb.insertAdjacentHTML("beforeend", html);
 
     const title = top.querySelector(".cm-page-title");
