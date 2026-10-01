@@ -38,6 +38,11 @@
   --cm-color-border-primary-light: var(--krds-light-color-border-primary-light);
   --cm-color-border-primary: var(--krds-light-color-border-primary);
   --cm-color-text-inverse: var(--krds-light-color-text-inverse-static);
+  --cm-color-border-gray: var(--krds-light-color-border-gray);
+  --cm-color-element-gray-lighter: var(--krds-light-color-element-gray-lighter);
+  --cm-color-text-disabled: var(--krds-light-color-text-disabled);
+  --cm-color-shadow2: var(--krds-light-color-alpha-shadow2);
+  --cm-color-shadow3: var(--krds-light-color-alpha-shadow3);
 }
 
 /* [헤더] 사이트 로고 (KRDS 기본 로고 이미지 교체) */
@@ -975,6 +980,287 @@
   }
 }
 
+/* [탭] 가로 스크롤 탭 : KRDS 탭(.tab.fill.full) 변형 (마크업 _common/html/code/tab--scroll.html, 스크립트 krds-custom.js cmTabScroll)
+   Figma: 컨텐츠 > s01통계정보_조사 변천사 list > tab-wrap
+   - 탭을 한 줄로 두고 넘치면 가로 스크롤, 좌우 끝에 흰 그라데이션 + 원형 이동 버튼(32px) */
+.cm-tab-scroll .tab {
+  position: relative;
+}
+.cm-tab-scroll .tab.full > ul {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-padding-inline: 7.6rem; /* 키보드로 옮긴 탭이 이동 버튼에 가리지 않게 (Figma swiper__atomic 76px) */
+  scrollbar-width: none;
+}
+.cm-tab-scroll .tab.full > ul::-webkit-scrollbar {
+  display: none;
+}
+.cm-tab-scroll .tab.full > ul > li {
+  flex: 1 0 20rem; /* Figma tab_fill__atomic 200px : 넘치면 스크롤 */
+}
+.cm-tab-scroll .btn-tab {
+  flex-direction: column;
+  gap: 0;
+  line-height: 1.5;
+}
+.cm-tab-scroll .btn-tab .sub {
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  font-weight: var(--krds-font-weight-regular);
+}
+/* 예정 차수 (Figma: element-gray-lighter 배경 + text-disabled) */
+.cm-tab-scroll .btn-tab[disabled] {
+  background-color: var(--cm-color-element-gray-lighter);
+}
+.cm-tab-scroll-nav {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 7.6rem;
+  pointer-events: none;
+}
+.cm-tab-scroll-nav[hidden] {
+  display: none;
+}
+.cm-tab-scroll-nav.prev {
+  left: 0;
+  justify-content: flex-start;
+  padding-left: var(--krds-padding-3);
+  background: linear-gradient(to left, transparent, var(--cm-color-surface-white) 3.6rem);
+}
+.cm-tab-scroll-nav.next {
+  right: 0;
+  justify-content: flex-end;
+  padding-right: var(--krds-padding-3);
+  background: linear-gradient(to right, transparent, var(--cm-color-surface-white) 3.6rem);
+}
+.cm-tab-scroll-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--krds-number-12);
+  height: var(--krds-number-12);
+  border: 0.1rem solid var(--cm-color-border-light);
+  border-radius: var(--krds-radius-max);
+  background-color: var(--cm-color-surface-white);
+  pointer-events: auto;
+}
+.cm-tab-scroll-btn:hover {
+  background-color: var(--krds-light-color-action-secondary-hover);
+}
+.cm-tab-scroll-btn .svg-icon {
+  width: 1.9rem; /* Figma 19.2px (carousel__atomic) */
+  height: 1.9rem;
+  background-color: var(--cm-color-icon);
+}
+
+/* [통계정보] 조사 변천사 목록 (Figma: 컨텐츠 > s01통계정보_조사 변천사 list) */
+.cm-survey-history .krds-tab-area {
+  gap: var(--krds-gap-9);
+}
+.cm-survey-history .tab-conts {
+  margin-top: 0;
+}
+.cm-survey-history .tab-conts.active {
+  gap: var(--krds-gap-9);
+}
+.cm-history-tit {
+  font-size: var(--krds-pc-font-size-heading-large);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+.cm-history-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-7);
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+.cm-history-meta {
+  display: flex;
+  gap: var(--krds-gap-5);
+}
+.cm-history-meta dt,
+.cm-history-part .tit {
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-history-part {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-5);
+  padding: var(--krds-padding-8) 0;
+  border-top: 0.1rem solid var(--cm-color-divider);
+  border-bottom: 0.1rem solid var(--cm-color-divider);
+}
+/* Figma 숫자 색 #256ef4(primary-50)는 본문 글자 대비가 낮아 KRDS 글자 토큰 text-primary 로 맞춤 */
+.cm-history-part .num {
+  color: var(--cm-color-text-primary);
+}
+.cm-history-part .cm-dot-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--krds-gap-5);
+}
+.cm-history-ready {
+  font-size: var(--krds-pc-font-size-body-medium);
+  color: var(--cm-color-text-subtle);
+}
+/* 조사 대상자별 문항 카드 */
+.cm-survey-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-6);
+}
+.cm-survey-group-tit {
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-2);
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+.cm-survey-group-tit .krds-badge {
+  font-weight: var(--krds-font-weight-regular);
+}
+.cm-survey-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--krds-gap-7);
+}
+.cm-survey-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-5);
+  position: relative;
+  min-width: 0;
+  padding: var(--krds-padding-9) var(--krds-number-13);
+  border: 0.1rem solid var(--cm-color-border-gray);
+  border-radius: var(--krds-radius-xlarge2);
+  background-color: var(--cm-color-surface-white);
+  transition: var(--krds-transition-base);
+}
+.cm-survey-card:hover,
+.cm-survey-card:focus-within {
+  border-color: var(--cm-color-border-primary);
+  box-shadow: 0 0 0.2rem var(--cm-color-shadow2), 0 0.8rem 1.6rem var(--cm-color-shadow3);
+}
+.cm-survey-card .tit {
+  display: flex;
+  align-items: center;
+  min-height: 5.2rem; /* Figma title 52px : 한 줄 제목도 두 줄 제목 카드와 높이를 맞춤 */
+  font-size: var(--krds-pc-font-size-heading-small);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+}
+.cm-survey-card .tit a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--krds-gap-1);
+}
+.cm-survey-card .tit .txt {
+  max-width: 24.5rem; /* Figma 긴 제목 줄바꿈 폭 245px */
+}
+.cm-survey-card .tit .svg-icon {
+  flex: none;
+  width: var(--krds-number-10);
+  height: var(--krds-number-10);
+  background-color: var(--cm-color-icon);
+}
+/* 제목 링크를 카드 전체로 넓힘 (카드 어디를 눌러도 상세로 이동, 링크 이름은 제목만 읽힘) */
+.cm-survey-card .tit a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.cm-survey-card .tit a:focus {
+  outline: 0;
+  box-shadow: none;
+}
+.cm-survey-card .tit a:focus::after {
+  border-radius: var(--krds-radius-xlarge2);
+  outline: 0.2rem solid var(--krds-light-color-border-inverse);
+  box-shadow: var(--krds-box-shadow-outline);
+}
+.cm-survey-stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--krds-padding-6) var(--krds-padding-8);
+  border: 0.1rem dashed var(--cm-color-border-primary-light);
+  border-radius: var(--krds-radius-medium1);
+  /* Figma : primary-5 위에 흰색 50% → surface-primary-subtler 를 흰색과 반씩 섞음 */
+  background-color: color-mix(in srgb, var(--cm-color-row-hover) 50%, var(--cm-color-surface-white));
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+}
+.cm-survey-stat > div,
+.cm-survey-stat dd {
+  display: flex;
+  align-items: baseline;
+}
+.cm-survey-stat .area {
+  gap: 0.3em;
+}
+.cm-survey-stat .item dd {
+  gap: var(--krds-gap-2);
+}
+.cm-survey-stat .num {
+  font-size: var(--krds-pc-font-size-heading-medium);
+  color: var(--cm-color-text-primary);
+}
+.cm-survey-stat strong {
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-survey-tags {
+  margin-top: var(--krds-gap-3);
+  padding-top: var(--krds-padding-6);
+  border-top: 0.1rem solid var(--cm-color-divider-light);
+}
+.cm-survey-tags .krds-btn-tag {
+  gap: 0.3em; /* inline-flex 라 이름과 숫자 사이 공백이 사라지므로 Figma 띄어쓰기 폭만큼 */
+  color: var(--cm-color-text-basic);
+}
+.cm-survey-tags .krds-btn-tag:hover,
+.cm-survey-tags .krds-btn-tag:active {
+  background-color: var(--krds-btn-tag--color-action); /* 누를 수 없는 표시용 태그 */
+}
+.cm-survey-tags .num {
+  color: var(--cm-color-text-primary);
+}
+@media (max-width: 1023px) {
+  .cm-survey-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 767px) {
+  .cm-history-tit {
+    font-size: var(--krds-mobile-font-size-heading-large);
+  }
+  .cm-history-meta {
+    flex-direction: column;
+    gap: var(--krds-gap-2);
+  }
+  .cm-history-part .cm-dot-list,
+  .cm-survey-cards {
+    grid-template-columns: 1fr;
+  }
+  .cm-survey-group-tit {
+    font-size: var(--krds-mobile-font-size-heading-medium);
+  }
+  .cm-survey-card {
+    padding: var(--krds-padding-8);
+  }
+}
+
 /* [푸터] 사이트 로고 · 기관 정보 한 줄 배치 · 웹 접근성 인증마크 */
 @media (min-width: 1024px) {
   #krds-footer > .inner {
@@ -1080,6 +1366,11 @@
   --cm-color-border-primary-light: var(--krds-high-contrast-color-border-primary-light);
   --cm-color-border-primary: var(--krds-high-contrast-color-border-primary);
   --cm-color-text-inverse: var(--krds-high-contrast-color-text-inverse-static);
+  --cm-color-border-gray: var(--krds-high-contrast-color-border-gray);
+  --cm-color-element-gray-lighter: var(--krds-high-contrast-color-element-gray-lighter);
+  --cm-color-text-disabled: var(--krds-high-contrast-color-text-disabled);
+  --cm-color-shadow2: var(--krds-high-contrast-color-alpha-shadow2);
+  --cm-color-shadow3: var(--krds-high-contrast-color-alpha-shadow3);
 }
 @media (prefers-color-scheme: dark) {
   [data-krds-mode=theme] {
@@ -1109,5 +1400,10 @@
     --cm-color-border-primary-light: var(--krds-high-contrast-color-border-primary-light);
     --cm-color-border-primary: var(--krds-high-contrast-color-border-primary);
     --cm-color-text-inverse: var(--krds-high-contrast-color-text-inverse-static);
+    --cm-color-border-gray: var(--krds-high-contrast-color-border-gray);
+    --cm-color-element-gray-lighter: var(--krds-high-contrast-color-element-gray-lighter);
+    --cm-color-text-disabled: var(--krds-high-contrast-color-text-disabled);
+    --cm-color-shadow2: var(--krds-high-contrast-color-alpha-shadow2);
+    --cm-color-shadow3: var(--krds-high-contrast-color-alpha-shadow3);
   }
 }

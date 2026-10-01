@@ -1,0 +1,39 @@
+<!-- base: krds/html/code/tab.html (1.0.6) / 변경: fill full 탭을 한 줄 가로 스크롤로 바꾸고 좌우 이동 버튼 추가, 탭 버튼 2줄 글자(.sub), 예정 탭(disabled) 추가 -->
+<!--
+  가로 스크롤 탭 (Figma: 컨텐츠 > s01통계정보_조사 변천사 list > tab-wrap)
+  - KRDS 탭(.krds-tab-area.layer > .tab.fill.full) 마크업과 탭 전환 스크립트(krds_tab)를 그대로 씁니다.
+  - .cm-tab-scroll 을 붙이면 탭이 한 줄로 늘어서고, 넘칠 때만 좌우 이동 버튼이 보입니다.
+    스타일 : _common/resources/css/krds-custom.css [탭] 가로 스크롤 탭
+    스크립트 : _common/resources/js/krds-custom.js (cmTabScroll)
+  - 이동 버튼은 마우스 사용자를 위한 보조 수단입니다. 키보드는 KRDS 탭과 같이 좌우 화살표로 탭 사이를 옮기며, 초점이 간 탭은 자동으로 화면 안으로 스크롤됩니다.
+  - 선택 탭의 "선택됨" 대체 텍스트는 KRDS 스크립트가 넣습니다. 미리 적어 두면 KRDS 스크립트가 aria-selected 를 true 로 바꾸지 않으므로 마크업에 적지 않습니다.
+  - 아직 열리지 않은 차수는 button 에 disabled 를 주고, KRDS 스크립트가 패널을 찾으므로 연결 패널(안내 문구)을 함께 둡니다.
+-->
+<div class="krds-tab-area layer cm-tab-scroll">
+	<div class="tab fill full">
+		<ul role="tablist">
+			<li id="tab_sample_01" role="tab" aria-selected="false" aria-controls="panel_sample_01">
+				<button type="button" class="btn-tab">2008년 <span class="sub">제1차</span></button>
+			</li>
+			<li id="tab_sample_02" role="tab" aria-selected="true" aria-controls="panel_sample_02" class="active">
+				<button type="button" class="btn-tab">2011년 <span class="sub">제2차</span></button>
+			</li>
+			<li id="tab_sample_03" role="tab" aria-selected="false" aria-controls="panel_sample_03">
+				<button type="button" class="btn-tab" disabled>2014년 <span class="sub">예정</span></button>
+			</li>
+		</ul>
+		<!-- 좌우 이동 버튼 : 탭이 넘칠 때만 보임 (스크립트가 hidden 을 바꿈) -->
+		<div class="cm-tab-scroll-nav prev" hidden>
+			<button type="button" class="cm-tab-scroll-btn"><span class="sr-only">이전 탭 보기</span><i class="svg-icon ico-angle left" aria-hidden="true"></i></button>
+		</div>
+		<div class="cm-tab-scroll-nav next" hidden>
+			<button type="button" class="cm-tab-scroll-btn"><span class="sr-only">다음 탭 보기</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></button>
+		</div>
+	</div>
+
+	<div class="tab-conts-wrap">
+		<section id="panel_sample_01" aria-labelledby="tab_sample_01" class="tab-conts" data-quick-nav="false">탭 1 영역</section>
+		<section id="panel_sample_02" aria-labelledby="tab_sample_02" class="tab-conts active" data-quick-nav="false">탭 2 영역</section>
+		<section id="panel_sample_03" aria-labelledby="tab_sample_03" class="tab-conts" data-quick-nav="false">준비 중 안내</section>
+	</div>
+</div>

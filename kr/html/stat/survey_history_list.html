@@ -32,7 +32,7 @@
 <body>
   <!--
     ==================================================================
-    조사 변천사 (Figma: 컨텐츠 > s01통계정보_조사 변천사 list / view)
+    조사 변천사 목록 (Figma: 컨텐츠 > s01통계정보_조사 변천사 list, node 10498:43777)
     공통 영역은 kr/tmpl 에서 인클루드합니다 (kr/js/include.js). 이 파일에는 페이지 컨텐츠만 둡니다.
       [01]~[03] 헤더             : kr/tmpl/header.html
       페이지 상단(브레드크럼·제목) : kr/tmpl/page-top.html (제목·설명은 메뉴 데이터, data-title · data-desc 로 변경 가능)
@@ -54,9 +54,225 @@
       <div data-include="page-top"></div>
 
       <!-- [04-1] 컨텐츠 : .inner -->
-      <div class="inner cm-contents">
-        <!-- TODO: 조사 변천사 목록(list) 퍼블리싱 (Figma: 컨텐츠 > s01통계정보_조사 변천사 list / view) -->
-        <p class="cm-todo">조사 변천사 목록(list) 컨텐츠 영역</p>
+      <div class="inner cm-contents cm-survey-history">
+        <!-- 조사 차수 탭 : KRDS 탭(fill full) + 가로 스크롤 변형 (_common/html/code/tab--scroll.html)
+             "선택됨" 대체 텍스트는 KRDS 스크립트(krds_tab)가 넣습니다. -->
+        <div class="krds-tab-area layer cm-tab-scroll">
+          <div class="tab fill full">
+            <ul role="tablist">
+              <li id="tab_history_01" role="tab" aria-selected="false" aria-controls="panel_history_01">
+                <button type="button" class="btn-tab">2008년 <span class="sub">제1차</span></button>
+              </li>
+              <li id="tab_history_02" role="tab" aria-selected="false" aria-controls="panel_history_02">
+                <button type="button" class="btn-tab">2011년 <span class="sub">제2차</span></button>
+              </li>
+              <li id="tab_history_03" role="tab" aria-selected="false" aria-controls="panel_history_03">
+                <button type="button" class="btn-tab">2014년 <span class="sub">제3차</span></button>
+              </li>
+              <li id="tab_history_04" role="tab" aria-selected="false" aria-controls="panel_history_04">
+                <button type="button" class="btn-tab">2017년 <span class="sub">제4차</span></button>
+              </li>
+              <li id="tab_history_05" role="tab" aria-selected="false" aria-controls="panel_history_05">
+                <button type="button" class="btn-tab">2020년 <span class="sub">제5차</span></button>
+              </li>
+              <li id="tab_history_06" role="tab" aria-selected="true" aria-controls="panel_history_06" class="active">
+                <button type="button" class="btn-tab">2023년 <span class="sub">제6차</span></button>
+              </li>
+              <li id="tab_history_07" role="tab" aria-selected="false" aria-controls="panel_history_07">
+                <button type="button" class="btn-tab" disabled>2026년 <span class="sub">예정</span></button>
+              </li>
+            </ul>
+            <div class="cm-tab-scroll-nav prev" hidden>
+              <button type="button" class="cm-tab-scroll-btn"><span class="sr-only">이전 차수 보기</span><i class="svg-icon ico-angle left" aria-hidden="true"></i></button>
+            </div>
+            <div class="cm-tab-scroll-nav next" hidden>
+              <button type="button" class="cm-tab-scroll-btn"><span class="sr-only">다음 차수 보기</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></button>
+            </div>
+          </div>
+
+          <div class="tab-conts-wrap">
+            <section id="panel_history_01" aria-labelledby="tab_history_01" class="tab-conts" data-quick-nav="false">
+              <!-- 개발 시 제1차(2008년) 조사 데이터로 제6차 패널과 같은 구조를 채웁니다. -->
+              <h2 class="cm-history-tit">제1차(2008년) 특수교육 실태조사</h2>
+            </section>
+            <section id="panel_history_02" aria-labelledby="tab_history_02" class="tab-conts" data-quick-nav="false">
+              <!-- 개발 시 제2차(2011년) 조사 데이터로 제6차 패널과 같은 구조를 채웁니다. -->
+              <h2 class="cm-history-tit">제2차(2011년) 특수교육 실태조사</h2>
+            </section>
+            <section id="panel_history_03" aria-labelledby="tab_history_03" class="tab-conts" data-quick-nav="false">
+              <!-- 개발 시 제3차(2014년) 조사 데이터로 제6차 패널과 같은 구조를 채웁니다. -->
+              <h2 class="cm-history-tit">제3차(2014년) 특수교육 실태조사</h2>
+            </section>
+            <section id="panel_history_04" aria-labelledby="tab_history_04" class="tab-conts" data-quick-nav="false">
+              <!-- 개발 시 제4차(2017년) 조사 데이터로 제6차 패널과 같은 구조를 채웁니다. -->
+              <h2 class="cm-history-tit">제4차(2017년) 특수교육 실태조사</h2>
+            </section>
+            <section id="panel_history_05" aria-labelledby="tab_history_05" class="tab-conts" data-quick-nav="false">
+              <!-- 개발 시 제5차(2020년) 조사 데이터로 제6차 패널과 같은 구조를 채웁니다. -->
+              <h2 class="cm-history-tit">제5차(2020년) 특수교육 실태조사</h2>
+            </section>
+            <section id="panel_history_06" aria-labelledby="tab_history_06" class="tab-conts active" data-quick-nav="false">
+              <!-- 조사 개요 -->
+              <div class="cm-history-summary">
+                <h2 class="cm-history-tit">제6차(2023년) 특수교육 실태조사</h2>
+                <dl class="cm-history-meta">
+                  <dt>조사 문항</dt>
+                  <dd>조사 대상자 8개·영역 50개·총 421문항</dd>
+                </dl>
+                <div class="cm-history-part">
+                  <p class="tit">조사 부분 <span class="num">7</span>개</p>
+                  <ul class="cm-dot-list">
+                    <li>특수교육대상자 현황</li>
+                    <li>특수교육기관 및 교육과정 운영 실태</li>
+                    <li>특수교육 관련서비스 지원현황</li>
+                    <li>특수교육 지원 행정조직 및 지원현황</li>
+                    <li>특수교육재정 확보·분배·활용 현황</li>
+                    <li>특수교육대상자 교육성과</li>
+                    <li>특수교육 관련자의 지원 만족도 및 요구 사항</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 조사 대상자별 문항 : 카드 전체를 누르면 상세로 이동 (제목 링크를 카드 크기로 넓힘) -->
+              <div class="cm-survey-group">
+                <h3 class="cm-survey-group-tit">보호자용 면접조사 문항 <span class="krds-badge bg-light-information">2종</span></h3>
+                <ul class="cm-survey-cards">
+                <li class="cm-survey-card">
+                  <h4 class="tit"><a href="survey_history_view.html"><span class="txt">특수교육대상자 보호자</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></a></h4>
+                  <dl class="cm-survey-stat">
+                    <div class="item"><dt class="sr-only">문항 수</dt><dd><strong class="num">105</strong> 문항</dd></div>
+                    <div class="area"><dt>영역</dt><dd><strong>5</strong>개</dd></div>
+                  </dl>
+                  <ul class="krds-tag-wrap medium cm-survey-tags" aria-label="영역별 문항 수">
+                      <li><span class="krds-btn-tag">일반사항 <span class="num">3</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">교육 <span class="num">23</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">장애진단 <span class="num">23</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">장애특성 <span class="num">23</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">기타사항 <span class="num">23</span><span class="sr-only">문항</span></span></li>
+                  </ul>
+                </li>
+                <li class="cm-survey-card">
+                  <h4 class="tit"><a href="survey_history_view.html"><span class="txt">장애영아 보호자</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></a></h4>
+                  <dl class="cm-survey-stat">
+                    <div class="item"><dt class="sr-only">문항 수</dt><dd><strong class="num">71</strong> 문항</dd></div>
+                    <div class="area"><dt>영역</dt><dd><strong>5</strong>개</dd></div>
+                  </dl>
+                  <ul class="krds-tag-wrap medium cm-survey-tags" aria-label="영역별 문항 수">
+                      <li><span class="krds-btn-tag">일반사항 <span class="num">3</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">교육 <span class="num">23</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">장애진단 <span class="num">23</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">장애특성 <span class="num">23</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">기타사항 <span class="num">23</span><span class="sr-only">문항</span></span></li>
+                  </ul>
+                </li>
+                </ul>
+              </div>
+
+              <div class="cm-survey-group">
+                <h3 class="cm-survey-group-tit">관리자 및 교사용 온라인 조사문항 <span class="krds-badge bg-light-information">6종</span></h3>
+                <ul class="cm-survey-cards">
+                <li class="cm-survey-card">
+                  <h4 class="tit"><a href="survey_history_view.html"><span class="txt">특수학교 관리자</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></a></h4>
+                  <dl class="cm-survey-stat">
+                    <div class="item"><dt class="sr-only">문항 수</dt><dd><strong class="num">40</strong> 문항</dd></div>
+                    <div class="area"><dt>영역</dt><dd><strong>5</strong>개</dd></div>
+                  </dl>
+                  <ul class="krds-tag-wrap medium cm-survey-tags" aria-label="영역별 문항 수">
+                      <li><span class="krds-btn-tag">일반사항 <span class="num">3</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">교육과정 운영 <span class="num">22</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">장학 및 연수 <span class="num">3</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">보호자 교육 <span class="num">4</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">인사 <span class="num">3</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">예산 <span class="num">3</span><span class="sr-only">문항</span></span></li>
+                  </ul>
+                </li>
+                <li class="cm-survey-card">
+                  <h4 class="tit"><a href="survey_history_view.html"><span class="txt">특수학급 관리자</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></a></h4>
+                  <dl class="cm-survey-stat">
+                    <div class="item"><dt class="sr-only">문항 수</dt><dd><strong class="num">19</strong> 문항</dd></div>
+                    <div class="area"><dt>영역</dt><dd><strong>5</strong>개</dd></div>
+                  </dl>
+                  <ul class="krds-tag-wrap medium cm-survey-tags" aria-label="영역별 문항 수">
+                      <li><span class="krds-btn-tag">일반사항 <span class="num">3</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">교육과정 운영 <span class="num">6</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">장학 및 연수 <span class="num">6</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">인사 <span class="num">5</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">예산 <span class="num">3</span><span class="sr-only">문항</span></span></li>
+                  </ul>
+                </li>
+                <li class="cm-survey-card">
+                  <h4 class="tit"><a href="survey_history_view.html"><span class="txt">특수학교 담임교사</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></a></h4>
+                  <dl class="cm-survey-stat">
+                    <div class="item"><dt class="sr-only">문항 수</dt><dd><strong class="num">51</strong> 문항</dd></div>
+                    <div class="area"><dt>영역</dt><dd><strong>7</strong>개</dd></div>
+                  </dl>
+                  <ul class="krds-tag-wrap medium cm-survey-tags" aria-label="영역별 문항 수">
+                      <li><span class="krds-btn-tag">일반사항 <span class="num">2</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">교육과정 운영 <span class="num">16</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">장학 및 연수 <span class="num">6</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">보호자 교육 <span class="num">4</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">지원인력지원 <span class="num">3</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">진로 및 직업교육 <span class="num">7</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">외 1개<span class="sr-only"> 영역</span></span></li>
+                  </ul>
+                </li>
+                <li class="cm-survey-card">
+                  <h4 class="tit"><a href="survey_history_view.html"><span class="txt">특수학급 교사</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></a></h4>
+                  <dl class="cm-survey-stat">
+                    <div class="item"><dt class="sr-only">문항 수</dt><dd><strong class="num">71</strong> 문항</dd></div>
+                    <div class="area"><dt>영역</dt><dd><strong>8</strong>개</dd></div>
+                  </dl>
+                  <ul class="krds-tag-wrap medium cm-survey-tags" aria-label="영역별 문항 수">
+                      <li><span class="krds-btn-tag">일반사항 <span class="num">5</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">교육과정 운영 <span class="num">23</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">장학 및 연수 <span class="num">6</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">보호자 교육 <span class="num">4</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">인사 <span class="num">4</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">지원인력지원 <span class="num">3</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">외 2개<span class="sr-only"> 영역</span></span></li>
+                  </ul>
+                </li>
+                <li class="cm-survey-card">
+                  <h4 class="tit"><a href="survey_history_view.html"><span class="txt">장애영아(특수학교 및 특수교육지원센터) 관리자</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></a></h4>
+                  <dl class="cm-survey-stat">
+                    <div class="item"><dt class="sr-only">문항 수</dt><dd><strong class="num">29</strong> 문항</dd></div>
+                    <div class="area"><dt>영역</dt><dd><strong>7</strong>개</dd></div>
+                  </dl>
+                  <ul class="krds-tag-wrap medium cm-survey-tags" aria-label="영역별 문항 수">
+                      <li><span class="krds-btn-tag">일반사항 <span class="num">6</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">교육과정 운영 <span class="num">4</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">장학 및 연수 <span class="num">3</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">가족지원 <span class="num">5</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">인사 <span class="num">4</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">행·재정 지원 <span class="num">4</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">외 1개<span class="sr-only"> 영역</span></span></li>
+                  </ul>
+                </li>
+                <li class="cm-survey-card">
+                  <h4 class="tit"><a href="survey_history_view.html"><span class="txt">장애영아(특수학교 및 특수교육지원센터) 교사</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></a></h4>
+                  <dl class="cm-survey-stat">
+                    <div class="item"><dt class="sr-only">문항 수</dt><dd><strong class="num">35</strong> 문항</dd></div>
+                    <div class="area"><dt>영역</dt><dd><strong>7</strong>개</dd></div>
+                  </dl>
+                  <ul class="krds-tag-wrap medium cm-survey-tags" aria-label="영역별 문항 수">
+                      <li><span class="krds-btn-tag">일반사항 <span class="num">2</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">교육과정 운영 <span class="num">10</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">장학 및 연수 <span class="num">2</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">가족지원 <span class="num">5</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">지원인력지원 <span class="num">3</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">만족도 <span class="num">9</span><span class="sr-only">문항</span></span></li>
+                      <li><span class="krds-btn-tag">외 1개<span class="sr-only"> 영역</span></span></li>
+                  </ul>
+                </li>
+                </ul>
+              </div>
+            </section>
+            <section id="panel_history_07" aria-labelledby="tab_history_07" class="tab-conts" data-quick-nav="false">
+              <h2 class="cm-history-tit">제7차(2026년) 특수교육 실태조사</h2>
+              <p class="cm-history-ready">조사 결과를 준비하고 있습니다.</p>
+            </section>
+          </div>
+        </div>
       </div>
       <!-- //[04-1] 컨텐츠 -->
     </div>
