@@ -27,7 +27,6 @@
   --cm-color-row-notice-hover: var(--krds-color-light-secondary-10);
   --cm-color-row-hover: var(--krds-light-color-surface-primary-subtler);
   --cm-color-row-hover-border: var(--krds-light-color-border-primary);
-  --cm-color-top-btn: var(--krds-color-light-primary-70);
   --cm-color-icon: var(--krds-light-color-text-basic);
 }
 
@@ -399,7 +398,7 @@
   background-color: var(--cm-color-row-notice-hover);
 }
 
-/* [푸터] 사이트 로고 · 기관 정보 한 줄 배치 · 웹 접근성 인증마크 · TOP 버튼 */
+/* [푸터] 사이트 로고 · 기관 정보 한 줄 배치 · 웹 접근성 인증마크 */
 @media (min-width: 1024px) {
   #krds-footer > .inner {
     padding-left: var(--krds-contents-padding-x);
@@ -436,23 +435,6 @@
   width: 100%;
   height: auto;
 }
-.cm-btn-top {
-  position: fixed;
-  right: var(--krds-number-14);
-  bottom: var(--krds-number-14);
-  z-index: 60;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 5rem;
-  height: 5rem;
-  border-radius: var(--krds-radius-max);
-  background-color: var(--cm-color-top-btn);
-  font-size: var(--krds-pc-font-size-body-xsmall);
-  font-weight: var(--krds-font-weight-bold);
-  color: var(--krds-light-color-text-inverse-static);
-}
-
 @media (max-width: 1023px) {
   #krds-header .header-container .logo {
     width: 27.2rem;
