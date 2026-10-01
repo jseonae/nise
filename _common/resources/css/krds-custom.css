@@ -752,8 +752,9 @@
 .cm-overview .cm-process {
   display: flex;
   align-items: center;
-  gap: var(--krds-gap-7);
+  gap: var(--krds-gap-10);
 }
+
 .cm-overview .cm-process > li {
   position: relative;
   display: flex;
@@ -762,7 +763,8 @@
   align-items: center;
   justify-content: center;
   gap: var(--krds-gap-4);
-  height: 12.4rem;
+  height: auto;
+  padding: var(--krds-padding-9) var(--krds-padding-10);
   border: 0.1rem solid var(--cm-color-border-light);
   border-radius: var(--krds-radius-xlarge2);
   background-color: var(--cm-color-surface-white);
@@ -775,7 +777,7 @@
   left: calc(var(--krds-gap-7) * -1);
   width: var(--krds-gap-7);
   height: var(--krds-icon--size-large);
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateX(50%);
   background-color: var(--cm-color-divider);
   -webkit-mask: url(../../../krds/resources/img/component/icon/ico_angle.svg) no-repeat center / 2rem;
   mask: url(../../../krds/resources/img/component/icon/ico_angle.svg) no-repeat center / 2rem;
