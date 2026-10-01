@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ko" data-krds-mode="light">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="format-detection" content="telephone=no">
+  <title>공지사항 | 알림마당 | 특수교육 실태조사 데이터 활용 플랫폼</title>
+
+  <!-- 파비콘 (KRDS 1.1.0) -->
+  <link rel="icon" type="image/svg+xml" href="../../../krds/resources/img/component/favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="512x512" href="../../../krds/resources/img/component/favicon/favicon-512x512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../../../krds/resources/img/component/favicon/favicon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../krds/resources/img/component/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="../../../krds/resources/img/component/favicon/favicon-192x192.png">
+
+  <!-- css : KRDS (원본, 수정 금지) -->
+  <link rel="stylesheet" href="../../../krds/resources/css/plugin/swiper-bundle.min.css">
+  <link rel="stylesheet" href="../../../krds/resources/css/component/output.css">
+  <!-- css : 커스텀 -->
+  <link rel="stylesheet" href="../../../_common/resources/css/krds-custom.css">
+  <link rel="stylesheet" href="../../css/krds-theme.css">
+  <link rel="stylesheet" href="../../css/user-custom.css">
+
+  <!-- script : 글자·화면 표시 설정 (화면 깜빡임 방지를 위해 head에서 불러옴) -->
+  <script src="../../../_common/resources/js/krds-display.js"></script>
+</head>
+
+<body>
+  <!--
+    ==================================================================
+    공지사항 목록 (Figma: 컨텐츠 > s03알림마당_공지사항 list, node 10493:36778)
+    레이아웃: kr/html/sublayout.html 기준, 사이드메뉴 없는 1단형 (페이지 상단 .cm-page-top)
+    인덱스는 sublayout.html과 같습니다. [01]~[03], [05]~[07]은 헤더·푸터 템플릿으로 분기합니다.
+    ==================================================================
+  -->
+
+  <!-- [S] #wrap : 전체 레이아웃 래퍼 -->
+  <div id="wrap">
+    <!-- ============================================================
+         [01] 본문 바로가기 : #krds-skip-link
+         ============================================================ -->
+    <div id="krds-skip-link">
+      <a href="#container">본문 바로가기</a>
+    </div>
+    <!-- //[01] 본문 바로가기 -->
+
+    <!-- ============================================================
+         [02] 공식 누리집 배너 : #krds-masthead
+         ============================================================ -->
+    <div id="krds-masthead">
+      <div class="toggle-wrap">
+        <div class="toggle-head">
+          <div class="inner">
+            <span class="nuri-txt">이 누리집은 대한민국 공식 전자정부 누리집입니다.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- //[02] 공식 누리집 배너 -->
+
+    <!-- ============================================================
+         [03] 헤더 : #krds-header
+         ============================================================ -->
+    <header id="krds-header">
+      <!-- [03-1] 헤더 컨텐츠 : .header-in -->
+      <div class="header-in">
+        <!-- [03-1-1] 헤더 상단 : .header-container (유틸리티 메뉴 · 로고 · 헤더 버튼) -->
+        <div class="header-container">
+          <div class="inner">
+            <!-- 유틸리티 메뉴 : .header-utility (사이트맵 · 국가상징 · 글자·화면 설정) -->
+            <div class="header-utility">
+              <ul class="utility-list">
+                <li>
+                  <a href="#" class="krds-btn small text">사이트맵 <i class="svg-icon ico-angle right"></i></a>
+                </li>
+                <li>
+                  <a href="https://www.mois.go.kr/frt/sub/a06/b08/nationalSymbol/screen.do" class="krds-btn small text" target="_blank" title="새 창 열림">국가상징 알아보기 <i class="svg-icon ico-go"></i></a>
+                </li>
+                <li>
+                  <button type="button" class="krds-btn small text open-modal" data-target="modal_adjust_display">
+                    <i class="svg-icon ico-view-mode"></i> 글자·화면 설정
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <!-- 로고 · 헤더 버튼 : .header-branding -->
+            <div class="header-branding">
+              <h2 class="logo">
+                <a href="../main.html">
+                  <span class="sr-only">특수교육 실태조사 데이터 활용 플랫폼</span>
+                </a>
+              </h2>
+              <!-- 헤더 버튼 : .header-actions (통계정보 · 데이터분석 · 알림마당 · 전체메뉴) -->
+              <div class="header-actions">
+                <a href="#" class="btn-navi cm-stat">통계정보</a>
+                <a href="#" class="btn-navi cm-analysis">데이터분석</a>
+                <a href="notice_list.html" class="btn-navi cm-notice">알림마당</a>
+                <button type="button" class="btn-navi all mob-only" aria-controls="mobile-nav">전체메뉴</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- //[03-1-1] 헤더 상단 -->
+
+        <!-- [03-1-2] 메인메뉴(GNB) PC : .krds-main-menu (현재 메뉴 .cm-current) -->
+        <nav class="krds-main-menu">
+          <div class="inner">
+            <ul class="gnb-menu">
+              <li>
+                <button type="button" class="gnb-main-trigger" data-trigger="gnb">조사개요</button>
+                <div class="gnb-toggle-wrap">
+                  <div class="gnb-main-list">
+                    <div class="gnb-sub-list single-list">
+                      <div class="gnb-sub-content">
+                        <h2 class="sub-title"><span>조사개요</span></h2>
+                        <ul>
+                          <li><a href="#">2Depth</a></li>
+                          <li><a href="#">2Depth</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <button type="button" class="gnb-main-trigger cm-current" data-trigger="gnb" aria-current="page">공지사항</button>
+                <div class="gnb-toggle-wrap">
+                  <div class="gnb-main-list">
+                    <div class="gnb-sub-list single-list">
+                      <div class="gnb-sub-content">
+                        <h2 class="sub-title"><span>공지사항</span></h2>
+                        <ul>
+                          <li><a href="notice_list.html">공지사항</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <button type="button" class="gnb-main-trigger" data-trigger="gnb">자료실</button>
+                <div class="gnb-toggle-wrap">
+                  <div class="gnb-main-list">
+                    <div class="gnb-sub-list single-list">
+                      <div class="gnb-sub-content">
+                        <h2 class="sub-title"><span>자료실</span></h2>
+                        <ul>
+                          <li><a href="#">2Depth</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <button type="button" class="gnb-main-trigger" data-trigger="gnb">홍보영상</button>
+                <div class="gnb-toggle-wrap">
+                  <div class="gnb-main-list">
+                    <div class="gnb-sub-list single-list">
+                      <div class="gnb-sub-content">
+                        <h2 class="sub-title"><span>홍보영상</span></h2>
+                        <ul>
+                          <li><a href="#">2Depth</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <!-- //[03-1-2] 메인메뉴(GNB) PC -->
+      </div>
+      <!-- //[03-1] 헤더 컨텐츠 -->
+
+      <!-- [03-2] 메인메뉴(GNB) 모바일 : #mobile-nav -->
+      <div id="mobile-nav" class="krds-main-menu-mobile">
+        <div class="gnb-wrap">
+          <div class="gnb-header">
+            <div class="gnb-service-menu">
+              <a href="#" class="link">통계정보</a>
+              <a href="#" class="link">데이터분석</a>
+              <a href="notice_list.html" class="link">알림마당</a>
+            </div>
+          </div>
+          <div class="gnb-body">
+            <div class="gnb-menu">
+              <div class="menu-wrap">
+                <ul>
+                  <li><a href="#mGnb-anchor1" class="gnb-main-trigger">조사개요</a></li>
+                  <li><a href="#mGnb-anchor2" class="gnb-main-trigger">공지사항</a></li>
+                  <li><a href="#mGnb-anchor3" class="gnb-main-trigger">자료실</a></li>
+                  <li><a href="#mGnb-anchor4" class="gnb-main-trigger">홍보영상</a></li>
+                </ul>
+              </div>
+              <div class="submenu-wrap">
+                <div class="gnb-sub-list" id="mGnb-anchor1">
+                  <h2 class="sub-title">조사개요</h2>
+                  <ul>
+                    <li><a href="#" class="gnb-sub-trigger">2Depth</a></li>
+                  </ul>
+                </div>
+                <div class="gnb-sub-list" id="mGnb-anchor2">
+                  <h2 class="sub-title">공지사항</h2>
+                  <ul>
+                    <li><a href="notice_list.html" class="gnb-sub-trigger">공지사항</a></li>
+                  </ul>
+                </div>
+                <div class="gnb-sub-list" id="mGnb-anchor3">
+                  <h2 class="sub-title">자료실</h2>
+                  <ul>
+                    <li><a href="#" class="gnb-sub-trigger">2Depth</a></li>
+                  </ul>
+                </div>
+                <div class="gnb-sub-list" id="mGnb-anchor4">
+                  <h2 class="sub-title">홍보영상</h2>
+                  <ul>
+                    <li><a href="#" class="gnb-sub-trigger">2Depth</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="krds-btn medium icon" id="close-nav">
+            <span class="sr-only">전체메뉴 닫기</span>
+            <i class="svg-icon ico-popup-close"></i>
+          </button>
+        </div>
+      </div>
+      <!-- //[03-2] 메인메뉴(GNB) 모바일 -->
+    </header>
+    <!-- //[03] 헤더 -->
+
+    <!-- ============================================================
+         [04] 컨테이너 : #container
+         ============================================================ -->
+    <div id="container">
+
+      <!-- 페이지 상단 : .cm-page-top (브레드크럼 · 공유/인쇄 · 페이지 제목) -->
+      <div class="cm-page-top">
+        <div class="inner">
+          <div class="cm-page-top-util">
+            <nav class="krds-breadcrumb-wrap" aria-label="현재 경로" id="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="home"><a href="../main.html" class="txt">홈</a></li>
+                <li><a href="notice_list.html" class="txt">알림마당</a></li>
+                <li><a href="notice_list.html" class="txt">공지사항</a></li>
+              </ol>
+            </nav>
+            <div class="cm-btn-group">
+              <button type="button" class="krds-btn xlarge icon border">
+                <span class="sr-only">공유하기</span>
+                <i class="svg-icon ico-share"></i>
+              </button>
+              <button type="button" class="krds-btn xlarge icon border" onclick="window.print();">
+                <span class="sr-only">인쇄하기</span>
+                <i class="svg-icon ico-print"></i>
+              </button>
+            </div>
+          </div>
+          <div class="cm-page-title">
+            <h1 class="h-tit">공지사항</h1>
+            <p class="desc">새로운 소식과 안내 사항을 알려 드립니다.</p>
+          </div>
+        </div>
+      </div>
+      <!-- //페이지 상단 -->
+
+      <!-- [04-1] 컨텐츠 : .inner -->
+      <div class="inner cm-contents">
+        <div class="cm-board">
+          <!-- 목록 상단 : 게시물 수 · 목록 표시 개수 · 검색 -->
+          <div class="cm-board-top">
+            <div class="cm-board-count" aria-live="polite">
+              <p class="total">총 <span class="num">38</span>개</p>
+              <p class="page"><span class="sr-only">현재 페이지</span><span class="current">1</span> / <span class="sr-only">전체 페이지</span>24</p>
+            </div>
+            <div class="cm-board-search">
+              <div class="cm-select-sort">
+                <label for="list_size">목록 표시 개수</label>
+                <select id="list_size" class="krds-form-select-sort medium">
+                  <option value="15" selected>15개</option>
+                  <option value="30">30개</option>
+                  <option value="50">50개</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <div class="form-conts btn-ico-wrap">
+                  <input type="text" id="search_keyword" class="krds-input" placeholder="검색어를 입력해주세요." title="검색어 입력">
+                  <button type="button" class="krds-btn medium icon">
+                    <span class="sr-only">검색</span>
+                    <i class="svg-icon ico-sch"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- //목록 상단 -->
+
+          <!-- 게시판 목록 : KRDS 사이트 새소식 목록(community_01) 마크업, 공지 행 .is-notice -->
+          <div class="krds-structured-list type3 cm-board-list">
+            <ul class="community-notice-list">
+              <li class="search-item is-notice">
+                <a href="#">
+                  <span class="category">공지</span>
+                  <p class="title">
+                    <strong class="visited">2026년 특수교육 실태조사 데이터 활용 시스템 개통 안내</strong>
+                    <i class="svg-icon ico-file"><span class="sr-only">첨부파일</span></i>
+                  </p>
+                  <span class="date">2025.10.22</span>
+                </a>
+              </li>
+              <li class="search-item is-notice">
+                <a href="#">
+                  <span class="category">공지</span>
+                  <p class="title">
+                    <strong class="visited">2026년 특수교육 실태조사 표본 설계 결과 공고</strong>
+                    <i class="svg-icon ico-file"><span class="sr-only">첨부파일</span></i>
+                  </p>
+                  <span class="date">2025.10.22</span>
+                </a>
+              </li>
+              <li class="search-item">
+                <a href="#">
+                  <span class="category">22</span>
+                  <p class="title">
+                    <strong class="visited">2026년 개인정보 처리방침 개정 안내</strong>
+                  </p>
+                  <span class="date">2025.10.22</span>
+                </a>
+              </li>
+              <li class="search-item">
+                <a href="#">
+                  <span class="category">21</span>
+                  <p class="title">
+                    <strong class="visited">2023년 특수교육 실태조사 원자료 공개 안내</strong>
+                  </p>
+                  <span class="date">2025.10.22</span>
+                </a>
+              </li>
+              <li class="search-item">
+                <a href="#">
+                  <span class="category">20</span>
+                  <p class="title">
+                    <strong class="visited">시계열 시각화 서비스 임시 점검 안내(8/2 02:00~04:00)</strong>
+                  </p>
+                  <span class="date">2025.10.22</span>
+                </a>
+              </li>
+              <li class="search-item">
+                <a href="#">
+                  <span class="category">19</span>
+                  <p class="title">
+                    <strong class="visited">특수교육 실태조사 데이터 활용 플랫폼 서비스 개선 안내</strong>
+                    <i class="svg-icon ico-file"><span class="sr-only">첨부파일</span></i>
+                  </p>
+                  <span class="date">2025.10.22</span>
+                </a>
+              </li>
+              <li class="search-item">
+                <a href="#">
+                  <span class="category">18</span>
+                  <p class="title">
+                    <strong class="visited">2026년 특수교육 실태조사 데이터 신규 등록 안내</strong>
+                    <i class="svg-icon ico-file"><span class="sr-only">첨부파일</span></i>
+                  </p>
+                  <span class="date">2025.10.22</span>
+                </a>
+              </li>
+              <li class="search-item">
+                <a href="#">
+                  <span class="category">17</span>
+                  <p class="title">
+                    <strong class="visited">특수교육 실태조사 통계자료 업데이트 안내</strong>
+                  </p>
+                  <span class="date">2025.10.22</span>
+                </a>
+              </li>
+              <li class="search-item">
+                <a href="#">
+                  <span class="category">16</span>
+                  <p class="title">
+                    <strong class="visited">서비스 이용 관련 주요 변경사항 안내</strong>
+                    <i class="svg-icon ico-file"><span class="sr-only">첨부파일</span></i>
+                  </p>
+                  <span class="date">2025.10.22</span>
+                </a>
+              </li>
+              <li class="search-item">
+                <a href="#">
+                  <span class="category">15</span>
+                  <p class="title">
+                    <strong class="visited">특수교육 실태조사 데이터 신규 자료 등록 안내</strong>
+                    <i class="svg-icon ico-file"><span class="sr-only">첨부파일</span></i>
+                  </p>
+                  <span class="date">2025.10.22</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- //게시판 목록 -->
+        </div>
+
+        <!-- 페이지네이션 : KRDS pagination -->
+        <div class="krds-pagination">
+          <span class="page-navi prev disabled">이전</span>
+          <div class="page-links">
+            <a class="page-link active" href="#"><span class="sr-only">현재페이지 </span>1</a>
+            <a class="page-link" href="#">2</a>
+            <a class="page-link" href="#">3</a>
+            <a class="page-link" href="#">4</a>
+            <a class="page-link" href="#">5</a>
+            <a class="page-link" href="#">6</a>
+            <a class="page-link" href="#">7</a>
+            <a class="page-link" href="#">8</a>
+            <a class="page-link" href="#">9</a>
+            <a class="page-link" href="#">10</a>
+          </div>
+          <a class="page-navi next" href="#">다음</a>
+        </div>
+        <!-- //페이지네이션 -->
+      </div>
+      <!-- //[04-1] 컨텐츠 -->
+    </div>
+    <!-- //[04] 컨테이너 -->
+
+    <!-- ============================================================
+         [05] 푸터 : #krds-footer
+         ============================================================ -->
+    <footer id="krds-footer">
+      <div class="inner">
+        <!-- 푸터 로고 : .f-logo -->
+        <div class="f-logo">
+          <span class="sr-only">특수교육 실태조사 데이터 활용 플랫폼</span>
+        </div>
+        <div class="f-cnt">
+          <!-- 기관 정보 : .f-info (주소 · 대표전화 · 팩스) -->
+          <div class="f-info">
+            <p class="info-addr">(31470) 충청남도 아산시 배방읍 공원로 40</p>
+            <ul class="info-cs">
+              <li><strong class="key-info">대표전화 <span>041-537-1500</span></strong></li>
+              <li><strong class="key-info">팩스 <span>041-531-6412</span></strong></li>
+            </ul>
+          </div>
+        </div>
+        <!-- 웹 접근성 인증마크 -->
+        <div class="cm-wa-mark">
+          <img src="../../../_common/resources/img/common/web_accessibility_mark.png" alt="과학기술정보통신부 웹 접근성 품질인증 마크">
+        </div>
+
+        <!-- 푸터 하단 : .f-btm (정책 메뉴 · 저작권) -->
+        <div class="f-btm">
+          <div class="f-btm-text">
+            <div class="f-menu">
+              <a href="#">이용안내</a>
+              <a href="#" class="point">개인정보처리방침</a>
+              <a href="#">저작권정책</a>
+            </div>
+            <p class="f-copy">© 2027 NISE ALL RIGHTS RESERVED</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- //[05] 푸터 -->
+
+    <!-- TOP 버튼 -->
+    <a href="#wrap" class="cm-btn-top">TOP<span class="sr-only"> 페이지 맨 위로 이동</span></a>
+  </div>
+  <!-- [E] #wrap -->
+
+
+  <!-- ============================================================
+       [06] 모달 : .modal-wrap (#wrap 바깥)
+       ============================================================ -->
+  <div class="modal-wrap">
+    <!-- [06-1] 글자·화면 표시 설정 : #modal_adjust_display (_common/resources/js/krds-display.js 연동, id·value 변경 금지) -->
+    <section id="modal_adjust_display" class="krds-modal fade" aria-labelledby="tit_modal_adjust_display">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 id="tit_modal_adjust_display" class="modal-title">글자·화면 표시 설정</h2>
+          </div>
+          <div class="modal-conts">
+            <div class="conts-area">
+              <div class="adjust_display">
+                <div class="fieldset adjust_scale">
+                  <div class="form-group scale-options">
+                    <h3>글자·화면 표시 설정</h3>
+                    <div class="form-conts">
+                      <div class="krds-check-area chk-column">
+                        <div class="krds-form-check">
+                          <input type="radio" name="scale_level" id="scale_level_small" value="small">
+                          <label for="scale_level_small">작게</label>
+                        </div>
+                        <div class="krds-form-check">
+                          <input type="radio" name="scale_level" id="scale_level_medium" value="medium" checked>
+                          <label for="scale_level_medium">보통</label>
+                        </div>
+                        <div class="krds-form-check">
+                          <input type="radio" name="scale_level" id="scale_level_large" value="large">
+                          <label for="scale_level_large">조금 크게</label>
+                        </div>
+                        <div class="krds-form-check">
+                          <input type="radio" name="scale_level" id="scale_level_xlarge" value="xlarge">
+                          <label for="scale_level_xlarge">크게</label>
+                        </div>
+                        <div class="krds-form-check">
+                          <input type="radio" name="scale_level" id="scale_level_xxlarge" value="xxlarge">
+                          <label for="scale_level_xxlarge">가장 크게</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="fieldset">
+                  <div class="form-group view-mode-options">
+                    <h3>화면 표시 모드</h3>
+                    <div class="form-conts">
+                      <div class="krds-check-area chk-column">
+                        <div class="krds-form-check view-mode-light">
+                          <input type="radio" name="view_mode" id="view_mode_light" value="light" checked>
+                          <label for="view_mode_light">기본 (밝은 배경)</label>
+                        </div>
+                        <div class="krds-form-check view-mode-dark">
+                          <input type="radio" name="view_mode" id="view_mode_dark" value="high-contrast">
+                          <label for="view_mode_dark">선명하게 (어두운 배경)</label>
+                        </div>
+                        <div class="krds-form-check view-mode-default">
+                          <input type="radio" name="view_mode" id="view_mode_default" value="theme">
+                          <label for="view_mode_default">시스템 설정</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-btn btn-wrap">
+            <button type="button" class="krds-btn medium tertiary close-modal" id="reset_display">초기화</button>
+            <button type="button" class="krds-btn medium primary close-modal">닫기</button>
+          </div>
+          <button type="button" class="krds-btn medium icon btn-close close-modal">
+            <span class="sr-only">닫기</span>
+            <i class="svg-icon ico-popup-close"></i>
+          </button>
+        </div>
+      </div>
+      <div class="modal-back"></div>
+    </section>
+    <!-- //[06-1] 글자·화면 표시 설정 -->
+  </div>
+  <!-- //[06] 모달 -->
+
+
+  <!-- ============================================================
+       [07] 스크립트
+       ============================================================ -->
+  <script src="../../../krds/resources/js/plugin/swiper-bundle.min.js"></script>
+  <script src="../../../krds/resources/js/component/ui-script.js"></script>
+  <script src="../../js/user-custom.js"></script>
+  <!-- //[07] 스크립트 -->
+</body>
+</html>
