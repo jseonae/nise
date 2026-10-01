@@ -234,6 +234,11 @@
   color: var(--cm-color-text-subtle);
 }
 
+/* 상세(view) 화면 : 페이지 제목 없이 브레드크럼 · 공유/인쇄만 (Figma 116px 변형) */
+.cm-page-top.cm-page-top-view {
+  padding-bottom: var(--krds-number-13);
+}
+
 /* [컨텐츠] 1단 레이아웃 본문 */
 .cm-contents {
   display: flex;
@@ -241,6 +246,14 @@
   gap: var(--krds-gap-9);
   padding-top: var(--krds-number-18);
   padding-bottom: var(--krds-number-20);
+}
+/* 퍼블리싱 전 빈 페이지 표시 (작업 완료 시 삭제) */
+.cm-todo {
+  padding: var(--krds-number-20) 0;
+  border: 0.1rem dashed var(--cm-color-divider-light);
+  border-radius: var(--krds-radius-medium3);
+  text-align: center;
+  color: var(--cm-color-text-subtle);
 }
 .cm-contents .krds-pagination {
   margin-top: 0;

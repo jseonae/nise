@@ -188,15 +188,16 @@
         <!-- //[03-1-1] 헤더 상단 -->
 
         <!-- [03-1-2] 메인메뉴(GNB) PC : .krds-main-menu
-             이 사업은 2Depth가 없습니다 : a.gnb-main-trigger 1단 링크 (gnb-toggle-wrap 없음, 화살표는 Figma대로 유지)
+             메인메뉴에는 현재 1Depth(통계정보·데이터분석·알림마당)의 2Depth만 1단 링크로 표시 (메뉴 구조: _common/docs/ia.md)
+             a.gnb-main-trigger 1단 링크 (gnb-toggle-wrap 없음, 화살표는 Figma대로 유지)
              현재 메뉴는 .cm-current + aria-current="page" -->
         <nav class="krds-main-menu">
           <div class="inner">
             <ul class="gnb-menu">
-              <li><a href="#" class="gnb-main-trigger" data-trigger="gnb">조사개요</a></li>
+              <li><a href="board/survey_overview.html" class="gnb-main-trigger" data-trigger="gnb">조사개요</a></li>
               <li><a href="board/notice_list.html" class="gnb-main-trigger" data-trigger="gnb">공지사항</a></li>
-              <li><a href="#" class="gnb-main-trigger" data-trigger="gnb">자료실</a></li>
-              <li><a href="#" class="gnb-main-trigger" data-trigger="gnb">홍보영상</a></li>
+              <li><a href="board/archive_list.html" class="gnb-main-trigger" data-trigger="gnb">자료실</a></li>
+              <li><a href="board/promo_video.html" class="gnb-main-trigger" data-trigger="gnb">홍보영상</a></li>
             </ul>
           </div>
         </nav>
@@ -284,10 +285,10 @@
           <!-- gnb-body : 1단 메뉴 목록 .cm-mobile-menu (KRDS 탭+하위메뉴 구조 대신 사용, 현재 메뉴 aria-current="page") -->
           <div class="gnb-body">
             <ul class="cm-mobile-menu">
-              <li><a href="#">조사개요</a></li>
+              <li><a href="board/survey_overview.html">조사개요</a></li>
               <li><a href="board/notice_list.html">공지사항</a></li>
-              <li><a href="#">자료실</a></li>
-              <li><a href="#">홍보영상</a></li>
+              <li><a href="board/archive_list.html">자료실</a></li>
+              <li><a href="board/promo_video.html">홍보영상</a></li>
             </ul>
           </div>
           <!-- //gnb-body -->

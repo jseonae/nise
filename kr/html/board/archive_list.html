@@ -7,7 +7,7 @@
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="format-detection" content="telephone=no">
-  <title>공지사항 | 알림마당 | 특수교육 실태조사 데이터 활용 플랫폼</title>
+  <title>자료실 | 알림마당 | 특수교육 실태조사 데이터 활용 플랫폼</title>
 
   <!-- 파비콘 (KRDS 1.1.0) -->
   <link rel="icon" type="image/svg+xml" href="../../../krds/resources/img/component/favicon/favicon.svg">
@@ -31,7 +31,7 @@
 <body>
   <!--
     ==================================================================
-    공지사항 목록 (Figma: 컨텐츠 > s03알림마당_공지사항 list, node 10493:36778)
+    자료실 (Figma: 컨텐츠 > s03알림마당_자료실 list / view)
     레이아웃: kr/html/sublayout.html 기준, 사이드메뉴 없는 1단형 (페이지 상단 .cm-page-top)
     인덱스는 sublayout.html과 같습니다. [01]~[03], [05]~[07]은 헤더·푸터 템플릿으로 분기합니다.
     ==================================================================
@@ -111,8 +111,8 @@
           <div class="inner">
             <ul class="gnb-menu">
               <li><a href="../board/survey_overview.html" class="gnb-main-trigger" data-trigger="gnb">조사개요</a></li>
-              <li><a href="../board/notice_list.html" class="gnb-main-trigger cm-current" data-trigger="gnb" aria-current="page">공지사항</a></li>
-              <li><a href="../board/archive_list.html" class="gnb-main-trigger" data-trigger="gnb">자료실</a></li>
+              <li><a href="../board/notice_list.html" class="gnb-main-trigger" data-trigger="gnb">공지사항</a></li>
+              <li><a href="../board/archive_list.html" class="gnb-main-trigger cm-current" data-trigger="gnb" aria-current="page">자료실</a></li>
               <li><a href="../board/promo_video.html" class="gnb-main-trigger" data-trigger="gnb">홍보영상</a></li>
             </ul>
           </div>
@@ -135,8 +135,8 @@
           <div class="gnb-body">
             <ul class="cm-mobile-menu">
               <li><a href="../board/survey_overview.html">조사개요</a></li>
-              <li><a href="../board/notice_list.html" aria-current="page">공지사항</a></li>
-              <li><a href="../board/archive_list.html">자료실</a></li>
+              <li><a href="../board/notice_list.html">공지사항</a></li>
+              <li><a href="../board/archive_list.html" aria-current="page">자료실</a></li>
               <li><a href="../board/promo_video.html">홍보영상</a></li>
             </ul>
           </div>
@@ -162,8 +162,8 @@
             <nav class="krds-breadcrumb-wrap" aria-label="현재 경로" id="breadcrumb">
               <ol class="breadcrumb">
                 <li class="home"><a href="../main.html" class="txt">홈</a></li>
-                <li><a href="survey_overview.html" class="txt">알림마당</a></li>
-                <li><a href="notice_list.html" class="txt">공지사항</a></li>
+                <li><a href="../board/survey_overview.html" class="txt">알림마당</a></li>
+                <li><a href="archive_list.html" class="txt">자료실</a></li>
               </ol>
             </nav>
             <div class="cm-btn-group">
@@ -178,8 +178,8 @@
             </div>
           </div>
           <div class="cm-page-title">
-            <h1 class="h-tit">공지사항</h1>
-            <p class="desc">새로운 소식과 안내 사항을 알려 드립니다.</p>
+            <h1 class="h-tit">자료실</h1>
+            <p class="desc">특수교육 실태조사 보고서와 통계·정책 자료를 내려받을 수 있습니다.</p>
           </div>
         </div>
       </div>
@@ -187,157 +187,8 @@
 
       <!-- [04-1] 컨텐츠 : .inner -->
       <div class="inner cm-contents">
-        <div class="cm-board">
-          <!-- 목록 상단 : 게시물 수 · 목록 표시 개수 · 검색 -->
-          <div class="cm-board-top">
-            <div class="cm-board-count" aria-live="polite">
-              <p class="total">총 <span class="num">38</span>개</p>
-              <p class="page"><span class="sr-only">현재 페이지</span><span class="current">1</span> / <span class="sr-only">전체 페이지</span>24</p>
-            </div>
-            <div class="cm-board-search">
-              <div class="cm-select-sort">
-                <label for="list_size">목록 표시 개수</label>
-                <select id="list_size" class="krds-form-select-sort medium">
-                  <option value="15" selected>15개</option>
-                  <option value="30">30개</option>
-                  <option value="50">50개</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <div class="form-conts btn-ico-wrap">
-                  <input type="text" id="search_keyword" class="krds-input" placeholder="검색어를 입력해주세요." title="검색어 입력">
-                  <button type="button" class="krds-btn medium icon">
-                    <span class="sr-only">검색</span>
-                    <i class="svg-icon ico-sch"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- //목록 상단 -->
-
-          <!-- 게시판 목록 : KRDS 사이트 새소식 목록(community_01) 마크업, 공지 행 .is-notice -->
-          <div class="krds-structured-list type3 cm-board-list">
-            <ul class="community-notice-list">
-              <li class="search-item is-notice">
-                <a href="notice_view.html">
-                  <span class="category">공지</span>
-                  <p class="title">
-                    <strong class="visited">2026년 특수교육 실태조사 데이터 활용 시스템 개통 안내</strong>
-                    <i class="svg-icon ico-file"><span class="sr-only">첨부파일</span></i>
-                  </p>
-                  <span class="date">2025.10.22</span>
-                </a>
-              </li>
-              <li class="search-item is-notice">
-                <a href="notice_view.html">
-                  <span class="category">공지</span>
-                  <p class="title">
-                    <strong class="visited">2026년 특수교육 실태조사 표본 설계 결과 공고</strong>
-                    <i class="svg-icon ico-file"><span class="sr-only">첨부파일</span></i>
-                  </p>
-                  <span class="date">2025.10.22</span>
-                </a>
-              </li>
-              <li class="search-item">
-                <a href="notice_view.html">
-                  <span class="category">22</span>
-                  <p class="title">
-                    <strong class="visited">2026년 개인정보 처리방침 개정 안내</strong>
-                  </p>
-                  <span class="date">2025.10.22</span>
-                </a>
-              </li>
-              <li class="search-item">
-                <a href="notice_view.html">
-                  <span class="category">21</span>
-                  <p class="title">
-                    <strong class="visited">2023년 특수교육 실태조사 원자료 공개 안내</strong>
-                  </p>
-                  <span class="date">2025.10.22</span>
-                </a>
-              </li>
-              <li class="search-item">
-                <a href="notice_view.html">
-                  <span class="category">20</span>
-                  <p class="title">
-                    <strong class="visited">시계열 시각화 서비스 임시 점검 안내(8/2 02:00~04:00)</strong>
-                  </p>
-                  <span class="date">2025.10.22</span>
-                </a>
-              </li>
-              <li class="search-item">
-                <a href="notice_view.html">
-                  <span class="category">19</span>
-                  <p class="title">
-                    <strong class="visited">특수교육 실태조사 데이터 활용 플랫폼 서비스 개선 안내</strong>
-                    <i class="svg-icon ico-file"><span class="sr-only">첨부파일</span></i>
-                  </p>
-                  <span class="date">2025.10.22</span>
-                </a>
-              </li>
-              <li class="search-item">
-                <a href="notice_view.html">
-                  <span class="category">18</span>
-                  <p class="title">
-                    <strong class="visited">2026년 특수교육 실태조사 데이터 신규 등록 안내</strong>
-                    <i class="svg-icon ico-file"><span class="sr-only">첨부파일</span></i>
-                  </p>
-                  <span class="date">2025.10.22</span>
-                </a>
-              </li>
-              <li class="search-item">
-                <a href="notice_view.html">
-                  <span class="category">17</span>
-                  <p class="title">
-                    <strong class="visited">특수교육 실태조사 통계자료 업데이트 안내</strong>
-                  </p>
-                  <span class="date">2025.10.22</span>
-                </a>
-              </li>
-              <li class="search-item">
-                <a href="notice_view.html">
-                  <span class="category">16</span>
-                  <p class="title">
-                    <strong class="visited">서비스 이용 관련 주요 변경사항 안내</strong>
-                    <i class="svg-icon ico-file"><span class="sr-only">첨부파일</span></i>
-                  </p>
-                  <span class="date">2025.10.22</span>
-                </a>
-              </li>
-              <li class="search-item">
-                <a href="notice_view.html">
-                  <span class="category">15</span>
-                  <p class="title">
-                    <strong class="visited">특수교육 실태조사 데이터 신규 자료 등록 안내</strong>
-                    <i class="svg-icon ico-file"><span class="sr-only">첨부파일</span></i>
-                  </p>
-                  <span class="date">2025.10.22</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <!-- //게시판 목록 -->
-        </div>
-
-        <!-- 페이지네이션 : KRDS pagination -->
-        <div class="krds-pagination">
-          <span class="page-navi prev disabled">이전</span>
-          <div class="page-links">
-            <a class="page-link active" href="#"><span class="sr-only">현재페이지 </span>1</a>
-            <a class="page-link" href="#">2</a>
-            <a class="page-link" href="#">3</a>
-            <a class="page-link" href="#">4</a>
-            <a class="page-link" href="#">5</a>
-            <a class="page-link" href="#">6</a>
-            <a class="page-link" href="#">7</a>
-            <a class="page-link" href="#">8</a>
-            <a class="page-link" href="#">9</a>
-            <a class="page-link" href="#">10</a>
-          </div>
-          <a class="page-navi next" href="#">다음</a>
-        </div>
-        <!-- //페이지네이션 -->
+        <!-- TODO: 자료실 목록(list) 퍼블리싱 (Figma: 컨텐츠 > s03알림마당_자료실 list / view) -->
+        <p class="cm-todo">자료실 목록(list) 컨텐츠 영역</p>
       </div>
       <!-- //[04-1] 컨텐츠 -->
     </div>
