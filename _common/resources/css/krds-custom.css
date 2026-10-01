@@ -219,6 +219,11 @@
   top: var(--krds-padding-7);
   right: var(--krds-padding-8);
 }
+/* 닫기 버튼 : 마크업은 KRDS 그대로(xsmall) 두고 크기만 small 로 (16px → 20px) */
+.cm-share .tooltip-popover .tooltip-close.krds-btn.icon.xsmall {
+  width: var(--krds-button--icon-size-small);
+  height: var(--krds-button--icon-size-small);
+}
 .krds-contextual-help.cm-share .tooltip-popover .cm-share-list {
   flex-direction: row;
   gap: var(--krds-gap-4);
