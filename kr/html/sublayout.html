@@ -33,483 +33,60 @@
 <body>
   <!--
     ==================================================================
-    서브 레이아웃 인덱스 (KRDS 샘플 sample_sub_01 기준)
+    서브 레이아웃 인덱스 (KRDS 샘플 sample_sub_01 기준, 이 사업은 사이드메뉴 없는 1단형)
+    새 페이지는 이 파일을 복사해 [04-1] 컨텐츠만 채웁니다.
     ==================================================================
     [S] #wrap                          전체 레이아웃 래퍼
-      [01] 본문 바로가기               #krds-skip-link          → 헤더 템플릿
-      [02] 공식 누리집 배너            #krds-masthead           → 헤더 템플릿
-      [03] 헤더                        #krds-header             → 헤더 템플릿
-        [03-1]   헤더 컨텐츠           .header-in
-        [03-1-1] 헤더 상단             .header-container (유틸리티 메뉴 · 로고 · 헤더 버튼)
-        [03-1-2] 메인메뉴(GNB) PC      .krds-main-menu
-        [03-2]   메인메뉴(GNB) 모바일  #mobile-nav
-      [04] 컨테이너                    #container               → 페이지별 컨텐츠
-        [04-1]   컨텐츠                .inner
-      [05] 푸터                        #krds-footer             → 푸터 템플릿
+      [01] 본문 바로가기               #krds-skip-link          ┐
+      [02] 공식 누리집 배너            #krds-masthead           ├ kr/tmpl/header.html
+      [03] 헤더                        #krds-header             ┘  (메인메뉴 2Depth 는 kr/js/include.js 메뉴 데이터로 채움)
+      [04] 컨테이너                    #container               → 페이지별
+        페이지 상단                    .cm-page-top             → kr/tmpl/page-top.html (브레드크럼 · 공유/인쇄 · 제목)
+        [04-1] 컨텐츠                  .inner.cm-contents       → 페이지별 컨텐츠 (이 부분만 작성)
+      [05] 푸터 · TOP 버튼             #krds-footer             → kr/tmpl/footer.html
     [E] #wrap
-    [06] 모달                          .modal-wrap (#wrap 바깥) → 푸터 템플릿
-      [06-1]   글자·화면 표시 설정     #modal_adjust_display
-    [07] 스크립트                                              → 푸터 템플릿
+    [06] 모달                          .modal-wrap (#wrap 바깥) → kr/tmpl/modal.html
+    [07] 스크립트                                               → 페이지별 (include.js 를 KRDS 스크립트보다 먼저)
 
-    템플릿 분기 기준
-      - kr/tmpl/header.html : <body> 다음 ~ [03] 헤더 끝 (#wrap 여는 태그 포함)
-      - 페이지 컨텐츠       : [04] 컨테이너
-      - kr/tmpl/footer.html : [05] 푸터 ~ [07] 스크립트 (#wrap 닫는 태그 포함)
+    인클루드 : <div data-include="이름"></div> 를 kr/js/include.js 가 kr/tmpl/이름.html 로 바꿈
+               (로컬 서버에서 열어야 동작, 개발 연동 시 서버 인클루드로 대체)
+    현재 메뉴 : 파일 위치(kr/html/1Depth폴더/파일명)로 메뉴 데이터에서 찾아 메인메뉴·브레드크럼·제목에 표시
+               xxx_view.html 은 상세 화면으로 보고 페이지 제목 없이 표시
     ==================================================================
   -->
 
-  <!-- [S] #wrap : 전체 레이아웃 래퍼 (헤더 템플릿에서 열고 푸터 템플릿에서 닫음) -->
+  <!-- [S] #wrap -->
   <div id="wrap">
-    <!-- ============================================================
-         [01] 본문 바로가기 : #krds-skip-link
-         분기: 헤더 템플릿 (kr/tmpl/header.html)
-         ============================================================ -->
-    <div id="krds-skip-link">
-      <a href="#container">본문 바로가기</a>
-    </div>
-    <!-- //[01] 본문 바로가기 -->
-
-    <!-- ============================================================
-         [02] 공식 누리집 배너 : #krds-masthead
-         분기: 헤더 템플릿 (kr/tmpl/header.html)
-         ============================================================ -->
-    <div id="krds-masthead">
-      <div class="toggle-wrap">
-        <div class="toggle-head">
-          <div class="inner">
-            <span class="nuri-txt">이 누리집은 대한민국 공식 전자정부 누리집입니다.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- //[02] 공식 누리집 배너 -->
-
-    <!-- ============================================================
-         [03] 헤더 : #krds-header
-         분기: 헤더 템플릿 (kr/tmpl/header.html)
-         ============================================================ -->
-    <header id="krds-header">
-      <!-- [03-1] 헤더 컨텐츠 : .header-in -->
-      <div class="header-in">
-        <!-- [03-1-1] 헤더 상단 : .header-container (유틸리티 메뉴 · 로고 · 헤더 버튼) -->
-        <div class="header-container">
-          <div class="inner">
-            <!-- 유틸리티 메뉴 : .header-utility (언어 · 지원 · 글자·화면 설정) -->
-            <div class="header-utility">
-              <ul class="utility-list">
-                <li>
-                  <!-- 언어 변경 : .krds-language -->
-                  <div class="krds-drop-wrap krds-language">
-                    <button type="button" class="krds-btn small text drop-btn">
-                      <i class="svg-icon ico-global"></i>
-                      Language
-                      <i class="svg-icon ico-toggle"></i>
-                    </button>
-                    <div class="drop-menu">
-                      <div class="drop-in">
-                        <ul class="drop-list">
-                          <li><a href="#" class="item-link active" lang="ko">한국어</a></li>
-                          <li><a href="#" class="item-link" lang="en">English (영어)</a></li>
-                          <li><a href="#" class="item-link" lang="zh">中文 (중국어)</a></li>
-                          <li><a href="#" class="item-link" lang="ja">日本語 (일본어)</a></li>
-                          <li><a href="#" class="item-link" lang="fr">français (프랑스어)</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- //언어 변경 -->
-                </li>
-                <li>
-                  <div class="krds-drop-wrap">
-                    <button type="button" class="krds-btn small text drop-btn">
-                      지원 <i class="svg-icon ico-toggle"></i>
-                    </button>
-                    <div class="drop-menu">
-                      <div class="drop-in">
-                        <ul class="drop-list">
-                          <li><a href="#" class="item-link">인증센터</a></li>
-                          <li><a href="#" class="item-link">누리집안내지도</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <button type="button" class="krds-btn small text open-modal" data-target="modal_adjust_display">
-                    <i class="svg-icon ico-view-mode"></i> 글자·화면 설정
-                  </button>
-                </li>
-              </ul>
-            </div>
-            <!-- 로고 · 헤더 버튼 : .header-branding -->
-            <div class="header-branding">
-              <h2 class="logo">
-                <a href="#">
-                  <span class="sr-only">대한민국정부</span>
-                </a>
-              </h2>
-              <!-- 헤더 버튼 : .header-actions (통합검색 · 로그인 · 회원가입 · 나의 GOV · 전체메뉴) -->
-              <div class="header-actions">
-                <button type="button" class="btn-navi sch open-modal" title="통합검색 레이어" data-target="popTotalSch">통합검색</button><!-- 통합검색 모달(#popTotalSch)은 [06] 모달 영역에 추가 예정 -->
-                <a href="#" class="btn-navi login">로그인</a>
-                <button type="button" class="btn-navi join">회원가입</button>
-                <div class="krds-drop-wrap my-drop">
-                  <button type="button" class="btn-navi my drop-btn">나의 GOV</button>
-                  <div class="drop-menu">
-                    <div class="drop-in">
-                      <div class="drop-top">
-                        <p class="my-name">홍길동님</p>
-                        <dl class="my-time">
-                          <dt>로그아웃까지 남은 시간</dt>
-                          <dd>
-                            <span class="time">12:00</span>
-                            <button type="button" class="krds-btn small text h-auto">시간 연장</button>
-                          </dd>
-                        </dl>
-                      </div>
-                      <ul class="drop-list">
-                        <li><a href="#" class="item-link">나의 GOV 홈</a></li>
-                        <li><a href="#" class="item-link">나의 신청내역</a></li>
-                        <li><a href="#" class="item-link">나의 생활정보</a></li>
-                        <li><a href="#" class="item-link">나의 정보관리</a></li>
-                      </ul>
-                      <div class="drop-bottom">
-                        <button type="button" class="krds-btn medium text">
-                          <i class="svg-icon ico-logout"></i> 로그아웃
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="btn-navi all" aria-controls="mobile-nav">전체메뉴</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- //[03-1-1] 헤더 상단 -->
-
-        <!-- [03-1-2] 메인메뉴(GNB) PC : .krds-main-menu
-             메인메뉴에는 현재 1Depth(통계정보·데이터분석·알림마당)의 2Depth만 1단 링크로 표시 (메뉴 구조: _common/docs/ia.md)
-             a.gnb-main-trigger 1단 링크 (gnb-toggle-wrap 없음, 화살표는 Figma대로 유지)
-             현재 메뉴는 .cm-current + aria-current="page" -->
-        <nav class="krds-main-menu">
-          <div class="inner">
-            <ul class="gnb-menu">
-              <li><a href="board/survey_overview.html" class="gnb-main-trigger" data-trigger="gnb">조사개요</a></li>
-              <li><a href="board/notice_list.html" class="gnb-main-trigger" data-trigger="gnb">공지사항</a></li>
-              <li><a href="board/archive_list.html" class="gnb-main-trigger" data-trigger="gnb">자료실</a></li>
-              <li><a href="board/promo_video.html" class="gnb-main-trigger" data-trigger="gnb">홍보영상</a></li>
-            </ul>
-          </div>
-        </nav>
-        <!-- //[03-1-2] 메인메뉴(GNB) PC -->
-      </div>
-      <!-- //[03-1] 헤더 컨텐츠 -->
-
-      <!-- [03-2] 메인메뉴(GNB) 모바일 : #mobile-nav (헤더 .btn-navi.all 버튼의 aria-controls와 id 일치 필요) -->
-      <div id="mobile-nav" class="krds-main-menu-mobile">
-        <div class="gnb-wrap">
-          <!-- gnb-header -->
-          <div class="gnb-header">
-            <!-- gnb-utils -->
-            <div class="gnb-utils">
-              <ul class="utility-list">
-                <li>
-                  <div class="krds-drop-wrap">
-                    <button type="button" class="krds-btn small text drop-btn">
-                      지원 <i class="svg-icon ico-toggle"></i>
-                    </button>
-                    <div class="drop-menu">
-                      <div class="drop-in">
-                        <ul class="drop-list">
-                          <li><a href="#" class="item-link">인증센터</a></li>
-                          <li><a href="#" class="item-link">누리집안내지도</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-
-                  <!-- 언어 변경 : .krds-language -->
-                  <div class="krds-drop-wrap krds-language">
-                    <button type="button" class="krds-btn small text drop-btn">
-                      <i class="svg-icon ico-global"></i>
-                      Language
-                      <i class="svg-icon ico-toggle"></i>
-                    </button>
-                    <div class="drop-menu">
-                      <div class="drop-in">
-                        <ul class="drop-list">
-                          <li><a href="#" class="item-link active" lang="ko">한국어</a></li>
-                          <li><a href="#" class="item-link" lang="en">English (영어)</a></li>
-                          <li><a href="#" class="item-link" lang="zh">中文 (중국어)</a></li>
-                          <li><a href="#" class="item-link" lang="ja">日本語 (일본어)</a></li>
-                          <li><a href="#" class="item-link" lang="fr">français (프랑스어)</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- //언어 변경 -->
-
-                </li>
-              </ul>
-            </div>
-            <!-- //gnb-utils -->
-            <!-- gnb-login -->
-            <div class="gnb-login">
-              <!-- <span class="user">홍길동님</span>
-                <button type="button" class="krds-btn large text"><i class="svg-icon ico-logout"></i> 로그아웃</button> -->
-              <button type="button" class="krds-btn large text"><i class="svg-icon ico-log"></i> 로그인을 해주세요</button>
-            </div>
-            <!-- //gnb-login -->
-            <!-- gnb-service-menu -->
-            <div class="gnb-service-menu">
-              <a href="#" class="link">메뉴명</a>
-              <a href="#" class="link">메뉴명</a>
-              <a href="#" class="link">메뉴명</a>
-              <a href="#" class="link">메뉴명</a>
-            </div>
-            <!-- //gnb-service-menu -->
-            <!-- 검색 -->
-            <div class="sch-input">
-              <input type="text" class="krds-input" placeholder="찾고자 하는 메뉴명을 입력해 주세요" title="찾고자 하는 메뉴명 입력">
-              <button type="button" class="krds-btn medium icon ico-search">
-                <span class="sr-only">검색</span>
-                <i class="svg-icon ico-sch"></i>
-              </button>
-            </div>
-            <!-- //검색 -->
-          </div>
-          <!-- //gnb-header -->
-
-          <!-- gnb-body : 1단 메뉴 목록 .cm-mobile-menu (KRDS 탭+하위메뉴 구조 대신 사용, 현재 메뉴 aria-current="page") -->
-          <div class="gnb-body">
-            <ul class="cm-mobile-menu">
-              <li><a href="board/survey_overview.html">조사개요</a></li>
-              <li><a href="board/notice_list.html">공지사항</a></li>
-              <li><a href="board/archive_list.html">자료실</a></li>
-              <li><a href="board/promo_video.html">홍보영상</a></li>
-            </ul>
-          </div>
-          <!-- //gnb-body -->
-
-          <!-- gnb-close -->
-          <button type="button" class="krds-btn medium icon" id="close-nav">
-            <span class="sr-only">전체메뉴 닫기</span>
-            <i class="svg-icon ico-popup-close"></i>
-          </button>
-          <!-- //gnb-close -->
-        </div>
-      </div>
-
-      <!-- //[03-2] 메인메뉴(GNB) 모바일 -->
-    </header>
-    <!-- //[03] 헤더 -->
+    <!-- [01]~[03] 본문 바로가기 · 공식 누리집 배너 · 헤더 -->
+    <div data-include="header"></div>
 
     <!-- ============================================================
          [04] 컨테이너 : #container
-         분기: 페이지별 컨텐츠 (본문 바로가기 링크의 이동 위치)
          ============================================================ -->
     <div id="container">
+      <!-- 페이지 상단 : 브레드크럼 · 공유/인쇄 · 페이지 제목 (메뉴에 없는 페이지는 data-title · data-desc 로 지정) -->
+      <div data-include="page-top" data-title="페이지 제목" data-desc="페이지 설명"></div>
 
-      <!-- [04-1] 컨텐츠 : .inner (브레드크럼 · 페이지 제목 · 본문) -->
-      <div class="inner">
+      <!-- [04-1] 컨텐츠 : .inner -->
+      <div class="inner cm-contents">
         컨텐츠 영역
       </div>
       <!-- //[04-1] 컨텐츠 -->
     </div>
     <!-- //[04] 컨테이너 -->
 
-    <!-- ============================================================
-         [05] 푸터 : #krds-footer
-         분기: 푸터 템플릿 (kr/tmpl/footer.html)
-         ============================================================ -->
-    <footer id="krds-footer">
-      <!-- inner -->
-      <div class="inner">
-        <!-- 푸터 로고 : .f-logo -->
-        <div class="f-logo">
-          <span class="sr-only">대한민국정부</span>
-        </div>
-        <div class="f-cnt">
-          <!-- 기관 정보 : .f-info (주소 · 대표전화) -->
-          <div class="f-info">
-            <p class="info-addr">(04383) 서울특별시 용산구 이태원로 22</p>
-            <ul class="info-cs">
-              <li>
-                <strong class="key-info">대표전화 <span>1234-5678</span></strong>
-                <span class="more-info">(유료, 평일 09시-18시)</span>
-              </li>
-              <li>
-                <strong class="key-info">해외이용 <span>+82-1234-5678</span></strong>
-                <span class="more-info">(유료, 평일 09시-18시)</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- 바로가기 · SNS : .f-link -->
-          <div class="f-link">
-            <div class="link-go">
-              <a href="#" class="krds-btn text">이용안내 <i class="svg-icon ico-angle right"></i></a>
-              <a href="#" class="krds-btn text">찾아오시는 길 <i class="svg-icon ico-angle right"></i></a>
-            </div>
-            <div class="link-sns">
-              <a href="#" class="krds-btn xlarge icon border" target="_blank" title="새 창 열기">
-                <span class="sr-only">인스타그램</span>
-                <i class="svg-icon ico-instagram"></i>
-              </a>
-              <a href="#" class="krds-btn xlarge icon border" target="_blank" title="새 창 열기">
-                <span class="sr-only">유튜브</span>
-                <i class="svg-icon ico-youtube"></i>
-              </a>
-              <a href="#" class="krds-btn xlarge icon border" target="_blank" title="새 창 열기">
-                <span class="sr-only">X</span>
-                <i class="svg-icon ico-sns-x"></i>
-              </a>
-              <a href="#" class="krds-btn xlarge icon border" target="_blank" title="새 창 열기">
-                <span class="sr-only">페이스북</span>
-                <i class="svg-icon ico-facebook"></i>
-              </a>
-              <a href="#" class="krds-btn xlarge icon border" target="_blank" title="새 창 열기">
-                <span class="sr-only">블로그</span>
-                <i class="svg-icon ico-blog"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 푸터 하단 : .f-btm (정책 메뉴 · 저작권 · 정부 누리집 식별자) -->
-        <div class="f-btm">
-          <div class="f-btm-text">
-            <div class="f-menu">
-              <a href="#" class="krds-btn small text">이용안내</a>
-              <a href="#" class="krds-btn small text">개인정보처리방침</a>
-              <a href="#" class="krds-btn small text">저작권 정책</a>
-              <a href="#" class="krds-btn small text">웹 접근성 품질인증 마크 획득</a>
-            </div>
-            <p class="f-copy">© 2023 National Health Insurance Service. All rights reserved.The Government of the Republic of Korea. All rights reserved.</p>
-          </div>
-          <!-- 정부 누리집 식별자 : .krds-identifier -->
-          <div class="krds-identifier">
-            <span class="logo">
-              <span class="sr-only">대한민국정부</span>
-            </span>
-            <span class="ban-txt">이 누리집은 정부 누리집입니다.</span>
-          </div>
-        </div>
-      </div>
-      <!-- //inner -->
-    </footer>
-    <!-- //[05] 푸터 -->
-
-    <!-- 페이지 상단으로 이동 : KRDS 사이트 기본 TOP 버튼 (krds-base.css · krds-base.js) -->
-    <button type="button" class="page-top-button krds-tooltip" data-tooltip="페이지 상단으로 이동"><i class="svg-icon ico-go-top"></i></button>
+    <!-- [05] 푸터 · TOP 버튼 -->
+    <div data-include="footer"></div>
   </div>
   <!-- [E] #wrap -->
 
+  <!-- [06] 모달 (#wrap 바깥) -->
+  <div data-include="modal"></div>
 
   <!-- ============================================================
-       [06] 모달 : .modal-wrap
-       #wrap 바깥에 둡니다 (모달이 열리면 KRDS가 #wrap에 inert를 겁니다). 분기: 푸터 템플릿
+       [07] 스크립트 (include.js 를 KRDS 스크립트보다 먼저)
        ============================================================ -->
-  <div class="modal-wrap">
-    <!-- [06-1] 글자·화면 표시 설정 : #modal_adjust_display (_common/resources/js/krds-display.js 연동, id·value 변경 금지) -->
-    <section id="modal_adjust_display" class="krds-modal fade" aria-labelledby="tit_modal_adjust_display">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <!-- modal title -->
-          <div class="modal-header">
-            <h2 id="tit_modal_adjust_display" class="modal-title">글자·화면 표시 설정</h2>
-          </div>
-          <!-- //modal title -->
-          <!-- modal contents -->
-          <div class="modal-conts">
-            <div class="conts-area">
-              <!-- adjust_display -->
-              <div class="adjust_display">
-                <!-- 글자 / 화면 표시 설정 -->
-                <div class="fieldset adjust_scale">
-                  <div class="form-group scale-options">
-                    <h3>글자·화면 표시 설정</h3>
-                    <div class="form-conts">
-                      <div class="krds-check-area chk-column">
-                        <div class="krds-form-check">
-                          <input type="radio" name="scale_level" id="scale_level_small" value="small">
-                          <label for="scale_level_small">작게</label>
-                        </div>
-                        <div class="krds-form-check">
-                          <input type="radio" name="scale_level" id="scale_level_medium" value="medium" checked>
-                          <label for="scale_level_medium">보통</label>
-                        </div>
-                        <div class="krds-form-check">
-                          <input type="radio" name="scale_level" id="scale_level_large" value="large">
-                          <label for="scale_level_large">조금 크게</label>
-                        </div>
-                        <div class="krds-form-check">
-                          <input type="radio" name="scale_level" id="scale_level_xlarge" value="xlarge">
-                          <label for="scale_level_xlarge">크게</label>
-                        </div>
-                        <div class="krds-form-check">
-                          <input type="radio" name="scale_level" id="scale_level_xxlarge" value="xxlarge">
-                          <label for="scale_level_xxlarge">가장 크게</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- 화면 표시 모드 -->
-                <div class="fieldset">
-                  <div class="form-group view-mode-options">
-                    <h3>화면 표시 모드</h3>
-                    <div class="form-conts">
-                      <div class="krds-check-area chk-column">
-                        <div class="krds-form-check view-mode-light">
-                          <input type="radio" name="view_mode" id="view_mode_light" value="light" checked>
-                          <label for="view_mode_light">기본 (밝은 배경)</label>
-                        </div>
-                        <div class="krds-form-check view-mode-dark">
-                          <input type="radio" name="view_mode" id="view_mode_dark" value="high-contrast">
-                          <label for="view_mode_dark">선명하게 (어두운 배경)</label>
-                        </div>
-                        <div class="krds-form-check view-mode-default">
-                          <input type="radio" name="view_mode" id="view_mode_default" value="theme">
-                          <label for="view_mode_default">시스템 설정</label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- //adjust_display -->
-            </div>
-          </div>
-          <!-- //modal contents -->
-          <!-- modal btn -->
-          <div class="modal-btn btn-wrap">
-            <button type="button" class="krds-btn medium tertiary close-modal" id="reset_display">초기화</button>
-            <button type="button" class="krds-btn medium primary close-modal">설정</button>
-          </div>
-          <!-- //modal btn -->
-          <!-- close button -->
-          <button type="button" class="krds-btn medium icon btn-close close-modal">
-            <span class="sr-only">닫기</span>
-            <i class="svg-icon ico-popup-close"></i>
-          </button>
-          <!-- //close button -->
-        </div>
-      </div>
-      <div class="modal-back"></div>
-    </section>
-    <!-- //[06-1] 글자·화면 표시 설정 -->
-  </div>
-  <!-- //[06] 모달 -->
-
-
-  <!-- ============================================================
-       [07] 스크립트
-       분기: 푸터 템플릿 (kr/tmpl/footer.html)
-       ============================================================ -->
+  <script src="../js/include.js"></script><!-- 공통 영역 인클루드 : KRDS 스크립트보다 먼저 -->
   <script src="../../krds/resources/js/plugin/swiper-bundle.min.js"></script>
   <script src="../../krds/resources/js/component/ui-script.js"></script>
   <script src="../../_common/resources/js/krds-custom.js"></script><!-- KRDS 스크립트 보정 -->

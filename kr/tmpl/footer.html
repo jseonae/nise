@@ -1,3 +1,45 @@
-<!-- 사용자 공통 푸터 -->
-<footer id="footer">
+<!--
+  사용자 공통 푸터 : [05] 푸터 · 페이지 상단으로 이동 버튼
+  - 페이지의 <div data-include="footer"></div> 자리에 들어갑니다.
+-->
+<!-- ============================================================
+     [05] 푸터 : #krds-footer
+     ============================================================ -->
+<footer id="krds-footer">
+  <div class="inner">
+    <!-- 푸터 로고 : .f-logo -->
+    <div class="f-logo">
+      <span class="sr-only">특수교육 실태조사 데이터 활용 플랫폼</span>
+    </div>
+    <div class="f-cnt">
+      <!-- 기관 정보 : .f-info (주소 · 대표전화 · 팩스) -->
+      <div class="f-info">
+        <p class="info-addr">(31470) 충청남도 아산시 배방읍 공원로 40</p>
+        <ul class="info-cs">
+          <li><strong class="key-info">대표전화 <span>041-537-1500</span></strong></li>
+          <li><strong class="key-info">팩스 <span>041-531-6412</span></strong></li>
+        </ul>
+      </div>
+    </div>
+    <!-- 웹 접근성 인증마크 -->
+    <div class="cm-wa-mark">
+      <img src="{{root}}_common/resources/img/common/web_accessibility_mark.png" alt="과학기술정보통신부 웹 접근성 품질인증 마크">
+    </div>
+
+    <!-- 푸터 하단 : .f-btm (정책 메뉴 · 저작권) -->
+    <div class="f-btm">
+      <div class="f-btm-text">
+        <div class="f-menu">
+          <a href="#">이용안내</a>
+          <a href="#" class="point">개인정보처리방침</a>
+          <a href="#">저작권정책</a>
+        </div>
+        <p class="f-copy">© 2027 NISE ALL RIGHTS RESERVED</p>
+      </div>
+    </div>
+  </div>
 </footer>
+<!-- //[05] 푸터 -->
+
+<!-- 페이지 상단으로 이동 : KRDS 사이트 기본 TOP 버튼 (krds-base.css · krds-base.js) -->
+<button type="button" class="page-top-button krds-tooltip" data-tooltip="페이지 상단으로 이동"><i class="svg-icon ico-go-top"></i></button>

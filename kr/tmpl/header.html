@@ -1,7 +1,109 @@
-<!-- 사용자 공통 헤더 -->
-<header id="header">
-  <!-- 글자·화면 표시 설정 열기 버튼 (모달 마크업: _common/resources/html/display-settings.html, #wrap 바깥에 배치) -->
-  <button type="button" class="krds-btn small text open-modal" data-target="modal_adjust_display">
-    <i class="svg-icon ico-view-mode"></i> 화면 설정
-  </button>
+<!--
+  사용자 공통 헤더 : [01] 본문 바로가기 ~ [03] 헤더
+  - 페이지의 <div data-include="header"></div> 자리에 kr/js/include.js 가 넣습니다. (경로 자리표시 root · html 은 실제 경로로 바뀜)
+  - 메인메뉴·모바일 메뉴의 2Depth 는 kr/js/include.js 의 MENU 데이터로 채웁니다.
+-->
+<!-- ============================================================
+     [01] 본문 바로가기 : #krds-skip-link
+     ============================================================ -->
+<div id="krds-skip-link">
+  <a href="#container">본문 바로가기</a>
+</div>
+<!-- //[01] 본문 바로가기 -->
+
+<!-- ============================================================
+     [02] 공식 누리집 배너 : #krds-masthead
+     ============================================================ -->
+<div id="krds-masthead">
+  <div class="toggle-wrap">
+    <div class="toggle-head">
+      <div class="inner">
+        <span class="nuri-txt">이 누리집은 대한민국 공식 전자정부 누리집입니다.</span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- //[02] 공식 누리집 배너 -->
+
+<!-- ============================================================
+     [03] 헤더 : #krds-header
+     ============================================================ -->
+<header id="krds-header">
+  <!-- [03-1] 헤더 컨텐츠 : .header-in -->
+  <div class="header-in">
+    <!-- [03-1-1] 헤더 상단 : .header-container (유틸리티 메뉴 · 로고 · 헤더 버튼) -->
+    <div class="header-container">
+      <div class="inner">
+        <!-- 유틸리티 메뉴 : .header-utility (사이트맵 · 국가상징 · 글자·화면 설정) -->
+        <div class="header-utility">
+          <ul class="utility-list">
+            <li>
+              <a href="#" class="krds-btn small text">사이트맵 <i class="svg-icon ico-angle right"></i></a>
+            </li>
+            <li>
+              <a href="https://www.mois.go.kr/frt/sub/a06/b08/nationalSymbol/screen.do" class="krds-btn small text" target="_blank" title="새 창 열림">국가상징 알아보기 <i class="svg-icon ico-go"></i></a>
+            </li>
+            <li>
+              <button type="button" class="krds-btn small text open-modal" data-target="modal_adjust_display">
+                <i class="svg-icon ico-view-mode"></i> 글자·화면 설정
+              </button>
+            </li>
+          </ul>
+        </div>
+        <!-- 로고 · 헤더 버튼 : .header-branding -->
+        <div class="header-branding">
+          <h2 class="logo">
+            <a href="{{html}}main.html">
+              <span class="sr-only">특수교육 실태조사 데이터 활용 플랫폼</span>
+            </a>
+          </h2>
+          <!-- 헤더 버튼 : .header-actions (통계정보 · 데이터분석 · 알림마당 · 전체메뉴, 모바일에서는 아이콘 메뉴를 전체메뉴 안에 표시) -->
+          <div class="header-actions">
+            <a href="{{html}}stat/survey_history_list.html" class="btn-navi cm-stat pc-only">통계정보</a>
+            <a href="{{html}}analysis/cross_analysis.html" class="btn-navi cm-analysis pc-only">데이터분석</a>
+            <a href="{{html}}board/survey_overview.html" class="btn-navi cm-notice pc-only">알림마당</a>
+            <button type="button" class="btn-navi all" aria-controls="mobile-nav">전체메뉴</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- //[03-1-1] 헤더 상단 -->
+
+    <!-- [03-1-2] 메인메뉴(GNB) PC : .krds-main-menu
+         현재 1Depth의 2Depth만 a.gnb-main-trigger 1단 링크로 표시 (gnb-toggle-wrap 없음, 화살표는 Figma대로 유지) -->
+    <nav class="krds-main-menu">
+      <div class="inner">
+        <ul class="gnb-menu">
+          <!-- 2Depth 메뉴 : kr/js/include.js 가 현재 1Depth 메뉴로 채움 (현재 메뉴 .cm-current) -->
+        </ul>
+      </div>
+    </nav>
+    <!-- //[03-1-2] 메인메뉴(GNB) PC -->
+  </div>
+  <!-- //[03-1] 헤더 컨텐츠 -->
+
+  <!-- [03-2] 메인메뉴(GNB) 모바일 : #mobile-nav -->
+  <div id="mobile-nav" class="krds-main-menu-mobile">
+    <div class="gnb-wrap">
+      <div class="gnb-header">
+        <div class="gnb-service-menu">
+          <a href="{{html}}stat/survey_history_list.html" class="link cm-stat">통계정보</a>
+          <a href="{{html}}analysis/cross_analysis.html" class="link cm-analysis">데이터분석</a>
+          <a href="{{html}}board/survey_overview.html" class="link cm-notice">알림마당</a>
+        </div>
+      </div>
+      <!-- 1단 메뉴 목록 : .cm-mobile-menu (KRDS 탭+하위메뉴 구조 대신 사용) -->
+      <div class="gnb-body">
+        <ul class="cm-mobile-menu">
+          <!-- 2Depth 메뉴 : kr/js/include.js 가 채움 (현재 메뉴 aria-current="page") -->
+        </ul>
+      </div>
+      <button type="button" class="krds-btn medium icon" id="close-nav">
+        <span class="sr-only">전체메뉴 닫기</span>
+        <i class="svg-icon ico-popup-close"></i>
+      </button>
+    </div>
+  </div>
+  <!-- //[03-2] 메인메뉴(GNB) 모바일 -->
 </header>
+<!-- //[03] 헤더 -->
