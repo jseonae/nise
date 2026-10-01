@@ -551,6 +551,54 @@
   }
 }
 
+/* [알림마당] 홍보영상 (Figma: 컨텐츠 > s03알림마당_홍보영상 view) */
+.cm-board-view.cm-video-view {
+  gap: var(--krds-gap-9);
+}
+.cm-video-view .cm-video-tit {
+  font-size: var(--krds-pc-font-size-heading-large);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+.cm-video-view .cm-video-player {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background-color: #000; /* 영상 영역 (재생기 기본 배경) */
+}
+.cm-video-view .cm-video-player video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cm-video-view .cm-video-script {
+  overflow-y: auto;
+  max-height: 25rem;
+  padding: var(--krds-number-12) var(--krds-padding-8) var(--krds-number-12) var(--krds-number-12);
+  border: 0.1rem solid var(--cm-color-border-light);
+  border-radius: var(--krds-radius-medium4);
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+  scrollbar-width: thin; /* Figma 스크롤바 : 8px, 막대 secondary-light / 바탕 secondary-lighter */
+  scrollbar-color: var(--cm-color-attach-border) var(--cm-color-row-notice);
+}
+.cm-video-view .cm-video-script::-webkit-scrollbar {
+  width: 0.8rem;
+}
+.cm-video-view .cm-video-script::-webkit-scrollbar-track {
+  border-radius: var(--krds-radius-xsmall2);
+  background-color: var(--cm-color-row-notice);
+}
+.cm-video-view .cm-video-script::-webkit-scrollbar-thumb {
+  border-radius: var(--krds-radius-xsmall2);
+  background-color: var(--cm-color-attach-border);
+}
+.cm-video-view .cm-video-script:focus-visible {
+  outline: 0.2rem solid var(--cm-color-border-primary);
+}
+
 /* [게시판] 표지 카드 목록 (Figma: 컨텐츠 > s03알림마당_자료실 list / listItem) */
 .cm-cover-list {
   display: grid;
