@@ -1993,6 +1993,381 @@
   box-shadow: none; /* 두 칸 표 : 고정 칸 그림자 없음 (Figma) */
 }
 
+/* [데이터분석] 교차분석 (Figma: 컨텐츠 > s02데이터분석_교차분석_view) */
+.cm-cross {
+  gap: var(--krds-gap-9);
+}
+/* 분석 조건 검색 : 분류 탭(.cm-ts-filter 와 같은 붙은 탭) + 칩 · 문항 상자 */
+.cm-cross-tab {
+  gap: var(--krds-gap-6);
+}
+.cm-cross-filter.tab-conts.active {
+  gap: var(--krds-gap-7);
+  padding: var(--krds-padding-9);
+  border-radius: var(--krds-radius-xlarge2);
+  background-color: var(--cm-color-row-notice); /* surface-secondary-subtler */
+}
+.cm-cross-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--krds-gap-2);
+  border: 0;
+}
+.cm-cross-chips .krds-form-chip input[type=radio] ~ label {
+  padding: 0 var(--krds-padding-6);
+}
+.cm-cross-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-4);
+  padding-top: var(--krds-padding-8);
+  border-top: 0.1rem solid var(--cm-color-attach-border);
+}
+.cm-cross-item .tit {
+  font-size: var(--krds-pc-font-size-body-medium);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-basic);
+}
+.cm-cross-item-row {
+  display: flex;
+  gap: var(--krds-gap-4);
+}
+.cm-cross-item-row .form-group {
+  flex: 0 0 46.3rem; /* Figma 463px */
+}
+.cm-cross-item-row .krds-form-select {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+/* 하위 변수 (교차·필터) */
+.cm-cross-result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-4);
+}
+.cm-cross-tit {
+  font-size: var(--krds-pc-font-size-heading-large);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+.cm-cross-box {
+  overflow: hidden;
+  border: 0.1rem solid var(--cm-color-border-light);
+  border-radius: var(--krds-radius-xlarge2);
+}
+.cm-cross-box > :not(.cm-var-builder),
+.cm-var-zones {
+  margin: 0 var(--krds-padding-7);
+}
+.cm-cross-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-6);
+  padding-bottom: var(--krds-padding-7);
+  background: linear-gradient(var(--cm-color-surface-white) 15.2rem, var(--cm-color-box-surface) 15.2rem); /* 위 변수 목록은 흰 바탕, 아래 작업 영역은 회색 바탕 (Figma) */
+}
+/* 하위 변수 놓기 (신규 컴포넌트 _common/html/code/ext_var_builder.html) */
+.cm-var-builder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-6);
+}
+.cm-var-pool {
+  min-height: 15.2rem;
+  padding: 3rem 3rem var(--krds-padding-2); /* Figma 30px */
+  border-bottom: 0.1rem solid var(--cm-color-border-light);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-var-pool .guide {
+  font-size: var(--krds-pc-font-size-label-small);
+  line-height: 1.5;
+  color: var(--cm-color-line-strong); /* Figma element-gray */
+}
+.cm-var-list,
+.cm-var-drop {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: var(--krds-gap-3);
+}
+.cm-var-list {
+  padding-top: var(--krds-padding-5);
+}
+.cm-var-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 1.4rem; /* Figma 7px 14px */
+  border: 0.1rem solid var(--cm-color-border-gray);
+  border-radius: var(--krds-radius-max);
+  background-color: var(--cm-color-surface-white);
+  font-size: var(--krds-pc-font-size-body-small);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+  cursor: grab;
+}
+.cm-var-chip .handle {
+  font-size: 1.1rem;
+  letter-spacing: -0.2rem;
+  color: var(--cm-color-border-gray);
+}
+/* 놓인 칩 : Figma 글자색 #256ef4 는 연한 바탕 대비가 낮아 text-primary 로 맞춤 */
+.cm-var-chip.is-active {
+  border-color: var(--cm-color-border-primary);
+  background-color: var(--cm-color-row-hover);
+  color: var(--cm-color-text-primary);
+}
+.cm-var-chip.is-active .handle {
+  color: var(--cm-color-border-primary);
+}
+.cm-var-zones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--krds-gap-6);
+}
+.cm-var-zone .head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--krds-gap-4);
+  margin-bottom: 0.7rem;
+}
+.cm-var-zone .tit {
+  font-size: var(--krds-pc-font-size-heading-xsmall);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-basic);
+}
+.cm-inline-select {
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-3);
+  font-size: var(--krds-pc-font-size-label-small);
+  color: var(--cm-color-text-basic);
+}
+.cm-inline-select label {
+  flex: none;
+}
+.cm-inline-select .krds-form-select {
+  color: var(--cm-color-text-basic);
+  width: auto;
+  min-width: 15.6rem;
+}
+.cm-var-drop {
+  height: 21.4rem;
+  padding: var(--krds-padding-8);
+  overflow-y: auto;
+  border: 0.15rem dashed var(--cm-color-border-gray);
+  border-radius: var(--krds-radius-medium3);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-var-drop.is-empty {
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+.cm-var-drop .empty {
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  color: var(--cm-color-line-strong);
+}
+/* 그래프 도구 */
+.cm-cross-tool {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--krds-gap-4);
+  margin-top: var(--krds-padding-5);
+}
+.cm-cross-tool .cm-ts-type {
+  padding-bottom: 0;
+}
+.cm-cross-tool .cm-ts-tool-btns {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--krds-gap-4);
+}
+/* 정렬기준 : KRDS 정렬 라디오 코드 없음 → 라디오 + Figma 글자 버튼 모양 (고른 항목 밑줄 · 옅은 바탕) */
+.cm-sort-radio {
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-3);
+  font-size: var(--krds-pc-font-size-body-medium);
+  color: var(--cm-color-text-basic);
+}
+.cm-sort-radio .tit {
+  margin-right: var(--krds-gap-3);
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-sort-radio input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.cm-sort-radio label {
+  padding: 0 var(--krds-padding-2);
+  border-radius: var(--krds-radius-small2);
+  cursor: pointer;
+}
+.cm-sort-radio input:checked + label {
+  background-color: var(--cm-color-row-notice);
+  text-decoration: underline;
+  text-underline-offset: var(--krds-font-underline-offset);
+}
+.cm-sort-radio input:focus-visible + label {
+  outline: 0.2rem solid var(--krds-light-color-border-inverse);
+  box-shadow: var(--krds-box-shadow-outline);
+}
+.cm-cross-tool .krds-drop-wrap .drop-btn .svg-icon {
+  width: var(--krds-number-8);
+  height: var(--krds-number-8);
+}
+/* 그래프 상자 : [임시] Figma 범례 · 그래프 이미지 */
+.cm-cross-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: var(--krds-gap-3);
+  padding: 5rem; /* Figma 50px */
+  border-radius: var(--krds-radius-medium3);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-chart-tit {
+  font-size: var(--krds-pc-font-size-label-small);
+  font-weight: var(--krds-font-weight-bold);
+  text-align: center;
+  color: var(--cm-color-text-bolder);
+}
+.cm-cross-chart .cm-chart-legend-img {
+  max-width: 100%;
+  height: auto;
+}
+.cm-cross-chart .cm-chart-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+}
+/* 통계표 상자 */
+.cm-cross-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: var(--krds-padding-9);
+  border-radius: var(--krds-radius-medium3);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-cross-table-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--krds-gap-4);
+  margin-bottom: 1rem;
+}
+.cm-cross-table-top .tit {
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-basic);
+}
+.cm-cross-table-top .opt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem 1.8rem;
+}
+.cm-cross-table-top .desc {
+  font-size: var(--krds-pc-font-size-label-small);
+  color: var(--cm-color-line-strong);
+}
+.cm-cross-q {
+  font-size: var(--krds-pc-font-size-heading-xxsmall);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-bolder);
+}
+.cm-cross-stat {
+  border-top: 0;
+}
+.cm-cross-stat .tbl.data thead tr th {
+  vertical-align: middle;
+}
+.cm-cross-stat .tbl.data thead tr th:nth-child(n+3):not(:last-child) {
+  text-align: left;
+}
+.cm-cross-stat .tbl.data tbody tr td:nth-child(2) {
+  text-align: right;
+}
+.cm-cross-stat .tbl.data thead tr > :first-child,
+.cm-cross-stat .tbl.data tbody tr > :first-child {
+  position: static;
+  border-right-width: 0.1rem;
+  box-shadow: none;
+}
+.cm-cross-stat .tbl.data tbody tr.sum > * {
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-cross-note {
+  padding-top: 0.3rem;
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  line-height: 1.5;
+  color: var(--cm-color-text-subtle);
+}
+/* 설명 자료 */
+.cm-cross-doc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-8);
+}
+.cm-cross-doc-top .sub {
+  margin-top: var(--krds-gap-2);
+  font-size: var(--krds-pc-font-size-body-medium);
+  color: var(--cm-color-line-strong);
+}
+.cm-cross-doc .cm-ts-section .tit {
+  color: var(--cm-color-text-basic);
+}
+.cm-cross-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-3);
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-subtle);
+}
+.cm-cross-source {
+  padding-top: 0;
+}
+@media (max-width: 1023px) {
+  .cm-var-zones {
+    grid-template-columns: 1fr;
+  }
+  .cm-cross-tool,
+  .cm-cross-tool .cm-ts-tool-btns {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .cm-cross-item-row {
+    flex-direction: column;
+  }
+  .cm-cross-item-row .form-group {
+    flex-basis: auto;
+  }
+}
+@media (max-width: 767px) {
+  .cm-cross-tit {
+    font-size: var(--krds-mobile-font-size-heading-large);
+  }
+  .cm-cross-chart,
+  .cm-cross-table,
+  .cm-cross-filter.tab-conts.active {
+    padding: var(--krds-padding-6);
+  }
+}
+
 /* [AI 해설 도우미] 신규 컴포넌트 (KRDS 없음, Figma 그대로) : _common/html/code/ext_ai_helper.html (화면마다 페이지에 둠)
    Figma: 컨텐츠 > 시계열시각화-view chat-btn-wrap · -view-ai해설도우미오픈 · -view-ai해설도우미챗진행
    - 여는 버튼은 콘텐츠 내 탐색(오른쪽 고정) 아래에 붙여 둠 (KRDS in_page_navigation 위치 계산식과 같은 기준) */
