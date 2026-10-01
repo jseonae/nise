@@ -93,83 +93,27 @@
                   <span class="sr-only">특수교육 실태조사 데이터 활용 플랫폼</span>
                 </a>
               </h2>
-              <!-- 헤더 버튼 : .header-actions (통계정보 · 데이터분석 · 알림마당 · 전체메뉴) -->
+              <!-- 헤더 버튼 : .header-actions (통계정보 · 데이터분석 · 알림마당 · 전체메뉴, 모바일에서는 아이콘 메뉴를 전체메뉴 안에 표시) -->
               <div class="header-actions">
-                <a href="#" class="btn-navi cm-stat">통계정보</a>
-                <a href="#" class="btn-navi cm-analysis">데이터분석</a>
-                <a href="notice_list.html" class="btn-navi cm-notice">알림마당</a>
-                <button type="button" class="btn-navi all mob-only" aria-controls="mobile-nav">전체메뉴</button>
+                <a href="#" class="btn-navi cm-stat pc-only">통계정보</a>
+                <a href="#" class="btn-navi cm-analysis pc-only">데이터분석</a>
+                <a href="notice_list.html" class="btn-navi cm-notice pc-only">알림마당</a>
+                <button type="button" class="btn-navi all" aria-controls="mobile-nav">전체메뉴</button>
               </div>
             </div>
           </div>
         </div>
         <!-- //[03-1-1] 헤더 상단 -->
 
-        <!-- [03-1-2] 메인메뉴(GNB) PC : .krds-main-menu (현재 메뉴 .cm-current) -->
+        <!-- [03-1-2] 메인메뉴(GNB) PC : .krds-main-menu
+             2Depth 없음 : a.gnb-main-trigger 1단 링크 (gnb-toggle-wrap 없음, 화살표는 Figma대로 유지), 현재 메뉴 .cm-current -->
         <nav class="krds-main-menu">
           <div class="inner">
             <ul class="gnb-menu">
-              <li>
-                <button type="button" class="gnb-main-trigger" data-trigger="gnb">조사개요</button>
-                <div class="gnb-toggle-wrap">
-                  <div class="gnb-main-list">
-                    <div class="gnb-sub-list single-list">
-                      <div class="gnb-sub-content">
-                        <h2 class="sub-title"><span>조사개요</span></h2>
-                        <ul>
-                          <li><a href="#">2Depth</a></li>
-                          <li><a href="#">2Depth</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <button type="button" class="gnb-main-trigger cm-current" data-trigger="gnb" aria-current="page">공지사항</button>
-                <div class="gnb-toggle-wrap">
-                  <div class="gnb-main-list">
-                    <div class="gnb-sub-list single-list">
-                      <div class="gnb-sub-content">
-                        <h2 class="sub-title"><span>공지사항</span></h2>
-                        <ul>
-                          <li><a href="notice_list.html">공지사항</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <button type="button" class="gnb-main-trigger" data-trigger="gnb">자료실</button>
-                <div class="gnb-toggle-wrap">
-                  <div class="gnb-main-list">
-                    <div class="gnb-sub-list single-list">
-                      <div class="gnb-sub-content">
-                        <h2 class="sub-title"><span>자료실</span></h2>
-                        <ul>
-                          <li><a href="#">2Depth</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <button type="button" class="gnb-main-trigger" data-trigger="gnb">홍보영상</button>
-                <div class="gnb-toggle-wrap">
-                  <div class="gnb-main-list">
-                    <div class="gnb-sub-list single-list">
-                      <div class="gnb-sub-content">
-                        <h2 class="sub-title"><span>홍보영상</span></h2>
-                        <ul>
-                          <li><a href="#">2Depth</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
+              <li><a href="#" class="gnb-main-trigger" data-trigger="gnb">조사개요</a></li>
+              <li><a href="notice_list.html" class="gnb-main-trigger cm-current" data-trigger="gnb" aria-current="page">공지사항</a></li>
+              <li><a href="#" class="gnb-main-trigger" data-trigger="gnb">자료실</a></li>
+              <li><a href="#" class="gnb-main-trigger" data-trigger="gnb">홍보영상</a></li>
             </ul>
           </div>
         </nav>
@@ -182,48 +126,19 @@
         <div class="gnb-wrap">
           <div class="gnb-header">
             <div class="gnb-service-menu">
-              <a href="#" class="link">통계정보</a>
-              <a href="#" class="link">데이터분석</a>
-              <a href="notice_list.html" class="link">알림마당</a>
+              <a href="#" class="link cm-stat">통계정보</a>
+              <a href="#" class="link cm-analysis">데이터분석</a>
+              <a href="notice_list.html" class="link cm-notice">알림마당</a>
             </div>
           </div>
+          <!-- 1단 메뉴 목록 : .cm-mobile-menu (KRDS 탭+하위메뉴 구조 대신 사용) -->
           <div class="gnb-body">
-            <div class="gnb-menu">
-              <div class="menu-wrap">
-                <ul>
-                  <li><a href="#mGnb-anchor1" class="gnb-main-trigger">조사개요</a></li>
-                  <li><a href="#mGnb-anchor2" class="gnb-main-trigger">공지사항</a></li>
-                  <li><a href="#mGnb-anchor3" class="gnb-main-trigger">자료실</a></li>
-                  <li><a href="#mGnb-anchor4" class="gnb-main-trigger">홍보영상</a></li>
-                </ul>
-              </div>
-              <div class="submenu-wrap">
-                <div class="gnb-sub-list" id="mGnb-anchor1">
-                  <h2 class="sub-title">조사개요</h2>
-                  <ul>
-                    <li><a href="#" class="gnb-sub-trigger">2Depth</a></li>
-                  </ul>
-                </div>
-                <div class="gnb-sub-list" id="mGnb-anchor2">
-                  <h2 class="sub-title">공지사항</h2>
-                  <ul>
-                    <li><a href="notice_list.html" class="gnb-sub-trigger">공지사항</a></li>
-                  </ul>
-                </div>
-                <div class="gnb-sub-list" id="mGnb-anchor3">
-                  <h2 class="sub-title">자료실</h2>
-                  <ul>
-                    <li><a href="#" class="gnb-sub-trigger">2Depth</a></li>
-                  </ul>
-                </div>
-                <div class="gnb-sub-list" id="mGnb-anchor4">
-                  <h2 class="sub-title">홍보영상</h2>
-                  <ul>
-                    <li><a href="#" class="gnb-sub-trigger">2Depth</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <ul class="cm-mobile-menu">
+              <li><a href="#">조사개요</a></li>
+              <li><a href="notice_list.html" aria-current="page">공지사항</a></li>
+              <li><a href="#">자료실</a></li>
+              <li><a href="#">홍보영상</a></li>
+            </ul>
           </div>
           <button type="button" class="krds-btn medium icon" id="close-nav">
             <span class="sr-only">전체메뉴 닫기</span>
@@ -562,6 +477,7 @@
        ============================================================ -->
   <script src="../../../krds/resources/js/plugin/swiper-bundle.min.js"></script>
   <script src="../../../krds/resources/js/component/ui-script.js"></script>
+  <script src="../../../_common/resources/js/krds-custom.js"></script>
   <script src="../../js/user-custom.js"></script>
   <!-- //[07] 스크립트 -->
 </body>

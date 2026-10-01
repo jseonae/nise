@@ -108,12 +108,26 @@
   mask-image: url(../img/ico/cm_ico_stat_search.svg);
 }
 
-/* [헤더] 아이콘 유틸메뉴 (KRDS .btn-navi 에 사업 추가 아이콘만 연결) */
+/* [헤더] 전체메뉴 버튼 : PC(1024px 이상)는 메인메뉴가 보이므로 숨김, 그 아래에서만 모바일 전체메뉴를 엶 */
+@media (min-width: 1024px) {
+  #krds-header .header-container .btn-navi.all {
+    display: none;
+  }
+}
+
+/* [헤더] 아이콘 유틸메뉴 (KRDS .btn-navi 와 모바일 전체메뉴 .gnb-service-menu .link 에 사업 추가 아이콘만 연결) */
 #krds-header .header-container .btn-navi.cm-stat::before,
 #krds-header .header-container .btn-navi.cm-analysis::before,
 #krds-header .header-container .btn-navi.cm-notice::before {
   width: var(--krds-icon--size-large);
   height: var(--krds-icon--size-large);
+}
+#krds-header .header-container .btn-navi.cm-stat::before,
+#krds-header .header-container .btn-navi.cm-analysis::before,
+#krds-header .header-container .btn-navi.cm-notice::before,
+.krds-main-menu-mobile .gnb-service-menu .link.cm-stat::before,
+.krds-main-menu-mobile .gnb-service-menu .link.cm-analysis::before,
+.krds-main-menu-mobile .gnb-service-menu .link.cm-notice::before {
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center center;
   -webkit-mask-size: contain;
@@ -121,26 +135,53 @@
   mask-position: center center;
   mask-size: contain;
 }
-#krds-header .header-container .btn-navi.cm-stat::before {
+#krds-header .header-container .btn-navi.cm-stat::before,
+.krds-main-menu-mobile .gnb-service-menu .link.cm-stat::before {
   -webkit-mask-image: url(../img/ico/cm_ico_chart_line.svg);
   mask-image: url(../img/ico/cm_ico_chart_line.svg);
 }
-#krds-header .header-container .btn-navi.cm-analysis::before {
+#krds-header .header-container .btn-navi.cm-analysis::before,
+.krds-main-menu-mobile .gnb-service-menu .link.cm-analysis::before {
   -webkit-mask-image: url(../img/ico/cm_ico_stat_search.svg);
   mask-image: url(../img/ico/cm_ico_stat_search.svg);
 }
-#krds-header .header-container .btn-navi.cm-notice::before {
+#krds-header .header-container .btn-navi.cm-notice::before,
+.krds-main-menu-mobile .gnb-service-menu .link.cm-notice::before {
   -webkit-mask-image: url(../img/ico/cm_ico_chat_text.svg);
   mask-image: url(../img/ico/cm_ico_chat_text.svg);
 }
 
-/* [메인메뉴] 현재 메뉴 표시 (.active 는 KRDS 스크립트가 펼침 상태로 쓰므로 별도 클래스 사용) */
+/* [메인메뉴] 2Depth 없는 1단 링크 (a.gnb-main-trigger, 화살표는 Figma대로 유지)
+   현재 메뉴 표시 (.active 는 KRDS 스크립트가 펼침 상태로 쓰므로 별도 클래스 사용) */
 .krds-main-menu .gnb-menu .gnb-main-trigger.cm-current {
   color: var(--cm-color-text-secondary);
 }
 .krds-main-menu .gnb-menu .gnb-main-trigger.cm-current::before {
   left: 0;
   width: 100%;
+}
+
+/* [모바일 전체메뉴] 1단 링크 목록 (KRDS 기본 탭+하위메뉴 구조 대신 사용, 스크립트 보정: _common/resources/js/krds-custom.js) */
+.krds-main-menu-mobile .gnb-wrap .gnb-body .cm-mobile-menu {
+  display: flex;
+  flex-direction: column;
+  padding: var(--krds-main-menu-mobile--sub-menu-padding);
+}
+.krds-main-menu-mobile .gnb-wrap .gnb-body .cm-mobile-menu a {
+  display: flex;
+  align-items: center;
+  padding: var(--krds-main-menu-mobile--sub-menu-trigger-padding-y) var(--krds-main-menu-mobile--sub-menu-trigger-padding-x);
+  border-radius: var(--krds-main-menu-mobile--sub-menu-trigger-border-radius);
+  font-size: var(--krds-main-menu-mobile--sub-menu-trigger-font-size-active);
+  font-weight: var(--krds-font-weight-bold);
+  transition: var(--krds-transition-base);
+}
+.krds-main-menu-mobile .gnb-wrap .gnb-body .cm-mobile-menu a:hover {
+  background-color: var(--krds-main-menu-mobile--sub-menu-trigger-color-action-hover);
+}
+.krds-main-menu-mobile .gnb-wrap .gnb-body .cm-mobile-menu a[aria-current=page] {
+  color: var(--krds-main-menu-mobile--sub-menu-trigger-color-text);
+  background-color: var(--krds-main-menu-mobile--sub-menu-trigger-color-action-active);
 }
 
 /* [페이지 상단] 브레드크럼 · 공유/인쇄 · 페이지 제목 (사이드메뉴 없는 1단 레이아웃) */
