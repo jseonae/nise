@@ -53,15 +53,62 @@
       <!-- 페이지 상단 : 브레드크럼 · 공유/인쇄 · 페이지 제목 -->
       <div data-include="page-top"></div>
 
-      <!-- [04-1] 컨텐츠 : .inner -->
-      <div class="inner cm-contents">
-        <h1 class="sr-only">자료실 상세</h1><!-- 게시물 제목 퍼블리싱 시 실제 제목(h1)으로 교체 -->
-        <!-- TODO: 자료실 상세(view) 퍼블리싱 (Figma: 컨텐츠 > s03알림마당_자료실 list / view) -->
-        <!-- 목록으로 : archive_list.html -->
-        <p class="cm-todo">자료실 상세(view) 컨텐츠 영역</p>
+      <!-- [04-1] 컨텐츠 : .inner
+           게시물 상세 : KRDS 사이트 새소식 상세(community_01_01) 마크업, 스타일은 Figma(s03알림마당_자료실 view, 공지사항 상세와 같은 구조) -->
+      <div class="inner cm-contents cm-board-view">
+        <!-- 제목 · 정보 -->
+        <div class="community-page-title">
+          <h1 class="tit">2026년 진로 이슈페이퍼 1호</h1>
+          <p class="info">
+            <span class="author">연구자 : 복헌수 외 1인</span>
+            <span class="date">발행일 : 2025.09.08</span>
+          </p>
+        </div>
 
-        <!-- 공공누리 (자료실용) : 관리자가 자료를 올릴 때 고른 유형만 출력 (kr/tmpl/kogl/archive/type0~4 · typeAI) -->
-        <div data-include="kogl/archive/type1"></div>
+        <div class="conts-area">
+          <!-- 본문 -->
+          <div class="g-description-area">
+            <p>2026년 진로 이슈페이퍼 1호</p>
+            <p>진로 이슈페이퍼는 장애학생 진로 직업교육의 동향과 정책적 의미를 전달합니다.</p>
+            <p>- 교육기관 장애인 의무고용 현황 진단과 개선 과제<br>
+              &nbsp;&nbsp;(복헌수 전주대학교 중등특수교육과 교수)</p>
+            <p>- 장애학생 취업 역량 강화를 위한 취업 코칭 프로그램 발전 방안과 과제<br>
+              &nbsp;&nbsp;(심진예 한국장애인고용공단 고용개발원 선임연구위원)</p>
+            <p>붙임 :<br>특수교육 실태조사 데이터 활용 시스템 이용 안내</p>
+          </div>
+
+          <!-- 첨부파일 : KRDS 파일 업로드(file_upload) 목록 마크업 -->
+          <div class="krds-file-upload cm-attach">
+            <h2 class="cm-attach-tit">첨부파일</h2>
+            <div class="file-list">
+              <ul class="upload-list">
+                <li>
+                  <div class="file-info">
+                    <div class="file-name">2026년 진로 이슈페이퍼 1호.pdf [PDF, 1.8 MB]</div>
+                    <div class="btn-wrap">
+                      <button type="button" class="krds-btn medium text">다운로드 <i class="svg-icon ico-down"></i></button>
+                      <a href="#" class="krds-btn medium text" target="_blank" title="새 창 열림">바로보기 <i class="svg-icon ico-angle right"></i></a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 공공누리 (자료실용) : 관리자가 자료를 올릴 때 고른 유형만 출력 (kr/tmpl/kogl/archive/)
+               type0(자유이용) · type1(출처표시) · type2(+상업적이용금지) · type3(+변경금지) · type4(+상업적이용금지+변경금지) · typeAI(인공지능 학습용)
+               개발 시 CMS 선택값으로 해당 파일을 인클루드 (Figma 예시 : 제4유형) -->
+          <div data-include="kogl/archive/type4"></div>
+        </div>
+
+        <!-- 이전글 · 다음글 · 목록 -->
+        <div class="page-btn-wrap both">
+          <div class="btn-wrap">
+            <a href="archive_view.html?idx=1" class="krds-btn medium tertiary"><i class="svg-icon ico-angle left"></i> 이전글</a>
+            <a href="archive_view.html?idx=3" class="krds-btn medium tertiary">다음글 <i class="svg-icon ico-angle right"></i></a>
+          </div>
+          <a href="archive_list.html" class="krds-btn medium tertiary">목록으로</a>
+        </div>
       </div>
       <!-- //[04-1] 컨텐츠 -->
     </div>
