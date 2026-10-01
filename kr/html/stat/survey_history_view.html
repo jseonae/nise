@@ -32,7 +32,7 @@
 <body>
   <!--
     ==================================================================
-    조사 변천사 상세 (Figma: 컨텐츠 > s01통계정보_조사 변천사 list / view)
+    조사 변천사 상세 (Figma: 컨텐츠 > s01통계정보_조사 변천사 view, node 10498:44180)
     공통 영역은 kr/tmpl 에서 인클루드합니다 (kr/js/include.js). 이 파일에는 페이지 컨텐츠만 둡니다.
       [01]~[03] 헤더             : kr/tmpl/header.html
       페이지 상단(브레드크럼·제목) : kr/tmpl/page-top.html (제목·설명은 메뉴 데이터, data-title · data-desc 로 변경 가능)
@@ -53,12 +53,96 @@
       <!-- 페이지 상단 : 브레드크럼 · 공유/인쇄 · 페이지 제목 -->
       <div data-include="page-top"></div>
 
-      <!-- [04-1] 컨텐츠 : .inner -->
-      <div class="inner cm-contents">
-        <h1 class="sr-only">조사 변천사 상세</h1><!-- 게시물 제목 퍼블리싱 시 실제 제목(h1)으로 교체 -->
-        <!-- TODO: 조사 변천사 상세(view) 퍼블리싱 (Figma: 컨텐츠 > s01통계정보_조사 변천사 list / view) -->
-        <!-- 목록으로 : survey_history_list.html -->
-        <p class="cm-todo">조사 변천사 상세(view) 컨텐츠 영역</p>
+      <!-- [04-1] 컨텐츠 : .inner (Figma: 컨텐츠 > s01통계정보_조사 변천사 view, node 10498:44180) -->
+      <div class="inner cm-contents cm-survey-view">
+        <!-- 개요 : 조사 대상자 · 전체 문항 수 -->
+        <section id="section_01" class="cm-survey-head">
+          <h1 class="tit">특수학교 관리자</h1>
+          <p class="count"><strong class="num">40</strong> 문항</p>
+        </section>
+
+        <!-- 조사 문항 : KRDS 표(table data) -->
+        <section id="section_02" class="cm-survey-question">
+          <div class="cm-survey-question-top">
+            <h2 class="tit">특수학교 관리자 조사 문항</h2>
+            <p class="desc">조사 대상자 8개·영역 50개·총 421문항</p>
+          </div>
+          <div class="krds-table-wrap cm-question-table">
+            <table class="tbl col data">
+              <caption>특수학교 관리자 조사 문항 표로 영역, 세부 조사 문항, 문항수로 구성되어 있습니다.</caption>
+              <colgroup>
+                <col style="width: 12.8rem;">
+                <col>
+                <col style="width: 8.4rem;">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">영역</th>
+                  <th scope="col">세부 조사 문항</th>
+                  <th scope="col">문항수</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">일반사항</th>
+                  <td>방과후학교 참여 현황, 방과후 프로그램 수 및 참여 현황, 당해연도 취학유예 및 유예 현황, 과연령 학생 현황, 과연령 기간별 학생 현황</td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <th scope="row">교육과정 운영</th>
+                  <td>유치원 적용 교육과정, 초·중·고 적용 교육과정(3), 초·중·고 교과군 시수(3), 교육과정 편성 시 고려 사항, 재량권 부여, 학급 배치 기준, 교과수업 형태, 개별화교육계획, 개별화교육계획 (IEP) 목표, 유아 개별화교육계획(IEP) 범위, 초·중·고 개별화교육계획(IEP) 범위, 통합교육 실시, 통합교육 효과, 장애이해교육, 취업자 관리, 취업자 사후관리(3)</td>
+                  <td>22</td>
+                </tr>
+                <tr>
+                  <th scope="row">장학 및 연수</th>
+                  <td>장려 장학 형태, 장려 연수 형태, 교내 연수 주제</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <th scope="row">보호자 교육</th>
+                  <td>보호자교육 포함 여부, 횟수, 방법, 내용</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <th scope="row">인사</th>
+                  <td>담임 배정, 교과전담 배정, 업무 배정 시 고려 사항</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <th scope="row">예산</th>
+                  <td>많이 투입되는 부문, 확대되어야 할 부문, 예산문제 갈등 해결</td>
+                  <td>3</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cm-table-note">( ) 안의 숫자는 분기 문항을 포함한 문항 수</p>
+        </section>
+
+        <!-- 이전글 · 다음글 · 목록 -->
+        <div class="page-btn-wrap both">
+          <div class="btn-wrap">
+            <a href="survey_history_view.html" class="krds-btn medium tertiary"><i class="svg-icon ico-angle left"></i> 이전글</a>
+            <a href="survey_history_view.html" class="krds-btn medium tertiary">다음글 <i class="svg-icon ico-angle right"></i></a>
+          </div>
+          <a href="survey_history_list.html" class="krds-btn medium tertiary">목록으로</a>
+        </div>
+
+        <!-- 콘텐츠 내 탐색 : KRDS in_page_navigation (화면 오른쪽 고정, 조사개요 화면과 같은 마크업) -->
+        <div class="krds-in-page-navigation-type">
+          <div class="krds-in-page-navigation-area">
+            <div class="in-page-navigation-header">
+              <p class="quick-caption">이 페이지의 구성</p>
+              <p class="quick-title">특수학교 관리자</p>
+            </div>
+            <nav class="in-page-navigation-list" aria-label="이 페이지의 구성">
+              <ul>
+                <li><a href="#section_01" class="active">개요</a></li>
+                <li><a href="#section_02">조사 문항</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
       <!-- //[04-1] 컨텐츠 -->
     </div>
