@@ -1859,6 +1859,352 @@
   }
 }
 
+/* [AI 해설 도우미] 신규 컴포넌트 (KRDS 없음, Figma 그대로) : _common/html/code/ext_ai_helper.html · kr/tmpl/ai-helper.html
+   Figma: 컨텐츠 > 시계열시각화-view chat-btn-wrap · -view-ai해설도우미오픈 · -view-ai해설도우미챗진행
+   - 여는 버튼은 콘텐츠 내 탐색(오른쪽 고정) 아래에 붙여 둠 (KRDS in_page_navigation 위치 계산식과 같은 기준) */
+.cm-ai {
+  --cm-ai-inpage-right: calc((100% - var(--krds-contents-wrap-size)) / 2 - (16rem - var(--krds-contents-padding-x) + var(--krds-pc-gap-layout-contents-right)));
+}
+.cm-ai-launcher {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--krds-gap-1);
+  position: fixed;
+  top: min(69rem, calc(100vh - 19rem)); /* Figma : 콘텐츠 내 탐색 시작점에서 434px 아래 */
+  right: calc(var(--cm-ai-inpage-right) + 13.6rem); /* 여는 버튼 가운데 = 콘텐츠 내 탐색 왼쪽 + 24px (Figma) */
+  z-index: 20;
+  transform: translateX(50%);
+}
+.cm-ai-bubble {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-3);
+  position: relative;
+  padding: var(--krds-padding-6) var(--krds-padding-7);
+  border: 0.1rem solid var(--cm-color-border-gray);
+  border-radius: var(--krds-radius-xlarge2);
+  background-color: var(--cm-color-surface-white);
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  line-height: 1.5;
+  white-space: nowrap;
+  color: var(--cm-color-text-basic);
+}
+/* 말풍선 꼬리 (Figma 22×12, 아래 가운데) */
+.cm-ai-bubble::before,
+.cm-ai-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  border: solid transparent;
+  transform: translateX(-50%);
+}
+.cm-ai-bubble::before {
+  top: 100%;
+  border-width: 1.2rem 1.1rem 0;
+  border-top-color: var(--cm-color-border-gray);
+}
+.cm-ai-bubble::after {
+  top: calc(100% - 0.1rem);
+  border-width: 1.1rem 1rem 0;
+  border-top-color: var(--cm-color-surface-white);
+}
+.cm-ai-bubble .tit {
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-primary);
+}
+.cm-ai-bubble .txt {
+  margin-top: calc(var(--krds-gap-1) - var(--krds-gap-3));
+}
+.cm-ai-bubble-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--krds-gap-1);
+  padding: var(--krds-padding-1);
+  border-radius: var(--krds-radius-small1);
+  background-color: var(--cm-color-box-surface); /* tertiary-fill-hover */
+  font-size: var(--krds-pc-font-size-label-xsmall);
+  color: var(--cm-color-text-basic);
+}
+.cm-ai-bubble-close .svg-icon {
+  width: var(--krds-number-8);
+  height: var(--krds-number-8);
+  background-color: var(--cm-color-icon);
+}
+.cm-ai-bubble[hidden] {
+  display: none;
+}
+.cm-ai-open {
+  width: 5rem;
+  height: 5rem;
+  margin-top: 1.2rem;
+  border-radius: var(--krds-radius-max);
+}
+.cm-ai-open img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.cm-ai[data-open] .cm-ai-launcher {
+  display: none;
+}
+/* 대화 창 (Figma Component 2 : 400px, 왼쪽만 둥근 모서리, 화면 오른쪽 끝에 붙음) */
+.cm-ai-panel {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: clamp(2rem, calc(100vh - 66.5rem), 40.3rem);
+  right: 0;
+  z-index: 30;
+  width: 40rem;
+  max-height: calc(100vh - 4rem);
+  overflow: hidden;
+  border: 0.1rem solid var(--cm-color-attach-border);
+  border-right: 0;
+  border-radius: var(--krds-radius-xlarge1) 0 0 var(--krds-radius-xlarge1);
+  background-color: var(--cm-color-surface-white);
+  box-shadow: 0 0 0.2rem var(--cm-color-shadow2), 0 0.8rem 1.6rem var(--cm-color-shadow3);
+}
+.cm-ai-panel[hidden] {
+  display: none;
+}
+.cm-ai-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: none;
+  padding: var(--krds-padding-6) var(--krds-padding-8) var(--krds-padding-5);
+  background-color: var(--cm-color-button-primary); /* Figma #256ef4 */
+}
+.cm-ai-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  /* Figma warning-10(#ffe0a3)은 파란 바탕 대비 3:1 미만이라 흰 글자로 맞춤 */
+  color: var(--cm-color-text-inverse);
+}
+.cm-ai-title:focus {
+  outline: 0; /* 창을 열 때 스크립트가 옮기는 초점 (누를 수 없는 제목) */
+  box-shadow: none;
+}
+.cm-ai-title .logo {
+  width: 20.2rem;
+  height: 2.2rem;
+}
+.cm-ai-title .logo-basic {
+  display: none;
+}
+.cm-ai-head .btns {
+  display: flex;
+  gap: var(--krds-gap-2);
+}
+.cm-ai-head .btns button {
+  display: inline-flex;
+  width: var(--krds-number-9);
+  height: var(--krds-number-9);
+}
+.cm-ai-head .btns .svg-icon {
+  width: 100%;
+  height: 100%;
+  background-color: var(--cm-color-text-inverse);
+}
+.cm-ai-reset {
+  display: none !important;
+}
+/* 처음 안내 : 파란 바탕이 회색으로 바뀌는 그라데이션 (Figma 55.7% → 82%) */
+.cm-ai-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-7);
+  padding: var(--krds-number-16) var(--krds-padding-8) var(--krds-padding-10);
+  overflow-y: auto;
+  background: linear-gradient(to bottom, var(--cm-color-button-primary) 55.7%, var(--cm-color-box-surface) 82%);
+  color: var(--cm-color-text-inverse);
+}
+.cm-ai-intro .hello {
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+}
+.cm-ai-intro .desc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-4);
+  margin-top: calc(var(--krds-gap-4) - var(--krds-gap-7));
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  line-height: 1.5;
+}
+.cm-ai-suggest {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-5);
+  padding: var(--krds-padding-6);
+  border-radius: var(--krds-radius-xlarge1);
+  background-color: var(--cm-color-surface-white);
+  box-shadow: 0 0 0.2rem var(--cm-color-shadow1), 0 0.4rem 0.8rem var(--cm-color-shadow2);
+}
+.cm-ai-suggest button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--krds-gap-3);
+  width: 100%;
+  padding: var(--krds-padding-3) var(--krds-padding-4);
+  border-radius: var(--krds-radius-small2);
+  font-size: var(--krds-pc-font-size-label-small);
+  line-height: 1.5;
+  text-align: left;
+  color: var(--cm-color-line-strong); /* Figma text/disabled-on */
+}
+.cm-ai-suggest button:hover,
+.cm-ai-suggest button:focus {
+  background-color: var(--cm-color-row-notice); /* Figma button/text-fill-hover */
+}
+.cm-ai-suggest .svg-icon {
+  flex: none;
+  width: var(--krds-number-8);
+  height: var(--krds-number-8);
+  background-color: var(--cm-color-element-primary);
+}
+/* 대화 진행 : 흰 머리글 · 컬러 로고 · 처음으로 버튼, 대화 목록 높이 460~500px 안에서 스크롤 */
+.cm-ai-chat {
+  display: none;
+  flex-direction: column;
+  height: 50rem;
+  min-height: 0;
+  padding: 0 var(--krds-padding-8);
+  overflow-y: auto;
+}
+.cm-ai-panel[data-state="chat"] .cm-ai-intro {
+  display: none;
+}
+.cm-ai-panel[data-state="chat"] .cm-ai-chat {
+  display: flex;
+}
+.cm-ai-panel[data-state="chat"] .cm-ai-head {
+  border-bottom: 0.1rem solid var(--cm-color-attach-border);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-ai-panel[data-state="chat"] .cm-ai-title {
+  color: var(--cm-color-text-primary);
+}
+.cm-ai-panel[data-state="chat"] .logo-inverse {
+  display: none;
+}
+.cm-ai-panel[data-state="chat"] .logo-basic {
+  display: block;
+}
+.cm-ai-panel[data-state="chat"] .cm-ai-reset {
+  display: inline-flex !important;
+}
+.cm-ai-panel[data-state="chat"] .cm-ai-head .btns .svg-icon {
+  background-color: var(--cm-color-border-light); /* Figma 아이콘 #cdd1d5 */
+}
+.cm-ai-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-4);
+  margin-top: auto; /* 대화가 적을 때 입력창 쪽(아래)부터 쌓임 */
+  padding: var(--krds-padding-10) 0;
+}
+.cm-ai-list > li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-2);
+}
+.cm-ai-list > li.ask {
+  align-items: flex-end;
+}
+.cm-ai-list > li.answer {
+  align-items: flex-start;
+}
+.cm-ai-list .bubble {
+  max-width: 35rem;
+  padding: var(--krds-padding-3) var(--krds-gap-5);
+  border-radius: var(--krds-number-8);
+  font-size: var(--krds-pc-font-size-body-small);
+  line-height: 1.5;
+}
+.cm-ai-list .ask .bubble {
+  background-color: var(--cm-color-chart-3); /* Figma primary-60 */
+  text-align: right;
+  color: var(--cm-color-text-inverse);
+}
+.cm-ai-list .answer .bubble {
+  background-color: var(--cm-color-box-surface);
+  color: var(--cm-color-text-subtle);
+}
+.cm-ai-list .answer strong {
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-ai-rate {
+  height: var(--krds-size-height-4);
+  margin-left: var(--krds-padding-3);
+  padding: 0 var(--krds-padding-3);
+  border-radius: var(--krds-radius-medium1);
+  font-size: var(--krds-pc-font-size-label-xsmall);
+  color: var(--cm-color-text-subtle);
+}
+.cm-ai-rate:hover {
+  background-color: var(--cm-color-box-surface);
+}
+/* 질문 입력 (KRDS 입력창 small + primary 아이콘 버튼, 입력 바탕은 Figma surface-gray-subtler) */
+.cm-ai-input {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: none;
+  padding: var(--krds-padding-6) var(--krds-padding-8);
+  background-color: var(--cm-color-surface-white);
+  box-shadow: 0 -0.2rem 0.5rem rgba(0, 0, 0, 0.03); /* Figma 입력 영역 그림자 (토큰 없음) */
+}
+.cm-ai-input .krds-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border-color: transparent;
+  background-color: var(--cm-color-box-surface);
+}
+.cm-ai-input .krds-btn {
+  flex: none;
+  width: var(--krds-size-height-6);
+  min-width: 0;
+  height: var(--krds-size-height-6);
+  padding: 0;
+}
+.cm-ai-input .krds-btn .svg-icon {
+  width: var(--krds-number-9);
+  height: var(--krds-number-9);
+}
+@media (max-width: 1023px) {
+  .cm-ai-launcher {
+    top: auto;
+    right: var(--krds-padding-6);
+    bottom: 10rem;
+    transform: none;
+  }
+  .cm-ai-bubble {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .cm-ai-panel {
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    max-height: calc(100vh - 6rem);
+    border-right: 0;
+    border-radius: var(--krds-radius-xlarge1) var(--krds-radius-xlarge1) 0 0;
+  }
+  .cm-ai-chat {
+    height: auto;
+    flex: 1 1 auto;
+  }
+}
+
 /* [푸터] 사이트 로고 · 기관 정보 한 줄 배치 · 웹 접근성 인증마크 */
 @media (min-width: 1024px) {
   #krds-footer > .inner {

@@ -60,3 +60,85 @@ const cmTabScroll = {
   },
 };
 document.addEventListener("DOMContentLoaded", () => cmTabScroll.init());
+
+/* AI 해설 도우미 (.cm-ai, 마크업 kr/tmpl/ai-helper.html · _common/html/code/ext_ai_helper.html)
+   - 여는 버튼 → 대화 창(처음 안내). 질문 예시를 누르거나 질문을 보내면 대화 진행 화면으로 바뀜
+   - Esc · 닫기 버튼으로 닫고 초점을 여는 버튼으로 되돌림, "오늘 하루 열지 않기"는 말풍선만 하루 숨김
+   - [퍼블리싱 확인용] 대화 진행 화면에는 Figma 예시 대화가 들어 있고, 새로 보낸 질문에는 Figma의 "답변을 만들지 못했어요."를 붙임
+     개발 시 질문 전송·답변 받기로 바꿈 */
+const cmAiHelper = {
+  hideKey: "cmAiBubbleHide",
+  init() {
+    const root = document.querySelector(".cm-ai");
+    if (!root) return;
+    const openBtn = root.querySelector(".cm-ai-open");
+    const panel = root.querySelector(".cm-ai-panel");
+    const bubble = root.querySelector(".cm-ai-bubble");
+    const chat = panel.querySelector(".cm-ai-chat");
+    const list = panel.querySelector(".cm-ai-list");
+    const form = panel.querySelector(".cm-ai-input");
+    const input = form.querySelector("input");
+
+    try {
+      if (Number(localStorage.getItem(this.hideKey)) > Date.now()) bubble.hidden = true;
+    } catch (e) {}
+
+    const open = () => {
+      panel.hidden = false;
+      root.setAttribute("data-open", "");
+      openBtn.setAttribute("aria-expanded", "true");
+      panel.querySelector(".cm-ai-title").focus({ preventScroll: true });
+    };
+    const close = () => {
+      panel.hidden = true;
+      root.removeAttribute("data-open");
+      openBtn.setAttribute("aria-expanded", "false");
+      openBtn.focus();
+    };
+    const showChat = () => {
+      panel.dataset.state = "chat";
+      chat.scrollTop = chat.scrollHeight;
+    };
+    const addAsk = (text) => {
+      const ask = document.createElement("li");
+      ask.className = "ask";
+      ask.innerHTML = '<p class="bubble"><span class="sr-only">질문 : </span></p>';
+      ask.querySelector(".bubble").append(text);
+      const answer = document.createElement("li");
+      answer.className = "answer";
+      answer.innerHTML = '<div class="bubble"><span class="sr-only">답변 : </span>답변을 만들지 못했어요.</div>';
+      list.append(ask, answer);
+    };
+
+    openBtn.addEventListener("click", open);
+    panel.querySelector(".cm-ai-close").addEventListener("click", close);
+    panel.querySelector(".cm-ai-reset").addEventListener("click", () => {
+      panel.dataset.state = "intro";
+      panel.querySelector(".cm-ai-title").focus({ preventScroll: true });
+    });
+    panel.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") close();
+    });
+    bubble.querySelector(".cm-ai-bubble-close").addEventListener("click", () => {
+      bubble.hidden = true;
+      openBtn.focus();
+      try {
+        localStorage.setItem(this.hideKey, String(Date.now() + 24 * 60 * 60 * 1000));
+      } catch (e) {}
+    });
+    panel.querySelectorAll(".cm-ai-suggest button").forEach((button) =>
+      button.addEventListener("click", () => {
+        showChat();
+        input.focus();
+      })
+    );
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const text = input.value.trim();
+      if (text) addAsk(text);
+      input.value = "";
+      showChat();
+    });
+  },
+};
+document.addEventListener("DOMContentLoaded", () => cmAiHelper.init());
