@@ -27,7 +27,6 @@
   --cm-color-row-notice-hover: var(--krds-color-light-secondary-10);
   --cm-color-row-hover: var(--krds-light-color-surface-primary-subtler);
   --cm-color-row-hover-border: var(--krds-light-color-border-primary);
-  --cm-color-top-btn: var(--krds-color-light-primary-70);
   --cm-color-icon: var(--krds-light-color-text-basic);
 }
 
@@ -194,6 +193,52 @@
   color: var(--cm-color-text-subtle);
 }
 
+/* [페이지 상단] 공유하기 팝업 : KRDS 맥락적 도움말(.krds-contextual-help.bottom.left) 변형 (Figma: 컨텐츠 > share-modal)
+   - 버튼은 공유/인쇄 버튼과 같은 테두리형, 팝업 안에는 SNS 버튼 5개 */
+.cm-share .tooltip-action .tooltip-btn.krds-btn.icon.border {
+  justify-content: center;
+  background-color: var(--cm-color-surface-white);
+}
+.cm-share .tooltip-popover {
+  /* 말풍선 위치를 Figma에 맞춤 : KRDS 기본(버튼과 16px 띄움, 꼬리가 버튼 중앙보다 왼쪽)을
+     꼬리 끝이 버튼 아래에 닿고 꼬리가 버튼 가운데 오도록 조정 */
+  --krds-contextual-help--bubble-arrow-position-x: -1.5rem; /* 팝업 왼쪽 끝 = 버튼 왼쪽 - 15px */
+  --krds-contextual-help--bubble-margin-x: 2.7rem;          /* 꼬리 중심 = 버튼 가운데(20px) */
+  padding: var(--krds-padding-7) var(--krds-padding-8);
+}
+.krds-contextual-help.bottom.cm-share .tooltip-popover {
+  margin-top: var(--krds-gap-4); /* 12px : 꼬리 끝이 버튼 바로 아래에 오도록 */
+}
+@media (min-width: 769px) {
+  .cm-share .tooltip-popover {
+    width: max-content !important; /* KRDS 스크립트가 열 때 360px 을 넣음 → Figma처럼 내용 폭에 맞춤 */
+  }
+}
+.cm-share .tooltip-popover .tooltip-close {
+  top: var(--krds-padding-7);
+  right: var(--krds-padding-8);
+}
+/* 닫기 버튼 : 마크업은 KRDS 그대로(xsmall) 두고 크기만 small 로 (16px → 20px) */
+.cm-share .tooltip-popover .tooltip-close.krds-btn.icon.xsmall {
+  width: var(--krds-button--icon-size-small);
+  height: var(--krds-button--icon-size-small);
+}
+.krds-contextual-help.cm-share .tooltip-popover .cm-share-list {
+  flex-direction: row;
+  gap: var(--krds-gap-4);
+}
+.cm-share .cm-share-btn {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--krds-radius-max);
+}
+.cm-share .cm-share-btn img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 /* 상세(view) 화면 : 페이지 제목 없이 브레드크럼 · 공유/인쇄만 (Figma 116px 변형) */
 .cm-page-top.cm-page-top-view {
   padding-bottom: var(--krds-number-13);
@@ -353,7 +398,7 @@
   background-color: var(--cm-color-row-notice-hover);
 }
 
-/* [푸터] 사이트 로고 · 기관 정보 한 줄 배치 · 웹 접근성 인증마크 · TOP 버튼 */
+/* [푸터] 사이트 로고 · 기관 정보 한 줄 배치 · 웹 접근성 인증마크 */
 @media (min-width: 1024px) {
   #krds-footer > .inner {
     padding-left: var(--krds-contents-padding-x);
@@ -390,23 +435,6 @@
   width: 100%;
   height: auto;
 }
-.cm-btn-top {
-  position: fixed;
-  right: var(--krds-number-14);
-  bottom: var(--krds-number-14);
-  z-index: 60;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 5rem;
-  height: 5rem;
-  border-radius: var(--krds-radius-max);
-  background-color: var(--cm-color-top-btn);
-  font-size: var(--krds-pc-font-size-body-xsmall);
-  font-weight: var(--krds-font-weight-bold);
-  color: var(--krds-light-color-text-inverse-static);
-}
-
 @media (max-width: 1023px) {
   #krds-header .header-container .logo {
     width: 27.2rem;

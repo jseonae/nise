@@ -168,10 +168,29 @@
               </ol>
             </nav>
             <div class="cm-btn-group">
-              <button type="button" class="krds-btn xlarge icon border">
-                <span class="sr-only">공유하기</span>
-                <i class="svg-icon ico-share"></i>
-              </button>
+              <!-- 공유하기 : KRDS 맥락적 도움말 변형 (_common/html/code/contextual_help--share.html) -->
+              <div class="krds-contextual-help bottom left cm-share">
+                <div class="tooltip-action">
+                  <button type="button" class="krds-btn xlarge icon border tooltip-btn">
+                    <span class="sr-only">공유하기</span>
+                    <i class="svg-icon ico-share"></i>
+                  </button>
+                  <div class="tooltip-popover" role="tooltip">
+                    <h2 class="tooltip-title">공유하기</h2>
+                    <ul class="tooltip-contents cm-share-list">
+                      <li><a href="#" class="cm-share-btn" data-share="facebook" target="_blank" title="새 창 열림"><img src="../../../_common/resources/img/sns/cm_share_facebook.svg" alt="페이스북에 공유하기"></a></li>
+                      <li><a href="#" class="cm-share-btn" data-share="x" target="_blank" title="새 창 열림"><img src="../../../_common/resources/img/sns/cm_share_x.svg" alt="X(트위터)에 공유하기"></a></li>
+                      <li><a href="#" class="cm-share-btn" data-share="band" target="_blank" title="새 창 열림"><img src="../../../_common/resources/img/sns/cm_share_band.svg" alt="네이버 밴드에 공유하기"></a></li>
+                      <li><a href="#" class="cm-share-btn" data-share="naver_blog" target="_blank" title="새 창 열림"><img src="../../../_common/resources/img/sns/cm_share_naver_blog.svg" alt="네이버 블로그에 공유하기"></a></li>
+                      <li><button type="button" class="cm-share-btn" data-share="url"><img src="../../../_common/resources/img/sns/cm_share_url.svg" alt="페이지 주소 복사하기"></button></li>
+                    </ul>
+                    <button type="button" class="krds-btn xsmall icon tooltip-close">
+                      <span class="sr-only">닫기</span>
+                      <i class="svg-icon ico-modal-close"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
               <button type="button" class="krds-btn xlarge icon border" onclick="window.print();">
                 <span class="sr-only">인쇄하기</span>
                 <i class="svg-icon ico-print"></i>
@@ -232,8 +251,8 @@
     </footer>
     <!-- //[05] 푸터 -->
 
-    <!-- TOP 버튼 -->
-    <a href="#wrap" class="cm-btn-top">TOP<span class="sr-only"> 페이지 맨 위로 이동</span></a>
+    <!-- 페이지 상단으로 이동 : KRDS 사이트 기본 TOP 버튼 (krds-base.css · krds-base.js) -->
+    <button type="button" class="page-top-button krds-tooltip" data-tooltip="페이지 상단으로 이동"><i class="svg-icon ico-go-top"></i></button>
   </div>
   <!-- [E] #wrap -->
 
@@ -328,6 +347,7 @@
   <script src="../../../krds/resources/js/plugin/swiper-bundle.min.js"></script>
   <script src="../../../krds/resources/js/component/ui-script.js"></script>
   <script src="../../../_common/resources/js/krds-custom.js"></script>
+  <script src="../../../_common/resources/js/krds-base.js"></script>
   <script src="../../js/user-custom.js"></script>
   <!-- //[07] 스크립트 -->
 </body>

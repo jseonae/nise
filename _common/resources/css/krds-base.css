@@ -101,3 +101,78 @@
     display: none;
   }
 }
+
+/* ==========================================================================
+   페이지 상단으로 이동 버튼 (.page-top-button)
+   - KRDS 패키지에는 없고 krds.go.kr 사이트 공통으로 쓰는 TOP 버튼 (스크립트: _common/resources/js/krds-base.js)
+   - 기준: krds.go.kr resources/css/site/output.css ".page-top-button"
+   ========================================================================== */
+.page-top-button {
+  position: fixed;
+  right: 4rem;
+  bottom: 6.4rem;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--krds-size-height-8);
+  height: var(--krds-size-height-8);
+  border: 0.1rem solid var(--krds-light-color-border-gray-light);
+  border-radius: var(--krds-radius-medium3);
+  background-color: var(--krds-light-color-action-white);
+  box-shadow: 0 0 0.2rem 0 var(--krds-light-color-alpha-shadow1), 0 0.4rem 0.8rem 0 var(--krds-light-color-alpha-shadow2);
+  visibility: hidden;
+  opacity: 0;
+}
+.page-top-button:hover {
+  background-color: var(--krds-light-color-action-secondary-hover);
+}
+.page-top-button:active,
+.page-top-button:focus {
+  background-color: var(--krds-light-color-action-secondary-pressed);
+  box-shadow: var(--krds-box-shadow-outline-inset);
+  outline-offset: -0.4rem;
+}
+.page-top-button.active {
+  z-index: 60;
+  visibility: visible;
+  opacity: 1;
+}
+@media (max-width: 1023px) {
+  .page-top-button {
+    right: var(--krds-contents-padding-x);
+    bottom: var(--krds-contents-padding-x);
+  }
+}
+[data-krds-mode=high-contrast] .page-top-button {
+  border-color: var(--krds-high-contrast-color-border-gray-light);
+  background-color: var(--krds-high-contrast-color-action-white);
+  box-shadow: 0 0 0.2rem 0 var(--krds-high-contrast-color-alpha-shadow1), 0 0.4rem 0.8rem 0 var(--krds-high-contrast-color-alpha-shadow2);
+}
+[data-krds-mode=high-contrast] .page-top-button:hover {
+  background-color: var(--krds-high-contrast-color-action-secondary-hover);
+}
+[data-krds-mode=high-contrast] .page-top-button:active,
+[data-krds-mode=high-contrast] .page-top-button:focus {
+  background-color: var(--krds-high-contrast-color-action-secondary-pressed);
+}
+[data-krds-mode=high-contrast] .page-top-button .svg-icon {
+  background-color: var(--krds-high-contrast-color-text-basic);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .page-top-button {
+    border-color: var(--krds-high-contrast-color-border-gray-light);
+    background-color: var(--krds-high-contrast-color-action-white);
+    box-shadow: 0 0 0.2rem 0 var(--krds-high-contrast-color-alpha-shadow1), 0 0.4rem 0.8rem 0 var(--krds-high-contrast-color-alpha-shadow2);
+  }
+  [data-krds-mode=theme] .page-top-button:hover {
+    background-color: var(--krds-high-contrast-color-action-secondary-hover);
+  }
+  [data-krds-mode=theme] .page-top-button:active,
+  [data-krds-mode=theme] .page-top-button:focus {
+    background-color: var(--krds-high-contrast-color-action-secondary-pressed);
+  }
+  [data-krds-mode=theme] .page-top-button .svg-icon {
+    background-color: var(--krds-high-contrast-color-text-basic);
+  }
+}
