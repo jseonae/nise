@@ -495,8 +495,7 @@
   border: 0.1rem solid var(--cm-color-border-light);
   border-radius: var(--krds-radius-medium3);
   background-color: var(--cm-color-box-surface);
-  font-size: var(--krds-pc-font-size-heading-xsmall);
-  font-weight: var(--krds-font-weight-bold);
+  font-size: var(--krds-pc-font-size-body-medium); /* 긴 이용조건 문구라 Figma 설명문과 같은 본문 크기·보통 굵기 */
   line-height: 1.5;
   color: var(--cm-color-text-subtle);
 }
