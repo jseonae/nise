@@ -32,7 +32,7 @@
 <body>
   <!--
     ==================================================================
-    시계열 시각화 (Figma: 컨텐츠 > 시계열시각화-list / view)
+    시계열 시각화 (Figma: 컨텐츠 > 시계열시각화-list / 시계열시각화-list-교육과정)
     공통 영역은 kr/tmpl 에서 인클루드합니다 (kr/js/include.js). 이 파일에는 페이지 컨텐츠만 둡니다.
       [01]~[03] 헤더             : kr/tmpl/header.html
       페이지 상단(브레드크럼·제목) : kr/tmpl/page-top.html (제목·설명은 메뉴 데이터, data-title · data-desc 로 변경 가능)
@@ -53,10 +53,446 @@
       <!-- 페이지 상단 : 브레드크럼 · 공유/인쇄 · 페이지 제목 -->
       <div data-include="page-top"></div>
 
-      <!-- [04-1] 컨텐츠 : .inner -->
-      <div class="inner cm-contents">
-        <!-- TODO: 시계열 시각화 목록(list) 퍼블리싱 (Figma: 컨텐츠 > 시계열시각화-list / view) -->
-        <p class="cm-todo">시계열 시각화 목록(list) 컨텐츠 영역</p>
+      <!-- [04-1] 컨텐츠 : .inner (Figma: 컨텐츠 > 시계열시각화-list 10611:43737 / 시계열시각화-list-교육과정 10611:43806) -->
+      <div class="inner cm-contents cm-timeseries">
+        <!-- 분류 : KRDS 탭(fill) + 탭 안 KRDS 라디오 칩
+             주제를 고르면 목록이 바뀝니다. 퍼블리싱에서는 확인용 스크립트(kr/js/user-custom.js cmTsFilter)가 카드만 걸러 보여주며, 개발 시 서버 조회로 바꿉니다. -->
+        <div class="krds-tab-area layer cm-ts-filter">
+          <div class="tab fill">
+            <ul role="tablist">
+              <li id="tab_ts_01" role="tab" aria-selected="true" aria-controls="panel_ts_01" class="active">
+                <button type="button" class="btn-tab">주제별</button>
+              </li>
+              <li id="tab_ts_02" role="tab" aria-selected="false" aria-controls="panel_ts_02">
+                <button type="button" class="btn-tab">조사대상자별</button>
+              </li>
+            </ul>
+          </div>
+          <div class="tab-conts-wrap">
+            <section id="panel_ts_01" aria-labelledby="tab_ts_01" class="tab-conts active" data-quick-nav="false">
+              <h2 class="sr-only">주제별 분류</h2>
+              <fieldset class="krds-check-area cm-chip-box">
+                <legend class="sr-only">주제 선택</legend>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_topic" id="ts_topic_all" value="all" data-total="38" data-pages="24" checked>
+                  <label class="krds-form-chip-outline" for="ts_topic_all">전체 (86)</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_topic" id="ts_topic_target" value="target" data-total="26" data-pages="2">
+                  <label class="krds-form-chip-outline" for="ts_topic_target">대상자현황 (26)</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_topic" id="ts_topic_curri" value="curri" data-total="38" data-pages="3">
+                  <label class="krds-form-chip-outline" for="ts_topic_curri">교육과정 (38)</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_topic" id="ts_topic_service" value="service" data-total="11" data-pages="1">
+                  <label class="krds-form-chip-outline" for="ts_topic_service">관련서비스 (11)</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_topic" id="ts_topic_admin" value="admin" data-total="11" data-pages="1">
+                  <label class="krds-form-chip-outline" for="ts_topic_admin">행정조직 (11)</label>
+                </div>
+              </fieldset>
+            </section>
+            <section id="panel_ts_02" aria-labelledby="tab_ts_02" class="tab-conts" data-quick-nav="false">
+              <h2 class="sr-only">조사대상자별 분류</h2>
+              <!-- Figma에 조사대상자별 선택 화면이 없어 조사 변천사의 조사 대상자 목록으로 채움 -->
+              <fieldset class="krds-check-area cm-chip-box">
+                <legend class="sr-only">조사대상자 선택</legend>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_0" value="0" checked>
+                  <label class="krds-form-chip-outline" for="ts_target_0">전체</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_1" value="1">
+                  <label class="krds-form-chip-outline" for="ts_target_1">특수교육대상자 보호자</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_2" value="2">
+                  <label class="krds-form-chip-outline" for="ts_target_2">장애영아 보호자</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_3" value="3">
+                  <label class="krds-form-chip-outline" for="ts_target_3">특수학교 관리자</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_4" value="4">
+                  <label class="krds-form-chip-outline" for="ts_target_4">특수학급 관리자</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_5" value="5">
+                  <label class="krds-form-chip-outline" for="ts_target_5">특수학교 담임교사</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_6" value="6">
+                  <label class="krds-form-chip-outline" for="ts_target_6">특수학급 교사</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_7" value="7">
+                  <label class="krds-form-chip-outline" for="ts_target_7">장애영아 관리자</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_8" value="8">
+                  <label class="krds-form-chip-outline" for="ts_target_8">장애영아 교사</label>
+                </div>
+              </fieldset>
+            </section>
+          </div>
+        </div>
+
+        <div class="cm-board">
+          <!-- 목록 상단 : 게시물 수 · 목록 표시 개수 · 검색 (공지사항 목록과 같은 구조) -->
+          <div class="cm-board-top">
+            <div class="cm-board-count" aria-live="polite">
+              <p class="total">총 <span class="num">38</span>개</p>
+              <p class="page"><span class="sr-only">현재 페이지</span><span class="current">1</span> / <span class="sr-only">전체 페이지</span><span class="last">24</span> <span class="unit">페이지</span></p>
+            </div>
+            <div class="cm-board-search">
+              <div class="cm-select-sort">
+                <label for="list_size">목록 표시 개수</label>
+                <select id="list_size" class="krds-form-select-sort medium">
+                  <option value="15" selected>15개</option>
+                  <option value="30">30개</option>
+                  <option value="50">50개</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <div class="form-conts btn-ico-wrap">
+                  <input type="text" id="search_keyword" class="krds-input" placeholder="검색어를 입력해주세요." title="검색어 입력">
+                  <button type="button" class="krds-btn medium icon">
+                    <span class="sr-only">검색</span>
+                    <i class="svg-icon ico-sch"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- //목록 상단 -->
+
+          <!-- 시각화 목록 : 카드 전체를 누르면 상세로 이동 (제목 링크를 카드 크기로 넓힘, "자세히보기"는 보이는 표시만) -->
+          <ul class="cm-ts-list">
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">거주 형태</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">배치 유형</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">특수교육대상자 최초 선정·배치 시기</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">취학유예·유예 경험 유무 및 시기</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">취학유예·유예 이유</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">전학 경험 유무 및 시기</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">취학유예·유예 이유</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">전학 경험 유무 및 시기</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">혼자 통학 가능 여부</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">등·하교 주 보조자</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">참여하는 사교육의 종류</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">사교육을 받는 장소</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">월평균 사교육비</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">고등학교 졸업 후 진로 방향</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="target" data-all="y">
+              <h3 class="tit"><a href="timeseries_view.html">취업을 위해 개선·강화해야 할 사항</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>대상자현황</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">교육과정 편성·운영 재량권 부여 정도</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-primary">특수학교 관리자</span></li><li><span class="krds-badge small outline-primary">특수학교 교사</span></li><li><span class="krds-badge small outline-success">특수학급 관리자</span></li><li><span class="krds-badge small outline-success">특수학급 교사</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">특수학교 IEP 작성 참여자</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-primary">특수학교 관리자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">특수학급 IEP 작성 참여자</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-success">특수학급 교사</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">IEP 최소 작성 목표(또는 내용)</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-primary">특수학교 관리자</span></li><li><span class="krds-badge small outline-success">특수학급 교사</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">초·중·고등학교 학업성취도의 주요 평가방법</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-primary">특수학교 교사</span></li><li><span class="krds-badge small outline-success">특수학급 교사</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">학업성취도 평가의 어려움</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-primary">특수학교 교사</span></li><li><span class="krds-badge small outline-success">특수학급 교사</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">특수학교의 학교(학급)단위 통합교육 운영 여부</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-primary">특수학교 관리자</span></li><li><span class="krds-badge small outline-primary">특수학교 교사</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">특수학교 학생의 통합 방법</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-primary">특수학교 교사</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">특수교사의 통합학급 수업 참여 여부</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-primary">특수학교 교사</span></li><li><span class="krds-badge small outline-success">특수학급 교사</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">통합교육을 통해 얻게 되는 학생의 교육적 효과</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-primary">특수학교 관리자</span></li><li><span class="krds-badge small outline-primary">특수학교 교사</span></li><li><span class="krds-badge small outline-success">특수학급 관리자</span></li><li><span class="krds-badge small outline-success">특수학급 교사</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2011</li><li>2017</li><li>2020</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">특수학교 장애인식개선교육 대상</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-primary">특수학교 관리자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">특수학급 장애인식개선교육 횟수</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-success">특수학급 관리자</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">진로 및 직업교육 실시 여부</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-primary">특수학교 교사</span></li><li><span class="krds-badge small outline-success">특수학급 교사</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">특수학급 교육활동 및 평가결과의 학교생활기록부 반영 정도</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-success">특수학급 교사</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-ts-card" data-topic="curri" hidden>
+              <h3 class="tit"><a href="timeseries_view.html">통합학급에서 특수학급 학생이 주로 참여하는 수업</a></h3>
+              <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+              <ul class="cm-ts-target" aria-label="조사대상자"><li><span class="krds-badge small outline-success">특수학급 교사</span></li></ul>
+              <dl class="cm-ts-years">
+                <dt><i class="svg-icon ico-calendar" aria-hidden="true"></i>비교연도</dt>
+                <dd><ul><li>2017</li><li>2020</li><li>2023</li></ul></dd>
+              </dl>
+              <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 페이지네이션 : KRDS pagination -->
+        <div class="krds-pagination">
+          <span class="page-navi prev disabled">이전</span>
+          <div class="page-links">
+            <a class="page-link active" href="#"><span class="sr-only">현재페이지 </span>1</a>
+            <a class="page-link" href="#">2</a>
+            <a class="page-link" href="#">3</a>
+            <a class="page-link" href="#">4</a>
+            <a class="page-link" href="#">5</a>
+            <a class="page-link" href="#">6</a>
+            <a class="page-link" href="#">7</a>
+            <a class="page-link" href="#">8</a>
+            <a class="page-link" href="#">9</a>
+            <a class="page-link" href="#">10</a>
+          </div>
+          <a class="page-navi next" href="#">다음</a>
+        </div>
+        <!-- //페이지네이션 -->
       </div>
       <!-- //[04-1] 컨텐츠 -->
     </div>
