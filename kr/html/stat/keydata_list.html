@@ -32,7 +32,7 @@
 <body>
   <!--
     ==================================================================
-    핵심데이터 시각화 (Figma: 컨텐츠 > 핵심데이터시각화-list / view)
+    핵심데이터 시각화 목록 (Figma: 컨텐츠 > 핵심데이터시각화-list, node 10611:46398)
     공통 영역은 kr/tmpl 에서 인클루드합니다 (kr/js/include.js). 이 파일에는 페이지 컨텐츠만 둡니다.
       [01]~[03] 헤더             : kr/tmpl/header.html
       페이지 상단(브레드크럼·제목) : kr/tmpl/page-top.html (제목·설명은 메뉴 데이터, data-title · data-desc 로 변경 가능)
@@ -53,10 +53,231 @@
       <!-- 페이지 상단 : 브레드크럼 · 공유/인쇄 · 페이지 제목 -->
       <div data-include="page-top"></div>
 
-      <!-- [04-1] 컨텐츠 : .inner -->
-      <div class="inner cm-contents">
-        <!-- TODO: 핵심데이터 시각화 목록(list) 퍼블리싱 (Figma: 컨텐츠 > 핵심데이터시각화-list / view) -->
-        <p class="cm-todo">핵심데이터 시각화 목록(list) 컨텐츠 영역</p>
+      <!-- [04-1] 컨텐츠 : .inner (Figma: 컨텐츠 > 핵심데이터시각화-list, node 10611:46398) -->
+      <div class="inner cm-contents cm-keydata">
+        <!-- 조사 연도 탭 : KRDS 탭(fill full) + 가로 스크롤 변형 (_common/html/code/tab--scroll.html) -->
+        <div class="krds-tab-area layer cm-tab-scroll cm-kd-years">
+          <div class="tab fill full">
+            <ul role="tablist">
+              <li id="tab_kd_2008" role="tab" aria-selected="false" aria-controls="panel_kd_2008">
+                <button type="button" class="btn-tab">2008년</button>
+              </li>
+              <li id="tab_kd_2011" role="tab" aria-selected="false" aria-controls="panel_kd_2011">
+                <button type="button" class="btn-tab">2011년</button>
+              </li>
+              <li id="tab_kd_2014" role="tab" aria-selected="false" aria-controls="panel_kd_2014">
+                <button type="button" class="btn-tab">2014년</button>
+              </li>
+              <li id="tab_kd_2017" role="tab" aria-selected="false" aria-controls="panel_kd_2017">
+                <button type="button" class="btn-tab">2017년</button>
+              </li>
+              <li id="tab_kd_2020" role="tab" aria-selected="false" aria-controls="panel_kd_2020">
+                <button type="button" class="btn-tab">2020년</button>
+              </li>
+              <li id="tab_kd_2023" role="tab" aria-selected="true" aria-controls="panel_kd_2023" class="active">
+                <button type="button" class="btn-tab">2023년</button>
+              </li>
+              <li id="tab_kd_2026" role="tab" aria-selected="false" aria-controls="panel_kd_2026">
+                <button type="button" class="btn-tab" disabled>2026년 예정</button>
+              </li>
+            </ul>
+            <div class="cm-tab-scroll-nav prev" hidden>
+              <button type="button" class="cm-tab-scroll-btn"><span class="sr-only">이전 연도 보기</span><i class="svg-icon ico-angle left" aria-hidden="true"></i></button>
+            </div>
+            <div class="cm-tab-scroll-nav next" hidden>
+              <button type="button" class="cm-tab-scroll-btn"><span class="sr-only">다음 연도 보기</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></button>
+            </div>
+          </div>
+
+          <div class="tab-conts-wrap">
+            <section id="panel_kd_2008" aria-labelledby="tab_kd_2008" class="tab-conts" data-quick-nav="false">
+              <!-- 개발 시 2008년 핵심데이터로 2023년 패널과 같은 구조를 채웁니다. -->
+              <h2 class="sr-only">2008년 핵심데이터</h2>
+            </section>
+            <section id="panel_kd_2011" aria-labelledby="tab_kd_2011" class="tab-conts" data-quick-nav="false">
+              <!-- 개발 시 2011년 핵심데이터로 2023년 패널과 같은 구조를 채웁니다. -->
+              <h2 class="sr-only">2011년 핵심데이터</h2>
+            </section>
+            <section id="panel_kd_2014" aria-labelledby="tab_kd_2014" class="tab-conts" data-quick-nav="false">
+              <!-- 개발 시 2014년 핵심데이터로 2023년 패널과 같은 구조를 채웁니다. -->
+              <h2 class="sr-only">2014년 핵심데이터</h2>
+            </section>
+            <section id="panel_kd_2017" aria-labelledby="tab_kd_2017" class="tab-conts" data-quick-nav="false">
+              <!-- 개발 시 2017년 핵심데이터로 2023년 패널과 같은 구조를 채웁니다. -->
+              <h2 class="sr-only">2017년 핵심데이터</h2>
+            </section>
+            <section id="panel_kd_2020" aria-labelledby="tab_kd_2020" class="tab-conts" data-quick-nav="false">
+              <!-- 개발 시 2020년 핵심데이터로 2023년 패널과 같은 구조를 채웁니다. -->
+              <h2 class="sr-only">2020년 핵심데이터</h2>
+            </section>
+            <section id="panel_kd_2023" aria-labelledby="tab_kd_2023" class="tab-conts active" data-quick-nav="false">
+              <h2 class="sr-only">2023년 핵심데이터</h2>
+              <!-- 주제 : KRDS 라디오 칩 (시계열 시각화 목록과 같은 칩 상자) -->
+              <fieldset class="krds-check-area cm-chip-box">
+                <legend class="sr-only">주제 선택</legend>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="kd_topic" id="kd_topic_all" value="all" checked>
+                  <label class="krds-form-chip-outline" for="kd_topic_all">전체 (86)</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="kd_topic" id="kd_topic_target" value="target">
+                  <label class="krds-form-chip-outline" for="kd_topic_target">대상자현황 (26)</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="kd_topic" id="kd_topic_curri" value="curri">
+                  <label class="krds-form-chip-outline" for="kd_topic_curri">교육과정 (38)</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="kd_topic" id="kd_topic_service" value="service">
+                  <label class="krds-form-chip-outline" for="kd_topic_service">관련서비스 (11)</label>
+                </div>
+                <div class="krds-form-chip medium">
+                  <input type="radio" class="radio" name="kd_topic" id="kd_topic_admin" value="admin">
+                  <label class="krds-form-chip-outline" for="kd_topic_admin">행정조직 (11)</label>
+                </div>
+              </fieldset>
+
+              <div class="cm-board">
+                <!-- 목록 상단 : 게시물 수 · 목록 표시 개수 · 검색 -->
+                <div class="cm-board-top">
+                  <div class="cm-board-count" aria-live="polite">
+                    <p class="total">총 <span class="num">38</span>개</p>
+                    <p class="page"><span class="sr-only">현재 페이지</span><span class="current">1</span> / <span class="sr-only">전체 페이지</span><span class="last">24</span> <span class="unit">페이지</span></p>
+                  </div>
+                  <div class="cm-board-search">
+                    <div class="cm-select-sort">
+                      <label for="list_size">목록 표시 개수</label>
+                      <select id="list_size" class="krds-form-select-sort medium">
+                        <option value="12" selected>12개</option>
+                        <option value="24">24개</option>
+                        <option value="48">48개</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-conts btn-ico-wrap">
+                        <input type="text" id="search_keyword" class="krds-input" placeholder="검색어를 입력해주세요." title="검색어 입력">
+                        <button type="button" class="krds-btn medium icon">
+                          <span class="sr-only">검색</span>
+                          <i class="svg-icon ico-sch"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 핵심데이터 카드 : 카드 전체를 누르면 상세로 이동 (제목 링크를 카드 크기로 넓힘, "결과보기"는 보이는 표시만) -->
+                <ul class="cm-kd-list">
+            <li class="cm-kd-card">
+              <span class="krds-badge small bg-light-gray"><span class="sr-only">분류 </span>대상자 현황·선정·진단</span>
+              <h3 class="tit"><a href="keydata_view.html">특수교육대상자 모집단 수합 현황</a></h3>
+              <p class="cm-kd-stat"><span class="label">일반학교</span> <span class="value"><span class="kind">비율</span> <strong>77.2%</strong></span></p>
+              <ul class="cm-kd-target" aria-label="조사대상"><li><span class="krds-badge small outline-gray">전체</span></li></ul>
+              <span class="krds-btn small tertiary cm-kd-more" aria-hidden="true">결과보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-kd-card">
+              <span class="krds-badge small bg-light-gray"><span class="sr-only">분류 </span>대상자 현황·선정·진단</span>
+              <h3 class="tit"><a href="keydata_view.html">특수교육대상자 최초 선정·배치 시기</a></h3>
+              <p class="cm-kd-stat"><span class="label">초등학교 1학년</span> <span class="value"><span class="kind">최다</span> <strong>25.6%</strong></span></p>
+              <ul class="cm-kd-target" aria-label="조사대상"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <span class="krds-btn small tertiary cm-kd-more" aria-hidden="true">결과보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-kd-card">
+              <span class="krds-badge small bg-light-gray"><span class="sr-only">분류 </span>대상자 현황·선정·진단</span>
+              <h3 class="tit"><a href="keydata_view.html">취학유예·유예 이유</a></h3>
+              <p class="cm-kd-stat"><span class="label">장애 호전 후 입학</span> <span class="value"><span class="kind">최다</span> <strong>69.5%</strong></span></p>
+              <ul class="cm-kd-target" aria-label="조사대상"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <span class="krds-btn small tertiary cm-kd-more" aria-hidden="true">결과보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-kd-card">
+              <span class="krds-badge small bg-light-gray"><span class="sr-only">분류 </span>대상자 현황·선정·진단</span>
+              <h3 class="tit"><a href="keydata_view.html">장애 진단 시기</a></h3>
+              <p class="cm-kd-stat"><span class="label">발견 시기와 동일</span> <span class="value"><span class="kind">최다</span> <strong>29.3%</strong></span></p>
+              <ul class="cm-kd-target" aria-label="조사대상"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <span class="krds-btn small tertiary cm-kd-more" aria-hidden="true">결과보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-kd-card">
+              <span class="krds-badge small bg-light-gray"><span class="sr-only">분류 </span>대상자 현황·선정·진단</span>
+              <h3 class="tit"><a href="keydata_view.html">장애 발견(의심) 시기와 장애 진단 시기가 차이 나는 이유</a></h3>
+              <p class="cm-kd-stat"><span class="label">자라면서 나아질 것이라 여겨서</span> <span class="value"><span class="kind">최다</span> <strong>51.6%</strong></span></p>
+              <ul class="cm-kd-target" aria-label="조사대상"><li><span class="krds-badge small outline-gray">보호자</span></li></ul>
+              <span class="krds-btn small tertiary cm-kd-more" aria-hidden="true">결과보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-kd-card">
+              <span class="krds-badge small bg-light-gray"><span class="sr-only">분류 </span>진로·직업교육</span>
+              <h3 class="tit"><a href="keydata_view.html">진로·직업교과(직업교육) 편성 현황</a></h3>
+              <p class="cm-kd-stat"><span class="label">편성·운영하고 있음</span> <span class="value"><strong>84.6%</strong></span></p>
+              <ul class="cm-kd-target" aria-label="조사대상"><li><span class="krds-badge small outline-gray">특수학교교사</span></li><li><span class="krds-badge small outline-gray">특수학급교사</span></li></ul>
+              <span class="krds-btn small tertiary cm-kd-more" aria-hidden="true">결과보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-kd-card">
+              <span class="krds-badge small bg-light-gray"><span class="sr-only">분류 </span>진로·직업교육</span>
+              <h3 class="tit"><a href="keydata_view.html">진로·직업교육 실시 형태</a></h3>
+              <p class="cm-kd-stat"><span class="label">교내 작업활동</span> <span class="value"><strong>47.0%</strong></span></p>
+              <ul class="cm-kd-target" aria-label="조사대상"><li><span class="krds-badge small outline-gray">특수학교교사</span></li><li><span class="krds-badge small outline-gray">특수학급교사</span></li></ul>
+              <span class="krds-btn small tertiary cm-kd-more" aria-hidden="true">결과보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-kd-card">
+              <span class="krds-badge small bg-light-gray"><span class="sr-only">분류 </span>진로·직업교육</span>
+              <h3 class="tit"><a href="keydata_view.html">진로·직업교육 요구사항</a></h3>
+              <p class="cm-kd-stat"><span class="label">취업 연결 부서의 설치</span> <span class="value"><strong>31.1%</strong></span></p>
+              <ul class="cm-kd-target" aria-label="조사대상"><li><span class="krds-badge small outline-gray">특수학교교사</span></li><li><span class="krds-badge small outline-gray">특수학급교사</span></li></ul>
+              <span class="krds-btn small tertiary cm-kd-more" aria-hidden="true">결과보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-kd-card">
+              <span class="krds-badge small bg-light-gray"><span class="sr-only">분류 </span>진로·직업교육</span>
+              <h3 class="tit"><a href="keydata_view.html">개별화교육계획의 전환교육계획 포함 여부</a></h3>
+              <p class="cm-kd-stat"><span class="label">전환교육의 관점을 담고 있음</span> <span class="value"><strong>41.0%</strong></span></p>
+              <ul class="cm-kd-target" aria-label="조사대상"><li><span class="krds-badge small outline-gray">특수학교교사</span></li><li><span class="krds-badge small outline-gray">특수학급교사</span></li></ul>
+              <span class="krds-btn small tertiary cm-kd-more" aria-hidden="true">결과보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-kd-card">
+              <span class="krds-badge small bg-light-gray"><span class="sr-only">분류 </span>교육과정·평가·통합교육</span>
+              <h3 class="tit"><a href="keydata_view.html">교육과정 편성·운영 방법</a></h3>
+              <p class="cm-kd-stat"><span class="label">기본교육과정</span> <span class="value"><strong>50.3%</strong></span></p>
+              <ul class="cm-kd-target" aria-label="조사대상"><li><span class="krds-badge small outline-gray">특수학교교사</span></li><li><span class="krds-badge small outline-gray">특수학급교사</span></li></ul>
+              <span class="krds-btn small tertiary cm-kd-more" aria-hidden="true">결과보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-kd-card">
+              <span class="krds-badge small bg-light-gray"><span class="sr-only">분류 </span>교육과정·평가·통합교육</span>
+              <h3 class="tit"><a href="keydata_view.html">교육과정 편성·운영 재량권</a></h3>
+              <p class="cm-kd-stat"><span class="label">단위학교와 학급에 더 많은 재량권</span> <span class="value"><strong>82.0%</strong></span></p>
+              <ul class="cm-kd-target" aria-label="조사대상"><li><span class="krds-badge small outline-gray">특수학교교사</span></li><li><span class="krds-badge small outline-gray">특수학급교사</span></li></ul>
+              <span class="krds-btn small tertiary cm-kd-more" aria-hidden="true">결과보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+            <li class="cm-kd-card">
+              <span class="krds-badge small bg-light-gray"><span class="sr-only">분류 </span>교육과정·평가·통합교육</span>
+              <h3 class="tit"><a href="keydata_view.html">개별화교육계획 작성자</a></h3>
+              <p class="cm-kd-stat"><span class="label">특수교사 단독 작성</span> <span class="value"><strong>77.2%</strong></span></p>
+              <ul class="cm-kd-target" aria-label="조사대상"><li><span class="krds-badge small outline-gray">특수학교교사</span></li><li><span class="krds-badge small outline-gray">특수학급교사</span></li></ul>
+              <span class="krds-btn small tertiary cm-kd-more" aria-hidden="true">결과보기 <i class="svg-icon ico-sch-plus"></i></span>
+            </li>
+                </ul>
+              </div>
+
+              <!-- 페이지네이션 : KRDS pagination -->
+              <div class="krds-pagination">
+                <span class="page-navi prev disabled">이전</span>
+                <div class="page-links">
+                  <a class="page-link active" href="#"><span class="sr-only">현재페이지 </span>1</a>
+                  <a class="page-link" href="#">2</a>
+                  <a class="page-link" href="#">3</a>
+                  <a class="page-link" href="#">4</a>
+                  <a class="page-link" href="#">5</a>
+                  <a class="page-link" href="#">6</a>
+                  <a class="page-link" href="#">7</a>
+                  <a class="page-link" href="#">8</a>
+                  <a class="page-link" href="#">9</a>
+                  <a class="page-link" href="#">10</a>
+                </div>
+                <a class="page-navi next" href="#">다음</a>
+              </div>
+            </section>
+            <section id="panel_kd_2026" aria-labelledby="tab_kd_2026" class="tab-conts" data-quick-nav="false">
+              <h2 class="sr-only">2026년 핵심데이터</h2>
+              <p class="cm-history-ready">조사 결과를 준비하고 있습니다.</p>
+            </section>
+          </div>
+        </div>
       </div>
       <!-- //[04-1] 컨텐츠 -->
     </div>
