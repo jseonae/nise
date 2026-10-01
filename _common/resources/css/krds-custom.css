@@ -194,6 +194,40 @@
   color: var(--cm-color-text-subtle);
 }
 
+/* [페이지 상단] 공유하기 팝업 : KRDS 맥락적 도움말(.krds-contextual-help.bottom.left) 변형 (Figma: 컨텐츠 > share-modal)
+   - 버튼은 공유/인쇄 버튼과 같은 테두리형, 팝업 안에는 SNS 버튼 5개 */
+.cm-share .tooltip-action .tooltip-btn.krds-btn.icon.border {
+  justify-content: center;
+  background-color: var(--cm-color-surface-white);
+}
+.cm-share .tooltip-popover {
+  padding: var(--krds-padding-7) var(--krds-padding-8);
+}
+@media (min-width: 769px) {
+  .cm-share .tooltip-popover {
+    width: max-content !important; /* KRDS 스크립트가 열 때 360px 을 넣음 → Figma처럼 내용 폭에 맞춤 */
+  }
+}
+.cm-share .tooltip-popover .tooltip-close {
+  top: var(--krds-padding-7);
+  right: var(--krds-padding-8);
+}
+.krds-contextual-help.cm-share .tooltip-popover .cm-share-list {
+  flex-direction: row;
+  gap: var(--krds-gap-4);
+}
+.cm-share .cm-share-btn {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--krds-radius-max);
+}
+.cm-share .cm-share-btn img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 /* 상세(view) 화면 : 페이지 제목 없이 브레드크럼 · 공유/인쇄만 (Figma 116px 변형) */
 .cm-page-top.cm-page-top-view {
   padding-bottom: var(--krds-number-13);
