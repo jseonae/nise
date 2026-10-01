@@ -61,7 +61,7 @@ const cmTabScroll = {
 };
 document.addEventListener("DOMContentLoaded", () => cmTabScroll.init());
 
-/* AI 해설 도우미 (.cm-ai, 마크업 kr/tmpl/ai-helper.html · _common/html/code/ext_ai_helper.html)
+/* AI 해설 도우미 (.cm-ai, 마크업 _common/html/code/ext_ai_helper.html, 화면마다 페이지에 둠)
    - 여는 버튼 → 대화 창(처음 안내). 질문 예시를 누르거나 질문을 보내면 대화 진행 화면으로 바뀜
    - Esc · 닫기 버튼으로 닫고 초점을 여는 버튼으로 되돌림, "오늘 하루 열지 않기"는 말풍선만 하루 숨김
    - [퍼블리싱 확인용] 대화 진행 화면에는 Figma 예시 대화가 들어 있고, 새로 보낸 질문에는 Figma의 "답변을 만들지 못했어요."를 붙임

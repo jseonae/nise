@@ -1962,7 +1962,38 @@
   }
 }
 
-/* [AI 해설 도우미] 신규 컴포넌트 (KRDS 없음, Figma 그대로) : _common/html/code/ext_ai_helper.html · kr/tmpl/ai-helper.html
+/* [통계정보] 핵심데이터 시각화 상세 (Figma: 컨텐츠 > 핵심데이터시각화-view) : 시계열 시각화 상세(.cm-ts-*)와 같은 틀 */
+/* 조회 연도 : 바꿀 수 없는 표시 값 (Figma 테두리 상자 32px) */
+.cm-ts-year {
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-3);
+  font-size: var(--krds-pc-font-size-label-small);
+  color: var(--cm-color-text-basic);
+}
+.cm-ts-year dd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7rem;
+  height: var(--krds-number-12);
+  padding: 0 var(--krds-padding-3);
+  border: 0.1rem solid var(--cm-color-border-gray-dark);
+  border-radius: var(--krds-radius-small2);
+  font-size: var(--krds-pc-font-size-label-medium);
+  color: var(--cm-color-text-subtle);
+}
+.cm-kd-desc {
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-subtle);
+}
+.cm-kd-view .cm-stat-table .tbl.data thead tr > :first-child,
+.cm-kd-view .cm-stat-table .tbl.data tbody tr > :first-child {
+  box-shadow: none; /* 두 칸 표 : 고정 칸 그림자 없음 (Figma) */
+}
+
+/* [AI 해설 도우미] 신규 컴포넌트 (KRDS 없음, Figma 그대로) : _common/html/code/ext_ai_helper.html (화면마다 페이지에 둠)
    Figma: 컨텐츠 > 시계열시각화-view chat-btn-wrap · -view-ai해설도우미오픈 · -view-ai해설도우미챗진행
    - 여는 버튼은 콘텐츠 내 탐색(오른쪽 고정) 아래에 붙여 둠 (KRDS in_page_navigation 위치 계산식과 같은 기준) */
 .cm-ai {
@@ -2251,6 +2282,14 @@
   border-radius: var(--krds-radius-medium1);
   font-size: var(--krds-pc-font-size-label-xsmall);
   color: var(--cm-color-text-subtle);
+}
+.cm-ai-links {
+  display: flex;
+  gap: 1rem;
+}
+.cm-ai-links .cm-ai-rate {
+  display: inline-flex;
+  align-items: center;
 }
 .cm-ai-rate:hover {
   background-color: var(--cm-color-box-surface);
