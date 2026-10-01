@@ -53,10 +53,208 @@
       <!-- 페이지 상단 : 브레드크럼 · 공유/인쇄 · 페이지 제목 -->
       <div data-include="page-top"></div>
 
-      <!-- [04-1] 컨텐츠 : .inner -->
-      <div class="inner cm-contents">
-        <!-- TODO: 조사개요 본문 퍼블리싱 (Figma: 컨텐츠 > s03알림마당_조사개요) -->
-        <p class="cm-todo">조사개요 본문 컨텐츠 영역</p>
+      <!-- [04-1] 컨텐츠 : .inner (Figma: 컨텐츠 > s03알림마당_조사개요) -->
+      <div class="inner cm-contents cm-overview">
+
+        <!-- 요약 : 진행 회차 · 주기 · 기관 · 조사대상 -->
+        <section id="section_01" class="cm-section">
+          <h2 class="sr-only">조사개요 요약</h2>
+          <ul class="cm-summary">
+            <li><strong class="tit">총 진행 회차</strong><span class="val">6회</span></li>
+            <li><strong class="tit">조사 주기</strong><span class="val">3년</span></li>
+            <li><strong class="tit">조사기관</strong><span class="val">국립특수교육원</span></li>
+          </ul>
+          <div class="cm-summary-target">
+            <h3 class="tit">조사대상</h3>
+            <ul class="cm-dot-list">
+              <li>특수교육대상자 보호자</li>
+              <li>특수학급 교사</li>
+              <li>특수학교 관리자</li>
+              <li>장애영아 보호자</li>
+              <li>특수학교 교사</li>
+              <li>장애영아 관리자</li>
+              <li>특수학급 관리자</li>
+              <li>장애영아 교사</li>
+            </ul>
+          </div>
+          <div class="cm-summary-desc">
+            <p>특수교육 실태조사는 <strong class="cm-point">「장애인 등에 대한 특수교육법」 제13조</strong>에 따라 교육부장관이 <strong>3년마다 실시하고 그 결과를 공표하여야 하는</strong> 법정 조사로, 2008년 국가승인통계 제112014호로 승인받았습니다. <strong class="cm-point">같은 법 시행령 제8조</strong>에 따라 특수교육대상자의 현황, 특수교육기관과 교육과정의 운영 실태, 특수교육 관련서비스 제공 현황, 행정조직과 재정, 교육성과와 만족도까지 일곱 개 부문을 다룹니다.</p>
+            <p>조사는 <strong>전국의 특수교육대상자 보호자와 특수학교·특수학급의 관리자 및 교사, 장애영아 보호자와 담당 교사·관리자</strong>를 대상으로 <strong>면접조사와 온라인조사</strong>를 함께 써서 이루어집니다. 그 결과는 특수교육 정책의 수립과 시행을 위한 기초자료로 활용되며, 조사 다음 해에 「특수교육 실태조사 보고서」로 발간되어 국립특수교육원 누리집과 국가통계포털(KOSIS)에서 확인할 수 있습니다.</p>
+          </div>
+        </section>
+
+        <!-- 조사 근거·목적·대상 -->
+        <section id="section_02" class="cm-section">
+          <h2 class="cm-section-tit">조사 근거·목적·대상</h2>
+          <dl class="cm-info-rows">
+            <div>
+              <dt>조사 근거</dt>
+              <dd>
+                <ul>
+                  <li>「장애인 등에 대한 특수교육법」 제13조 특수교육 실태조사</li>
+                  <li>「장애인 등에 대한 특수교육법 시행령」 제8조 실태조사에 포함되어야 하는 사항</li>
+                  <li>국가승인통계 제112014호</li>
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>조사 목적</dt>
+              <dd>
+                <ul>
+                  <li>특수교육대상자의 교육 실태와 요구 파악</li>
+                  <li>특수교육 정책 및 시행을 위한 기초자료 제공</li>
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>조사 대상</dt>
+              <dd>
+                <ul class="cm-dot-list cm-target-rows">
+                  <li><strong>특수교육 실태조사</strong> <span>특수교육대상자 보호자 · 특수학교 관리자 · 특수학교 교사 · 특수학급 관리자 · 특수학급 교사</span></li>
+                  <li><strong>장애영아 실태조사</strong> <span>장애영아 보호자 · 장애영아 관리자 · 장애영아 교사</span></li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- 조사 절차 (마지막 단계 .is-current 강조) -->
+        <section id="section_03" class="cm-section">
+          <h2 class="cm-section-tit">조사 절차</h2>
+          <ol class="cm-process">
+            <li><span class="num">01</span><span class="txt">조사 근거</span></li>
+            <li><span class="num">02</span><span class="txt">조사 준비</span></li>
+            <li><span class="num">03</span><span class="txt">실태조사</span></li>
+            <li><span class="num">04</span><span class="txt">자료 처리 및 분석</span></li>
+            <li class="is-current"><span class="num">05</span><span class="txt">공표</span></li>
+          </ol>
+        </section>
+
+        <!-- 조사 연혁 : 최신 회차가 위 (진행 예정 회차 .is-current) -->
+        <section id="section_04" class="cm-section">
+          <h2 class="cm-section-tit">조사 연혁</h2>
+          <ol class="cm-history">
+              <li class="is-current">
+                <strong class="year">2026<span class="sr-only">년</span></strong>
+                <div class="card">
+                  <div class="top">
+                    <span class="krds-badge bg-primary">제7차</span>
+                    <div class="summary">
+                      <p class="tit">2026년 실시 예정</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <strong class="year">2023<span class="sr-only">년</span></strong>
+                <div class="card">
+                  <div class="top">
+                    <span class="krds-badge bg-light-primary">제6차</span>
+                    <div class="summary">
+                      <p class="tit">법적 7개 조사 부문 조사 실시</p>
+                      <p class="sub">장애인 평생교육 과정 및 시설 운영 현황 조사 부문 별도 조사로 분리 수행</p>
+                    </div>
+                  </div>
+                  <dl class="detail">
+                    <div><dt>조사 대상</dt><dd>특수교육대상학생 및 보호자 · 특수학교(급) 관리자 및 교사 · 장애인 시설(기관) · 장애영아 및 보호자</dd></div>
+                    <div><dt>조사 방법</dt><dd>가구 면접 조사 · 방문조사 · 온라인 조사 · 직접 대면조사(TAPI)</dd></div>
+                  </dl>
+                </div>
+              </li>
+              <li>
+                <strong class="year">2020<span class="sr-only">년</span></strong>
+                <div class="card">
+                  <div class="top">
+                    <span class="krds-badge bg-light-primary">제5차</span>
+                    <div class="summary">
+                      <p class="tit">법적 7개 조사 부문 조사 실시</p>
+                      <p class="sub">장애인 평생교육 과정 및 시설 운영 현황 조사 부문 별도 조사로 분리 수행</p>
+                    </div>
+                  </div>
+                  <dl class="detail">
+                    <div><dt>조사 대상</dt><dd>특수교육대상학생 및 보호자 · 특수학교(급) 관리자 및 교사 · 장애인 시설(기관) · 장애영아 및 보호자</dd></div>
+                    <div><dt>조사 방법</dt><dd>가구 면접 조사 · 방문조사 · 온라인 조사 · 직접 대면조사(TAPI)<br><span class="note">※ 코로나19로 비대면(온라인)조사 방식 도입</span></dd></div>
+                  </dl>
+                </div>
+              </li>
+              <li>
+                <strong class="year">2017<span class="sr-only">년</span></strong>
+                <div class="card">
+                  <div class="top">
+                    <span class="krds-badge bg-light-primary">제4차</span>
+                    <div class="summary">
+                      <p class="tit">법적 8개 조사 부문 조사 실시</p>
+                    </div>
+                  </div>
+                  <dl class="detail">
+                    <div><dt>조사 대상</dt><dd>특수교육대상학생 및 보호자 · 특수학교(급) 관리자 및 교사 · 장애인 시설(기관) · 장애영아 및 보호자</dd></div>
+                    <div><dt>조사 방법</dt><dd>가구 면접 조사 · 방문조사 · 온라인 조사 · 직접 대면조사(TAPI)</dd></div>
+                  </dl>
+                </div>
+              </li>
+              <li>
+                <strong class="year">2014<span class="sr-only">년</span></strong>
+                <div class="card">
+                  <div class="top">
+                    <span class="krds-badge bg-light-primary">제3차</span>
+                  </div>
+                  <dl class="detail">
+                    <div><dt>조사 대상</dt><dd>특수교육대상학생 및 보호자 · 특수학교(급) 관리자 및 교사 · 장애인 시설(기관) · 장애영아 및 보호자</dd></div>
+                    <div><dt>조사 방법</dt><dd>가구 면접 조사 · 방문조사 · 온라인 조사</dd></div>
+                  </dl>
+                </div>
+              </li>
+              <li>
+                <strong class="year">2011<span class="sr-only">년</span></strong>
+                <div class="card">
+                  <div class="top">
+                    <span class="krds-badge bg-light-primary">제2차</span>
+                    <div class="summary">
+                      <p class="tit">법적 8개 조사 부문 조사 실시</p>
+                    </div>
+                  </div>
+                  <dl class="detail">
+                    <div><dt>조사 대상</dt><dd>특수교육대상학생 및 보호자 · 특수학교(급) 관리자 및 교사 · 장애인 시설(기관)</dd></div>
+                    <div><dt>조사 방법</dt><dd>면접 조사 · 방문조사 · 온라인 조사(모바일·누리집) 도입</dd></div>
+                  </dl>
+                </div>
+              </li>
+              <li>
+                <strong class="year">2008<span class="sr-only">년</span></strong>
+                <div class="card">
+                  <div class="top">
+                    <span class="krds-badge bg-light-primary">제1차</span>
+                    <div class="summary">
+                      <p class="tit">「장애인 등에 대한 특수교육법」 시행 후 최초로 실시한 조사</p>
+                      <p class="sub">법적 8개 조사 부문 중 6개 영역의 조사 실시</p>
+                    </div>
+                  </div>
+                  <dl class="detail">
+                    <div><dt>조사 대상</dt><dd>특수교육대상학생 및 보호자 · 특수학교(급) 관리자 및 교사</dd></div>
+                    <div><dt>조사 방법</dt><dd>면접 조사 · 방문조사</dd></div>
+                  </dl>
+                </div>
+              </li>
+          </ol>
+        </section>
+
+        <!-- 콘텐츠 내 탐색 : KRDS in_page_navigation (화면 오른쪽 고정) -->
+        <div class="krds-in-page-navigation-type">
+          <div class="krds-in-page-navigation-area">
+            <div class="in-page-navigation-header">
+              <p class="quick-caption">이 페이지의 구성</p>
+              <p class="quick-title">조사개요</p>
+            </div>
+            <nav class="in-page-navigation-list" aria-label="이 페이지의 구성">
+              <ul>
+                <li><a href="#section_01" class="active">조사개요</a></li>
+                <li><a href="#section_02">조사 근거·목적·대상</a></li>
+                <li><a href="#section_03">조사 절차</a></li>
+                <li><a href="#section_04">조사 연혁</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
       <!-- //[04-1] 컨텐츠 -->
     </div>

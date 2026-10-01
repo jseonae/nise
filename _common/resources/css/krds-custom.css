@@ -33,6 +33,11 @@
   --cm-color-attach-border: var(--krds-light-color-border-secondary-light);
   --cm-color-attach-item: var(--krds-light-color-surface-white-subtle);
   --cm-color-box-surface: var(--krds-light-color-surface-gray-subtler);
+  --cm-color-element-primary: var(--krds-light-color-element-primary);
+  --cm-color-element-secondary: var(--krds-light-color-element-secondary);
+  --cm-color-border-primary-light: var(--krds-light-color-border-primary-light);
+  --cm-color-border-primary: var(--krds-light-color-border-primary);
+  --cm-color-text-inverse: var(--krds-light-color-text-inverse-static);
 }
 
 /* [헤더] 사이트 로고 (KRDS 기본 로고 이미지 교체) */
@@ -546,6 +551,295 @@
   }
 }
 
+/* [알림마당] 조사개요 (Figma: 컨텐츠 > s03알림마당_조사개요) */
+.cm-overview {
+  gap: var(--krds-number-18);
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+}
+.cm-overview .cm-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-7);
+}
+.cm-overview .cm-section-tit {
+  font-size: var(--krds-pc-font-size-heading-large);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+/* 점 목록 (Figma list__atomic_bullet : 6px 점) */
+.cm-dot-list > li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.cm-dot-list > li::before {
+  content: "";
+  position: absolute;
+  top: calc(0.75em - 0.3rem);
+  left: 0;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: var(--krds-radius-max);
+  background-color: var(--cm-color-text-subtle);
+}
+/* 요약 카드 */
+.cm-overview .cm-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+}
+.cm-overview .cm-summary > li,
+.cm-overview .cm-summary-target {
+  display: flex;
+  flex-direction: column;
+  border: 0.1rem solid var(--cm-color-border-primary-light);
+  border-radius: var(--krds-radius-large1);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-overview .cm-summary > li {
+  gap: var(--krds-gap-2);
+  padding: var(--krds-padding-8) var(--krds-padding-8) var(--krds-number-12);
+  font-size: var(--krds-pc-font-size-heading-xsmall);
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-overview .cm-summary .tit {
+  color: var(--cm-color-text-bolder);
+}
+.cm-overview .cm-summary .val {
+  color: var(--cm-color-text-primary);
+}
+.cm-overview .cm-summary-target {
+  gap: var(--krds-gap-4);
+  margin-top: calc(1.8rem - var(--krds-gap-7));
+  padding: var(--krds-number-12);
+}
+.cm-overview .cm-summary-target .tit {
+  font-size: var(--krds-pc-font-size-heading-xsmall);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-bolder);
+}
+.cm-overview .cm-summary-target .cm-dot-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, auto);
+  grid-auto-columns: 20rem;
+  gap: var(--krds-gap-3) var(--krds-gap-8);
+}
+.cm-overview .cm-summary-desc p + p {
+  margin-top: 1.5em;
+}
+.cm-overview .cm-point {
+  color: var(--cm-color-text-primary);
+}
+/* 조사 근거·목적·대상 */
+.cm-overview .cm-info-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-5);
+  padding: var(--krds-padding-8) 0;
+  border-top: 0.1rem solid var(--cm-color-divider);
+  border-bottom: 0.1rem solid var(--cm-color-divider);
+}
+.cm-overview .cm-info-rows > div {
+  display: flex;
+  gap: var(--krds-gap-7);
+}
+.cm-overview .cm-info-rows dt {
+  flex: 0 0 12rem;
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-bolder);
+}
+.cm-overview .cm-info-rows dd ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-3);
+}
+.cm-overview .cm-target-rows strong {
+  margin-right: var(--krds-gap-4);
+  color: var(--cm-color-text-subtle);
+}
+.cm-overview .cm-target-rows span {
+  font-size: var(--krds-pc-font-size-body-small);
+}
+/* 조사 절차 */
+.cm-overview .cm-process {
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-7);
+}
+.cm-overview .cm-process > li {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--krds-gap-4);
+  height: 12.4rem;
+  border: 0.1rem solid var(--cm-color-border-light);
+  border-radius: var(--krds-radius-xlarge2);
+  background-color: var(--cm-color-surface-white);
+  text-align: center;
+}
+.cm-overview .cm-process > li + li::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc(var(--krds-gap-7) * -1);
+  width: var(--krds-gap-7);
+  height: var(--krds-icon--size-large);
+  transform: translateY(-50%);
+  background-color: var(--cm-color-divider);
+  -webkit-mask: url(../../../krds/resources/img/component/icon/ico_angle.svg) no-repeat center / 2rem;
+  mask: url(../../../krds/resources/img/component/icon/ico_angle.svg) no-repeat center / 2rem;
+  rotate: -90deg;
+}
+.cm-overview .cm-process .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: var(--krds-radius-max);
+  background-color: var(--cm-color-element-secondary);
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-inverse);
+}
+.cm-overview .cm-process .is-current {
+  border-color: var(--cm-color-border-primary);
+}
+.cm-overview .cm-process .is-current .num {
+  background-color: var(--cm-color-element-primary);
+}
+.cm-overview .cm-process .is-current .txt {
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-primary);
+}
+/* 조사 연혁 : 연도 원 + 카드, 왼쪽 세로선으로 연결 */
+.cm-overview .cm-history {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-7);
+}
+.cm-overview .cm-history::before {
+  content: "";
+  position: absolute;
+  top: 3.4rem;
+  bottom: 3.4rem;
+  left: 3.4rem;
+  width: 0.1rem;
+  background-color: var(--cm-color-divider-light);
+}
+.cm-overview .cm-history > li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-8);
+}
+.cm-overview .cm-history .year {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 0 0 6.8rem;
+  align-items: center;
+  justify-content: center;
+  height: 6.8rem;
+  border-radius: var(--krds-radius-max);
+  background-color: var(--cm-color-element-secondary);
+  font-size: var(--krds-pc-font-size-heading-xsmall);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-inverse);
+}
+.cm-overview .cm-history .year::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: var(--krds-gap-8);
+  border-top: 0.1rem dashed var(--cm-color-divider);
+}
+.cm-overview .cm-history .card {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--krds-gap-7);
+  padding: var(--krds-number-12);
+  border: 0.1rem solid var(--cm-color-attach-border);
+  border-radius: var(--krds-radius-xlarge2);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-overview .cm-history .top {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--krds-gap-7);
+}
+.cm-overview .cm-history .summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-1);
+  color: var(--cm-color-text-bolder);
+}
+.cm-overview .cm-history .summary .sub {
+  font-size: var(--krds-pc-font-size-body-small);
+}
+.cm-overview .cm-history .detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-3);
+  padding-top: var(--krds-gap-7);
+  border-top: 0.1rem solid var(--cm-color-divider-light);
+  font-size: var(--krds-pc-font-size-body-small);
+  color: var(--cm-color-text-subtle);
+}
+.cm-overview .cm-history .detail > div {
+  display: flex;
+  gap: var(--krds-gap-7);
+}
+.cm-overview .cm-history .detail dt {
+  flex: 0 0 auto;
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-overview .cm-history .detail .note {
+  font-size: var(--krds-pc-font-size-body-xsmall);
+}
+.cm-overview .cm-history .is-current .year {
+  background-color: var(--cm-color-element-primary);
+}
+.cm-overview .cm-history .is-current .card {
+  border-color: var(--cm-color-border-primary);
+}
+.cm-overview .cm-history .is-current .summary .tit {
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-subtle);
+}
+@media (max-width: 1023px) {
+  .cm-overview .cm-summary {
+    grid-template-columns: 1fr;
+  }
+  .cm-overview .cm-summary-target .cm-dot-list {
+    grid-auto-flow: row;
+    grid-template-rows: none;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cm-overview .cm-process {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cm-overview .cm-process > li + li::before {
+    display: none;
+  }
+  .cm-overview .cm-info-rows > div,
+  .cm-overview .cm-history .top,
+  .cm-overview .cm-history .detail > div {
+    flex-direction: column;
+    gap: var(--krds-gap-3);
+  }
+}
+
 /* [푸터] 사이트 로고 · 기관 정보 한 줄 배치 · 웹 접근성 인증마크 */
 @media (min-width: 1024px) {
   #krds-footer > .inner {
@@ -646,6 +940,11 @@
   --cm-color-attach-border: var(--krds-high-contrast-color-border-secondary-light);
   --cm-color-attach-item: var(--krds-high-contrast-color-surface-white-subtle);
   --cm-color-box-surface: var(--krds-high-contrast-color-surface-gray-subtler);
+  --cm-color-element-primary: var(--krds-high-contrast-color-element-primary);
+  --cm-color-element-secondary: var(--krds-high-contrast-color-element-secondary);
+  --cm-color-border-primary-light: var(--krds-high-contrast-color-border-primary-light);
+  --cm-color-border-primary: var(--krds-high-contrast-color-border-primary);
+  --cm-color-text-inverse: var(--krds-high-contrast-color-text-inverse-static);
 }
 @media (prefers-color-scheme: dark) {
   [data-krds-mode=theme] {
@@ -670,5 +969,10 @@
     --cm-color-attach-border: var(--krds-high-contrast-color-border-secondary-light);
     --cm-color-attach-item: var(--krds-high-contrast-color-surface-white-subtle);
     --cm-color-box-surface: var(--krds-high-contrast-color-surface-gray-subtler);
+    --cm-color-element-primary: var(--krds-high-contrast-color-element-primary);
+    --cm-color-element-secondary: var(--krds-high-contrast-color-element-secondary);
+    --cm-color-border-primary-light: var(--krds-high-contrast-color-border-primary-light);
+    --cm-color-border-primary: var(--krds-high-contrast-color-border-primary);
+    --cm-color-text-inverse: var(--krds-high-contrast-color-text-inverse-static);
   }
 }
