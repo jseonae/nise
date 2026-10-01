@@ -201,7 +201,14 @@
   background-color: var(--cm-color-surface-white);
 }
 .cm-share .tooltip-popover {
+  /* 말풍선 위치를 Figma에 맞춤 : KRDS 기본(버튼과 16px 띄움, 꼬리가 버튼 중앙보다 왼쪽)을
+     꼬리 끝이 버튼 아래에 닿고 꼬리가 버튼 가운데 오도록 조정 */
+  --krds-contextual-help--bubble-arrow-position-x: -1.5rem; /* 팝업 왼쪽 끝 = 버튼 왼쪽 - 15px */
+  --krds-contextual-help--bubble-margin-x: 2.7rem;          /* 꼬리 중심 = 버튼 가운데(20px) */
   padding: var(--krds-padding-7) var(--krds-padding-8);
+}
+.krds-contextual-help.bottom.cm-share .tooltip-popover {
+  margin-top: 1.1rem; /* Figma : 꼬리(높이 약 11px) 끝이 버튼 아래에 닿음 */
 }
 @media (min-width: 769px) {
   .cm-share .tooltip-popover {
