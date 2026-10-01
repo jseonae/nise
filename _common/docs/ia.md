@@ -33,4 +33,4 @@
 - `kr/js/include.js` 가 KRDS 스크립트보다 먼저 템플릿을 넣고, 위 메뉴 구조(파일 안 `MENU`)로 메인메뉴·모바일 메뉴·브레드크럼·페이지 제목과 현재 메뉴를 채웁니다. 메뉴가 바뀌면 이 표와 `MENU` 를 함께 고칩니다.
 - 로컬 서버(`python3 -m http.server`)로 열어야 동작합니다. 파일을 직접 여는 file:// 에서는 인클루드가 되지 않습니다.
 - 새 페이지는 `kr/html/sublayout.html` 을 복사해 `[04-1] 컨텐츠` 만 채웁니다.
-- 공공누리 표시는 `kr/tmpl/kogl/` 의 유형별 파일(type0 · type1 · type2 · type3 · type4 · typeAI)을 `<div data-include="kogl/type1"></div>` 처럼 넣습니다. 한국문화정보원 공통코드(https://www.kogl.or.kr/edu/eduDataView.do?dataIdx=170) 그대로이며, 개발 시 관리자가 글 등록 때 고른 유형을 인클루드합니다. 인공지능 학습용(typeAI)은 다른 유형 바로 뒤에 덧붙입니다.
+- 공공누리 표시는 공지사항용 `kr/tmpl/kogl/notice/`, 자료실용 `kr/tmpl/kogl/archive/` 의 유형별 파일(type0 · type1 · type2 · type3 · type4 · typeAI)을 `<div data-include="kogl/notice/type1"></div>` 처럼 넣습니다. 문구는 Figma 공공누리 컴포넌트 기준이고, 마크 이미지·클래스는 한국문화정보원 공통코드(https://www.kogl.or.kr/edu/eduDataView.do?dataIdx=170)를 씁니다. 개발 시 관리자가 글 등록 때 고른 유형을 인클루드합니다.
