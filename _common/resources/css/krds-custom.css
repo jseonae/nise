@@ -2368,6 +2368,31 @@
   }
 }
 
+/* [공통] 빈 상태 · 준비 중 안내 (신규 컴포넌트 _common/html/code/ext_empty.html, Figma: s02데이터분석_교차분석 페이지준비중) */
+.cm-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--krds-gap-3);
+  padding: var(--krds-padding-10) 0 10rem; /* Figma 40px 0 100px */
+  text-align: center;
+  color: var(--cm-color-text-subtle);
+}
+.cm-empty img {
+  width: 16.4rem;
+  height: auto;
+  opacity: 0.55; /* Figma 그림 투명도 */
+}
+.cm-empty .tit {
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+}
+.cm-empty .txt {
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+}
+
 /* [AI 해설 도우미] 신규 컴포넌트 (KRDS 없음, Figma 그대로) : _common/html/code/ext_ai_helper.html (화면마다 페이지에 둠)
    Figma: 컨텐츠 > 시계열시각화-view chat-btn-wrap · -view-ai해설도우미오픈 · -view-ai해설도우미챗진행
    - 여는 버튼은 콘텐츠 내 탐색(오른쪽 고정) 아래에 붙여 둠 (KRDS in_page_navigation 위치 계산식과 같은 기준) */

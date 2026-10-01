@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko" data-krds-mode="light">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="format-detection" content="telephone=no">
+  <title>교차분석 | 데이터분석 | 특수교육 실태조사 데이터 활용 플랫폼</title>
+
+  <!-- 파비콘 (KRDS 1.1.0) -->
+  <link rel="icon" type="image/svg+xml" href="../../../krds/resources/img/component/favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="512x512" href="../../../krds/resources/img/component/favicon/favicon-512x512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../../../krds/resources/img/component/favicon/favicon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../krds/resources/img/component/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="../../../krds/resources/img/component/favicon/favicon-192x192.png">
+
+  <!-- css : KRDS (원본, 수정 금지) -->
+  <link rel="stylesheet" href="../../../krds/resources/css/plugin/swiper-bundle.min.css">
+  <link rel="stylesheet" href="../../../krds/resources/css/component/output.css">
+  <!-- css : 커스텀 -->
+  <link rel="stylesheet" href="../../../_common/resources/css/krds-base.css"><!-- KRDS 기본 보정 -->
+  <link rel="stylesheet" href="../../../_common/resources/css/krds-custom.css">
+  <link rel="stylesheet" href="../../css/krds-theme.css">
+  <link rel="stylesheet" href="../../css/user-custom.css">
+
+  <!-- script : 글자·화면 표시 설정 (화면 깜빡임 방지를 위해 head에서 불러옴) -->
+  <script src="../../../_common/resources/js/krds-display.js"></script>
+</head>
+
+<body>
+  <!--
+    ==================================================================
+    교차분석 준비 중 (Figma: 컨텐츠 > s02데이터분석_교차분석 페이지준비중) : 조사대상자·문항을 골랐지만 아직 결과 화면이 없을 때
+    공통 영역은 kr/tmpl 에서 인클루드합니다 (kr/js/include.js). 이 파일에는 페이지 컨텐츠만 둡니다.
+      [01]~[03] 헤더             : kr/tmpl/header.html
+      페이지 상단(브레드크럼·제목) : kr/tmpl/page-top.html (제목·설명은 메뉴 데이터, data-title · data-desc 로 변경 가능)
+      [05] 푸터 · TOP 버튼        : kr/tmpl/footer.html
+      [06] 모달                   : kr/tmpl/modal.html
+    ==================================================================
+  -->
+
+  <!-- [S] #wrap -->
+  <div id="wrap">
+    <!-- [01]~[03] 본문 바로가기 · 공식 누리집 배너 · 헤더 -->
+    <div data-include="header"></div>
+
+    <!-- ============================================================
+         [04] 컨테이너 : #container
+         ============================================================ -->
+    <div id="container">
+      <!-- 페이지 상단 : 브레드크럼 · 공유/인쇄 · 페이지 제목 -->
+      <div data-include="page-top"></div>
+
+      <!-- [04-1] 컨텐츠 : .inner (Figma: 컨텐츠 > s02데이터분석_교차분석 페이지준비중, node 10527:24486) -->
+      <div class="inner cm-contents cm-cross">
+        <!-- 분석 조건 검색 : KRDS 탭(fill) + 라디오 칩, 분석 항목(문항) 검색·선택 -->
+        <section id="section_01" class="cm-cross-search">
+          <h2 class="sr-only">분석 조건 검색</h2>
+          <div class="krds-tab-area layer cm-ts-filter cm-cross-tab">
+            <div class="tab fill">
+              <ul role="tablist">
+                <li id="tab_cross_01" role="tab" aria-selected="false" aria-controls="panel_cross_01">
+                  <button type="button" class="btn-tab">주제별</button>
+                </li>
+                <li id="tab_cross_02" role="tab" aria-selected="true" aria-controls="panel_cross_02" class="active">
+                  <button type="button" class="btn-tab">조사대상자별</button>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-conts-wrap">
+              <section id="panel_cross_01" aria-labelledby="tab_cross_01" class="tab-conts cm-cross-filter" data-quick-nav="false">
+                <h3 class="sr-only">주제별 탐색</h3>
+                <fieldset class="krds-check-area cm-cross-chips">
+                  <legend class="sr-only">주제 선택</legend>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_topic" id="cross_topic_1" value="1">
+                    <label class="krds-form-chip-outline" for="cross_topic_1">기본 현황 · 배치 (38)</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_topic" id="cross_topic_2" value="2">
+                    <label class="krds-form-chip-outline" for="cross_topic_2">선정 · 진단 (41)</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_topic" id="cross_topic_3" value="3">
+                    <label class="krds-form-chip-outline" for="cross_topic_3">교육과정 · 개별화교육(IEP) (61)</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_topic" id="cross_topic_4" value="4">
+                    <label class="krds-form-chip-outline" for="cross_topic_4">방과후 · 돌봄 (7)</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_topic" id="cross_topic_5" value="5">
+                    <label class="krds-form-chip-outline" for="cross_topic_5">사교육 (8)</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_topic" id="cross_topic_6" value="6">
+                    <label class="krds-form-chip-outline" for="cross_topic_6">치료지원 · 관련서비스 (24)</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_topic" id="cross_topic_7" value="7">
+                    <label class="krds-form-chip-outline" for="cross_topic_7">통합교육 (30)</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_topic" id="cross_topic_8" value="8">
+                    <label class="krds-form-chip-outline" for="cross_topic_8">진로 · 직업 (25)</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_topic" id="cross_topic_9" value="9">
+                    <label class="krds-form-chip-outline" for="cross_topic_9">보조인력 · 통학 · 편의 (52)</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_topic" id="cross_topic_10" value="10">
+                    <label class="krds-form-chip-outline" for="cross_topic_10">가족지원 · 보호자 (46)</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_topic" id="cross_topic_11" value="11">
+                    <label class="krds-form-chip-outline" for="cross_topic_11">만족도 · 요구 (113)</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_topic" id="cross_topic_12" value="12">
+                    <label class="krds-form-chip-outline" for="cross_topic_12">인력 · 운영(교원 · 학급 · 예산) (73)</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_topic" id="cross_topic_13" value="13">
+                    <label class="krds-form-chip-outline" for="cross_topic_13">건강 · 정서 · 행동 (21)</label>
+                  </div>
+                </fieldset>
+                <div class="cm-cross-item">
+                  <p class="tit" id="cross_item_tit">분석 항목(문항)</p>
+                  <div class="cm-cross-item-row" role="group" aria-labelledby="cross_item_tit">
+                    <div class="form-group">
+                      <div class="form-conts btn-ico-wrap">
+                        <input type="text" id="cross_item_search" class="krds-input" placeholder="문항검색" title="문항 검색어 입력">
+                        <button type="button" class="krds-btn medium icon"><span class="sr-only">문항 검색</span><i class="svg-icon ico-sch"></i></button>
+                      </div>
+                    </div>
+                    <select id="cross_item" class="krds-form-select" title="분석 항목(문항) 선택" disabled>
+                      <option value="" selected>탐색 방식을 먼저 선택해 주세요.</option>
+                    </select>
+                  </div>
+                </div>
+              </section>
+              <section id="panel_cross_02" aria-labelledby="tab_cross_02" class="tab-conts active cm-cross-filter" data-quick-nav="false">
+                <h3 class="sr-only">조사대상자별 탐색</h3>
+                <!-- 조사대상자 칩 : Figma 페이지준비중 화면 기준 (Figma 오타 "교사장애영아", "보호자특수교육대상자 보호자"는 바로잡음) -->
+                <fieldset class="krds-check-area cm-cross-chips">
+                  <legend class="sr-only">조사대상자 선택</legend>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_target" id="cross_target_1" value="1">
+                    <label class="krds-form-chip-outline" for="cross_target_1">특수학교 관리자</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_target" id="cross_target_2" value="2" checked>
+                    <label class="krds-form-chip-outline" for="cross_target_2">특수학교 교사</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_target" id="cross_target_3" value="3">
+                    <label class="krds-form-chip-outline" for="cross_target_3">특수학급 관리자</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_target" id="cross_target_4" value="4">
+                    <label class="krds-form-chip-outline" for="cross_target_4">특수학급 교사</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_target" id="cross_target_5" value="5">
+                    <label class="krds-form-chip-outline" for="cross_target_5">장애영아 관리자</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_target" id="cross_target_6" value="6">
+                    <label class="krds-form-chip-outline" for="cross_target_6">장애영아 교사</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_target" id="cross_target_7" value="7">
+                    <label class="krds-form-chip-outline" for="cross_target_7">장애영아 보호자</label>
+                  </div>
+                  <div class="krds-form-chip medium">
+                    <input type="radio" class="radio" name="cross_target" id="cross_target_8" value="8">
+                    <label class="krds-form-chip-outline" for="cross_target_8">특수교육대상자 보호자</label>
+                  </div>
+                </fieldset>
+                <div class="cm-cross-item">
+                  <p class="tit" id="cross_item_tit2">분석 항목(문항)</p>
+                  <div class="cm-cross-item-row" role="group" aria-labelledby="cross_item_tit2">
+                    <div class="form-group">
+                      <div class="form-conts btn-ico-wrap">
+                        <input type="text" id="cross_item_search2" class="krds-input" placeholder="문항검색" title="문항 검색어 입력">
+                        <button type="button" class="krds-btn medium icon"><span class="sr-only">문항 검색</span><i class="svg-icon ico-sch"></i></button>
+                      </div>
+                    </div>
+                    <select id="cross_item2" class="krds-form-select" title="분석 항목(문항) 선택">
+                      <option value="C10" selected>[C10] 귀 학급의 교육과정 운영을 가장 어렵게 하는 사항은 무엇입니까?</option>
+                    </select>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- 준비 중 안내 : 신규 컴포넌트 _common/html/code/ext_empty.html -->
+        <div class="cm-empty">
+          <img src="../../../_common/resources/img/common/cm_ready.png" alt="">
+          <h2 class="tit">준비중입니다.</h2>
+          <p class="txt">현재 화면은 준비 중입니다.</p>
+        </div>
+      </div>
+      <!-- //[04-1] 컨텐츠 -->
+    </div>
+    <!-- //[04] 컨테이너 -->
+
+    <!-- [05] 푸터 · TOP 버튼 -->
+    <div data-include="footer"></div>
+  </div>
+  <!-- [E] #wrap -->
+
+  <!-- [06] 모달 (#wrap 바깥) -->
+  <div data-include="modal"></div>
+
+  <!-- ============================================================
+       [07] 스크립트
+       ============================================================ -->
+  <script src="../../js/include.js"></script><!-- 공통 영역 인클루드 : KRDS 스크립트보다 먼저 -->
+  <script src="../../../krds/resources/js/plugin/swiper-bundle.min.js"></script>
+  <script src="../../../krds/resources/js/component/ui-script.js"></script>
+  <script src="../../../_common/resources/js/krds-custom.js"></script>
+  <script src="../../../_common/resources/js/krds-base.js"></script>
+  <script src="../../js/user-custom.js"></script>
+  <!-- //[07] 스크립트 -->
+</body>
+</html>

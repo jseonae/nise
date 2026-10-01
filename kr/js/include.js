@@ -44,11 +44,11 @@
 
   const pageUrl = (section, item) => `${htmlBase}${section.dir}/${item.list ? `${item.file}_list` : item.file}.html`;
 
-  // 현재 페이지 찾기 (xxx_view.html 은 xxx 목록 메뉴로 봄)
+  // 현재 페이지 찾기 (xxx_view.html 은 xxx 목록 메뉴로, xxx_ready.html(준비 중 화면)은 xxx 메뉴로 봄)
   const path = location.pathname;
   const fileName = path.split("/").pop().replace(/\.html$/, "");
   const isView = /_view$/.test(fileName);
-  const baseName = fileName.replace(/_(list|view)$/, "");
+  const baseName = fileName.replace(/_(list|view|ready)$/, "");
   let current = null;
   MENU.forEach((section) => {
     section.items.forEach((item) => {
