@@ -44,15 +44,11 @@
   --cm-color-shadow1: var(--krds-light-color-alpha-shadow1);
   --cm-color-button-primary: var(--krds-light-color-button-primary-fill);
   --cm-color-badge-border-light: var(--krds-color-light-gray-10);
+  --cm-color-ai-ask: var(--krds-color-light-primary-60);
   --cm-color-shadow2: var(--krds-light-color-alpha-shadow2);
   --cm-color-shadow3: var(--krds-light-color-alpha-shadow3);
   --cm-color-border-gray-dark: var(--krds-light-color-border-gray-dark);
   --cm-color-shadow-sticky: rgba(42, 49, 58, 0.2) /* Figma 고정 칸 그림자 (KRDS 토큰 없음) */;
-  --cm-color-chart-1: var(--krds-color-light-primary-50);
-  --cm-color-chart-2: var(--krds-color-light-primary-80);
-  --cm-color-chart-2-line: var(--krds-color-light-primary-50);
-  --cm-color-chart-3: var(--krds-color-light-primary-60);
-  --cm-color-chart-3-dot: var(--krds-color-light-primary-40);
   --cm-color-border-secondary-20: var(--krds-color-light-secondary-20);
 }
 
@@ -1681,46 +1677,11 @@
   border-radius: var(--krds-radius-medium3);
   background-color: var(--cm-color-surface-white);
 }
-.cm-chart-legend {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--krds-gap-1);
-}
-/* 범례 버튼 : KRDS 범례 컴포넌트 없음, Figma 그대로 (primary 연한 바탕 + primary 테두리) */
-.cm-chart-legend button {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--krds-gap-2);
-  height: var(--krds-number-12);
-  padding: 0 var(--krds-padding-4);
-  border: 0.1rem solid var(--cm-color-border-primary);
-  border-radius: var(--krds-radius-small2);
-  background-color: var(--cm-color-row-hover);
-  font-size: var(--krds-pc-font-size-label-xsmall);
-  color: var(--cm-color-text-primary);
-}
-.cm-chart-legend button[aria-pressed="false"] {
-  border-color: var(--cm-color-border-light);
-  background-color: var(--cm-color-surface-white);
-  color: var(--cm-color-text-subtle);
-}
-/* 계열 색 · 패턴 : 차트 라이브러리 계열 설정과 같은 값으로 맞춤 (Figma 그래프 색) */
-.cm-chart-legend .swatch {
-  width: var(--krds-number-8);
-  height: var(--krds-number-7);
-  border-radius: 0.2rem;
-}
-.cm-chart-legend .swatch.y1 {
-  background-color: var(--cm-color-chart-1);
-}
-.cm-chart-legend .swatch.y2 {
-  background: repeating-linear-gradient(-45deg, var(--cm-color-chart-2) 0 0.3rem, var(--cm-color-chart-2-line) 0.3rem 0.4rem);
-}
-.cm-chart-legend .swatch.y3 {
-  background: radial-gradient(circle, var(--cm-color-chart-3-dot) 0.08rem, var(--cm-color-chart-3) 0.12rem) 0 0 / 0.4rem 0.4rem;
-}
+/* [임시] 그래프 자리 : Figma 그래프 이미지를 그대로 넣음 (그래프 작업 때 차트 라이브러리로 바꿈) */
 .cm-chart-area {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-5);
   width: 100%;
 }
 .cm-chart-area img {
@@ -2272,7 +2233,7 @@
   line-height: 1.5;
 }
 .cm-ai-list .ask .bubble {
-  background-color: var(--cm-color-chart-3); /* Figma primary-60 */
+  background-color: var(--cm-color-ai-ask); /* Figma primary-60 */
   text-align: right;
   color: var(--cm-color-text-inverse);
 }
@@ -2458,15 +2419,11 @@
   --cm-color-shadow1: var(--krds-high-contrast-color-alpha-shadow1);
   --cm-color-button-primary: var(--krds-high-contrast-color-button-primary-fill);
   --cm-color-badge-border-light: var(--krds-color-high-contrast-gray-90);
+  --cm-color-ai-ask: var(--krds-color-high-contrast-primary-60);
   --cm-color-shadow2: var(--krds-high-contrast-color-alpha-shadow2);
   --cm-color-shadow3: var(--krds-high-contrast-color-alpha-shadow3);
   --cm-color-border-gray-dark: var(--krds-high-contrast-color-border-gray-dark);
   --cm-color-shadow-sticky: var(--krds-high-contrast-color-alpha-shadow3);
-  --cm-color-chart-1: var(--krds-color-high-contrast-primary-50);
-  --cm-color-chart-2: var(--krds-color-high-contrast-primary-80);
-  --cm-color-chart-2-line: var(--krds-color-high-contrast-primary-50);
-  --cm-color-chart-3: var(--krds-color-high-contrast-primary-60);
-  --cm-color-chart-3-dot: var(--krds-color-high-contrast-primary-40);
   --cm-color-border-secondary-20: var(--krds-high-contrast-color-border-secondary-light);
 }
 @media (prefers-color-scheme: dark) {
@@ -2503,15 +2460,11 @@
     --cm-color-shadow1: var(--krds-high-contrast-color-alpha-shadow1);
     --cm-color-button-primary: var(--krds-high-contrast-color-button-primary-fill);
     --cm-color-badge-border-light: var(--krds-color-high-contrast-gray-90);
+    --cm-color-ai-ask: var(--krds-color-high-contrast-primary-60);
     --cm-color-shadow2: var(--krds-high-contrast-color-alpha-shadow2);
     --cm-color-shadow3: var(--krds-high-contrast-color-alpha-shadow3);
     --cm-color-border-gray-dark: var(--krds-high-contrast-color-border-gray-dark);
     --cm-color-shadow-sticky: var(--krds-high-contrast-color-alpha-shadow3);
-    --cm-color-chart-1: var(--krds-color-high-contrast-primary-50);
-    --cm-color-chart-2: var(--krds-color-high-contrast-primary-80);
-    --cm-color-chart-2-line: var(--krds-color-high-contrast-primary-50);
-    --cm-color-chart-3: var(--krds-color-high-contrast-primary-60);
-    --cm-color-chart-3-dot: var(--krds-color-high-contrast-primary-40);
     --cm-color-border-secondary-20: var(--krds-high-contrast-color-border-secondary-light);
   }
 }
