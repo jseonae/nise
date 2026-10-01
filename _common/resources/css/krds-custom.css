@@ -1,51 +1,10 @@
 @charset "UTF-8";
 /* ==========================================================================
-   KRDS 추가 스타일 (공통)
-   - KRDS 원본(krds/)은 수정하지 않고, 부족한 스타일은 이 파일에 추가합니다.
-   - KRDS CSS 다음에 불러옵니다.
+   사업 커스텀 스타일 (공통)
+   - 이 사업 디자인(Figma)에 맞춘 변형·추가 스타일입니다. cm- 접두사를 씁니다.
+   - KRDS가 안내만 하고 코드를 주지 않는 기본 스타일은 krds-base.css 에 둡니다.
+   - 불러오는 순서 : KRDS output.css → krds-base.css → krds-custom.css(이 파일)
    ========================================================================== */
-
-/* PretendardGOV 폰트 (KRDS CSS에는 @font-face 선언이 없어 여기서 정의) */
-@font-face {
-  font-family: "Pretendard GOV";
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  src: url("../../../krds/resources/fonts/PretendardGOV-Regular.subset.woff2") format("woff2"),
-       url("../../../krds/resources/fonts/PretendardGOV-Regular.subset.woff") format("woff");
-}
-@font-face {
-  font-family: "Pretendard GOV";
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-  src: url("../../../krds/resources/fonts/PretendardGOV-Medium.subset.woff2") format("woff2"),
-       url("../../../krds/resources/fonts/PretendardGOV-Medium.subset.woff") format("woff");
-}
-@font-face {
-  font-family: "Pretendard GOV";
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-  src: url("../../../krds/resources/fonts/PretendardGOV-Bold.subset.woff2") format("woff2"),
-       url("../../../krds/resources/fonts/PretendardGOV-Bold.subset.woff") format("woff");
-}
-
-/* ==========================================================================
-   글자·화면 표시 설정 (_common/resources/js/krds-display.js)
-   ========================================================================== */
-
-/* 설정 모달 내부 간격 (KRDS 사이트 전용 클래스라 KRDS CSS에 없음) */
-#modal_adjust_display .adjust_display {
-  display: flex;
-  flex-direction: column;
-  gap: var(--krds-gap-8);
-}
-#modal_adjust_display .form-group h3 {
-  margin-bottom: var(--krds-gap-4);
-  font-size: var(--krds-pc-font-size-heading-xsmall);
-  font-weight: var(--krds-font-weight-bold);
-}
 
 /* ==========================================================================
    사이트 공통 레이아웃 (Figma: 프로젝트 26_003 특수원 krds / 컨텐츠)
