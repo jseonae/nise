@@ -69,6 +69,7 @@
 .svg-icon.cm-ico-chart-line,
 .svg-icon.cm-ico-chart-bar,
 .svg-icon.cm-ico-chart-bar-horizontal,
+.svg-icon.cm-ico-inquiry,
 .svg-icon.cm-ico-chat-text,
 .svg-icon.cm-ico-stat-search {
   -webkit-mask-repeat: no-repeat;
@@ -89,6 +90,10 @@
 .svg-icon.cm-ico-chart-bar-horizontal {
   -webkit-mask-image: url(../img/ico/cm_ico_chart_bar_horizontal.svg);
   mask-image: url(../img/ico/cm_ico_chart_bar_horizontal.svg);
+}
+.svg-icon.cm-ico-inquiry {
+  -webkit-mask-image: url(../img/ico/cm_ico_inquiry.svg);
+  mask-image: url(../img/ico/cm_ico_inquiry.svg);
 }
 .svg-icon.cm-ico-chat-text {
   -webkit-mask-image: url(../img/ico/cm_ico_chat_text.svg);
@@ -2635,6 +2640,94 @@
   .cm-es-chart,
   .cm-es-ratio .body .cm-chart-area {
     padding: var(--krds-padding-6);
+  }
+}
+
+/* [공통] 만족도조사 (신규 컴포넌트 _common/html/code/ext_research.html · kr/tmpl/research.html, Figma: researchWrap)
+   KRDS 라디오·입력창은 그대로 쓰고, 상자·평가하기 버튼 색만 Figma 그대로 */
+.cm-research {
+  padding: var(--krds-padding-10) var(--krds-padding-9);
+  border: 0.1rem solid var(--cm-color-border-light);
+  border-radius: 1rem; /* Figma radius/large1 10px (KRDS 반경 토큰에 10px 없음) */
+  background-color: var(--cm-color-box-surface);
+}
+.cm-research-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-6);
+}
+.cm-research-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--krds-gap-4) var(--krds-gap-6);
+}
+.cm-research-top .tit {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--krds-gap-2);
+  font-size: var(--krds-pc-font-size-heading-small);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-subtle);
+}
+.cm-research-top .tit .svg-icon {
+  flex: none;
+  width: var(--krds-number-12);
+  height: var(--krds-number-12);
+  background-color: var(--cm-color-text-subtle);
+}
+.cm-research-rate {
+  flex-wrap: wrap;
+  gap: var(--krds-gap-6);
+  margin-left: auto;
+}
+.cm-research-opinion {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--krds-gap-4);
+  padding-bottom: var(--krds-padding-7);
+}
+.cm-research-opinion .input {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.cm-research-opinion .textarea-count {
+  position: absolute;
+  top: 100%;
+  left: 0.6rem;
+  justify-content: flex-start; /* KRDS 는 오른쪽 정렬, Figma 는 왼쪽 */
+  gap: 0;
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  color: var(--cm-color-line-strong); /* Figma text/disabled-on */
+}
+/* 평가하기 : Figma button/tertiary-border(#58616a) 채운 버튼 (KRDS 버튼 종류에 없는 색) */
+.cm-research-submit {
+  flex: none;
+  min-width: 7.8rem;
+  border-color: var(--cm-color-border-gray-dark);
+  background-color: var(--cm-color-border-gray-dark);
+  color: var(--cm-color-text-inverse);
+}
+.cm-research-submit:hover,
+.cm-research-submit:active {
+  border-color: var(--cm-color-text-basic);
+  background-color: var(--cm-color-text-basic);
+  color: var(--cm-color-text-inverse);
+}
+@media (max-width: 767px) {
+  .cm-research {
+    padding: var(--krds-padding-8) var(--krds-padding-6);
+  }
+  .cm-research-rate {
+    margin-left: 0;
+  }
+  .cm-research-opinion {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--krds-gap-8);
   }
 }
 

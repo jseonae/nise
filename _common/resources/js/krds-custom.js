@@ -179,3 +179,20 @@ const cmTableScroll = {
   },
 };
 document.addEventListener("DOMContentLoaded", () => cmTableScroll.init());
+
+/* 만족도조사 (.cm-research, 마크업 kr/tmpl/research.html) : 의견 글자 수 세기 (KRDS textarea-count 표시) */
+const cmResearch = {
+  init() {
+    document.querySelectorAll(".cm-research").forEach((box) => {
+      const input = box.querySelector(".cm-research-opinion input");
+      const now = box.querySelector(".textarea-count .count-now");
+      if (!input || !now) return;
+      const update = () => {
+        now.textContent = input.value.length;
+      };
+      input.addEventListener("input", update);
+      update();
+    });
+  },
+};
+document.addEventListener("DOMContentLoaded", () => cmResearch.init());

@@ -1,0 +1,47 @@
+<!--
+  만족도조사 : 모든 콘텐츠 페이지 맨 아래 (KRDS 만족도 조사(User feedback)는 Figma 가이드만 있고 코드가 없어 신규 컴포넌트)
+  - 원본 마크업 : _common/html/code/ext_research.html (이 파일과 같게 유지)
+  - 페이지의 [04-1] 컨텐츠(.cm-contents) 맨 끝 <div data-include="research"></div> 자리에 들어갑니다.
+  - 스타일 : _common/resources/css/krds-custom.css [공통] 만족도조사 · 스크립트 : _common/resources/js/krds-custom.js (cmResearch, 글자 수 세기)
+  Figma : 컨텐츠 > researchWrap (조사 변천사 list · view, 특수교육현황-학생수기준-계)
+-->
+<!-- 만족도조사 : 개발 시 action 에 저장 주소 연결 -->
+<section class="cm-research" aria-labelledby="cm_research_tit">
+  <form class="cm-research-form" action="#" method="post">
+    <div class="cm-research-top">
+      <h2 id="cm_research_tit" class="tit"><i class="svg-icon cm-ico-inquiry" aria-hidden="true"></i>현재 페이지의 내용이나 사용 편의성에 만족하십니까?</h2>
+      <!-- 만족도 5단계 : KRDS 라디오, 질문(제목)을 그룹 이름으로 연결 -->
+      <div class="krds-check-area cm-research-rate" role="radiogroup" aria-labelledby="cm_research_tit">
+        <div class="krds-form-check medium">
+          <input type="radio" name="research_rate" id="research_rate_5" value="5">
+          <label for="research_rate_5">매우만족</label>
+        </div>
+        <div class="krds-form-check medium">
+          <input type="radio" name="research_rate" id="research_rate_4" value="4">
+          <label for="research_rate_4">만족</label>
+        </div>
+        <div class="krds-form-check medium">
+          <input type="radio" name="research_rate" id="research_rate_3" value="3">
+          <label for="research_rate_3">보통</label>
+        </div>
+        <div class="krds-form-check medium">
+          <input type="radio" name="research_rate" id="research_rate_2" value="2">
+          <label for="research_rate_2">불만족</label>
+        </div>
+        <div class="krds-form-check medium">
+          <input type="radio" name="research_rate" id="research_rate_1" value="1">
+          <label for="research_rate_1">매우불만족</label>
+        </div>
+      </div>
+    </div>
+    <div class="cm-research-opinion">
+      <div class="input">
+        <label for="research_opinion" class="sr-only">의견 (200자 이내)</label>
+        <input type="text" id="research_opinion" name="research_opinion" class="krds-input" placeholder="의견을 남겨주세요." maxlength="200" aria-describedby="research_count">
+        <!-- 글자 수 : KRDS textarea-count 마크업 -->
+        <p class="textarea-count" id="research_count"><span class="count-now">0</span><span class="count-total">/200자 이내</span></p>
+      </div>
+      <button type="submit" class="krds-btn medium cm-research-submit">평가하기</button>
+    </div>
+  </form>
+</section>
