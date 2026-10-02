@@ -78,23 +78,36 @@
             </dl>
             <div class="cm-ts-tool-btns">
               <div class="krds-form-toggle-switch medium">
-                <input type="checkbox" id="kd_pattern" checked>
+                <input type="checkbox" id="kd_pattern" data-chart-option="pattern" checked>
                 <label for="kd_pattern"><span class="switch-toggle"><i></i></span>패턴 적용</label>
               </div>
               <div class="krds-form-toggle-switch medium">
-                <input type="checkbox" id="kd_label" checked>
+                <input type="checkbox" id="kd_label" data-chart-option="label" checked>
                 <label for="kd_label"><span class="switch-toggle"><i></i></span>레이블 보기</label>
               </div>
-              <button type="button" class="krds-btn small tertiary">차트 확대</button>
-              <button type="button" class="krds-btn small tertiary">다운로드</button>
-              <button type="button" class="krds-btn small tertiary">인쇄</button>
+              <button type="button" class="krds-btn small tertiary" data-chart-action="zoom">차트 확대</button>
+              <!-- 다운로드 : KRDS 드롭다운(krds-drop-wrap), 그래프 이미지(PNG·SVG) · 통계표(CSV) -->
+              <div class="krds-drop-wrap">
+                <button type="button" class="krds-btn small tertiary drop-btn">다운로드 <i class="svg-icon ico-angle"></i></button>
+                <div class="drop-menu">
+                  <div class="drop-in">
+                    <ul class="drop-list">
+                      <li><a href="#" class="item-link" data-chart-download="png">그래프 이미지(PNG)</a></li>
+                      <li><a href="#" class="item-link" data-chart-download="svg">그래프 벡터 이미지(SVG)</a></li>
+                      <li><a href="#" class="item-link" data-chart-download="csv">통계표(CSV)</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="krds-btn small tertiary" data-chart-action="print">인쇄</button>
             </div>
           </div>
 
-          <!-- 차트 : [임시] Figma 그래프 이미지를 그대로 넣음. 그래프 작업 때 차트 라이브러리로 바꿈 (같은 값은 아래 통계표에 있음) -->
+          <!-- 차트 : 신규 컴포넌트 _common/html/code/ext_chart.html (스크립트 _common/resources/js/cm-chart.js)
+               값은 아래 통계표(#kd_table)에서 읽음. 항목마다 그래프 종류가 하나로 고정되어 종류 전환 버튼 없음 (화면설계서 0104) -->
           <div class="cm-chart-box">
             <div class="cm-chart-area">
-              <img src="../../img/stat/sample_chart_hbar.png" alt="특수교육대상자 최초 선정·배치 시기 비율 가로막대 그래프(2023년). 자세한 값은 아래 통계표를 참고하세요.">
+              <div data-cm-chart="hbar" data-chart-title="특수교육대상자 최초 선정·배치 시기" data-chart-table="#kd_table" data-chart-unit="%" data-chart-tools="#section_01" data-chart-source="#kd_source"></div>
             </div>
           </div>
         </section>
@@ -106,7 +119,7 @@
             <p class="unit">[단위 : %]</p>
           </div>
           <div class="krds-table-wrap cm-stat-table">
-            <table class="tbl col data">
+            <table class="tbl col data" id="kd_table">
               <caption>특수교육대상자 최초 선정·배치 시기 통계표로 시기와 비율(%)로 구성되어 있습니다.</caption>
               <colgroup>
                 <col style="width: 51.5%;">
@@ -183,7 +196,7 @@
             <li>모집단 수치는 표본조사 결과에 가중치를 적용해 전체 규모로 추정한 값입니다.</li>
             <li>가중치 적용으로 소수점에 의해 합계 등의 수치가 일치하지 않을 수 있습니다.</li>
           </ul>
-          <p class="cm-source"><strong>출처 -</strong> 국립특수교육원 특수교육 실태조사(국가승인통계 제112014호)</p>
+          <p class="cm-source" id="kd_source"><strong>출처 -</strong> 국립특수교육원 특수교육 실태조사(국가승인통계 제112014호)</p>
         </section>
 
         <!-- 용어해설 : KRDS 표(table data) -->
@@ -363,6 +376,8 @@
   <script src="../../../krds/resources/js/component/ui-script.js"></script>
   <script src="../../../_common/resources/js/krds-custom.js"></script>
   <script src="../../../_common/resources/js/krds-base.js"></script>
+  <script src="../../../_common/resources/js/lib/echarts.min.js"></script><!-- 그래프 라이브러리 ECharts 5.5.0 -->
+  <script src="../../../_common/resources/js/cm-chart.js"></script><!-- 그래프 (신규 컴포넌트 ext_chart) -->
   <script src="../../js/user-custom.js"></script>
   <!-- //[07] 스크립트 -->
 </body>

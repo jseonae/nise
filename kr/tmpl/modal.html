@@ -83,5 +83,33 @@
     <div class="modal-back"></div>
   </section>
   <!-- //[06-1] 글자·화면 표시 설정 -->
+
+  <!-- [06-2] 차트 확대 : #modal_chart_zoom (KRDS 모달, _common/resources/js/cm-chart.js 연동, id·class 변경 금지)
+       그래프 도구의 [차트 확대] 버튼이 열고, 같은 그래프를 크게 다시 그림. 제목은 스크립트가 그래프 제목으로 바꿈 -->
+  <section id="modal_chart_zoom" class="krds-modal fade cm-chart-modal" aria-labelledby="tit_modal_chart_zoom">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="tit_modal_chart_zoom" class="modal-title">차트 확대</h2>
+        </div>
+        <div class="modal-conts">
+          <div class="conts-area">
+            <div class="cm-chart-zoom-font" role="group" aria-label="그래프 글자 크기">
+              <button type="button" class="krds-btn small tertiary" data-chart-font="down">글자 작게</button>
+              <span class="cm-chart-zoom-level" aria-live="polite">100%</span>
+              <button type="button" class="krds-btn small tertiary" data-chart-font="up">글자 크게</button>
+            </div>
+            <div class="cm-chart-zoom-body"></div>
+          </div>
+        </div>
+        <button type="button" class="krds-btn medium icon btn-close close-modal">
+          <span class="sr-only">닫기</span>
+          <i class="svg-icon ico-popup-close"></i>
+        </button>
+      </div>
+    </div>
+    <div class="modal-back"></div>
+  </section>
+  <!-- //[06-2] 차트 확대 -->
 </div>
 <!-- //[06] 모달 -->
