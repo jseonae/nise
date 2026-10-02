@@ -77,8 +77,11 @@ const cmEduBasis = {
       });
       if (sub) sub.hidden = value !== "level";
       if (pattern) {
+        // 꺾은선 패널(배치·급별·장애유형별)은 패턴을 쓰지 않음. 그래프 모듈(cm-chart.js)이 바뀐 값을 읽도록 change 를 보냄
+        pattern.dataset.chartGuard = "";
         pattern.disabled = value !== "total";
         pattern.checked = value === "total";
+        pattern.dispatchEvent(new Event("change"));
       }
       window.dispatchEvent(new Event("resize"));
     };

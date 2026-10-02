@@ -1,0 +1,105 @@
+<!-- ext: 신규 컴포넌트 (KRDS 없음) / 그래프 : 통계표 값을 ECharts 그래프로 보여주는 영역 (범례 · 키보드 탐색 · 확대 · 다운로드 · 인쇄) -->
+<!--
+  기준 : nise2026/nise_graph_13types_v1.0.html (그래프 13종 검토본 v63) 의 색·패턴 세트, 꺾은선 모양, 글자 크기, HTML 범례, 키보드 탐색, 내보내기 규칙
+         상자 · 범례 배치는 Figma (컨텐츠 > 시계열시각화-view · 핵심데이터시각화-view · s02데이터분석_교차분석_view · 특수교육현황-*)
+  - 불러오기 (페이지 [07] 스크립트, krds-base.js 다음)
+      <script src="../../../_common/resources/js/lib/echarts.min.js"></script>  : ECharts 5.5.0 (13types 파일에 내장된 빌드를 그대로 분리)
+      <script src="../../../_common/resources/js/cm-chart.js"></script>         : 그래프 모듈 (CmChart)
+  - 스타일 : _common/resources/css/krds-custom.css [그래프]
+  - 확대 모달 : kr/tmpl/modal.html #modal_chart_zoom (KRDS 모달, 글자 크기 5단계)
+
+  ■ 그래프 자리 : data-cm-chart 를 붙인 빈 div. 범례 · 요약문(스크린리더) · 그래프는 스크립트가 만듭니다.
+    data-cm-chart        그래프 종류
+                           bar       세로 묶음 막대 (⑨ · ⑩-1 · 교차분석 그룹막대)       계열 = 표의 열
+                           hbar      가로 막대 (핵심데이터 단일 가로막대 · 교차분석 가로막대) 계열 = 표의 열
+                           stack-h   누적 가로막대 100% (⑤)                              계열 = 표의 행
+                           line      다중 꺾은선 (①)                                    계열 = 표의 행
+                           combo     막대 + 전년 대비 증가율 꺾은선 (⑧ 계)                계열 = 표의 첫 행
+                           multiples 스몰 멀티플 패널 (⑧ 배치별·급별·장애유형별)          패널 = 표의 행
+    data-chart-title     그래프 제목 (접근 이름 · 확대 모달 제목 · 내려받는 파일 이름)
+    data-chart-table     값을 읽을 통계표 선택자. th[data-chart-skip](열) · tr[data-chart-skip](행)은 그래프에서 뺌 (예 : 계 · 합계)
+    data-chart-data      통계표가 없을 때 값 JSON 선택자 : <script type="application/json"> {"categories":[], "series":[{"name":"", "data":[]}]}
+    data-chart-unit      % · 명 · 개 (값 라벨 · 툴팁 · 축)
+    data-chart-tools     그래프 도구를 담은 영역 선택자 (아래 도구 속성을 이 안에서 찾음, 그래프 여러 개가 함께 쓸 수 있음)
+    data-chart-source    출처 문구 선택자 (내려받은 그림 · CSV 아래에 들어감)
+    data-chart-palette   색·패턴 세트 순서 직접 지정 (예 "1,3,4,6"). 없으면 13types 규칙 : 일반 5→7→6…, 막대 2개 5·7, 연도 계열 연함→진함
+    data-chart-height    그래프 높이 (기본 40rem)
+    data-chart-series    row | col : 표에서 계열을 읽는 방향을 바꿀 때
+
+  ■ 그래프 도구 (data-chart-tools 영역 안, KRDS 마크업에 속성만 붙임)
+    [data-chart-type="bar|hbar|stack-h|line"]  그래프 종류 버튼 (aria-pressed · secondary/tertiary 를 스크립트가 바꿈), 글자는 .cm-chart-type-txt
+    [data-chart-option="pattern"]              패턴 적용 토글 (KRDS 토글 스위치 input)
+    [data-chart-option="label"]                레이블 보기 토글. 패턴 · 레이블 중 하나는 늘 켜 둠 (색만 남지 않게, 13types 규칙)
+    [data-chart-sort]                          정렬 라디오 (value : view · desc · asc)
+    [data-chart-action="zoom|print"]           차트 확대 · 인쇄 버튼
+    [data-chart-download="png|svg|csv"]        다운로드 목록 (KRDS 드롭다운 krds-drop-wrap 의 item-link)
+
+  ■ 접근성 (KWCAG 2.2 5.1.1 · 5.4.1 · 6.1.1 · 6.1.2, nise2026 접근성 워크벤치 점검 항목)
+    - 그래프 영역 role="group" + aria-label(제목) + aria-describedby(요약문), 같은 영역에 통계표가 있음
+    - 키보드 : 그래프 안 role="grid" 대리 칸 (Tab 한 번 정지) ←→ 값 · ↑↓ 계열 · Enter/Space 값 확인 · Esc 닫기, aria-keyshortcuts, 값은 aria-live 로 읽음
+    - 범례 : button[aria-pressed] 로 계열 표시/숨김, 숨긴 항목이 있으면 '전체 보기'
+    - 색에 무관한 인식 : 막대는 패턴(decal), 꺾은선은 선 모양 + 점 모양
+    - 화면 표시 모드(고대비 · 시스템 다크)를 바꾸면 다크 팔레트로 다시 그림
+-->
+
+<!-- 예 : 통계표를 읽는 세로 막대 + 종류 전환 · 토글 · 확대 · 다운로드 · 인쇄 -->
+<section id="sample_chart_section">
+  <div class="cm-ts-type" role="group" aria-label="그래프 종류">
+    <button type="button" class="krds-btn small secondary" aria-pressed="true" data-chart-type="bar"><i class="svg-icon cm-ico-chart-bar" aria-hidden="true"></i><span class="cm-chart-type-txt">세로막대 그래프</span></button>
+    <button type="button" class="krds-btn small tertiary" aria-pressed="false" data-chart-type="stack-h"><i class="svg-icon cm-ico-chart-bar-horizontal" aria-hidden="true"></i><span class="cm-chart-type-txt">누적 가로막대 그래프</span></button>
+    <button type="button" class="krds-btn small tertiary" aria-pressed="false" data-chart-type="line"><i class="svg-icon cm-ico-chart-line" aria-hidden="true"></i><span class="cm-chart-type-txt">꺾은선 그래프</span></button>
+  </div>
+  <div class="cm-ts-tool">
+    <div class="cm-ts-tool-btns">
+      <div class="krds-form-toggle-switch medium">
+        <input type="checkbox" id="sample_pattern" data-chart-option="pattern" checked>
+        <label for="sample_pattern"><span class="switch-toggle"><i></i></span>패턴 적용</label>
+      </div>
+      <div class="krds-form-toggle-switch medium">
+        <input type="checkbox" id="sample_label" data-chart-option="label" checked>
+        <label for="sample_label"><span class="switch-toggle"><i></i></span>레이블 보기</label>
+      </div>
+      <button type="button" class="krds-btn small tertiary" data-chart-action="zoom">차트 확대</button>
+      <div class="krds-drop-wrap">
+        <button type="button" class="krds-btn small tertiary drop-btn">다운로드 <i class="svg-icon ico-angle"></i></button>
+        <div class="drop-menu">
+          <div class="drop-in">
+            <ul class="drop-list">
+              <li><a href="#" class="item-link" data-chart-download="png">그래프 이미지(PNG)</a></li>
+              <li><a href="#" class="item-link" data-chart-download="svg">그래프 벡터 이미지(SVG)</a></li>
+              <li><a href="#" class="item-link" data-chart-download="csv">통계표(CSV)</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="krds-btn small tertiary" data-chart-action="print">인쇄</button>
+    </div>
+  </div>
+  <div class="cm-chart-box">
+    <div class="cm-chart-area">
+      <div data-cm-chart="bar" data-chart-title="그래프 제목" data-chart-table="#sample_chart_table" data-chart-unit="%" data-chart-tools="#sample_chart_section" data-chart-source="#sample_chart_source"></div>
+    </div>
+  </div>
+  <div class="krds-table-wrap cm-stat-table">
+    <table class="tbl col data" id="sample_chart_table">
+      <caption>표 설명</caption>
+      <thead>
+        <tr><th scope="col">구분</th><th scope="col">2017</th><th scope="col">2020</th><th scope="col">2023</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">시설</th><td>8.2%</td><td>3.4%</td><td>2.6%</td></tr>
+        <tr><th scope="row">자택</th><td>91.2%</td><td>95.8%</td><td>97.1%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cm-source" id="sample_chart_source"><strong>출처 -</strong> 출처 문구</p>
+</section>
+
+<!-- 예 : 통계표가 없을 때 JSON 으로 값 넣기 (누적 가로막대 100%) -->
+<div data-cm-chart="stack-h" data-chart-title="배치 유형 구성비 변화" data-chart-data="#sample_ratio_data" data-chart-unit="%" data-chart-palette="1,3,4,6" data-chart-height="22rem"></div>
+<script type="application/json" id="sample_ratio_data">
+  {"categories": ["2008", "2026"], "series": [{"name": "특수학교", "data": [32.7, 25.8]}, {"name": "일반학교 특수학급", "data": [53, 58.6]}]}
+</script>
+
+<!-- 예 : 스몰 멀티플 (표의 행마다 패널 하나, 패널마다 세로축 0부터) -->
+<div data-cm-chart="multiples" data-chart-title="배치별 특수교육대상자 수 추이" data-chart-table="#표_선택자" data-chart-unit="명"></div>

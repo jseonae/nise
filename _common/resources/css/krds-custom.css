@@ -1692,17 +1692,12 @@
   border-radius: var(--krds-radius-medium3);
   background-color: var(--cm-color-surface-white);
 }
-/* [임시] 그래프 자리 : Figma 그래프 이미지를 그대로 넣음 (그래프 작업 때 차트 라이브러리로 바꿈) */
+/* 그래프 자리 : 그래프(.cm-chart, 신규 컴포넌트 ext_chart)를 담음 */
 .cm-chart-area {
   display: flex;
   flex-direction: column;
   gap: var(--krds-gap-5);
   width: 100%;
-}
-.cm-chart-area img {
-  display: block;
-  width: 100%;
-  height: auto;
 }
 /* 통계표 · 지표정보 · 용어해설 */
 .cm-ts-section {
@@ -1833,6 +1828,16 @@
   }
   .cm-chart-box {
     padding: var(--krds-padding-6);
+  }
+  /* 좁은 화면 : 조회 도구가 화면 밖으로 넘치지 않게 칩 · 버튼 줄바꿈 */
+  .cm-ts-tool-filter {
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+  .cm-ts-tool-btns {
+    min-width: 0;
   }
 }
 
@@ -2240,7 +2245,7 @@
   width: var(--krds-number-8);
   height: var(--krds-number-8);
 }
-/* 그래프 상자 : [임시] Figma 범례 · 그래프 이미지 */
+/* 그래프 상자 : 제목 + 그래프(.cm-chart, 신규 컴포넌트 ext_chart) */
 .cm-cross-chart {
   display: flex;
   flex-direction: column;
@@ -2256,16 +2261,6 @@
   font-weight: var(--krds-font-weight-bold);
   text-align: center;
   color: var(--cm-color-text-bolder);
-}
-.cm-cross-chart .cm-chart-legend-img {
-  max-width: 100%;
-  height: auto;
-}
-.cm-cross-chart .cm-chart-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin-top: 1rem;
 }
 /* 통계표 상자 */
 .cm-cross-table {
@@ -2500,10 +2495,6 @@
   border-radius: var(--krds-radius-small3);
   background-color: var(--cm-color-surface-white);
 }
-.cm-chart-area .cm-chart-legend-img {
-  width: auto;
-  max-width: 100%;
-}
 /* 학생 수 · 기관 수 탭 */
 .cm-es-tab {
   gap: var(--krds-gap-9);
@@ -2728,6 +2719,169 @@
     flex-direction: column;
     align-items: stretch;
     gap: var(--krds-gap-8);
+  }
+}
+
+/* [그래프] 신규 컴포넌트 (KRDS 없음) : _common/html/code/ext_chart.html, 스크립트 _common/resources/js/cm-chart.js
+   - 그래프 안쪽(색·패턴·글자·축)은 nise2026/nise_graph_13types_v1.0.html(검토본 v63) 기준, 범례·상자 배치는 Figma 기준
+   - 범례 : 버튼(aria-pressed). 켜진 항목은 Figma 범례(연한 Primary 바탕·Primary 테두리), 숨긴 항목은 회색 + 취소선 */
+.cm-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-5);
+  width: 100%;
+  min-width: 0;
+}
+.cm-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--krds-gap-2);
+}
+.cm-chart-legend[hidden] {
+  display: none;
+}
+.cm-chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--krds-gap-2);
+  min-height: 3.6rem;
+  padding: 0 var(--krds-padding-5);
+  border: 0.1rem solid var(--cm-color-border-primary);
+  border-radius: var(--krds-radius-medium1);
+  background-color: var(--cm-color-row-hover);
+  font-size: var(--krds-pc-font-size-label-small);
+  color: var(--cm-color-text-primary);
+}
+.cm-chart-legend-item[aria-pressed=false] {
+  border-color: var(--cm-color-border-light);
+  background-color: var(--cm-color-surface-white);
+  color: var(--cm-color-text-subtle);
+  text-decoration: line-through;
+}
+.cm-chart-legend-item[aria-pressed=false] .cm-chart-legend-swatch {
+  opacity: 0.35;
+  filter: grayscale(0.65);
+}
+.cm-chart-legend-swatch {
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+}
+.cm-chart-legend-swatch.line {
+  width: 3.6rem;
+}
+.cm-chart-legend-all {
+  min-height: 3.6rem;
+  padding: 0 var(--krds-padding-5);
+  border: 0.1rem dashed var(--cm-color-border-gray-dark);
+  border-radius: var(--krds-radius-medium1);
+  background-color: transparent;
+  font-size: var(--krds-pc-font-size-label-small);
+  color: var(--cm-color-text-basic);
+}
+.cm-chart-body {
+  width: 100%;
+  min-width: 0;
+}
+.cm-chart-plot {
+  position: relative;
+  width: 100%;
+  height: 40rem;
+}
+/* 키보드 탐색 : 그래프 안 대리 칸(role=grid)은 화면에 보이지 않고, 초점이 오면 그래프 전체에 초점 테두리 */
+.cm-chart-focus-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+.cm-chart-focus-point {
+  position: absolute;
+  width: 0.1rem;
+  height: 0.1rem;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.cm-chart-plot:has(.cm-chart-focus-grid:focus-within) {
+  outline: 0.3rem solid var(--cm-color-border-primary);
+  outline-offset: 0.3rem;
+  border-radius: var(--krds-radius-medium3);
+}
+@media (forced-colors: active) {
+  .cm-chart-plot:has(.cm-chart-focus-grid:focus-within) {
+    outline-color: Highlight;
+  }
+}
+/* 스몰 멀티플 패널 카드 (13types ⑧ sm-card, Figma 특수교육현황 배치·급별·장애유형별) */
+.cm-chart-panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--krds-gap-5);
+}
+.cm-chart-panel {
+  overflow: hidden;
+  border: 0.1rem solid var(--cm-color-border-light);
+  border-radius: var(--krds-radius-medium3);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-chart-panel-tit {
+  padding: var(--krds-padding-6);
+  border-bottom: 0.1rem solid var(--cm-color-border-light);
+  background-color: var(--cm-color-box-surface);
+  font-size: var(--krds-pc-font-size-body-small);
+  font-weight: var(--krds-font-weight-bold);
+  text-align: center;
+  color: var(--cm-color-text-bolder);
+}
+.cm-chart-panel-tit b {
+  color: var(--cm-color-text-primary);
+}
+.cm-chart-panel .cm-chart-plot {
+  height: 28rem;
+}
+/* 그래프 종류 버튼 : 선택한 버튼만 글자를 보이고 나머지는 아이콘 + 대체 텍스트 */
+.cm-ts-type [aria-pressed=false] .cm-chart-type-txt {
+  position: absolute;
+  width: 0.1rem;
+  height: 0.1rem;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/* 차트 확대 모달 (kr/tmpl/modal.html #modal_chart_zoom, KRDS 모달) : 넓게 · 글자 크기 5단계 */
+.cm-chart-modal .modal-dialog {
+  width: calc(100% - 4rem);
+  max-width: 128rem;
+}
+.cm-chart-zoom-font {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--krds-gap-2);
+  margin-bottom: var(--krds-gap-5);
+}
+.cm-chart-zoom-level {
+  min-width: 4.8rem;
+  font-size: var(--krds-pc-font-size-label-small);
+  text-align: center;
+  color: var(--cm-color-text-basic);
+}
+.cm-chart-zoom-body .cm-chart-plot {
+  height: min(60vh, 60rem);
+}
+@media (max-width: 767px) {
+  .cm-chart-plot {
+    height: 32rem;
+  }
+  .cm-chart-panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cm-chart-legend-item,
+  .cm-chart-legend-all {
+    font-size: var(--krds-mobile-font-size-label-small);
   }
 }
 
