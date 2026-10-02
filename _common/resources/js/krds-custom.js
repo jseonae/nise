@@ -142,3 +142,40 @@ const cmAiHelper = {
   },
 };
 document.addEventListener("DOMContentLoaded", () => cmAiHelper.init());
+
+/* 가로 스크롤 표 (.cm-table-scroll, 마크업 _common/html/code/ext_table_scroll.html)
+   - 이전/다음 버튼으로 한 열씩 옮기고 끝에서 버튼을 disabled 로 바꿈
+   - 한 번이라도 옮기면 손가락 그림(.cm-table-scroll-hint)을 숨김 */
+const cmTableScroll = {
+  init() {
+    document.querySelectorAll(".cm-table-scroll").forEach((box) => this.setup(box));
+  },
+  setup(box) {
+    const wrap = box.querySelector(".krds-table-wrap");
+    const prev = box.querySelector(".cm-table-prev");
+    const next = box.querySelector(".cm-table-next");
+    if (!wrap || !prev || !next) return;
+    const step = () => {
+      const cell = wrap.querySelector("thead th:nth-child(2)");
+      return cell ? cell.offsetWidth : wrap.clientWidth / 2;
+    };
+    const update = () => {
+      const max = wrap.scrollWidth - wrap.clientWidth;
+      const atStart = wrap.scrollLeft <= 1;
+      const atEnd = wrap.scrollLeft >= max - 1;
+      [[prev, atStart], [next, atEnd]].forEach(([btn, off]) => {
+        if (off && btn === document.activeElement) (btn === prev ? next : prev).focus();
+        btn.disabled = off;
+      });
+      box.classList.toggle("is-end", atEnd);
+      box.classList.toggle("no-scroll", max <= 1);
+      if (!atStart) box.classList.add("is-scrolled");
+    };
+    prev.addEventListener("click", () => wrap.scrollBy({ left: -step(), behavior: "smooth" }));
+    next.addEventListener("click", () => wrap.scrollBy({ left: step(), behavior: "smooth" }));
+    wrap.addEventListener("scroll", update, { passive: true });
+    if ("ResizeObserver" in window) new ResizeObserver(update).observe(wrap);
+    update();
+  },
+};
+document.addEventListener("DOMContentLoaded", () => cmTableScroll.init());
