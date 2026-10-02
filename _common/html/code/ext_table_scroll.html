@@ -1,0 +1,30 @@
+<!-- ext: 신규 컴포넌트 (KRDS 표 + 좌우 이동) / 가로 스크롤 표 : 열이 많은 통계표를 좌우로 옮겨 보는 표 -->
+<!--
+  Figma : 컨텐츠 > 특수교육현황-학생수기준-* > 통계표 (KRDS Table scroll + controllerWrap)
+  - 표는 KRDS 표(table data) + .cm-stat-table(칸 테두리·첫 칸 고정) 을 그대로 씁니다.
+  - 스타일 : _common/resources/css/krds-custom.css [표] 가로 스크롤 표 (.cm-table-scroll)
+  - 스크립트 : _common/resources/js/krds-custom.js (cmTableScroll)
+      · 이전/다음 버튼으로 한 열씩 옮기고, 끝에 닿으면 버튼을 disabled 로 바꿉니다.
+      · 오른쪽 손가락 그림(.cm-table-scroll-hint)은 한 번 옮기면 숨깁니다. 꾸밈용이라 aria-hidden.
+  - 키보드 : 표 영역(tabindex="0")에 초점을 두고 좌우 화살표로도 옮길 수 있습니다(브라우저 기본 스크롤).
+  - 첫 칸 너비는 table 의 style="--cm-first-col: 6.5rem" 처럼 지정합니다 (Figma 계 65px, 그 밖 230px).
+-->
+<div class="cm-table-scroll">
+  <div class="krds-table-wrap cm-stat-table cm-es-table" tabindex="0" role="group" aria-label="표 이름 표, 좌우로 스크롤">
+    <table class="tbl col data" style="--cm-first-col: 6.5rem;">
+      <caption>표 설명</caption>
+      <thead>
+        <tr><th scope="col">구분</th><th scope="col">2008</th><th scope="col">2009</th><!-- … --></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">전체</th><td>71,484</td><td>75,187</td><!-- … --></tr>
+      </tbody>
+    </table>
+  </div>
+  <span class="cm-table-scroll-hint" aria-hidden="true"></span>
+  <div class="cm-table-scroll-ctrl">
+    <p>표를 좌우로 이동하여 확인하세요.</p>
+    <button type="button" class="krds-btn small tertiary cm-table-prev" disabled><i class="svg-icon ico-angle left"></i>이전<span class="sr-only"> 열 보기</span></button>
+    <button type="button" class="krds-btn small tertiary cm-table-next">다음<span class="sr-only"> 열 보기</span><i class="svg-icon ico-angle right"></i></button>
+  </div>
+</div>

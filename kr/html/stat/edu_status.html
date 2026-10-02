@@ -53,10 +53,313 @@
       <!-- 페이지 상단 : 브레드크럼 · 공유/인쇄 · 페이지 제목 -->
       <div data-include="page-top"></div>
 
-      <!-- [04-1] 컨텐츠 : .inner -->
-      <div class="inner cm-contents">
-        <!-- TODO: 특수교육 현황 본문 퍼블리싱 (Figma: 컨텐츠 > 특수교육현황-학생수기준-계) -->
-        <p class="cm-todo">특수교육 현황 본문 컨텐츠 영역</p>
+      <!-- [04-1] 컨텐츠 : .inner (Figma: 컨텐츠 > 특수교육현황-학생수기준-계 · 배치 · 급별 · 장애유형별, node 10611:53765 · 10611:54009 · 10611:54222 · 10691:69015) -->
+      <div class="inner cm-contents cm-edu-status">
+        <!-- 숫자로 보는 특수교육 -->
+        <section id="section_01" class="cm-es-section">
+          <h2 class="cm-cross-tit">숫자로 보는 특수교육 18년의 변화</h2>
+          <ul class="cm-es-summary">
+            <li>
+              <p class="tit">특수교육대상자</p>
+              <p class="val">124,195명</p>
+              <p class="desc">2008년 71,484명 대비 <strong>+73.7%</strong></p>
+            </li>
+            <li>
+              <p class="tit">일반학교 배치 비중</p>
+              <p class="val">67.3 <span aria-hidden="true">→</span><span class="sr-only">에서</span> 74.1%</p>
+              <p class="desc"><strong>+6.8%p</strong> · 학생 100명 중 74명이 일반학교에 배치</p>
+            </li>
+            <li>
+              <p class="tit">유치원 과정 재학생</p>
+              <p class="val">7,498명</p>
+              <p class="desc">2008년 3,236명 대비 2.3배 · <strong>조기개입 확대</strong></p>
+            </li>
+            <li>
+              <p class="tit">특수교육 운영 기관</p>
+              <p class="val">18,373개교</p>
+              <p class="desc">2008년 9,910개교 대비 <strong>+85.4%</strong></p>
+            </li>
+            <li>
+              <p class="tit">특수학급 운영 일반학교</p>
+              <p class="val">9,930개교</p>
+              <p class="desc">2008년 4,971개교 대비 <strong>+99.8%</strong></p>
+            </li>
+            <li>
+              <p class="tit">일반학급에서 함께 배우는 학생</p>
+              <p class="val">19,202명</p>
+              <p class="desc">2008년 10,227명 대비 <strong>+87.8%</strong></p>
+            </li>
+          </ul>
+          <p class="cm-es-foot">2008 ~ 2026 · 특수교육통계 자료에서 발췌한 내용입니다.</p>
+
+          <!-- 배치 유형 구성비 : [임시] Figma 범례·그래프 이미지 그대로 -->
+          <div class="cm-es-ratio">
+            <div class="head">
+              <div class="tit-wrap">
+                <h3 class="tit">배치 유형 구성비 변화 — 통합교육으로의 이동</h3>
+                <p class="desc">막대 길이는 학생 수 규모가 아닌 비율(%)을 나타냅니다</p>
+              </div>
+              <div class="btns">
+                <div class="krds-form-toggle-switch medium">
+                  <input type="checkbox" id="es_ratio_pattern" checked>
+                  <label for="es_ratio_pattern"><span class="switch-toggle"><i></i></span>패턴 적용</label>
+                </div>
+                <button type="button" class="krds-btn small tertiary">차트 확대</button>
+              </div>
+            </div>
+            <div class="body">
+              <div class="cm-chart-area">
+                <img src="../../img/stat/edu_place_ratio_legend.png" alt="" class="cm-chart-legend-img">
+                <img src="../../img/stat/edu_place_ratio.png" alt="배치 유형 구성비 가로 누적막대 그래프. 2008년 특수학교 32.7%, 일반학교 특수학급 53%, 특수교육지원센터 14.3% · 2026년 특수학교 25.8%, 일반학교 특수학급 58.6%, 특수교육지원센터 15.4%">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 특수교육대상자 수 추이 -->
+        <section id="section_02" class="cm-es-section">
+          <div class="cm-es-section-top">
+            <h2 class="cm-cross-tit">특수교육대상자 수 추이</h2>
+            <p class="desc">학생 수 기준으로 본 특수교육대상자 연도별 지표 입니다.</p>
+          </div>
+          <div class="krds-tab-area layer cm-es-tab">
+            <div class="tab fill full">
+              <ul role="tablist">
+                <li id="tab_es_01" role="tab" aria-selected="true" aria-controls="panel_es_01" class="active">
+                  <button type="button" class="btn-tab">학생 수</button>
+                </li>
+                <li id="tab_es_02" role="tab" aria-selected="false" aria-controls="panel_es_02">
+                  <button type="button" class="btn-tab">기관 수</button>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-conts-wrap">
+              <section id="panel_es_01" aria-labelledby="tab_es_01" class="tab-conts active" data-quick-nav="false">
+                <h3 class="sr-only">학생 수</h3>
+                <!-- 조회 도구 : 학생 수 기준을 바꾸면 아래 그래프·통계표가 바뀜
+                     퍼블리싱에서는 확인용 스크립트(kr/js/user-custom.js cmEduBasis)가 4가지 상태(.cm-es-result)를 바꿔 보여줌, 개발 시 서버 조회로 바꿈 -->
+                <div class="cm-ts-tool">
+                  <div class="cm-ts-tool-filter">
+                    <div class="cm-ts-select">
+                      <label for="es_basis">학생 수 기준</label>
+                      <select id="es_basis" class="krds-form-select small">
+                        <option value="total" selected>계</option>
+                        <option value="place">배치별</option>
+                        <option value="level">급별</option>
+                        <option value="disability">장애유형별</option>
+                      </select>
+                    </div>
+                    <!-- 급별일 때만 보이는 배치 선택 -->
+                    <div class="cm-ts-select cm-es-sub" hidden>
+                      <label for="es_place" class="sr-only">배치 선택</label>
+                      <select id="es_place" class="krds-form-select small">
+                        <option value="all">전체 배치</option>
+                        <option value="school">특수학교</option>
+                        <option value="class">일반학교 특수학급</option>
+                        <option value="full" selected>일반학교 일반학급(완전통합)</option>
+                        <option value="center">특수교육지원센터</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="cm-ts-tool-btns">
+                    <!-- 꺾은선 그래프(배치·급별·장애유형별)에서는 패턴을 쓰지 않아 disabled (Figma) -->
+                    <div class="krds-form-toggle-switch medium">
+                      <input type="checkbox" id="es_pattern" checked>
+                      <label for="es_pattern"><span class="switch-toggle"><i></i></span>패턴 적용</label>
+                    </div>
+                    <div class="krds-form-toggle-switch medium">
+                      <input type="checkbox" id="es_label" checked>
+                      <label for="es_label"><span class="switch-toggle"><i></i></span>레이블 보기</label>
+                    </div>
+                    <button type="button" class="krds-btn small tertiary">차트 확대</button>
+                    <button type="button" class="krds-btn small tertiary">다운로드</button>
+                    <button type="button" class="krds-btn small tertiary">인쇄</button>
+                  </div>
+                </div>
+              <!-- 학생 수 기준 : 학생 수 기준 계 -->
+              <div class="cm-es-result" data-basis="total">
+                <!-- 그래프 : [임시] Figma 그래프 이미지 그대로 (그래프 작업 때 차트 라이브러리로 바꿈, 같은 값은 아래 통계표에 있음) -->
+                <div class="cm-chart-box cm-es-chart">
+                  <div class="cm-chart-area">
+                  <img src="../../img/stat/edu_trend_total.png" alt="특수교육대상자 수(막대)와 전년 대비 증가율(선) 그래프, 2008년~2026년">
+                  </div>
+                </div>
+                <h3 class="cm-es-tit">통계표</h3>
+                <!-- 가로 스크롤 표 : 신규 컴포넌트 _common/html/code/ext_table_scroll.html (스크립트 krds-custom.js cmTableScroll) -->
+                <div class="cm-table-scroll">
+                  <div class="krds-table-wrap cm-stat-table cm-es-table" tabindex="0" role="group" aria-label="학생 수 기준 계 표, 좌우로 스크롤">
+                    <table class="tbl col data" style="--cm-first-col: 6.5rem;">
+                      <caption>학생 수 기준 계 표로 구분과 2008년부터 2026년까지 연도별 학생 수(명)로 구성되어 있습니다.</caption>
+                      <thead>
+                        <tr><th scope="col">구분</th><th scope="col">2008</th><th scope="col">2009</th><th scope="col">2010</th><th scope="col">2011</th><th scope="col">2012</th><th scope="col">2013</th><th scope="col">2014</th><th scope="col">2015</th><th scope="col">2016</th><th scope="col">2017</th><th scope="col">2018</th><th scope="col">2019</th><th scope="col">2020</th><th scope="col">2021</th><th scope="col">2022</th><th scope="col">2023</th><th scope="col">2024</th><th scope="col">2025</th><th scope="col">2026</th></tr>
+                      </thead>
+                      <tbody>
+                      <tr><th scope="row">전체</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <span class="cm-table-scroll-hint" aria-hidden="true"></span>
+                  <div class="cm-table-scroll-ctrl">
+                    <p>표를 좌우로 이동하여 확인하세요.</p>
+                    <button type="button" class="krds-btn small tertiary cm-table-prev" disabled><i class="svg-icon ico-angle left"></i>이전<span class="sr-only"> 열 보기</span></button>
+                    <button type="button" class="krds-btn small tertiary cm-table-next">다음<span class="sr-only"> 열 보기</span><i class="svg-icon ico-angle right"></i></button>
+                  </div>
+                </div>
+                <div class="cm-es-notes">
+                  <p><strong>급별 구분 안내</strong> — 원자료에는 장애유형별 구분이 포함되어 있지 않아 배치 유형을 가로지르는 <strong>학교과정별(장애영아·유치원·초등학교·중학교·고등학교·전공과)</strong> 구분을 제공합니다.</p>
+                  <p class="cm-source cm-es-source"><strong>출처 -</strong> 교육부 국립특수교육원, 특수교육통계 (2008~2026년) — 행정통계 기준으로 실태조사 결과와 집계 대상·시점이 다를 수 있습니다.</p>
+                </div>
+              </div>
+              <!-- 학생 수 기준 : 학생 수 기준 배치별 -->
+              <div class="cm-es-result" data-basis="place" hidden>
+                <!-- 그래프 : [임시] Figma 그래프 이미지 그대로 (그래프 작업 때 차트 라이브러리로 바꿈, 같은 값은 아래 통계표에 있음) -->
+                <div class="cm-chart-box cm-es-chart">
+                  <p class="cm-es-desc">계열 간 규모 차이가 커 계열별 독립 패널로 표시합니다 — 각 패널의 세로축 눈금이 다르니 값은 축·수치로 확인해 주세요 · 특수교육지원센터의 2008년 값은 원자료에 없어 '미집계'로 표시합니다</p>
+                  <div class="cm-chart-area">
+                  <img src="../../img/stat/edu_trend_place.png" alt="배치별 특수교육대상자 수 꺾은선 그래프 4개(특수교육지원센터, 특수학교, 일반학교 특수학급, 일반학교 일반학급), 2008년~2026년">
+                  </div>
+                </div>
+                <h3 class="cm-es-tit">통계표</h3>
+                <!-- 가로 스크롤 표 : 신규 컴포넌트 _common/html/code/ext_table_scroll.html (스크립트 krds-custom.js cmTableScroll) -->
+                <div class="cm-table-scroll">
+                  <div class="krds-table-wrap cm-stat-table cm-es-table" tabindex="0" role="group" aria-label="학생 수 기준 배치별 표, 좌우로 스크롤">
+                    <table class="tbl col data" style="--cm-first-col: 23rem;">
+                      <caption>학생 수 기준 배치별 표로 구분과 2008년부터 2026년까지 연도별 학생 수(명)로 구성되어 있습니다.</caption>
+                      <thead>
+                        <tr><th scope="col">구분</th><th scope="col">2008</th><th scope="col">2009</th><th scope="col">2010</th><th scope="col">2011</th><th scope="col">2012</th><th scope="col">2013</th><th scope="col">2014</th><th scope="col">2015</th><th scope="col">2016</th><th scope="col">2017</th><th scope="col">2018</th><th scope="col">2019</th><th scope="col">2020</th><th scope="col">2021</th><th scope="col">2022</th><th scope="col">2023</th><th scope="col">2024</th><th scope="col">2025</th><th scope="col">2026</th></tr>
+                      </thead>
+                      <tbody>
+                      <tr><th scope="row">특수교육지원센터</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">특수학교</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">일반학교 특수학급</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">일반학교 일반학급(완전통합)</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <span class="cm-table-scroll-hint" aria-hidden="true"></span>
+                  <div class="cm-table-scroll-ctrl">
+                    <p>표를 좌우로 이동하여 확인하세요.</p>
+                    <button type="button" class="krds-btn small tertiary cm-table-prev" disabled><i class="svg-icon ico-angle left"></i>이전<span class="sr-only"> 열 보기</span></button>
+                    <button type="button" class="krds-btn small tertiary cm-table-next">다음<span class="sr-only"> 열 보기</span><i class="svg-icon ico-angle right"></i></button>
+                  </div>
+                </div>
+                <div class="cm-es-notes">
+                  <p class="cm-source cm-es-source"><strong>출처 -</strong> 교육부 국립특수교육원, 특수교육통계 (2008~2026년) — 행정통계 기준으로 실태조사 결과와 집계 대상·시점이 다를 수 있습니다.</p>
+                </div>
+              </div>
+              <!-- 학생 수 기준 : 학생 수 기준 급별 -->
+              <div class="cm-es-result" data-basis="level" hidden>
+                <!-- 그래프 : [임시] Figma 그래프 이미지 그대로 (그래프 작업 때 차트 라이브러리로 바꿈, 같은 값은 아래 통계표에 있음) -->
+                <div class="cm-chart-box cm-es-chart">
+                  <p class="cm-es-desc">'장애영아'는 특수학교 장애영아 과정과 특수교육지원센터를 합산한 값입니다 · 2008년은 장애영아 구분이 없어 '미집계'로 표시합니다.</p>
+                  <div class="cm-chart-area">
+                  <img src="../../img/stat/edu_trend_level.png" alt="급별 특수교육대상자 수 꺾은선 그래프 4개(유치원, 초등학교, 중학교, 고등학교), 2008년~2026년">
+                  </div>
+                </div>
+                <h3 class="cm-es-tit">통계표</h3>
+                <!-- 가로 스크롤 표 : 신규 컴포넌트 _common/html/code/ext_table_scroll.html (스크립트 krds-custom.js cmTableScroll) -->
+                <div class="cm-table-scroll">
+                  <div class="krds-table-wrap cm-stat-table cm-es-table" tabindex="0" role="group" aria-label="학생 수 기준 급별 표, 좌우로 스크롤">
+                    <table class="tbl col data" style="--cm-first-col: 23rem;">
+                      <caption>학생 수 기준 급별 표로 구분과 2008년부터 2026년까지 연도별 학생 수(명)로 구성되어 있습니다.</caption>
+                      <thead>
+                        <tr><th scope="col">구분</th><th scope="col">2008</th><th scope="col">2009</th><th scope="col">2010</th><th scope="col">2011</th><th scope="col">2012</th><th scope="col">2013</th><th scope="col">2014</th><th scope="col">2015</th><th scope="col">2016</th><th scope="col">2017</th><th scope="col">2018</th><th scope="col">2019</th><th scope="col">2020</th><th scope="col">2021</th><th scope="col">2022</th><th scope="col">2023</th><th scope="col">2024</th><th scope="col">2025</th><th scope="col">2026</th></tr>
+                      </thead>
+                      <tbody>
+                      <tr><th scope="row">장애영아</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">유치원</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">초등학교</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">중학교</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">고등학교</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">전공과</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <span class="cm-table-scroll-hint" aria-hidden="true"></span>
+                  <div class="cm-table-scroll-ctrl">
+                    <p>표를 좌우로 이동하여 확인하세요.</p>
+                    <button type="button" class="krds-btn small tertiary cm-table-prev" disabled><i class="svg-icon ico-angle left"></i>이전<span class="sr-only"> 열 보기</span></button>
+                    <button type="button" class="krds-btn small tertiary cm-table-next">다음<span class="sr-only"> 열 보기</span><i class="svg-icon ico-angle right"></i></button>
+                  </div>
+                </div>
+                <div class="cm-es-notes">
+                  <p><strong>급별 구분 안내</strong> — 원자료에는 장애유형별 구분이 포함되어 있지 않아 배치 유형을 가로지르는 <strong>학교과정별(장애영아·유치원·초등학교·중학교·고등학교·전공과)</strong> 구분을 제공합니다.</p>
+                  <p class="cm-source cm-es-source"><strong>출처 -</strong> 교육부 국립특수교육원, 특수교육통계 (2008~2026년) — 행정통계 기준으로 실태조사 결과와 집계 대상·시점이 다를 수 있습니다.</p>
+                </div>
+              </div>
+              <!-- 학생 수 기준 : 학생 수 기준 장애유형별 -->
+              <div class="cm-es-result" data-basis="disability" hidden>
+                <!-- 그래프 : [임시] Figma 그래프 이미지 그대로 (그래프 작업 때 차트 라이브러리로 바꿈, 같은 값은 아래 통계표에 있음) -->
+                <div class="cm-chart-box cm-es-chart">
+                  <p class="cm-es-desc">10개 장애유형을 유형별 독립 패널로 표시합니다 — 패널마다 세로축 눈금이 다릅니다 · 2008년은 정서장애에 자폐성장애가 포함되어 집계되었고(정서행동장애 7,681명), 발달지체는 2009년부터 조사되어 두 유형의 2008년 값은 '미집계'로 표시합니다</p>
+                  <div class="cm-chart-area">
+                  <img src="../../img/stat/edu_trend_disability_1.png" alt="장애유형별 특수교육대상자 수 꺾은선 그래프(시각장애~학습장애), 2008년~2026년">
+                  <img src="../../img/stat/edu_trend_disability_2.png" alt="장애유형별 특수교육대상자 수 꺾은선 그래프(건강장애, 발달지체 등), 2008년~2026년">
+                  </div>
+                </div>
+                <h3 class="cm-es-tit">통계표</h3>
+                <!-- 가로 스크롤 표 : 신규 컴포넌트 _common/html/code/ext_table_scroll.html (스크립트 krds-custom.js cmTableScroll) -->
+                <div class="cm-table-scroll">
+                  <div class="krds-table-wrap cm-stat-table cm-es-table" tabindex="0" role="group" aria-label="학생 수 기준 장애유형별 표, 좌우로 스크롤">
+                    <table class="tbl col data" style="--cm-first-col: 23rem;">
+                      <caption>학생 수 기준 장애유형별 표로 구분과 2008년부터 2026년까지 연도별 학생 수(명)로 구성되어 있습니다.</caption>
+                      <thead>
+                        <tr><th scope="col">구분</th><th scope="col">2008</th><th scope="col">2009</th><th scope="col">2010</th><th scope="col">2011</th><th scope="col">2012</th><th scope="col">2013</th><th scope="col">2014</th><th scope="col">2015</th><th scope="col">2016</th><th scope="col">2017</th><th scope="col">2018</th><th scope="col">2019</th><th scope="col">2020</th><th scope="col">2021</th><th scope="col">2022</th><th scope="col">2023</th><th scope="col">2024</th><th scope="col">2025</th><th scope="col">2026</th></tr>
+                      </thead>
+                      <tbody>
+                      <tr><th scope="row">시각장애</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">청각장애</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">지적장애</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">지체장애</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">정서행동장애</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">자폐성장애</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">의사소통장애</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">학습장애</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">건강장애</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      <tr><th scope="row">발달지체</th><td>71,484</td><td>75,187</td><td>79,711</td><td>82,665</td><td>85,012</td><td>86,633</td><td>87,278</td><td>88,067</td><td>87,950</td><td>89,353</td><td>90,780</td><td>92,958</td><td>95,420</td><td>98,154</td><td>103,695</td><td>109,703</td><td>115,610</td><td>120,735</td><td>124,195</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <span class="cm-table-scroll-hint" aria-hidden="true"></span>
+                  <div class="cm-table-scroll-ctrl">
+                    <p>표를 좌우로 이동하여 확인하세요.</p>
+                    <button type="button" class="krds-btn small tertiary cm-table-prev" disabled><i class="svg-icon ico-angle left"></i>이전<span class="sr-only"> 열 보기</span></button>
+                    <button type="button" class="krds-btn small tertiary cm-table-next">다음<span class="sr-only"> 열 보기</span><i class="svg-icon ico-angle right"></i></button>
+                  </div>
+                </div>
+                <div class="cm-es-notes">
+                  <p class="cm-source cm-es-source"><strong>출처 -</strong> 교육부 국립특수교육원, 특수교육통계 (2008~2026년) — 행정통계 기준으로 실태조사 결과와 집계 대상·시점이 다를 수 있습니다.<br>전체 기관 수는 각 연도 통계집 주요 현황 표의 공표 계를 그대로 표기했습니다.</p>
+                </div>
+              </div>
+              </section>
+              <section id="panel_es_02" aria-labelledby="tab_es_02" class="tab-conts" data-quick-nav="false">
+                <h3 class="sr-only">기관 수</h3>
+                <!-- Figma에 기관 수 화면이 아직 없음 -->
+                <div class="cm-empty">
+                  <img src="../../../_common/resources/img/common/cm_ready.png" alt="">
+                  <p class="tit">준비중입니다.</p>
+                  <p class="txt">기관 수 화면은 준비 중입니다.</p>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- 콘텐츠 내 탐색 : KRDS in_page_navigation (화면 오른쪽 고정) -->
+        <div class="krds-in-page-navigation-type">
+          <div class="krds-in-page-navigation-area">
+            <div class="in-page-navigation-header">
+              <p class="quick-caption">이 페이지의 구성</p>
+              <p class="quick-title">특수교육 현황</p>
+            </div>
+            <nav class="in-page-navigation-list" aria-label="이 페이지의 구성">
+              <ul>
+                <li><a href="#section_01" class="active">숫자로 보는 특수교육</a></li>
+                <li><a href="#section_02">특수교육대상자 수 추이</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
       <!-- //[04-1] 컨텐츠 -->
     </div>

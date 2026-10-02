@@ -2393,6 +2393,241 @@
   line-height: 1.5;
 }
 
+/* [통계정보] 특수교육 현황 (Figma: 컨텐츠 > 특수교육현황-학생수기준-계 · 배치 · 급별 · 장애유형별) */
+.cm-edu-status {
+  gap: var(--krds-number-16);
+}
+.cm-es-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-6);
+}
+.cm-es-section-top .desc {
+  margin-top: var(--krds-gap-1);
+  font-size: var(--krds-pc-font-size-body-medium);
+  color: var(--cm-color-text-subtle);
+}
+/* 요약 카드 (Figma: 3열 · 간격 18px · 반경 10px) */
+.cm-es-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+}
+.cm-es-summary > li {
+  display: flex;
+  flex-direction: column;
+  padding: var(--krds-padding-8) var(--krds-padding-8) var(--krds-padding-9);
+  border: 0.1rem solid var(--cm-color-border-primary-light);
+  border-radius: 1rem; /* Figma radius/large1 10px (KRDS 반경 토큰에 10px 없음) */
+  background-color: var(--cm-color-surface-white);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+.cm-es-summary .tit {
+  font-size: var(--krds-pc-font-size-body-medium);
+}
+.cm-es-summary .val {
+  margin-top: var(--krds-gap-2);
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-primary);
+}
+.cm-es-summary .desc {
+  margin-top: var(--krds-gap-4);
+  font-size: var(--krds-pc-font-size-body-small);
+}
+.cm-es-summary .desc strong {
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-es-foot {
+  margin-top: calc(var(--krds-gap-3) - var(--krds-gap-6));
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  color: var(--cm-color-text-subtle);
+}
+/* 배치 유형 구성비 상자 */
+.cm-es-ratio {
+  margin-top: calc(var(--krds-gap-7) - var(--krds-gap-6));
+  overflow: hidden;
+  border: 0.1rem solid var(--cm-color-border-light);
+  border-radius: var(--krds-radius-medium3);
+}
+.cm-es-ratio .head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--krds-gap-4);
+  padding: var(--krds-padding-8);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-es-ratio .head .tit {
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+.cm-es-ratio .head .desc {
+  font-size: var(--krds-pc-font-size-body-small);
+  color: var(--cm-color-text-subtle);
+}
+.cm-es-ratio .head .btns {
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-3);
+}
+.cm-es-ratio .body {
+  padding: var(--krds-padding-8);
+  background-color: var(--cm-color-box-surface);
+}
+.cm-es-ratio .body .cm-chart-area {
+  align-items: center;
+  padding: var(--krds-padding-9);
+  border-radius: var(--krds-radius-small3);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-chart-area .cm-chart-legend-img {
+  width: auto;
+  max-width: 100%;
+}
+/* 학생 수 · 기관 수 탭 */
+.cm-es-tab {
+  gap: var(--krds-gap-9);
+}
+.cm-es-tab > .tab-conts-wrap > .tab-conts {
+  margin-top: 0;
+}
+.cm-es-tab > .tab-conts-wrap > .tab-conts.active {
+  gap: var(--krds-gap-6);
+}
+.cm-es-result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-6);
+}
+.cm-es-result[hidden],
+.cm-es-sub[hidden] {
+  display: none;
+}
+.cm-es-sub .krds-form-select {
+  width: auto;
+  min-width: 10rem;
+}
+.cm-es-chart {
+  align-items: stretch;
+  padding: var(--krds-padding-10) var(--krds-number-16);
+}
+.cm-es-desc {
+  font-size: var(--krds-pc-font-size-body-small);
+  line-height: 1.5;
+  color: var(--cm-color-text-subtle);
+}
+.cm-es-tit {
+  margin-top: var(--krds-gap-6);
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-bolder);
+}
+.cm-es-notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-1);
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+}
+.cm-es-notes strong {
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-es-notes .cm-es-source {
+  padding-top: 0;
+}
+/* 통계표 : 열 110px (Figma), 첫 칸 너비는 --cm-first-col */
+.cm-es-table .tbl.data {
+  table-layout: fixed;
+  width: calc(var(--cm-first-col, 6.5rem) + 19 * 11rem);
+  min-width: 0;
+}
+.cm-es-table .tbl.data thead tr > :first-child,
+.cm-es-table .tbl.data tbody tr > :first-child {
+  width: var(--cm-first-col, 6.5rem);
+}
+/* [표] 가로 스크롤 표 (신규 컴포넌트 _common/html/code/ext_table_scroll.html) : 오른쪽 흰 그라데이션 · 손가락 그림 · 이전/다음 (Figma 그대로) */
+.cm-table-scroll {
+  position: relative;
+}
+.cm-table-scroll .krds-table-wrap {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.cm-table-scroll .krds-table-wrap:focus-visible {
+  outline: 0.2rem solid var(--krds-light-color-border-inverse);
+  box-shadow: var(--krds-box-shadow-outline);
+}
+.cm-table-scroll::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 5.3rem; /* 아래 이동 버튼 줄 높이 */
+  width: 8.6rem; /* Figma scrollBg 86px */
+  background: linear-gradient(to right, transparent, var(--cm-color-surface-white));
+  pointer-events: none;
+}
+.cm-table-scroll.is-end::after,
+.cm-table-scroll.no-scroll::after {
+  display: none;
+}
+.cm-table-scroll-hint {
+  position: absolute;
+  top: 1.5rem;
+  right: 0;
+  width: 8.6rem;
+  height: 6.5rem;
+  background: url(../img/common/cm_table_scroll_hint.svg) no-repeat center / contain;
+  pointer-events: none;
+}
+.cm-table-scroll.is-scrolled .cm-table-scroll-hint,
+.cm-table-scroll.no-scroll .cm-table-scroll-hint {
+  display: none;
+}
+.cm-table-scroll-ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--krds-gap-4);
+  margin-top: var(--krds-gap-4);
+  padding-bottom: var(--krds-padding-5);
+  border-bottom: 0.1rem solid var(--cm-color-border-light);
+}
+.cm-table-scroll-ctrl p {
+  font-size: var(--krds-pc-font-size-body-small);
+  color: var(--cm-color-text-subtle);
+}
+.cm-table-scroll-ctrl .krds-btn + .krds-btn {
+  margin-left: calc(var(--krds-gap-3) - var(--krds-gap-4));
+}
+.cm-table-scroll-ctrl .krds-btn .svg-icon {
+  width: var(--krds-number-8);
+  height: var(--krds-number-8);
+}
+.cm-table-scroll.no-scroll .cm-table-scroll-ctrl {
+  display: none;
+}
+@media (max-width: 1023px) {
+  .cm-es-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 767px) {
+  .cm-es-summary {
+    grid-template-columns: 1fr;
+  }
+  .cm-es-chart,
+  .cm-es-ratio .body .cm-chart-area {
+    padding: var(--krds-padding-6);
+  }
+}
+
 /* [AI 해설 도우미] 신규 컴포넌트 (KRDS 없음, Figma 그대로) : _common/html/code/ext_ai_helper.html (화면마다 페이지에 둠)
    Figma: 컨텐츠 > 시계열시각화-view chat-btn-wrap · -view-ai해설도우미오픈 · -view-ai해설도우미챗진행
    - 여는 버튼은 콘텐츠 내 탐색(오른쪽 고정) 아래에 붙여 둠 (KRDS in_page_navigation 위치 계산식과 같은 기준) */

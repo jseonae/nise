@@ -59,3 +59,31 @@ const cmTsFilter = {
   },
 };
 document.addEventListener("DOMContentLoaded", () => cmTsFilter.init());
+
+/* [퍼블리싱 확인용] 특수교육 현황 학생 수 기준 (kr/html/stat/edu_status.html)
+   선택에 맞는 그래프·통계표(.cm-es-result[data-basis])를 보여주고, 급별일 때 배치 선택을 보이며, 꺾은선 그래프에서는 패턴 적용을 끔.
+   개발 시 서버 조회로 바꾸고 이 코드는 지웁니다. */
+const cmEduBasis = {
+  init() {
+    const select = document.getElementById("es_basis");
+    if (!select) return;
+    const results = document.querySelectorAll(".cm-es-result");
+    const sub = document.querySelector(".cm-es-sub");
+    const pattern = document.getElementById("es_pattern");
+    const apply = () => {
+      const value = select.value;
+      results.forEach((result) => {
+        result.hidden = result.dataset.basis !== value;
+      });
+      if (sub) sub.hidden = value !== "level";
+      if (pattern) {
+        pattern.disabled = value !== "total";
+        pattern.checked = value === "total";
+      }
+      window.dispatchEvent(new Event("resize"));
+    };
+    select.addEventListener("change", apply);
+    apply();
+  },
+};
+document.addEventListener("DOMContentLoaded", () => cmEduBasis.init());
