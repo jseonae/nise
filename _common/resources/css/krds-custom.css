@@ -1633,6 +1633,8 @@
   align-items: center;
 }
 .cm-ts-tool-filter {
+  flex: none;
+  max-width: 80rem; /* Figma step1-select 최대 800px : 칩이 많을 때(장애유형별 등) 칩 묶음 안에서 줄바꿈 */
   flex-wrap: nowrap;
   gap: var(--krds-gap-3);
 }
@@ -1648,9 +1650,15 @@
   color: var(--cm-color-text-basic);
 }
 .cm-ts-select .krds-form-select {
+  flex: none;
   width: 14rem; /* Figma selectbox 140px */
 }
+.cm-ts-chips[hidden] {
+  display: none;
+}
 .cm-ts-chips {
+  flex: 0 1 auto;
+  min-width: 0;
   gap: var(--krds-gap-2);
   border: 0;
 }
@@ -1660,6 +1668,8 @@
   justify-content: center;
 }
 .cm-ts-tool-btns {
+  flex: 1 1 auto;
+  min-width: 40rem; /* Figma btnrap 최소 400px */
   justify-content: flex-end;
   gap: var(--krds-gap-3);
 }
