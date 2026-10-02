@@ -1,0 +1,49 @@
+<!-- ext: 신규 컴포넌트 (KRDS에 없음) / 하위 변수 놓기 : 변수 칩을 분석 차원 · 조건/필터 영역으로 끌어다 놓는 교차분석 조건 만들기 -->
+<!--
+  Figma : 컨텐츠 > s02데이터분석_교차분석_view > 하위 변수 (교차·필터)
+  - 스타일 : _common/resources/css/krds-custom.css [데이터분석] 교차분석 > 하위 변수 놓기
+  - 변수 칩(.cm-var-chip)은 button 이고 draggable="true". 끌어다 놓기 동작은 개발 시 구현합니다.
+  - 접근성 : 끌어다 놓기만으로는 키보드·스크린리더 사용자가 쓸 수 없으므로, 개발 시 칩을 눌렀을 때
+    "분석 차원에 추가 / 조건에 추가 / 빼기"를 고르는 방법(메뉴나 버튼)을 함께 제공해야 합니다.
+  - 놓인 칩은 .is-active, 빈 영역은 .cm-var-drop.is-empty + .empty 안내 문구
+-->
+<div class="cm-var-builder">
+  <div class="cm-var-pool">
+    <p class="guide" id="cross_var_guide">아래 하위 변수를 분석 차원이나 조건/필터 영역으로 끌어다 놓으세요.<br>다시 이곳으로 끌어오면 제외할 수 있습니다.</p>
+    <ul class="cm-var-list" aria-label="하위 변수">
+      <li><button type="button" class="cm-var-chip" draggable="true" aria-describedby="cross_var_guide"><span class="handle" aria-hidden="true">⠿</span>설립 장애유형</button></li>
+    </ul>
+  </div>
+  <div class="cm-var-zones">
+    <div class="cm-var-zone">
+      <div class="head">
+        <h3 class="tit">분석 차원</h3>
+        <div class="cm-inline-select">
+          <label for="cross_mode">분석방식</label>
+          <select id="cross_mode" class="krds-form-select small">
+            <option value="single" selected>개별 분석 (교체)</option>
+            <option value="multi">중첩 분석 (추가)</option>
+          </select>
+        </div>
+      </div>
+      <ul class="cm-var-drop" aria-label="분석 차원에 놓은 변수">
+        <li><button type="button" class="cm-var-chip is-active" draggable="true" aria-describedby="cross_var_guide"><span class="handle" aria-hidden="true">⠿</span>학교 과정</button></li>
+      </ul>
+    </div>
+    <div class="cm-var-zone">
+      <div class="head">
+        <h3 class="tit">조건 / 필터</h3>
+        <div class="cm-inline-select">
+          <label for="cross_join">변수 간 결합</label>
+          <select id="cross_join" class="krds-form-select small">
+            <option value="and" selected>AND (모두 충족)</option>
+            <option value="or">OR (하나라도 충족)</option>
+          </select>
+        </div>
+      </div>
+      <div class="cm-var-drop is-empty">
+        <p class="empty">변수를 끌어다 놓고 추가한 후 값을 선택하세요.</p>
+      </div>
+    </div>
+  </div>
+</div>

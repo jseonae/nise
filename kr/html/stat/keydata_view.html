@@ -32,7 +32,7 @@
 <body>
   <!--
     ==================================================================
-    핵심데이터 시각화 상세 (Figma: 컨텐츠 > 핵심데이터시각화-list / view)
+    핵심데이터 시각화 상세 (Figma: 컨텐츠 > 핵심데이터시각화-view · -view-ai해설도우미오픈 · -view-ai해설도우미챗진행)
     공통 영역은 kr/tmpl 에서 인클루드합니다 (kr/js/include.js). 이 파일에는 페이지 컨텐츠만 둡니다.
       [01]~[03] 헤더             : kr/tmpl/header.html
       페이지 상단(브레드크럼·제목) : kr/tmpl/page-top.html (제목·설명은 메뉴 데이터, data-title · data-desc 로 변경 가능)
@@ -51,14 +51,214 @@
          ============================================================ -->
     <div id="container">
       <!-- 페이지 상단 : 브레드크럼 · 공유/인쇄 · 페이지 제목 -->
-      <div data-include="page-top"></div>
+      <div data-include="page-top" data-crumb="특수교육대상자 최초 선정·배치 시기"></div>
 
-      <!-- [04-1] 컨텐츠 : .inner -->
-      <div class="inner cm-contents">
-        <h1 class="sr-only">핵심데이터 시각화 상세</h1><!-- 게시물 제목 퍼블리싱 시 실제 제목(h1)으로 교체 -->
-        <!-- TODO: 핵심데이터 시각화 상세(view) 퍼블리싱 (Figma: 컨텐츠 > 핵심데이터시각화-list / view) -->
-        <!-- 목록으로 : keydata_list.html -->
-        <p class="cm-todo">핵심데이터 시각화 상세(view) 컨텐츠 영역</p>
+      <!-- [04-1] 컨텐츠 : .inner (Figma: 컨텐츠 > 핵심데이터시각화-view, node 10611:49285 · 시계열 시각화 상세와 같은 구조) -->
+      <div class="inner cm-contents cm-ts-view cm-kd-view">
+        <!-- 그래프 -->
+        <section id="section_01" class="cm-ts-graph">
+          <div class="cm-ts-head">
+            <div class="cm-ts-head-tit">
+              <div class="cm-ts-badges">
+                <span class="krds-badge small bg-gray"><span class="sr-only">주제 </span>교육과정</span>
+                <ul class="cm-ts-target" aria-label="조사대상">
+                  <li><span class="krds-badge small outline-gray">보호자</span></li>
+                </ul>
+              </div>
+              <h1 class="tit">특수교육대상자 최초 선정·배치 시기</h1>
+            </div>
+          </div>
+
+          <h2 class="sr-only">그래프</h2>
+          <!-- 그래프 조회 도구 : 조회 연도(표시) · KRDS 토글 스위치 · 버튼 -->
+          <div class="cm-ts-tool">
+            <dl class="cm-ts-year">
+              <dt>조회 연도</dt>
+              <dd>2023년</dd>
+            </dl>
+            <div class="cm-ts-tool-btns">
+              <div class="krds-form-toggle-switch medium">
+                <input type="checkbox" id="kd_pattern" checked>
+                <label for="kd_pattern"><span class="switch-toggle"><i></i></span>패턴 적용</label>
+              </div>
+              <div class="krds-form-toggle-switch medium">
+                <input type="checkbox" id="kd_label" checked>
+                <label for="kd_label"><span class="switch-toggle"><i></i></span>레이블 보기</label>
+              </div>
+              <button type="button" class="krds-btn small tertiary">차트 확대</button>
+              <button type="button" class="krds-btn small tertiary">다운로드</button>
+              <button type="button" class="krds-btn small tertiary">인쇄</button>
+            </div>
+          </div>
+
+          <!-- 차트 : [임시] Figma 그래프 이미지를 그대로 넣음. 그래프 작업 때 차트 라이브러리로 바꿈 (같은 값은 아래 통계표에 있음) -->
+          <div class="cm-chart-box">
+            <div class="cm-chart-area">
+              <img src="../../img/stat/sample_chart_hbar.png" alt="특수교육대상자 최초 선정·배치 시기 비율 가로막대 그래프(2023년). 자세한 값은 아래 통계표를 참고하세요.">
+            </div>
+          </div>
+        </section>
+
+        <!-- 통계표 -->
+        <section id="section_02" class="cm-ts-section">
+          <div class="cm-ts-section-top">
+            <h2 class="tit">통계표</h2>
+            <p class="unit">[단위 : %]</p>
+          </div>
+          <div class="krds-table-wrap cm-stat-table">
+            <table class="tbl col data">
+              <caption>특수교육대상자 최초 선정·배치 시기 통계표로 시기와 비율(%)로 구성되어 있습니다.</caption>
+              <colgroup>
+                <col style="width: 51.5%;">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">시기</th>
+                  <th scope="col">비율(%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">0~3세 미만</th>
+                  <td>6.2</td>
+                </tr>
+                <tr>
+                  <th scope="row">유치원 3세반</th>
+                  <td>10.4</td>
+                </tr>
+                <tr>
+                  <th scope="row">유치원 4세반</th>
+                  <td>10.1</td>
+                </tr>
+                <tr>
+                  <th scope="row">유치원 5세반</th>
+                  <td>19.2</td>
+                </tr>
+                <tr>
+                  <th scope="row">초등학교 1학년</th>
+                  <td>25.6</td>
+                </tr>
+                <tr>
+                  <th scope="row">초등학교 2~3학년</th>
+                  <td>9.8</td>
+                </tr>
+                <tr>
+                  <th scope="row">초등학교 4~6학년</th>
+                  <td>8.7</td>
+                </tr>
+                <tr>
+                  <th scope="row">중학교 1학년</th>
+                  <td>3.2</td>
+                </tr>
+                <tr>
+                  <th scope="row">중학교 2~3학년</th>
+                  <td>3.2</td>
+                </tr>
+                <tr>
+                  <th scope="row">고등학교</th>
+                  <td>3.5</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 데이터 설명 -->
+        <section id="section_03" class="cm-ts-section">
+          <h2 class="tit">데이터 설명</h2>
+          <p class="cm-kd-desc">최초 선정·배치 시기는 ‘초등학교 1학년’ 25.6%로 최다, ‘유치원 5세반’ 19.2%가 그다음</p>
+        </section>
+
+        <!-- 지표정보 -->
+        <section id="section_04" class="cm-ts-section">
+          <h2 class="tit">지표정보</h2>
+          <dl class="cm-indicator">
+            <div>
+              <dt>모집단</dt>
+              <dd>조사대상 보호자 · 2023년 모집단 104,087명</dd>
+            </div>
+          </dl>
+          <ul class="cm-refer-list">
+            <li>모집단 수치는 표본조사 결과에 가중치를 적용해 전체 규모로 추정한 값입니다.</li>
+            <li>가중치 적용으로 소수점에 의해 합계 등의 수치가 일치하지 않을 수 있습니다.</li>
+          </ul>
+          <p class="cm-source"><strong>출처 -</strong> 국립특수교육원 특수교육 실태조사(국가승인통계 제112014호)</p>
+        </section>
+
+        <!-- 용어해설 : KRDS 표(table data) -->
+        <section id="section_05" class="cm-ts-section">
+          <h2 class="tit">용어해설</h2>
+          <div class="krds-table-wrap cm-term-table">
+            <table class="tbl col data">
+              <caption>용어해설 표로 용어와 정의로 구성되어 있습니다.</caption>
+              <colgroup>
+                <col style="width: 18rem;">
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">용어</th>
+                  <th scope="col">정의</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">특수교육대상자</th>
+                  <td>시각장애·청각장애·지적장애 등으로 특수교육이 필요하다고 진단·평가되어 특수교육대상자로 선정된 사람</td>
+                </tr>
+                <tr>
+                  <th scope="row">선정·배치</th>
+                  <td>특수교육운영위원회의 진단·평가를 거쳐 특수교육대상자로 선정하고 특수학교·특수학급·일반학급 중 교육받을 곳을 정하는 절차</td>
+                </tr>
+                <tr>
+                  <th scope="row">특수학교</th>
+                  <td>특수교육대상자의 교육을 위하여 일반학교와 분리된 형태로 설립·운영되는 학교</td>
+                </tr>
+                <tr>
+                  <th scope="row">일반학교 특수학급</th>
+                  <td>특수교육대상자의 통합교육을 실시하기 위하여 일반학교에 설치된 학급</td>
+                </tr>
+                <tr>
+                  <th scope="row">모집단</th>
+                  <td>조사가 알아보려는 대상 전체의 집합. 표본조사 결과에 가중치를 적용해 이 규모를 추정함</td>
+                </tr>
+                <tr>
+                  <th scope="row">가중치</th>
+                  <td>표본의 응답 결과를 모집단 전체 규모로 확대 추정하기 위하여 표본 각각에 부여하는 값</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 이전글 · 다음글 · 목록 -->
+        <div class="page-btn-wrap both">
+          <div class="btn-wrap">
+            <a href="keydata_view.html" class="krds-btn medium tertiary"><i class="svg-icon ico-angle left"></i> 이전글</a>
+            <a href="keydata_view.html" class="krds-btn medium tertiary">다음글 <i class="svg-icon ico-angle right"></i></a>
+          </div>
+          <a href="keydata_list.html" class="krds-btn medium tertiary">목록으로</a>
+        </div>
+
+        <!-- 콘텐츠 내 탐색 : KRDS in_page_navigation (화면 오른쪽 고정) -->
+        <div class="krds-in-page-navigation-type">
+          <div class="krds-in-page-navigation-area">
+            <div class="in-page-navigation-header">
+              <p class="quick-caption">이 페이지의 구성</p>
+              <p class="quick-title">특수교육대상자 최초 선정·배치 시기</p>
+            </div>
+            <nav class="in-page-navigation-list" aria-label="이 페이지의 구성">
+              <ul>
+                <li><a href="#section_01" class="active">그래프</a></li>
+                <li><a href="#section_02">통계표</a></li>
+                <li><a href="#section_03">데이터 설명</a></li>
+                <li><a href="#section_04">지표정보</a></li>
+                <li><a href="#section_05">용어해설</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
       <!-- //[04-1] 컨텐츠 -->
     </div>
@@ -71,6 +271,86 @@
 
   <!-- [06] 모달 (#wrap 바깥) -->
   <div data-include="modal"></div>
+
+  <!-- AI 해설 도우미 : 화면마다 질문 예시·대화 내용이 달라 페이지에 둡니다.
+       원본 마크업 _common/html/code/ext_ai_helper.html, 스타일 krds-custom.css [AI 해설 도우미], 스크립트 krds-custom.js cmAiHelper -->
+  <!-- ============================================================
+       [06-2] AI 해설 도우미 : .cm-ai
+       ============================================================ -->
+  <div class="cm-ai">
+    <!-- 여는 버튼 · 안내 말풍선 -->
+    <div class="cm-ai-launcher">
+      <div class="cm-ai-bubble">
+        <p class="tit">통계는 저에게 물어보세요!</p>
+        <p class="txt">이 화면의 표를 읽어 드려요.</p>
+        <button type="button" class="cm-ai-bubble-close">오늘 하루 열지 않기 <i class="svg-icon ico-popup-close" aria-hidden="true"></i></button>
+      </div>
+      <button type="button" class="cm-ai-open" aria-expanded="false" aria-controls="cm_ai_panel">
+        <img src="../../../_common/resources/img/ai/cm_ai_btn.svg" alt="AI 해설 도우미 열기">
+      </button>
+    </div>
+
+    <!-- 대화 창 : data-state="intro"(처음 안내) | "chat"(대화 진행) -->
+    <section id="cm_ai_panel" class="cm-ai-panel" role="dialog" aria-modal="false" aria-labelledby="cm_ai_title" data-state="intro" hidden>
+      <div class="cm-ai-head">
+        <h2 id="cm_ai_title" class="cm-ai-title" tabindex="-1">
+          <img class="logo logo-inverse" src="../../../_common/resources/img/ai/cm_ai_logo_white.svg" alt="특수교육 실태조사 데이터 활용 플랫폼">
+          <img class="logo logo-basic" src="../../../_common/resources/img/ai/cm_ai_logo.svg" alt="특수교육 실태조사 데이터 활용 플랫폼">
+          <span class="name">AI 해설 도우미</span>
+        </h2>
+        <div class="btns">
+          <button type="button" class="cm-ai-reset"><span class="sr-only">대화 처음으로</span><i class="svg-icon ico-reset" aria-hidden="true"></i></button>
+          <button type="button" class="cm-ai-close"><span class="sr-only">AI 해설 도우미 닫기</span><i class="svg-icon ico-popup-close" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <!-- 처음 안내 · 질문 예시 -->
+      <div class="cm-ai-intro">
+        <p class="hello">안녕하세요 <span aria-hidden="true">👋🏻</span><br>도움이 필요하신가요?</p>
+        <div class="desc">
+          <p>저는 특수교육 실태조사 데이터를 쉽게<br>읽어 드리는 AI 해설 도우미예요.<br>궁금하신 점을 아래와 같이 질문하시면 대답해 드릴게요!</p>
+          <p>참고로, 저는 화면에 없는 질문에는 답변드리지 못해요.</p>
+        </div>
+        <ul class="cm-ai-suggest" aria-label="질문 예시">
+          <li><button type="button">가장 많은 시기는 언제인가요? <i class="svg-icon ico-angle right" aria-hidden="true"></i></button></li>
+          <li><button type="button">유치원 5세 반은 몇 %인가요? <i class="svg-icon ico-angle right" aria-hidden="true"></i></button></li>
+          <li><button type="button">선정·배치가 무엇인가요? <i class="svg-icon ico-angle right" aria-hidden="true"></i></button></li>
+        </ul>
+      </div>
+
+      <!-- 대화 진행 : 새 말풍선을 읽어 주도록 role="log" (아래 대화는 Figma 예시, 개발 시 응답으로 채움) -->
+      <div class="cm-ai-chat" role="log" aria-label="대화 내용" tabindex="0">
+        <ul class="cm-ai-list">
+          <li class="ask"><p class="bubble"><span class="sr-only">질문 : </span>가장 많은 시기는 언제인가요?</p></li>
+          <li class="answer">
+            <div class="bubble"><span class="sr-only">답변 : </span>가장 많은 시기는 <strong>초등학교 1학년</strong> 입니다.<br>25.6%로 100명 중 약 26명 입니다.</div>
+            <button type="button" class="cm-ai-rate">답변 평가</button>
+          </li>
+          <li class="ask"><p class="bubble"><span class="sr-only">질문 : </span>모집단</p></li>
+          <li class="answer">
+            <div class="bubble"><span class="sr-only">답변 : </span><strong>모집단</strong><br>조사가 알아보려는 대상 전체. 화면의 모집단 수치는 표본조사 결과에 가중치를 적용해 전체 규모로 추정한 값입니다.</div>
+            <button type="button" class="cm-ai-rate">답변 평가</button>
+          </li>
+          <li class="ask"><p class="bubble"><span class="sr-only">질문 : </span>왜 늘었나요?</p></li>
+          <li class="answer">
+            <div class="bubble"><span class="sr-only">답변 : </span>조사 결과에 대한 통계를 안내하고 있습니다.<br>늘어난 이유는 실태조사에서 시행되지 않아<br>답변을 드릴 수 없습니다.</div>
+            <div class="cm-ai-links">
+              <a href="../board/survey_overview.html" class="cm-ai-rate">조사 개요 보기</a>
+              <a href="#" class="cm-ai-rate">통계설명자료</a><!-- 개발 시 통계설명자료 주소 연결 -->
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 질문 입력 : KRDS 입력창 · 버튼 -->
+      <form class="cm-ai-input" action="#">
+        <label for="cm_ai_question" class="sr-only">질문 입력</label>
+        <input type="text" id="cm_ai_question" class="krds-input small" placeholder="궁금한 숫자를 물어보세요." autocomplete="off">
+        <button type="submit" class="krds-btn small primary"><span class="sr-only">질문 보내기</span><i class="svg-icon ico-go-top" aria-hidden="true"></i></button>
+      </form>
+    </section>
+  </div>
+  <!-- //[06-2] AI 해설 도우미 -->
 
   <!-- ============================================================
        [07] 스크립트

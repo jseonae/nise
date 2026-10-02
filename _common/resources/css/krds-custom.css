@@ -43,15 +43,12 @@
   --cm-color-text-disabled: var(--krds-light-color-text-disabled);
   --cm-color-shadow1: var(--krds-light-color-alpha-shadow1);
   --cm-color-button-primary: var(--krds-light-color-button-primary-fill);
+  --cm-color-badge-border-light: var(--krds-color-light-gray-10);
+  --cm-color-ai-ask: var(--krds-color-light-primary-60);
   --cm-color-shadow2: var(--krds-light-color-alpha-shadow2);
   --cm-color-shadow3: var(--krds-light-color-alpha-shadow3);
   --cm-color-border-gray-dark: var(--krds-light-color-border-gray-dark);
   --cm-color-shadow-sticky: rgba(42, 49, 58, 0.2) /* Figma 고정 칸 그림자 (KRDS 토큰 없음) */;
-  --cm-color-chart-1: var(--krds-color-light-primary-50);
-  --cm-color-chart-2: var(--krds-color-light-primary-80);
-  --cm-color-chart-2-line: var(--krds-color-light-primary-50);
-  --cm-color-chart-3: var(--krds-color-light-primary-60);
-  --cm-color-chart-3-dot: var(--krds-color-light-primary-40);
   --cm-color-border-secondary-20: var(--krds-color-light-secondary-20);
 }
 
@@ -1408,7 +1405,7 @@
 .cm-timeseries .cm-board-count .page .last {
   margin-right: var(--krds-gap-1);
 }
-.cm-timeseries .cm-board-count .page .unit {
+.cm-board-count .page .unit {
   font-weight: var(--krds-font-weight-bold);
 }
 /* 시각화 카드 */
@@ -1680,46 +1677,11 @@
   border-radius: var(--krds-radius-medium3);
   background-color: var(--cm-color-surface-white);
 }
-.cm-chart-legend {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--krds-gap-1);
-}
-/* 범례 버튼 : KRDS 범례 컴포넌트 없음, Figma 그대로 (primary 연한 바탕 + primary 테두리) */
-.cm-chart-legend button {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--krds-gap-2);
-  height: var(--krds-number-12);
-  padding: 0 var(--krds-padding-4);
-  border: 0.1rem solid var(--cm-color-border-primary);
-  border-radius: var(--krds-radius-small2);
-  background-color: var(--cm-color-row-hover);
-  font-size: var(--krds-pc-font-size-label-xsmall);
-  color: var(--cm-color-text-primary);
-}
-.cm-chart-legend button[aria-pressed="false"] {
-  border-color: var(--cm-color-border-light);
-  background-color: var(--cm-color-surface-white);
-  color: var(--cm-color-text-subtle);
-}
-/* 계열 색 · 패턴 : 차트 라이브러리 계열 설정과 같은 값으로 맞춤 (Figma 그래프 색) */
-.cm-chart-legend .swatch {
-  width: var(--krds-number-8);
-  height: var(--krds-number-7);
-  border-radius: 0.2rem;
-}
-.cm-chart-legend .swatch.y1 {
-  background-color: var(--cm-color-chart-1);
-}
-.cm-chart-legend .swatch.y2 {
-  background: repeating-linear-gradient(-45deg, var(--cm-color-chart-2) 0 0.3rem, var(--cm-color-chart-2-line) 0.3rem 0.4rem);
-}
-.cm-chart-legend .swatch.y3 {
-  background: radial-gradient(circle, var(--cm-color-chart-3-dot) 0.08rem, var(--cm-color-chart-3) 0.12rem) 0 0 / 0.4rem 0.4rem;
-}
+/* [임시] 그래프 자리 : Figma 그래프 이미지를 그대로 넣음 (그래프 작업 때 차트 라이브러리로 바꿈) */
 .cm-chart-area {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-5);
   width: 100%;
 }
 .cm-chart-area img {
@@ -1859,6 +1821,932 @@
   }
 }
 
+/* [통계정보] 핵심데이터 시각화 목록 (Figma: 컨텐츠 > 핵심데이터시각화-list)
+   연도 탭 : 가로 스크롤 탭(.cm-tab-scroll), 주제 칩 상자 : 시계열 목록과 같은 .cm-chip-box */
+.cm-keydata .cm-kd-years {
+  gap: var(--krds-gap-5);
+}
+.cm-keydata .cm-kd-years .tab-conts {
+  margin-top: 0;
+}
+.cm-keydata .cm-kd-years .tab-conts.active {
+  gap: var(--krds-gap-9);
+}
+.cm-kd-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--krds-gap-7);
+}
+.cm-kd-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--krds-gap-4);
+  position: relative;
+  min-width: 0;
+  padding: var(--krds-padding-9) var(--krds-number-13);
+  border: 0.1rem solid var(--cm-color-attach-border); /* border-secondary-light */
+  border-radius: var(--krds-radius-xlarge2);
+  background-color: var(--cm-color-surface-white);
+  transition: var(--krds-transition-base);
+}
+.cm-kd-card:hover,
+.cm-kd-card:focus-within {
+  border-color: var(--cm-color-border-primary);
+  box-shadow: 0 0 0.2rem var(--cm-color-shadow2), 0 0.8rem 1.6rem var(--cm-color-shadow3);
+}
+.cm-kd-card .krds-badge.small {
+  height: var(--krds-size-height-4);
+}
+/* 분류 배지 : Figma element-gray-lighter 바탕 + text-subtle */
+.cm-kd-card > .krds-badge.bg-light-gray {
+  background-color: var(--cm-color-element-gray-lighter);
+  color: var(--cm-color-text-subtle);
+}
+.cm-kd-card .tit {
+  width: 100%;
+  min-height: 2.8em; /* Figma 제목 영역 두 줄 높이 (한 줄 제목도 같은 높이로 맞춤) */
+  font-size: var(--krds-pc-font-size-heading-small);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.4;
+  color: var(--cm-color-text-basic);
+}
+.cm-kd-card:hover .tit a,
+.cm-kd-card .tit a:focus {
+  text-decoration: underline;
+  text-underline-offset: var(--krds-font-underline-offset);
+}
+.cm-kd-card .tit a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--krds-radius-xlarge2);
+}
+.cm-kd-card .tit a:focus {
+  outline: 0;
+  box-shadow: none;
+}
+.cm-kd-card .tit a:focus::after {
+  outline: 0.2rem solid var(--krds-light-color-border-inverse);
+  box-shadow: var(--krds-box-shadow-outline);
+}
+/* 대표 값 상자 (조사 변천사 카드와 같은 점선 상자, 가운데 정렬) */
+.cm-kd-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: calc(1rem - var(--krds-gap-4)); /* 제목과 10px (Figma) */
+  padding: var(--krds-padding-3) var(--krds-padding-4);
+  border: 0.1rem dashed var(--cm-color-border-primary-light);
+  border-radius: var(--krds-radius-medium1);
+  background-color: color-mix(in srgb, var(--cm-color-row-hover) 50%, var(--cm-color-surface-white));
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--cm-color-text-basic);
+}
+.cm-kd-stat .label {
+  margin-bottom: -0.2rem;
+}
+.cm-kd-stat .value {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.cm-kd-stat strong {
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-primary);
+}
+.cm-kd-target {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--krds-gap-2);
+}
+/* 조사대상 배지 : Figma 테두리 gray-10 (KRDS outline-gray 보다 옅음) */
+.cm-kd-target .krds-badge.outline-gray {
+  border-color: var(--cm-color-badge-border-light);
+  color: var(--cm-color-text-subtle);
+}
+/* 결과보기 : 보이는 표시만 (링크는 제목). 마우스를 올리면 KRDS primary 버튼 색 (Figma) */
+.cm-kd-more {
+  width: 100%;
+  pointer-events: none;
+}
+.cm-kd-more .svg-icon {
+  width: var(--krds-number-8);
+  height: var(--krds-number-8);
+}
+.cm-kd-card:hover .cm-kd-more,
+.cm-kd-card:focus-within .cm-kd-more {
+  border-color: var(--cm-color-button-primary);
+  background-color: var(--cm-color-button-primary);
+  color: var(--cm-color-text-inverse);
+}
+.cm-kd-card:hover .cm-kd-more .svg-icon,
+.cm-kd-card:focus-within .cm-kd-more .svg-icon {
+  background-color: var(--cm-color-text-inverse);
+}
+@media (max-width: 1023px) {
+  .cm-kd-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 767px) {
+  .cm-kd-list {
+    grid-template-columns: 1fr;
+  }
+  .cm-kd-card {
+    padding: var(--krds-padding-8);
+  }
+}
+
+/* [통계정보] 핵심데이터 시각화 상세 (Figma: 컨텐츠 > 핵심데이터시각화-view) : 시계열 시각화 상세(.cm-ts-*)와 같은 틀 */
+/* 조회 연도 : 바꿀 수 없는 표시 값 (Figma 테두리 상자 32px) */
+.cm-ts-year {
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-3);
+  font-size: var(--krds-pc-font-size-label-small);
+  color: var(--cm-color-text-basic);
+}
+.cm-ts-year dd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7rem;
+  height: var(--krds-number-12);
+  padding: 0 var(--krds-padding-3);
+  border: 0.1rem solid var(--cm-color-border-gray-dark);
+  border-radius: var(--krds-radius-small2);
+  font-size: var(--krds-pc-font-size-label-medium);
+  color: var(--cm-color-text-subtle);
+}
+.cm-kd-desc {
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-subtle);
+}
+.cm-kd-view .cm-stat-table .tbl.data thead tr > :first-child,
+.cm-kd-view .cm-stat-table .tbl.data tbody tr > :first-child {
+  box-shadow: none; /* 두 칸 표 : 고정 칸 그림자 없음 (Figma) */
+}
+
+/* [데이터분석] 교차분석 (Figma: 컨텐츠 > s02데이터분석_교차분석_view) */
+.cm-cross {
+  gap: var(--krds-gap-9);
+}
+/* 분석 조건 검색 : 분류 탭(.cm-ts-filter 와 같은 붙은 탭) + 칩 · 문항 상자 */
+.cm-cross-tab {
+  gap: var(--krds-gap-6);
+}
+.cm-cross-filter.tab-conts.active {
+  gap: var(--krds-gap-7);
+  padding: var(--krds-padding-9);
+  border-radius: var(--krds-radius-xlarge2);
+  background-color: var(--cm-color-row-notice); /* surface-secondary-subtler */
+}
+.cm-cross-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--krds-gap-2);
+  border: 0;
+}
+.cm-cross-chips .krds-form-chip input[type=radio] ~ label {
+  padding: 0 var(--krds-padding-6);
+}
+.cm-cross-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-4);
+  padding-top: var(--krds-padding-8);
+  border-top: 0.1rem solid var(--cm-color-attach-border);
+}
+.cm-cross-item .tit {
+  font-size: var(--krds-pc-font-size-body-medium);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-basic);
+}
+.cm-cross-item-row {
+  display: flex;
+  gap: var(--krds-gap-4);
+}
+.cm-cross-item-row .form-group {
+  flex: 0 0 46.3rem; /* Figma 463px */
+}
+.cm-cross-item-row .krds-form-select {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+/* 하위 변수 (교차·필터) */
+.cm-cross-result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-4);
+}
+.cm-cross-tit {
+  font-size: var(--krds-pc-font-size-heading-large);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+.cm-cross-box {
+  overflow: hidden;
+  border: 0.1rem solid var(--cm-color-border-light);
+  border-radius: var(--krds-radius-xlarge2);
+}
+.cm-cross-box > :not(.cm-var-builder),
+.cm-var-zones {
+  margin: 0 var(--krds-padding-7);
+}
+.cm-cross-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-6);
+  padding-bottom: var(--krds-padding-7);
+  background: linear-gradient(var(--cm-color-surface-white) 15.2rem, var(--cm-color-box-surface) 15.2rem); /* 위 변수 목록은 흰 바탕, 아래 작업 영역은 회색 바탕 (Figma) */
+}
+/* 하위 변수 놓기 (신규 컴포넌트 _common/html/code/ext_var_builder.html) */
+.cm-var-builder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-6);
+}
+.cm-var-pool {
+  min-height: 15.2rem;
+  padding: 3rem 3rem var(--krds-padding-2); /* Figma 30px */
+  border-bottom: 0.1rem solid var(--cm-color-border-light);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-var-pool .guide {
+  font-size: var(--krds-pc-font-size-label-small);
+  line-height: 1.5;
+  color: var(--cm-color-line-strong); /* Figma element-gray */
+}
+.cm-var-list,
+.cm-var-drop {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: var(--krds-gap-3);
+}
+.cm-var-list {
+  padding-top: var(--krds-padding-5);
+}
+.cm-var-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 1.4rem; /* Figma 7px 14px */
+  border: 0.1rem solid var(--cm-color-border-gray);
+  border-radius: var(--krds-radius-max);
+  background-color: var(--cm-color-surface-white);
+  font-size: var(--krds-pc-font-size-body-small);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+  cursor: grab;
+}
+.cm-var-chip .handle {
+  font-size: 1.1rem;
+  letter-spacing: -0.2rem;
+  color: var(--cm-color-border-gray);
+}
+/* 놓인 칩 : Figma 글자색 #256ef4 는 연한 바탕 대비가 낮아 text-primary 로 맞춤 */
+.cm-var-chip.is-active {
+  border-color: var(--cm-color-border-primary);
+  background-color: var(--cm-color-row-hover);
+  color: var(--cm-color-text-primary);
+}
+.cm-var-chip.is-active .handle {
+  color: var(--cm-color-border-primary);
+}
+.cm-var-zones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--krds-gap-6);
+}
+.cm-var-zone .head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--krds-gap-4);
+  margin-bottom: 0.7rem;
+}
+.cm-var-zone .tit {
+  font-size: var(--krds-pc-font-size-heading-xsmall);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-basic);
+}
+.cm-inline-select {
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-3);
+  font-size: var(--krds-pc-font-size-label-small);
+  color: var(--cm-color-text-basic);
+}
+.cm-inline-select label {
+  flex: none;
+}
+.cm-inline-select .krds-form-select {
+  color: var(--cm-color-text-basic);
+  width: auto;
+  min-width: 15.6rem;
+}
+.cm-var-drop {
+  height: 21.4rem;
+  padding: var(--krds-padding-8);
+  overflow-y: auto;
+  border: 0.15rem dashed var(--cm-color-border-gray);
+  border-radius: var(--krds-radius-medium3);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-var-drop.is-empty {
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+.cm-var-drop .empty {
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  color: var(--cm-color-line-strong);
+}
+/* 그래프 도구 */
+.cm-cross-tool {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--krds-gap-4);
+  margin-top: var(--krds-padding-5);
+}
+.cm-cross-tool .cm-ts-type {
+  padding-bottom: 0;
+}
+.cm-cross-tool .cm-ts-tool-btns {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--krds-gap-4);
+}
+/* 정렬기준 : KRDS 정렬 라디오 코드 없음 → 라디오 + Figma 글자 버튼 모양 (고른 항목 밑줄 · 옅은 바탕) */
+.cm-sort-radio {
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-3);
+  font-size: var(--krds-pc-font-size-body-medium);
+  color: var(--cm-color-text-basic);
+}
+.cm-sort-radio .tit {
+  margin-right: var(--krds-gap-3);
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-sort-radio input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.cm-sort-radio label {
+  padding: 0 var(--krds-padding-2);
+  border-radius: var(--krds-radius-small2);
+  cursor: pointer;
+}
+.cm-sort-radio input:checked + label {
+  background-color: var(--cm-color-row-notice);
+  text-decoration: underline;
+  text-underline-offset: var(--krds-font-underline-offset);
+}
+.cm-sort-radio input:focus-visible + label {
+  outline: 0.2rem solid var(--krds-light-color-border-inverse);
+  box-shadow: var(--krds-box-shadow-outline);
+}
+.cm-cross-tool .krds-drop-wrap .drop-btn .svg-icon {
+  width: var(--krds-number-8);
+  height: var(--krds-number-8);
+}
+/* 그래프 상자 : [임시] Figma 범례 · 그래프 이미지 */
+.cm-cross-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: var(--krds-gap-3);
+  padding: 5rem; /* Figma 50px */
+  border-radius: var(--krds-radius-medium3);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-chart-tit {
+  font-size: var(--krds-pc-font-size-label-small);
+  font-weight: var(--krds-font-weight-bold);
+  text-align: center;
+  color: var(--cm-color-text-bolder);
+}
+.cm-cross-chart .cm-chart-legend-img {
+  max-width: 100%;
+  height: auto;
+}
+.cm-cross-chart .cm-chart-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+}
+/* 통계표 상자 */
+.cm-cross-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: var(--krds-padding-9);
+  border-radius: var(--krds-radius-medium3);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-cross-table-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--krds-gap-4);
+  margin-bottom: 1rem;
+}
+.cm-cross-table-top .tit {
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-basic);
+}
+.cm-cross-table-top .opt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem 1.8rem;
+}
+.cm-cross-table-top .desc {
+  font-size: var(--krds-pc-font-size-label-small);
+  color: var(--cm-color-line-strong);
+}
+.cm-cross-q {
+  font-size: var(--krds-pc-font-size-heading-xxsmall);
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-bolder);
+}
+.cm-cross-stat {
+  border-top: 0;
+}
+.cm-cross-stat .tbl.data thead tr th {
+  vertical-align: middle;
+}
+.cm-cross-stat .tbl.data thead tr th:nth-child(n+3):not(:last-child) {
+  text-align: left;
+}
+.cm-cross-stat .tbl.data tbody tr td:nth-child(2) {
+  text-align: right;
+}
+.cm-cross-stat .tbl.data thead tr > :first-child,
+.cm-cross-stat .tbl.data tbody tr > :first-child {
+  position: static;
+  border-right-width: 0.1rem;
+  box-shadow: none;
+}
+.cm-cross-stat .tbl.data tbody tr.sum > * {
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-cross-note {
+  padding-top: 0.3rem;
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  line-height: 1.5;
+  color: var(--cm-color-text-subtle);
+}
+/* 설명 자료 */
+.cm-cross-doc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-8);
+}
+.cm-cross-doc-top .sub {
+  margin-top: var(--krds-gap-2);
+  font-size: var(--krds-pc-font-size-body-medium);
+  color: var(--cm-color-line-strong);
+}
+.cm-cross-doc .cm-ts-section .tit {
+  color: var(--cm-color-text-basic);
+}
+.cm-cross-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-3);
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-subtle);
+}
+.cm-cross-source {
+  padding-top: 0;
+}
+@media (max-width: 1023px) {
+  .cm-var-zones {
+    grid-template-columns: 1fr;
+  }
+  .cm-cross-tool,
+  .cm-cross-tool .cm-ts-tool-btns {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .cm-cross-item-row {
+    flex-direction: column;
+  }
+  .cm-cross-item-row .form-group {
+    flex-basis: auto;
+  }
+}
+@media (max-width: 767px) {
+  .cm-cross-tit {
+    font-size: var(--krds-mobile-font-size-heading-large);
+  }
+  .cm-cross-chart,
+  .cm-cross-table,
+  .cm-cross-filter.tab-conts.active {
+    padding: var(--krds-padding-6);
+  }
+}
+
+/* [공통] 빈 상태 · 준비 중 안내 (신규 컴포넌트 _common/html/code/ext_empty.html, Figma: s02데이터분석_교차분석 페이지준비중) */
+.cm-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--krds-gap-3);
+  padding: var(--krds-padding-10) 0 10rem; /* Figma 40px 0 100px */
+  text-align: center;
+  color: var(--cm-color-text-subtle);
+}
+.cm-empty img {
+  width: 16.4rem;
+  height: auto;
+  opacity: 0.55; /* Figma 그림 투명도 */
+}
+.cm-empty .tit {
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+}
+.cm-empty .txt {
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+}
+
+/* [AI 해설 도우미] 신규 컴포넌트 (KRDS 없음, Figma 그대로) : _common/html/code/ext_ai_helper.html (화면마다 페이지에 둠)
+   Figma: 컨텐츠 > 시계열시각화-view chat-btn-wrap · -view-ai해설도우미오픈 · -view-ai해설도우미챗진행
+   - 여는 버튼은 콘텐츠 내 탐색(오른쪽 고정) 아래에 붙여 둠 (KRDS in_page_navigation 위치 계산식과 같은 기준) */
+.cm-ai {
+  --cm-ai-inpage-right: calc((100% - var(--krds-contents-wrap-size)) / 2 - (16rem - var(--krds-contents-padding-x) + var(--krds-pc-gap-layout-contents-right)));
+}
+.cm-ai-launcher {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--krds-gap-1);
+  position: fixed;
+  top: min(69rem, calc(100vh - 19rem)); /* Figma : 콘텐츠 내 탐색 시작점에서 434px 아래 */
+  right: calc(var(--cm-ai-inpage-right) + 13.6rem); /* 여는 버튼 가운데 = 콘텐츠 내 탐색 왼쪽 + 24px (Figma) */
+  z-index: 20;
+  transform: translateX(50%);
+}
+.cm-ai-bubble {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-3);
+  position: relative;
+  padding: var(--krds-padding-6) var(--krds-padding-7);
+  border: 0.1rem solid var(--cm-color-border-gray);
+  border-radius: var(--krds-radius-xlarge2);
+  background-color: var(--cm-color-surface-white);
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  line-height: 1.5;
+  white-space: nowrap;
+  color: var(--cm-color-text-basic);
+}
+/* 말풍선 꼬리 (Figma 22×12, 아래 가운데) */
+.cm-ai-bubble::before,
+.cm-ai-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  border: solid transparent;
+  transform: translateX(-50%);
+}
+.cm-ai-bubble::before {
+  top: 100%;
+  border-width: 1.2rem 1.1rem 0;
+  border-top-color: var(--cm-color-border-gray);
+}
+.cm-ai-bubble::after {
+  top: calc(100% - 0.1rem);
+  border-width: 1.1rem 1rem 0;
+  border-top-color: var(--cm-color-surface-white);
+}
+.cm-ai-bubble .tit {
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-primary);
+}
+.cm-ai-bubble .txt {
+  margin-top: calc(var(--krds-gap-1) - var(--krds-gap-3));
+}
+.cm-ai-bubble-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--krds-gap-1);
+  padding: var(--krds-padding-1);
+  border-radius: var(--krds-radius-small1);
+  background-color: var(--cm-color-box-surface); /* tertiary-fill-hover */
+  font-size: var(--krds-pc-font-size-label-xsmall);
+  color: var(--cm-color-text-basic);
+}
+.cm-ai-bubble-close .svg-icon {
+  width: var(--krds-number-8);
+  height: var(--krds-number-8);
+  background-color: var(--cm-color-icon);
+}
+.cm-ai-bubble[hidden] {
+  display: none;
+}
+.cm-ai-open {
+  width: 5rem;
+  height: 5rem;
+  margin-top: 1.2rem;
+  border-radius: var(--krds-radius-max);
+}
+.cm-ai-open img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.cm-ai[data-open] .cm-ai-launcher {
+  display: none;
+}
+/* 대화 창 (Figma Component 2 : 400px, 왼쪽만 둥근 모서리, 화면 오른쪽 끝에 붙음) */
+.cm-ai-panel {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: clamp(2rem, calc(100vh - 66.5rem), 40.3rem);
+  right: 0;
+  z-index: 30;
+  width: 40rem;
+  max-height: calc(100vh - 4rem);
+  overflow: hidden;
+  border: 0.1rem solid var(--cm-color-attach-border);
+  border-right: 0;
+  border-radius: var(--krds-radius-xlarge1) 0 0 var(--krds-radius-xlarge1);
+  background-color: var(--cm-color-surface-white);
+  box-shadow: 0 0 0.2rem var(--cm-color-shadow2), 0 0.8rem 1.6rem var(--cm-color-shadow3);
+}
+.cm-ai-panel[hidden] {
+  display: none;
+}
+.cm-ai-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: none;
+  padding: var(--krds-padding-6) var(--krds-padding-8) var(--krds-padding-5);
+  background-color: var(--cm-color-button-primary); /* Figma #256ef4 */
+}
+.cm-ai-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  /* Figma warning-10(#ffe0a3)은 파란 바탕 대비 3:1 미만이라 흰 글자로 맞춤 */
+  color: var(--cm-color-text-inverse);
+}
+.cm-ai-title:focus {
+  outline: 0; /* 창을 열 때 스크립트가 옮기는 초점 (누를 수 없는 제목) */
+  box-shadow: none;
+}
+.cm-ai-title .logo {
+  width: 20.2rem;
+  height: 2.2rem;
+}
+.cm-ai-title .logo-basic {
+  display: none;
+}
+.cm-ai-head .btns {
+  display: flex;
+  gap: var(--krds-gap-2);
+}
+.cm-ai-head .btns button {
+  display: inline-flex;
+  width: var(--krds-number-9);
+  height: var(--krds-number-9);
+}
+.cm-ai-head .btns .svg-icon {
+  width: 100%;
+  height: 100%;
+  background-color: var(--cm-color-text-inverse);
+}
+.cm-ai-reset {
+  display: none !important;
+}
+/* 처음 안내 : 파란 바탕이 회색으로 바뀌는 그라데이션 (Figma 55.7% → 82%) */
+.cm-ai-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-7);
+  padding: var(--krds-number-16) var(--krds-padding-8) var(--krds-padding-10);
+  overflow-y: auto;
+  background: linear-gradient(to bottom, var(--cm-color-button-primary) 55.7%, var(--cm-color-box-surface) 82%);
+  color: var(--cm-color-text-inverse);
+}
+.cm-ai-intro .hello {
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+}
+.cm-ai-intro .desc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-4);
+  margin-top: calc(var(--krds-gap-4) - var(--krds-gap-7));
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  line-height: 1.5;
+}
+.cm-ai-suggest {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-5);
+  padding: var(--krds-padding-6);
+  border-radius: var(--krds-radius-xlarge1);
+  background-color: var(--cm-color-surface-white);
+  box-shadow: 0 0 0.2rem var(--cm-color-shadow1), 0 0.4rem 0.8rem var(--cm-color-shadow2);
+}
+.cm-ai-suggest button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--krds-gap-3);
+  width: 100%;
+  padding: var(--krds-padding-3) var(--krds-padding-4);
+  border-radius: var(--krds-radius-small2);
+  font-size: var(--krds-pc-font-size-label-small);
+  line-height: 1.5;
+  text-align: left;
+  color: var(--cm-color-line-strong); /* Figma text/disabled-on */
+}
+.cm-ai-suggest button:hover,
+.cm-ai-suggest button:focus {
+  background-color: var(--cm-color-row-notice); /* Figma button/text-fill-hover */
+}
+.cm-ai-suggest .svg-icon {
+  flex: none;
+  width: var(--krds-number-8);
+  height: var(--krds-number-8);
+  background-color: var(--cm-color-element-primary);
+}
+/* 대화 진행 : 흰 머리글 · 컬러 로고 · 처음으로 버튼, 대화 목록 높이 460~500px 안에서 스크롤 */
+.cm-ai-chat {
+  display: none;
+  flex-direction: column;
+  height: 50rem;
+  min-height: 0;
+  padding: 0 var(--krds-padding-8);
+  overflow-y: auto;
+}
+.cm-ai-panel[data-state="chat"] .cm-ai-intro {
+  display: none;
+}
+.cm-ai-panel[data-state="chat"] .cm-ai-chat {
+  display: flex;
+}
+.cm-ai-panel[data-state="chat"] .cm-ai-head {
+  border-bottom: 0.1rem solid var(--cm-color-attach-border);
+  background-color: var(--cm-color-surface-white);
+}
+.cm-ai-panel[data-state="chat"] .cm-ai-title {
+  color: var(--cm-color-text-primary);
+}
+.cm-ai-panel[data-state="chat"] .logo-inverse {
+  display: none;
+}
+.cm-ai-panel[data-state="chat"] .logo-basic {
+  display: block;
+}
+.cm-ai-panel[data-state="chat"] .cm-ai-reset {
+  display: inline-flex !important;
+}
+.cm-ai-panel[data-state="chat"] .cm-ai-head .btns .svg-icon {
+  background-color: var(--cm-color-border-light); /* Figma 아이콘 #cdd1d5 */
+}
+.cm-ai-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-4);
+  margin-top: auto; /* 대화가 적을 때 입력창 쪽(아래)부터 쌓임 */
+  padding: var(--krds-padding-10) 0;
+}
+.cm-ai-list > li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-2);
+}
+.cm-ai-list > li.ask {
+  align-items: flex-end;
+}
+.cm-ai-list > li.answer {
+  align-items: flex-start;
+}
+.cm-ai-list .bubble {
+  max-width: 35rem;
+  padding: var(--krds-padding-3) var(--krds-gap-5);
+  border-radius: var(--krds-number-8);
+  font-size: var(--krds-pc-font-size-body-small);
+  line-height: 1.5;
+}
+.cm-ai-list .ask .bubble {
+  background-color: var(--cm-color-ai-ask); /* Figma primary-60 */
+  text-align: right;
+  color: var(--cm-color-text-inverse);
+}
+.cm-ai-list .answer .bubble {
+  background-color: var(--cm-color-box-surface);
+  color: var(--cm-color-text-subtle);
+}
+.cm-ai-list .answer strong {
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-ai-rate {
+  height: var(--krds-size-height-4);
+  margin-left: var(--krds-padding-3);
+  padding: 0 var(--krds-padding-3);
+  border-radius: var(--krds-radius-medium1);
+  font-size: var(--krds-pc-font-size-label-xsmall);
+  color: var(--cm-color-text-subtle);
+}
+.cm-ai-links {
+  display: flex;
+  gap: 1rem;
+}
+.cm-ai-links .cm-ai-rate {
+  display: inline-flex;
+  align-items: center;
+}
+.cm-ai-rate:hover {
+  background-color: var(--cm-color-box-surface);
+}
+/* 질문 입력 (KRDS 입력창 small + primary 아이콘 버튼, 입력 바탕은 Figma surface-gray-subtler) */
+.cm-ai-input {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: none;
+  padding: var(--krds-padding-6) var(--krds-padding-8);
+  background-color: var(--cm-color-surface-white);
+  box-shadow: 0 -0.2rem 0.5rem rgba(0, 0, 0, 0.03); /* Figma 입력 영역 그림자 (토큰 없음) */
+}
+.cm-ai-input .krds-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border-color: transparent;
+  background-color: var(--cm-color-box-surface);
+}
+.cm-ai-input .krds-btn {
+  flex: none;
+  width: var(--krds-size-height-6);
+  min-width: 0;
+  height: var(--krds-size-height-6);
+  padding: 0;
+}
+.cm-ai-input .krds-btn .svg-icon {
+  width: var(--krds-number-9);
+  height: var(--krds-number-9);
+}
+@media (max-width: 1023px) {
+  .cm-ai-launcher {
+    top: auto;
+    right: var(--krds-padding-6);
+    bottom: 10rem;
+    transform: none;
+  }
+  .cm-ai-bubble {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .cm-ai-panel {
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    max-height: calc(100vh - 6rem);
+    border-right: 0;
+    border-radius: var(--krds-radius-xlarge1) var(--krds-radius-xlarge1) 0 0;
+  }
+  .cm-ai-chat {
+    height: auto;
+    flex: 1 1 auto;
+  }
+}
+
 /* [푸터] 사이트 로고 · 기관 정보 한 줄 배치 · 웹 접근성 인증마크 */
 @media (min-width: 1024px) {
   #krds-footer > .inner {
@@ -1969,15 +2857,12 @@
   --cm-color-text-disabled: var(--krds-high-contrast-color-text-disabled);
   --cm-color-shadow1: var(--krds-high-contrast-color-alpha-shadow1);
   --cm-color-button-primary: var(--krds-high-contrast-color-button-primary-fill);
+  --cm-color-badge-border-light: var(--krds-color-high-contrast-gray-90);
+  --cm-color-ai-ask: var(--krds-color-high-contrast-primary-60);
   --cm-color-shadow2: var(--krds-high-contrast-color-alpha-shadow2);
   --cm-color-shadow3: var(--krds-high-contrast-color-alpha-shadow3);
   --cm-color-border-gray-dark: var(--krds-high-contrast-color-border-gray-dark);
   --cm-color-shadow-sticky: var(--krds-high-contrast-color-alpha-shadow3);
-  --cm-color-chart-1: var(--krds-color-high-contrast-primary-50);
-  --cm-color-chart-2: var(--krds-color-high-contrast-primary-80);
-  --cm-color-chart-2-line: var(--krds-color-high-contrast-primary-50);
-  --cm-color-chart-3: var(--krds-color-high-contrast-primary-60);
-  --cm-color-chart-3-dot: var(--krds-color-high-contrast-primary-40);
   --cm-color-border-secondary-20: var(--krds-high-contrast-color-border-secondary-light);
 }
 @media (prefers-color-scheme: dark) {
@@ -2013,15 +2898,12 @@
     --cm-color-text-disabled: var(--krds-high-contrast-color-text-disabled);
     --cm-color-shadow1: var(--krds-high-contrast-color-alpha-shadow1);
     --cm-color-button-primary: var(--krds-high-contrast-color-button-primary-fill);
+    --cm-color-badge-border-light: var(--krds-color-high-contrast-gray-90);
+    --cm-color-ai-ask: var(--krds-color-high-contrast-primary-60);
     --cm-color-shadow2: var(--krds-high-contrast-color-alpha-shadow2);
     --cm-color-shadow3: var(--krds-high-contrast-color-alpha-shadow3);
     --cm-color-border-gray-dark: var(--krds-high-contrast-color-border-gray-dark);
     --cm-color-shadow-sticky: var(--krds-high-contrast-color-alpha-shadow3);
-    --cm-color-chart-1: var(--krds-color-high-contrast-primary-50);
-    --cm-color-chart-2: var(--krds-color-high-contrast-primary-80);
-    --cm-color-chart-2-line: var(--krds-color-high-contrast-primary-50);
-    --cm-color-chart-3: var(--krds-color-high-contrast-primary-60);
-    --cm-color-chart-3-dot: var(--krds-color-high-contrast-primary-40);
     --cm-color-border-secondary-20: var(--krds-high-contrast-color-border-secondary-light);
   }
 }

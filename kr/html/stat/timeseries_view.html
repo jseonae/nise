@@ -122,16 +122,12 @@
             </div>
           </div>
 
-          <!-- 차트 : 범례는 HTML(계열 보이기·숨기기 누름 버튼), 그래프는 개발 시 차트 라이브러리로 그림
-               퍼블리싱에서는 Figma 그래프 이미지(kr/img/stat/sample_chart_bar.png)를 예시로 둠. 같은 값은 아래 통계표에 있음 -->
+          <!-- 차트 : [임시] Figma 그래프 이미지(범례 · 그래프)를 그대로 넣음. 그래프 작업 때 차트 라이브러리로 바꿈
+               같은 값은 아래 통계표에 있음 -->
           <div class="cm-chart-box">
-            <ul class="cm-chart-legend" aria-label="범례">
-              <li><button type="button" aria-pressed="true"><span class="swatch y1" aria-hidden="true"></span>2017년</button></li>
-              <li><button type="button" aria-pressed="true"><span class="swatch y2" aria-hidden="true"></span>2020년</button></li>
-              <li><button type="button" aria-pressed="true"><span class="swatch y3" aria-hidden="true"></span>2023년</button></li>
-            </ul>
             <div class="cm-chart-area">
-              <img src="../../img/stat/sample_chart_bar.png" alt="학교과정 초등학교 기준 거주 형태별 비율 세로막대 그래프. 자세한 값은 아래 통계표를 참고하세요.">
+              <img src="../../img/stat/sample_chart_bar_legend.png" alt="" class="cm-chart-legend-img">
+              <img src="../../img/stat/sample_chart_bar.png" alt="거주 형태별 비율 세로막대 그래프(2017년·2020년·2023년). 자세한 값은 아래 통계표를 참고하세요.">
             </div>
           </div>
         </section>
@@ -314,6 +310,82 @@
 
   <!-- [06] 모달 (#wrap 바깥) -->
   <div data-include="modal"></div>
+
+  <!-- AI 해설 도우미 : 화면마다 질문 예시·대화 내용이 달라 페이지에 둡니다.
+       원본 마크업 _common/html/code/ext_ai_helper.html, 스타일 krds-custom.css [AI 해설 도우미], 스크립트 krds-custom.js cmAiHelper -->
+  <!-- ============================================================
+       [06-2] AI 해설 도우미 : .cm-ai
+       ============================================================ -->
+  <div class="cm-ai">
+    <!-- 여는 버튼 · 안내 말풍선 -->
+    <div class="cm-ai-launcher">
+      <div class="cm-ai-bubble">
+        <p class="tit">통계는 저에게 물어보세요!</p>
+        <p class="txt">이 화면의 표를 읽어 드려요.</p>
+        <button type="button" class="cm-ai-bubble-close">오늘 하루 열지 않기 <i class="svg-icon ico-popup-close" aria-hidden="true"></i></button>
+      </div>
+      <button type="button" class="cm-ai-open" aria-expanded="false" aria-controls="cm_ai_panel">
+        <img src="../../../_common/resources/img/ai/cm_ai_btn.svg" alt="AI 해설 도우미 열기">
+      </button>
+    </div>
+
+    <!-- 대화 창 : data-state="intro"(처음 안내) | "chat"(대화 진행) -->
+    <section id="cm_ai_panel" class="cm-ai-panel" role="dialog" aria-modal="false" aria-labelledby="cm_ai_title" data-state="intro" hidden>
+      <div class="cm-ai-head">
+        <h2 id="cm_ai_title" class="cm-ai-title" tabindex="-1">
+          <img class="logo logo-inverse" src="../../../_common/resources/img/ai/cm_ai_logo_white.svg" alt="특수교육 실태조사 데이터 활용 플랫폼">
+          <img class="logo logo-basic" src="../../../_common/resources/img/ai/cm_ai_logo.svg" alt="특수교육 실태조사 데이터 활용 플랫폼">
+          <span class="name">AI 해설 도우미</span>
+        </h2>
+        <div class="btns">
+          <button type="button" class="cm-ai-reset"><span class="sr-only">대화 처음으로</span><i class="svg-icon ico-reset" aria-hidden="true"></i></button>
+          <button type="button" class="cm-ai-close"><span class="sr-only">AI 해설 도우미 닫기</span><i class="svg-icon ico-popup-close" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <!-- 처음 안내 · 질문 예시 -->
+      <div class="cm-ai-intro">
+        <p class="hello">안녕하세요 <span aria-hidden="true">👋🏻</span><br>도움이 필요하신가요?</p>
+        <div class="desc">
+          <p>저는 특수교육 실태조사 데이터를 쉽게<br>읽어 드리는 AI 해설 도우미예요.<br>궁금하신 점을 아래와 같이 질문하시면 대답해 드릴게요!</p>
+          <p>참고로, 저는 화면에 없는 질문에는 답변드리지 못해요.</p>
+        </div>
+        <ul class="cm-ai-suggest" aria-label="질문 예시">
+          <li><button type="button">2020년에 모두 반영 비율은 어떻게 돼요? <i class="svg-icon ico-angle right" aria-hidden="true"></i></button></li>
+          <li><button type="button">조사응답자 수는 몇명인가요? <i class="svg-icon ico-angle right" aria-hidden="true"></i></button></li>
+          <li><button type="button">특수학급은 무엇인가요? <i class="svg-icon ico-angle right" aria-hidden="true"></i></button></li>
+        </ul>
+      </div>
+
+      <!-- 대화 진행 : 새 말풍선을 읽어 주도록 role="log" (아래 대화는 Figma 예시, 개발 시 응답으로 채움) -->
+      <div class="cm-ai-chat" role="log" aria-label="대화 내용" tabindex="0">
+        <ul class="cm-ai-list">
+          <li class="ask"><p class="bubble"><span class="sr-only">질문 : </span>2020년에 모두 반영 비율은 어떻게 돼요?</p></li>
+          <li class="answer">
+            <div class="bubble"><span class="sr-only">답변 : </span><strong>모두 반영</strong>은 2020년 12.9%예요.<br>100명 중 약 13명이에요.</div>
+            <button type="button" class="cm-ai-rate">답변 평가</button>
+          </li>
+          <li class="ask"><p class="bubble"><span class="sr-only">질문 : </span>모집단</p></li>
+          <li class="answer">
+            <div class="bubble"><span class="sr-only">답변 : </span><strong>모집단</strong><br>조사가 알아보려는 대상 전체. 화면의 모집단 수치는 표본조사 결과에 가중치를 적용해 전체 규모로 추정한 값입니다.</div>
+            <button type="button" class="cm-ai-rate">답변 평가</button>
+          </li>
+          <li class="ask"><p class="bubble"><span class="sr-only">질문 : </span>2026년 모두 반영 비율</p></li>
+          <li class="answer">
+            <div class="bubble"><span class="sr-only">답변 : </span>답변을 만들지 못했어요.</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 질문 입력 : KRDS 입력창 · 버튼 -->
+      <form class="cm-ai-input" action="#">
+        <label for="cm_ai_question" class="sr-only">질문 입력</label>
+        <input type="text" id="cm_ai_question" class="krds-input small" placeholder="궁금한 숫자를 물어보세요." autocomplete="off">
+        <button type="submit" class="krds-btn small primary"><span class="sr-only">질문 보내기</span><i class="svg-icon ico-go-top" aria-hidden="true"></i></button>
+      </form>
+    </section>
+  </div>
+  <!-- //[06-2] AI 해설 도우미 -->
 
   <!-- ============================================================
        [07] 스크립트
