@@ -87,3 +87,21 @@ const cmEduBasis = {
   },
 };
 document.addEventListener("DOMContentLoaded", () => cmEduBasis.init());
+
+/* [퍼블리싱 확인용] 시계열 시각화 상세 특성별 조회 (kr/html/stat/timeseries_view.html)
+   특성별 조회 선택에 맞는 칩 그룹(.cm-ts-chips[data-feature])만 보여줌. 칩 내용은 임시이며 개발 시 서버 조회로 바꿉니다. */
+const cmTsFeature = {
+  init() {
+    const select = document.getElementById("ts_feature");
+    const groups = document.querySelectorAll(".cm-ts-chips[data-feature]");
+    if (!select || !groups.length) return;
+    const apply = () => {
+      groups.forEach((group) => {
+        group.hidden = group.dataset.feature !== select.value;
+      });
+    };
+    select.addEventListener("change", apply);
+    apply();
+  },
+};
+document.addEventListener("DOMContentLoaded", () => cmTsFeature.init());

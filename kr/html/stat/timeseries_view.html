@@ -87,24 +87,88 @@
                   <option value="disability">장애유형별</option>
                 </select>
               </div>
-              <fieldset class="krds-check-area cm-ts-chips">
+              <!-- 특성별 칩 : 특성별 조회 선택에 따라 바뀜 ([임시] 내용 미확정, 학교과정별만 Figma 기준)
+                   퍼블리싱에서는 확인용 스크립트(kr/js/user-custom.js cmTsFeature)가 그룹을 바꿔 보여줌, 개발 시 서버 조회로 바꿈 -->
+              <fieldset class="krds-check-area cm-ts-chips" data-feature="course">
                 <legend class="sr-only">학교과정 선택</legend>
-                  <div class="krds-form-chip small">
-                    <input type="radio" class="radio" name="ts_course" id="ts_course_0" value="0">
-                    <label class="krds-form-chip-outline" for="ts_course_0">유<span class="sr-only">치원</span></label>
-                  </div>
-                  <div class="krds-form-chip small">
-                    <input type="radio" class="radio" name="ts_course" id="ts_course_1" value="1" checked>
-                    <label class="krds-form-chip-outline" for="ts_course_1">초<span class="sr-only">등학교</span></label>
-                  </div>
-                  <div class="krds-form-chip small">
-                    <input type="radio" class="radio" name="ts_course" id="ts_course_2" value="2">
-                    <label class="krds-form-chip-outline" for="ts_course_2">중<span class="sr-only">학교</span></label>
-                  </div>
-                  <div class="krds-form-chip small">
-                    <input type="radio" class="radio" name="ts_course" id="ts_course_3" value="3">
-                    <label class="krds-form-chip-outline" for="ts_course_3">고<span class="sr-only">등학교</span></label>
-                  </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_course" id="ts_course_0" value="0">
+                  <label class="krds-form-chip-outline" for="ts_course_0">유<span class="sr-only">치원</span></label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_course" id="ts_course_1" value="1" checked>
+                  <label class="krds-form-chip-outline" for="ts_course_1">초<span class="sr-only">등학교</span></label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_course" id="ts_course_2" value="2">
+                  <label class="krds-form-chip-outline" for="ts_course_2">중<span class="sr-only">학교</span></label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_course" id="ts_course_3" value="3">
+                  <label class="krds-form-chip-outline" for="ts_course_3">고<span class="sr-only">등학교</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="krds-check-area cm-ts-chips" data-feature="place" hidden>
+                <legend class="sr-only">배치유형 선택</legend>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_place" id="ts_place_0" value="0" checked>
+                  <label class="krds-form-chip-outline" for="ts_place_0">특수학교</label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_place" id="ts_place_1" value="1">
+                  <label class="krds-form-chip-outline" for="ts_place_1">특수학급</label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_place" id="ts_place_2" value="2">
+                  <label class="krds-form-chip-outline" for="ts_place_2">일반학급</label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_place" id="ts_place_3" value="3">
+                  <label class="krds-form-chip-outline" for="ts_place_3">특수교육지원센터</label>
+                </div>
+              </fieldset>
+              <fieldset class="krds-check-area cm-ts-chips" data-feature="disability" hidden>
+                <legend class="sr-only">장애유형 선택</legend>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_disability" id="ts_disability_0" value="0" checked>
+                  <label class="krds-form-chip-outline" for="ts_disability_0">시각<span class="sr-only"> 장애</span></label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_disability" id="ts_disability_1" value="1">
+                  <label class="krds-form-chip-outline" for="ts_disability_1">청각<span class="sr-only"> 장애</span></label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_disability" id="ts_disability_2" value="2">
+                  <label class="krds-form-chip-outline" for="ts_disability_2">지적<span class="sr-only"> 장애</span></label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_disability" id="ts_disability_3" value="3">
+                  <label class="krds-form-chip-outline" for="ts_disability_3">지체<span class="sr-only"> 장애</span></label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_disability" id="ts_disability_4" value="4">
+                  <label class="krds-form-chip-outline" for="ts_disability_4">정서·행동<span class="sr-only"> 장애</span></label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_disability" id="ts_disability_5" value="5">
+                  <label class="krds-form-chip-outline" for="ts_disability_5">자폐성<span class="sr-only"> 장애</span></label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_disability" id="ts_disability_6" value="6">
+                  <label class="krds-form-chip-outline" for="ts_disability_6">의사소통<span class="sr-only"> 장애</span></label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_disability" id="ts_disability_7" value="7">
+                  <label class="krds-form-chip-outline" for="ts_disability_7">학습<span class="sr-only"> 장애</span></label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_disability" id="ts_disability_8" value="8">
+                  <label class="krds-form-chip-outline" for="ts_disability_8">건강<span class="sr-only"> 장애</span></label>
+                </div>
+                <div class="krds-form-chip small">
+                  <input type="radio" class="radio" name="ts_disability" id="ts_disability_9" value="9">
+                  <label class="krds-form-chip-outline" for="ts_disability_9">발달지체</label>
+                </div>
               </fieldset>
             </div>
             <div class="cm-ts-tool-btns">
