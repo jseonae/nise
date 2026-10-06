@@ -728,11 +728,12 @@
   padding-left: var(--krds-padding-3);
   padding-right: var(--krds-padding-3);
 }
+/* 내려받기 아이콘 버튼 : 옆의 글자 버튼(medium, 48px)과 같은 높이 · 같은 모서리 */
 .cm-cover-item .btns .krds-btn.icon {
   flex: 0 0 auto;
-  width: var(--krds-size-height-6);
-  height: var(--krds-size-height-6);
-  border-radius: var(--krds-radius-medium1);
+  width: var(--krds-button--size-height-medium);
+  height: var(--krds-button--size-height-medium);
+  border-radius: var(--krds-button--radius-medium);
 }
 .cm-cover-item .btns .krds-btn.icon .svg-icon {
   width: var(--krds-icon--size-medium);
