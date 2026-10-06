@@ -248,10 +248,61 @@
                   </div>
                 </li>
               </ul>
+
+              <!-- 페이지네이션 : KRDS pagination (탭마다 목록 아래에 둠, 목록을 불러오지 못한 탭에는 없음) -->
+              <div class="krds-pagination">
+                <span class="page-navi prev disabled">이전</span>
+                <div class="page-links">
+                  <a class="page-link active" href="#"><span class="sr-only">현재페이지 </span>1</a>
+                  <a class="page-link" href="#">2</a>
+                  <a class="page-link" href="#">3</a>
+                  <a class="page-link" href="#">4</a>
+                  <a class="page-link" href="#">5</a>
+                  <a class="page-link" href="#">6</a>
+                  <a class="page-link" href="#">7</a>
+                  <a class="page-link" href="#">8</a>
+                  <a class="page-link" href="#">9</a>
+                  <a class="page-link" href="#">10</a>
+                </div>
+                <a class="page-navi next" href="#">다음</a>
+              </div>
             </section>
             <section id="panel_archive_02" aria-labelledby="tab_archive_02" class="tab-conts" data-quick-nav="false">
               <h2 class="sr-only">종단연구 자료 목록</h2>
-              <p class="cm-todo">종단연구 자료 목록 (실태조사 탭과 같은 구조)</p>
+              <!-- 목록 불러오기 실패 상태 (Figma: 컨텐츠 > s03알림마당_자료실 list-목록불러오기 실패, node 11094:148172)
+                   목록 상단은 그대로 두고, 표지 카드 목록 · 페이지네이션 자리에 오류 안내를 보여줌
+                   퍼블리싱에서는 종단연구 탭에 이 상태를 넣어 둠. 개발 시 목록 조회 실패 때만 출력하고 [다시시도]에 재조회를 연결 -->
+              <div class="cm-board-top">
+                <div class="cm-board-count" aria-live="polite">
+                  <p class="total">총 <span class="num">38</span>개</p>
+                  <p class="page"><span class="sr-only">현재 페이지</span><span class="current">1</span> / <span class="sr-only">전체 페이지</span>24</p>
+                </div>
+                <div class="cm-board-search">
+                  <div class="cm-select-sort">
+                    <label for="list_size_archive_02">목록 표시 개수</label>
+                    <select id="list_size_archive_02" class="krds-form-select-sort medium">
+                      <option value="15" selected>15개</option>
+                      <option value="30">30개</option>
+                      <option value="50">50개</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-conts btn-ico-wrap">
+                      <input type="text" id="search_archive_02" class="krds-input" placeholder="검색어를 입력해주세요." title="검색어 입력">
+                      <button type="button" class="krds-btn medium icon">
+                        <span class="sr-only">검색</span>
+                        <i class="svg-icon ico-sch"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 오류 안내 : 빈 상태 컴포넌트 변형 _common/html/code/ext_empty.html (.cm-empty.is-error, 그림 없이 문구 + 버튼) -->
+              <div class="cm-empty is-error" role="alert">
+                <p class="tit">목록을 불러오지 못했습니다.</p>
+                <p class="txt">잠시 후 다시 시도해 주세요.</p>
+                <button type="button" class="krds-btn large tertiary">다시시도</button>
+              </div>
             </section>
             <section id="panel_archive_03" aria-labelledby="tab_archive_03" class="tab-conts" data-quick-nav="false">
               <h2 class="sr-only">특수교육통계 자료 목록</h2>
@@ -260,23 +311,6 @@
           </div>
         </div>
 
-        <!-- 페이지네이션 : KRDS pagination -->
-        <div class="krds-pagination">
-          <span class="page-navi prev disabled">이전</span>
-          <div class="page-links">
-            <a class="page-link active" href="#"><span class="sr-only">현재페이지 </span>1</a>
-            <a class="page-link" href="#">2</a>
-            <a class="page-link" href="#">3</a>
-            <a class="page-link" href="#">4</a>
-            <a class="page-link" href="#">5</a>
-            <a class="page-link" href="#">6</a>
-            <a class="page-link" href="#">7</a>
-            <a class="page-link" href="#">8</a>
-            <a class="page-link" href="#">9</a>
-            <a class="page-link" href="#">10</a>
-          </div>
-          <a class="page-navi next" href="#">다음</a>
-        </div>
         <!-- 만족도조사 : 모든 콘텐츠 맨 아래 공통 (kr/tmpl/research.html) -->
         <div data-include="research"></div>
       </div>

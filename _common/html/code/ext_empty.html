@@ -10,3 +10,13 @@
   <h2 class="tit">준비중입니다.</h2>
   <p class="txt">현재 화면은 준비 중입니다.</p>
 </div>
+
+<!-- 변형 : 오류 안내 (.cm-empty.is-error)
+     Figma : 컨텐츠 > s03알림마당_자료실 list-목록불러오기 실패 > errorBox
+     - 그림 없이 문구 + 버튼(KRDS large tertiary). 목록 조회에 실패했을 때 목록 · 페이지네이션 자리에 넣습니다.
+     - 화면이 바뀌며 나타나는 안내라 role="alert" 로 스크린리더에 알립니다. -->
+<div class="cm-empty is-error" role="alert">
+  <p class="tit">목록을 불러오지 못했습니다.</p>
+  <p class="txt">잠시 후 다시 시도해 주세요.</p>
+  <button type="button" class="krds-btn large tertiary">다시시도</button>
+</div>
