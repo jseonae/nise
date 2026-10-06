@@ -1,0 +1,20 @@
+<!-- ext: 신규 컴포넌트 (KRDS에 없음, 메인 전용) / 숫자 카드 : 제목 · 큰 수치 · 꼬리표 · 인포그래픽 -->
+<!--
+  Figma : 컨텐츠 > section2-1 tab1 (node 11510:63189)
+  - 스타일 : kr/css/main.css 3-2. 숫자 카드 (.cm-stat-cards · .cm-stat-card)
+  - 인포그래픽은 그림 전체가 이미지입니다. 수치는 alt 에 글로 적습니다. 수치가 바뀌면 이미지와 alt 를 함께 바꿉니다.
+  - 이미지가 흰 바탕이라 카드 색은 화면 모드(선명하게)와 관계없이 밝은 색으로 고정했습니다.
+  - 지금 이미지는 Figma 1배 크기(290×200)입니다. 고해상도 화면용으로 2배 PNG 나 SVG 로 내보낸 파일로 바꾸면 더 선명합니다. (kr/img/main/stat_01~04.png)
+-->
+<ul class="cm-stat-cards">
+  <li class="cm-stat-card">
+    <div class="info">
+      <h3 class="tit">특수교육대상학생</h3>
+      <p class="num">73.7%</p>
+      <p class="tag">전체 양적 성장</p>
+    </div>
+    <!-- 인포그래픽 : 그림 전체를 이미지로 넣고 수치는 대체 텍스트로 제공 (수치가 바뀌면 이미지 · alt 를 함께 교체) -->
+    <div class="graph"><img src="{{root}}kr/img/main/stat_01.png" alt="특수교육대상학생 수 변화 그래프. 2008년 71,484명에서 2026년 124,195명으로 52,711명 늘어 1.74배 증가" width="290" height="200"></div>
+  </li>
+</ul>
+<p class="cm-stat-source">출처: 교육부 국립특수교육원, 특수교육통계(2008~2026년)</p>

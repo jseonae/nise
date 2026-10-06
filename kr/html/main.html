@@ -1,125 +1,571 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-krds-mode="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>main | 사용자</title>
-  <!-- KRDS (원본, 수정 금지) -->
-  <link rel="stylesheet" href="../../krds/resources/css/component/output.css"><!-- common.css + component.css 통합본 (component.css의 잘못된 이미지 경로 보정) -->
-  <!-- 커스텀 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="format-detection" content="telephone=no">
+  <title>특수교육 실태조사 데이터 활용 플랫폼</title>
+
+  <!-- 파비콘 (KRDS 1.1.0) -->
+  <link rel="icon" type="image/svg+xml" href="../../krds/resources/img/component/favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="512x512" href="../../krds/resources/img/component/favicon/favicon-512x512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../../krds/resources/img/component/favicon/favicon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../krds/resources/img/component/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="../../krds/resources/img/component/favicon/favicon-192x192.png">
+
+  <!-- css : KRDS (원본, 수정 금지) -->
+  <link rel="stylesheet" href="../../krds/resources/css/plugin/swiper-bundle.min.css">
+  <link rel="stylesheet" href="../../krds/resources/css/component/output.css">
+  <!-- css : 커스텀 -->
   <link rel="stylesheet" href="../../_common/resources/css/krds-base.css"><!-- KRDS 기본 보정 -->
   <link rel="stylesheet" href="../../_common/resources/css/krds-custom.css">
   <link rel="stylesheet" href="../css/krds-theme.css">
   <link rel="stylesheet" href="../css/user-custom.css">
-  <!-- 글자·화면 표시 설정 (화면 깜빡임 방지를 위해 head에서 불러옴) -->
+  <link rel="stylesheet" href="../css/main.css"><!-- 메인 화면 전용 -->
+
+  <!-- script : 글자·화면 표시 설정 (화면 깜빡임 방지를 위해 head에서 불러옴) -->
   <script src="../../_common/resources/js/krds-display.js"></script>
 </head>
-<body>
+
+<body class="cm-main">
+  <!--
+    ==================================================================
+    메인 (Figma: 컨텐츠 > main-확정 node 11510:62328)
+    공통 영역은 kr/tmpl 에서 인클루드합니다 (kr/js/include.js). 이 파일에는 메인 컨텐츠만 둡니다.
+      [01]~[03] 헤더        : kr/tmpl/header.html (메인메뉴 없음 data-gnb="none")
+      [05] 푸터 · TOP 버튼   : kr/tmpl/footer.html
+      [06] 모달              : kr/tmpl/modal.html
+    - 메인만 본문 폭이 1520px 입니다. (body.cm-main, 서브는 KRDS 기본 1200px) : kr/css/main.css
+    - 메인 전용 스타일 kr/css/main.css · 스크립트 kr/js/main.js
+    - 메인 전용 컴포넌트 문서 : kr/html/code/ext_main_*.html
+    ==================================================================
+  -->
+
+  <!-- [S] #wrap -->
   <div id="wrap">
-    <header id="header">
-      <!-- 글자·화면 표시 설정 열기 버튼 (모달 마크업: _common/resources/html/display-settings.html, #wrap 바깥에 배치) -->
-      <button type="button" class="krds-btn small text open-modal" data-target="modal_adjust_display">
-        <i class="svg-icon ico-view-mode"></i> 화면 설정
-      </button>
-    </header>
-    <main id="container">
-    </main>
-  </div>
+    <!-- [01]~[03] 본문 바로가기 · 공식 누리집 배너 · 헤더 (메인메뉴 없음) -->
+    <div data-include="header" data-gnb="none"></div>
 
-  <!-- 글자·화면 표시 설정 모달 (krds.go.kr 사이트 마크업) -->
-  <section id="modal_adjust_display" class="krds-modal fade" aria-labelledby="tit_modal_adjust_display" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <!-- modal title -->
-        <div class="modal-header">
-          <h2 id="tit_modal_adjust_display" class="modal-title">
-            글자·화면 표시 설정
-          </h2>
+    <!-- ============================================================
+         [04] 컨테이너 : #container
+         ============================================================ -->
+    <div id="container" class="cm-main-container">
+
+      <!-- [04-1] 히어로 : 사이트 이름 · 소개 · 통합검색 (신규 컴포넌트 kr/html/code/ext_main_hero.html, Figma node 11510:62329) -->
+      <section class="cm-hero" aria-labelledby="hero_tit">
+        <div class="inner">
+          <div class="cm-hero-txt">
+            <h1 id="hero_tit" class="tit"><span class="line1"><em>특수교육</em> 실태조사</span> <span class="line2">데이터 활용 플랫폼</span></h1>
+            <p class="desc">2008년부터 3년마다 조사되는 특수교육 데이터를 수집 및 가공하여, <br class="pc-only">교육 현장과 국민의 실질적인 데이터 활용을 지원합니다.</p>
+          </div>
+          <div class="cm-hero-search">
+            <!-- 통합검색 : 헤더 통합검색과 같은 결과 화면(search/search_result.html)으로 이동. 빈 값 확인 · 화면 나누기는 기존 스크립트(cmSearchResult · cmSearchDemo) 사용 -->
+            <form class="cm-search-top-form cm-hero-form" role="search" aria-label="메인 통합검색" action="search/search_result.html" method="get">
+              <input type="text" name="q" id="hero_keyword" class="krds-input" placeholder="검색어를 입력해 주세요." title="통합검색 검색어 입력" autocomplete="off">
+              <button type="submit" class="btn-submit">
+                <span class="sr-only">검색</span>
+                <i class="svg-icon ico-sch" aria-hidden="true"></i>
+              </button>
+            </form>
+            <!-- 추천 검색어 : 헤더 통합검색과 같은 목록 (누르면 바로 검색, 목록은 개발 시 서버 출력) -->
+            <div class="cm-search-recommend">
+              <p class="tit" id="hero_recommend_tit">추천 검색어</p>
+              <ul class="cm-search-chips" aria-labelledby="hero_recommend_tit">
+                <li><button type="button" class="cm-search-chip" data-keyword="특수교육대상자">#특수교육대상자</button></li>
+                <li><button type="button" class="cm-search-chip" data-keyword="통합교육">#통합교육</button></li>
+                <li><button type="button" class="cm-search-chip" data-keyword="특수학급">#특수학급</button></li>
+                <li><button type="button" class="cm-search-chip" data-keyword="장애유형">#장애유형</button></li>
+                <li><button type="button" class="cm-search-chip" data-keyword="교원">#교원</button></li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <!-- //modal title -->
-        <!-- modal contents -->
-        <div class="modal-conts">
-          <div class="conts-area">
+      </section>
+      <!-- //[04-1] 히어로 -->
 
-            <!-- adjust_display -->
-            <div class="adjust_display">
-              <!-- 글자 / 화면 표시 설정 -->
-              <div class="fieldset adjust_scale">
-                <div class="form-group scale-options">
-                  <h3>글자·화면 표시 설정</h3>
-                  <div class="form-conts">
-                    <div class="krds-check-area chk-column">
-                      <div class="krds-form-check">
-                        <input type="radio" name="scale_level" id="scale_level_small" value="small">
-                        <label for="scale_level_small">작게</label>
-                      </div>
-                      <div class="krds-form-check">
-                        <input type="radio" name="scale_level" id="scale_level_medium" value="medium" checked>
-                        <label for="scale_level_medium">보통</label>
-                      </div>
-                      <div class="krds-form-check">
-                        <input type="radio" name="scale_level" id="scale_level_large" value="large">
-                        <label for="scale_level_large">조금 크게</label>
-                      </div>
-                      <div class="krds-form-check">
-                        <input type="radio" name="scale_level" id="scale_level_xlarge" value="xlarge">
-                        <label for="scale_level_xlarge">크게</label>
-                      </div>
-                      <div class="krds-form-check">
-                        <input type="radio" name="scale_level" id="scale_level_xxlarge" value="xxlarge">
-                        <label for="scale_level_xxlarge">가장 크게</label>
-                      </div>
+      <!-- [04-2] 숫자로 보는 특수교육 · 실태조사변천사 (Figma: section2-1 tab1 · tab2, node 11510:62361)
+           탭 : KRDS 탭(layer) 구조 · 스크립트 그대로, 모양만 글자형 변형 (_common/html/code/tab--text.html) -->
+      <section class="cm-main-data" aria-label="숫자로 보는 특수교육과 실태조사변천사">
+        <div class="inner">
+          <div class="krds-tab-area layer">
+            <div class="tab cm-tab-text">
+              <ul role="tablist">
+                <li id="tab_main_01" role="tab" aria-selected="true" aria-controls="panel_main_01" class="active">
+                  <button type="button" class="btn-tab">숫자로 보는 특수교육</button><!-- "선택됨" 대체 텍스트는 KRDS 스크립트가 넣음 -->
+                </li>
+                <li id="tab_main_02" role="tab" aria-selected="false" aria-controls="panel_main_02">
+                  <button type="button" class="btn-tab">실태조사변천사</button>
+                </li>
+              </ul>
+            </div>
+
+            <div class="tab-conts-wrap">
+              <!-- 탭 1 : 숫자로 보는 특수교육 (신규 컴포넌트 kr/html/code/ext_main_stat_card.html) -->
+              <section id="panel_main_01" aria-labelledby="tab_main_01" class="tab-conts active">
+                <h2 class="sr-only">숫자로 보는 특수교육</h2>
+                <ul class="cm-stat-cards">
+                <li class="cm-stat-card">
+                  <div class="info">
+                    <h3 class="tit">특수교육대상학생</h3>
+                    <p class="num">73.7%</p>
+                    <p class="tag">전체 양적 성장</p>
+                  </div>
+                  <!-- 인포그래픽 : 그림 전체를 이미지로 넣고 수치는 대체 텍스트로 제공 (수치가 바뀌면 이미지 · alt 를 함께 교체) -->
+                  <div class="graph"><img src="../img/main/stat_01.png" alt="특수교육대상학생 수 변화 그래프. 2008년 71,484명에서 2026년 124,195명으로 52,711명 늘어 1.74배 증가" width="290" height="200"></div>
+                </li>
+                <li class="cm-stat-card">
+                  <div class="info">
+                    <h3 class="tit">특수학급 운영 유치원</h3>
+                    <p class="num">680.6%</p>
+                    <p class="tag">조기개입 확대</p>
+                  </div>
+                  <!-- 인포그래픽 : 그림 전체를 이미지로 넣고 수치는 대체 텍스트로 제공 (수치가 바뀌면 이미지 · alt 를 함께 교체) -->
+                  <div class="graph"><img src="../img/main/stat_02.png" alt="특수학급 운영 유치원 수 변화 그래프. 2008년 165개원에서 2026년 1,288개원으로 1,123개원 늘어 7.81배 확대" width="290" height="200"></div>
+                </li>
+                <li class="cm-stat-card">
+                  <div class="info">
+                    <h3 class="tit">특수학급 운영 일반학교</h3>
+                    <p class="num">99.8%</p>
+                    <p class="tag">인프라 확충</p>
+                  </div>
+                  <!-- 인포그래픽 : 그림 전체를 이미지로 넣고 수치는 대체 텍스트로 제공 (수치가 바뀌면 이미지 · alt 를 함께 교체) -->
+                  <div class="graph"><img src="../img/main/stat_03.png" alt="특수학급 운영 일반학교 수 변화 그래프. 2008년 4,971개교에서 2026년 9,930개교로 4,959개교 늘어 99.8% 증가, 2.0배 확대" width="290" height="200"></div>
+                </li>
+                <li class="cm-stat-card">
+                  <div class="info">
+                    <h3 class="tit">일반학교에서 배우는 특수교육대상학생</h3>
+                    <p class="num">74.1%</p>
+                    <p class="tag">통합교육 성과</p>
+                  </div>
+                  <!-- 인포그래픽 : 그림 전체를 이미지로 넣고 수치는 대체 텍스트로 제공 (수치가 바뀌면 이미지 · alt 를 함께 교체) -->
+                  <div class="graph"><img src="../img/main/stat_04.png" alt="일반학교에서 배우는 특수교육대상학생 수 변화 그래프. 2008년 48,084명(67.3%)에서 2026년 91,986명(74.1%)으로 43,902명 늘어 비율 6.8% 상승, 1.91배 증가" width="290" height="200"></div>
+                </li>
+                </ul>
+                <p class="cm-stat-source">출처: 교육부 국립특수교육원, 특수교육통계(2008~2026년)</p>
+              </section>
+
+              <!-- 탭 2 : 실태조사변천사 (신규 컴포넌트 kr/html/code/ext_main_history.html, Figma: 변천사3 Default~Variant7)
+                   카드 7장을 이전 · 다음 버튼과 연도 버튼으로 넘김 (자동 넘김 없음, kr/js/main.js cmMainHistory) -->
+              <section id="panel_main_02" aria-labelledby="tab_main_02" class="tab-conts">
+                <h2 class="sr-only">실태조사변천사</h2>
+                <div class="cm-history" data-cm-history role="group" aria-roledescription="캐러셀" aria-label="실태조사변천사">
+                  <div class="cm-history-stage">
+                    <span class="layer layer3" aria-hidden="true"></span>
+                    <span class="layer layer2" aria-hidden="true"></span>
+                    <span class="layer layer1" aria-hidden="true"></span>
+                    <ul class="cm-history-slides" aria-live="polite">
+                      <li class="cm-history-slide is-active" id="history_slide_1" role="group" aria-roledescription="슬라이드" aria-label="7장 중 1번째, 2008년">
+                        <div class="top">
+                          <div class="head">
+                            <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
+                            <span class="idx" aria-hidden="true">1</span>
+                          </div>
+                          <div class="body">
+                            <h3 class="tit"><span class="sr-only">2008년 : </span>특수교육 실태조사의 시작</h3>
+                            <ul class="cm-check-list">
+                              <li>장애인 등에 대한 특수교육법 시행 후 <br class="pc-only"><em>최초로 실시된 조사</em></li>
+                              <li>법적 8개 조사 부문 중 6개 영역 조사 실시</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="side">
+                          <p class="year" aria-hidden="true">2008</p>
+                          <a href="stat/survey_history_list.html?round=1" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2008년 제1차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="cover"><img src="../img/main/history_cover_2008.jpg" alt="2008 특수교육 실태조사 보고서 표지" width="255" height="346"></div>
+                      </li>
+                          <li class="cm-history-slide" id="history_slide_2" role="group" aria-roledescription="슬라이드" aria-label="7장 중 2번째, 2011년" hidden>
+                        <div class="top">
+                          <div class="head">
+                            <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
+                            <span class="idx" aria-hidden="true">2</span>
+                          </div>
+                          <div class="body">
+                            <h3 class="tit"><span class="sr-only">2011년 : </span>온라인 조사 방식의 도입</h3>
+                            <ul class="cm-check-list">
+                              <li>기존 면접·방문조사에 더해 모바일 및 인터넷을 활용한 온라인 조사가 시작되었습니다.</li>
+                              <li>장애인 시설(기관) 조사 대상 확대</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="side">
+                          <p class="year" aria-hidden="true">2011</p>
+                          <a href="stat/survey_history_list.html?round=2" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2011년 제2차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="cover"><img src="../img/main/history_cover_2011.jpg" alt="2011 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                      </li>
+                          <li class="cm-history-slide" id="history_slide_3" role="group" aria-roledescription="슬라이드" aria-label="7장 중 3번째, 2014년" hidden>
+                        <div class="top">
+                          <div class="head">
+                            <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
+                            <span class="idx" aria-hidden="true">3</span>
+                          </div>
+                          <div class="body">
+                            <h3 class="tit"><span class="sr-only">2014년 : </span>더 다양한 특수교육 현장으로 확대</h3>
+                            <ul class="cm-check-list">
+                              <li>특수학교와 특수교육대상자 중심에서 장애영아 및 보호자까지 조사 대상을 확대했습니다.</li>
+                              <li>가구 면접조사 실시</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="side">
+                          <p class="year" aria-hidden="true">2014</p>
+                          <a href="stat/survey_history_list.html?round=3" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2014년 제3차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="cover"><img src="../img/main/history_cover_2014.jpg" alt="2014 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                      </li>
+                          <li class="cm-history-slide" id="history_slide_4" role="group" aria-roledescription="슬라이드" aria-label="7장 중 4번째, 2017년" hidden>
+                        <div class="top">
+                          <div class="head">
+                            <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
+                            <span class="idx" aria-hidden="true">4</span>
+                          </div>
+                          <div class="body">
+                            <h3 class="tit"><span class="sr-only">2017년 : </span>조사 방식의 디지털 전환</h3>
+                            <ul class="cm-check-list">
+                              <li>가구 면접·방문·온라인 조사와 함께 <br class="pc-only"><em>TAPI 조사 방식을 새롭게 도입</em>했습니다.</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="side">
+                          <p class="year" aria-hidden="true">2017</p>
+                          <a href="stat/survey_history_list.html?round=4" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2017년 제4차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="cover"><img src="../img/main/history_cover_2017.jpg" alt="2017 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                      </li>
+                          <li class="cm-history-slide" id="history_slide_5" role="group" aria-roledescription="슬라이드" aria-label="7장 중 5번째, 2020년" hidden>
+                        <div class="top">
+                          <div class="head">
+                            <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
+                            <span class="idx" aria-hidden="true">5</span>
+                          </div>
+                          <div class="body">
+                            <h3 class="tit"><span class="sr-only">2020년 : </span>변화하는 환경에 대응한 조사</h3>
+                            <ul class="cm-check-list">
+                              <li>TAPI 조사와 함께 코로나19 상황에 대응해 비대면 온라인 조사 방식을 도입했습니다.</li>
+                              <li>장애인 평생 교육과정 및 시설 운영 현황 조사 부문 별도 조사로 분리 수행</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="side">
+                          <p class="year" aria-hidden="true">2020</p>
+                          <a href="stat/survey_history_list.html?round=5" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2020년 제5차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="cover"><img src="../img/main/history_cover_2020.jpg" alt="2020 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                      </li>
+                          <li class="cm-history-slide" id="history_slide_6" role="group" aria-roledescription="슬라이드" aria-label="7장 중 6번째, 2023년" hidden>
+                        <div class="top">
+                          <div class="head">
+                            <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
+                            <span class="idx" aria-hidden="true">6</span>
+                          </div>
+                          <div class="body">
+                            <h3 class="tit"><span class="sr-only">2023년 : </span>특수교육 현장을 더 깊이 들여다보다</h3>
+                            <ul class="cm-check-list">
+                              <li>특수교육대상자의 현황뿐 아니라 교육과정·지원서비스·교육재정 등 현장 전반을 폭넓게 조사했습니다.</li>
+                              <li>7개 조사 부문 현장 전반 조사</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="side">
+                          <p class="year" aria-hidden="true">2023</p>
+                          <a href="stat/survey_history_list.html?round=6" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2023년 제6차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="cover"><img src="../img/main/history_cover_2023.jpg" alt="2023 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                      </li>
+                          <li class="cm-history-slide" id="history_slide_7" role="group" aria-roledescription="슬라이드" aria-label="7장 중 7번째, 2026년" hidden>
+                        <div class="top">
+                          <div class="head">
+                            <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
+                            <span class="idx" aria-hidden="true">7</span>
+                          </div>
+                          <div class="body">
+                            <h3 class="tit"><span class="sr-only">2026년 : </span>축적된 조사, 이어지는 기록</h3>
+                            <ul class="cm-check-list">
+                              <li>통합홈페이지와 모집단 수합 시스템을 통한 <br class="pc-only"><em>조사 편의성 및 국가승인통계로서의 품질 향상</em>에 집중했습니다.</li>
+                              <li>대면면접, 전화면접의 제한점 보완을 위해 화상면접조사 도입</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="side">
+                          <p class="year" aria-hidden="true">2026</p>
+                          <a href="stat/survey_history_list.html?round=7" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2026년 제7차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="cover"><img src="../img/main/history_cover_2026.jpg" alt="2026 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="cm-history-nav">
+                    <!-- 연도 진행 막대 : 연도를 누르면 해당 카드로 이동, 현재 연도 aria-current -->
+                    <ol class="cm-history-timeline" aria-label="조사 연도">
+                      <li class="is-active"><button type="button" data-index="0" aria-controls="history_slide_1" aria-current="true"><span class="year">2008</span><span class="label">최초조사</span></button></li>
+                      <li><button type="button" data-index="1" aria-controls="history_slide_2"><span class="year">2011</span><span class="label">온라인조사 도입</span></button></li>
+                      <li><button type="button" data-index="2" aria-controls="history_slide_3"><span class="year">2014</span><span class="label">조사대상 확대</span></button></li>
+                      <li><button type="button" data-index="3" aria-controls="history_slide_4"><span class="year">2017</span><span class="label">TAPI도입</span></button></li>
+                      <li><button type="button" data-index="4" aria-controls="history_slide_5"><span class="year">2020</span><span class="label">비대면조사도입</span></button></li>
+                      <li><button type="button" data-index="5" aria-controls="history_slide_6"><span class="year">2023</span><span class="label">조사체계고도화</span></button></li>
+                      <li><button type="button" data-index="6" aria-controls="history_slide_7"><span class="year">2026</span><span class="label">현재조사</span></button></li>
+                    </ol>
+                    <div class="cm-history-arrows">
+                      <button type="button" class="cm-round-btn prev"><span class="sr-only">이전 조사</span><i class="svg-icon ico-angle left" aria-hidden="true"></i></button>
+                      <button type="button" class="cm-round-btn next"><span class="sr-only">다음 조사</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></button>
                     </div>
                   </div>
                 </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- //[04-2] -->
+
+      <!-- [04-3] 그래프로 보는 특수교육 실태조사 (신규 컴포넌트 kr/html/code/ext_main_link_card.html, Figma node 11510:62362) -->
+      <section class="cm-main-sec cm-main-graph" aria-labelledby="main_graph_tit">
+        <div class="inner">
+          <h2 id="main_graph_tit" class="cm-main-tit">그래프로 보는 특수교육 실태조사</h2>
+          <ul class="cm-link-cards">
+            <li>
+              <a href="stat/timeseries_list.html" class="cm-link-card">
+                <span class="txt">
+                  <strong class="tit"><em>시계열</em>로 보는 데이터</strong>
+                  <span class="desc">2008년부터 축적된 특수교육 데이터를 연도별로 비교하고, <br class="pc-only">변화의 흐름을 한 눈에 확인할 수 있습니다.</span>
+                </span>
+                <img src="../img/main/graph_timeseries.svg" alt="" class="img" width="150" height="140">
+                <span class="go" aria-hidden="true"><i class="svg-icon ico-angle right"></i></span>
+              </a>
+            </li>
+            <li>
+              <a href="stat/keydata_list.html" class="cm-link-card">
+                <span class="txt">
+                  <strong class="tit">핵심데이터 <em>시각화</em></strong>
+                  <span class="desc">연도별 주요 특수교육 실태조사 데이터를 시각화하여 <br class="pc-only">사용자가 쉽게 이해할 수 있도록 제공합니다.</span>
+                </span>
+                <img src="../img/main/graph_keydata.svg" alt="" class="img" width="150" height="140">
+                <span class="go" aria-hidden="true"><i class="svg-icon ico-angle right"></i></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <!-- //[04-3] -->
+
+      <!-- [04-4] 공지사항 · 연구 보고서 · 알림판 (신규 컴포넌트 kr/html/code/ext_main_board.html, Figma node 11510:62368) -->
+      <div class="cm-main-sec cm-main-board">
+        <div class="inner">
+          <!-- 공지사항 : 최근 4건 (개발 시 서버 출력, 새 글은 .is-new + N 표시) -->
+          <section class="cm-main-article cm-main-notice" aria-labelledby="main_notice_tit">
+            <div class="head">
+              <h2 id="main_notice_tit" class="cm-main-tit">공지사항</h2>
+              <a href="board/notice_list.html" class="krds-btn small text cm-more">더보기<span class="sr-only"> : 공지사항</span> <i class="svg-icon ico-plus" aria-hidden="true"></i></a>
+            </div>
+            <ul class="cm-noti-list">
+              <li><a href="board/notice_view.html" class="cm-noti-item is-new"><span class="tit"><span class="txt">교육부 특수교육 실태조사 데이터 플랫폼이 오픈했습니다.</span><i class="cm-ico-new" role="img" aria-label="새 글"></i></span><span class="date"><span class="sr-only">등록일 </span>2026-08-25</span></a></li>
+              <li><a href="board/notice_view.html" class="cm-noti-item is-new"><span class="tit"><span class="txt">특수교육실태조사 데이터 플랫폼 서비스 명칭 공모 당선 발표</span><i class="cm-ico-new" role="img" aria-label="새 글"></i></span><span class="date"><span class="sr-only">등록일 </span>2026-08-25</span></a></li>
+              <li><a href="board/notice_view.html" class="cm-noti-item"><span class="tit"><span class="txt">특수교육실태조사 공동 포럼을 개최합니다.</span></span><span class="date"><span class="sr-only">등록일 </span>2026-08-19</span></a></li>
+              <li><a href="board/notice_view.html" class="cm-noti-item"><span class="tit"><span class="txt">현장특수교육 제33권 1호가 발간되었습니다.</span></span><span class="date"><span class="sr-only">등록일 </span>2026-05-30</span></a></li>
+            </ul>
+          </section>
+
+          <!-- 연구 보고서 : 표지 넘김 (KRDS 포함 Swiper, 자동 넘김 없음, kr/js/main.js cmMainReport) -->
+          <section class="cm-main-article cm-main-report" aria-labelledby="main_report_tit">
+            <div class="head">
+              <h2 id="main_report_tit" class="cm-main-tit">연구 보고서</h2>
+              <a href="board/archive_list.html" class="krds-btn small text cm-more">더보기<span class="sr-only"> : 연구 보고서</span> <i class="svg-icon ico-plus" aria-hidden="true"></i></a>
+            </div>
+            <div class="cm-report" role="group" aria-roledescription="캐러셀" aria-label="연구 보고서">
+              <div class="swiper">
+                <div class="swiper-wrapper">
+                <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="3장 중 1번째">
+                  <a href="board/archive_view.html?idx=1" class="cm-report-item">
+                    <span class="cover"><img src="../img/main/report_cover_01.jpg" alt="" width="159" height="221"></span>
+                    <span class="tit">2026 특수교육 실태조사(VII) 예비조사</span>
+                  </a>
+                </div>
+                <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="3장 중 2번째">
+                  <a href="board/archive_view.html?idx=3" class="cm-report-item">
+                    <span class="cover"><img src="../img/board/archive/cover_03.png" alt="" width="159" height="221"></span>
+                    <span class="tit">2025 특수교육통계</span>
+                  </a>
+                </div>
+                <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="3장 중 3번째">
+                  <a href="board/archive_view.html?idx=4" class="cm-report-item">
+                    <span class="cover"><img src="../img/board/archive/cover_04.png" alt="" width="159" height="221"></span>
+                    <span class="tit">2023년 특수교육 실태조사 보고서</span>
+                  </a>
+                </div>
+                </div>
               </div>
-              <!-- 화면 표시 모드 -->
-              <div class="fieldset">
-                <div class="form-group view-mode-options">
-                  <h3>화면 표시 모드</h3>
-                  <div class="form-conts">
-                    <div class="krds-check-area chk-column">
-                      <div class="krds-form-check view-mode-light">
-                        <input type="radio" name="view_mode" id="view_mode_light" value="light" checked>
-                        <label for="view_mode_light">기본 (밝은 배경)</label>
-                      </div>
-                      <div class="krds-form-check view-mode-dark">
-                        <input type="radio" name="view_mode" id="view_mode_dark" value="high-contrast">
-                        <label for="view_mode_dark">선명하게 (어두운 배경)</label>
-                      </div>
-                      <div class="krds-form-check view-mode-default">
-                        <input type="radio" name="view_mode" id="view_mode_default" value="theme">
-                        <label for="view_mode_default">시스템 설정</label>
-                      </div>
-                    </div>
-                  </div>
+              <div class="controller">
+                <button type="button" class="cm-round-btn prev"><span class="sr-only">이전 보고서</span><i class="svg-icon ico-angle left" aria-hidden="true"></i></button>
+                <button type="button" class="cm-round-btn next"><span class="sr-only">다음 보고서</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </section>
+
+          <!-- 알림판 : 배너 넘김 (KRDS 포함 Swiper, 자동 넘김 · 정지 버튼, kr/js/main.js cmMainBanner)
+               Figma 에는 배너 3종만 있어 3종을 되풀이해 8장으로 채움. 배너는 개발 시 관리자 등록 이미지(477×288) + 대체 텍스트로 바뀝니다. -->
+          <section class="cm-main-article cm-main-banner" aria-labelledby="main_banner_tit">
+            <div class="head">
+              <h2 id="main_banner_tit" class="cm-main-tit">알림판</h2>
+              <!-- 모아보기 : 버튼만 둠 (눌렀을 때 화면은 Figma 에 없어 동작 보류) -->
+              <button type="button" class="krds-btn small icon cm-banner-all"><span class="sr-only">알림판 모아보기</span><i class="cm-ico-view-all" aria-hidden="true"></i></button>
+            </div>
+            <div class="cm-banner-area" role="group" aria-roledescription="캐러셀" aria-label="알림판">
+              <div class="controller">
+                <p class="count"><span class="sr-only">현재 배너</span><strong class="current">01</strong> <span class="slash" aria-hidden="true">/</span> <span class="sr-only">전체</span><span class="total">08</span></p>
+                <button type="button" class="cm-round-btn prev"><span class="sr-only">이전 배너</span><i class="svg-icon ico-angle left" aria-hidden="true"></i></button>
+                <button type="button" class="cm-round-btn next"><span class="sr-only">다음 배너</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></button>
+                <button type="button" class="cm-round-btn toggle"><span class="sr-only">자동 넘김 정지</span><i class="svg-icon ico-swiper-stop" aria-hidden="true"></i></button>
+              </div>
+              <div class="swiper">
+                <div class="swiper-wrapper">
+                <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 1번째">
+                  <!-- 배너 1 : guide -->
+                  <a href="#" class="cm-banner cm-banner--guide">
+                    <span class="eyebrow">처음 방문하셨나요?</span>
+                    <strong class="tit">데이터 플랫폼 <em>이용안내</em></strong>
+                    <span class="desc">사용자별 이용안내를 제공하고 있습니다.</span>
+                    <span class="btn">자세히보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
+                    <img src="../img/main/banner_guide.png" alt="" class="img" width="173" height="133">
+                  </a>
+                </div>
+                <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 2번째">
+                  <!-- 배너 2 : privacy -->
+                  <a href="#" class="cm-banner cm-banner--privacy">
+                    <span class="eyebrow">내 정보, 내가 지킨다!</span>
+                    <span class="lead">작은 실천 하나가</span>
+                    <strong class="tit"><em>소중한 개인정보</em>를 지켜줍니다!</strong>
+                    <span class="btn">카드뉴스 보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
+                    <img src="../img/main/banner_privacy.png" alt="" class="img" width="358" height="126">
+                  </a>
+                </div>
+                <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 3번째">
+                  <!-- 배너 3 : open -->
+                  <a href="board/notice_view.html" class="cm-banner cm-banner--open">
+                    <img src="../img/main/banner_logo.svg" alt="교육부 국립특수교육원" class="logo" width="129" height="29">
+                    <strong class="tit"><em>특수교육 실태조사</em> <span><em>데이터 플랫폼</em>이</span> <span>오픈 <span class="light">하였습니다.</span></span></strong>
+                    <img src="../img/main/banner_open.png" alt="" class="img" width="219" height="141">
+                  </a>
+                </div>
+                <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 4번째">
+                  <!-- 배너 4 : guide -->
+                  <a href="#" class="cm-banner cm-banner--guide">
+                    <span class="eyebrow">처음 방문하셨나요?</span>
+                    <strong class="tit">데이터 플랫폼 <em>이용안내</em></strong>
+                    <span class="desc">사용자별 이용안내를 제공하고 있습니다.</span>
+                    <span class="btn">자세히보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
+                    <img src="../img/main/banner_guide.png" alt="" class="img" width="173" height="133">
+                  </a>
+                </div>
+                <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 5번째">
+                  <!-- 배너 5 : privacy -->
+                  <a href="#" class="cm-banner cm-banner--privacy">
+                    <span class="eyebrow">내 정보, 내가 지킨다!</span>
+                    <span class="lead">작은 실천 하나가</span>
+                    <strong class="tit"><em>소중한 개인정보</em>를 지켜줍니다!</strong>
+                    <span class="btn">카드뉴스 보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
+                    <img src="../img/main/banner_privacy.png" alt="" class="img" width="358" height="126">
+                  </a>
+                </div>
+                <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 6번째">
+                  <!-- 배너 6 : open -->
+                  <a href="board/notice_view.html" class="cm-banner cm-banner--open">
+                    <img src="../img/main/banner_logo.svg" alt="교육부 국립특수교육원" class="logo" width="129" height="29">
+                    <strong class="tit"><em>특수교육 실태조사</em> <span><em>데이터 플랫폼</em>이</span> <span>오픈 <span class="light">하였습니다.</span></span></strong>
+                    <img src="../img/main/banner_open.png" alt="" class="img" width="219" height="141">
+                  </a>
+                </div>
+                <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 7번째">
+                  <!-- 배너 7 : guide -->
+                  <a href="#" class="cm-banner cm-banner--guide">
+                    <span class="eyebrow">처음 방문하셨나요?</span>
+                    <strong class="tit">데이터 플랫폼 <em>이용안내</em></strong>
+                    <span class="desc">사용자별 이용안내를 제공하고 있습니다.</span>
+                    <span class="btn">자세히보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
+                    <img src="../img/main/banner_guide.png" alt="" class="img" width="173" height="133">
+                  </a>
+                </div>
+                <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 8번째">
+                  <!-- 배너 8 : privacy -->
+                  <a href="#" class="cm-banner cm-banner--privacy">
+                    <span class="eyebrow">내 정보, 내가 지킨다!</span>
+                    <span class="lead">작은 실천 하나가</span>
+                    <strong class="tit"><em>소중한 개인정보</em>를 지켜줍니다!</strong>
+                    <span class="btn">카드뉴스 보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
+                    <img src="../img/main/banner_privacy.png" alt="" class="img" width="358" height="126">
+                  </a>
+                </div>
                 </div>
               </div>
             </div>
-            <!-- //adjust_display -->
-
-          </div>
+          </section>
         </div>
-        <!-- //modal contents -->
-        <!-- modal btn -->
-        <div class="modal-btn btn-wrap">
-          <button type="button" class="krds-btn medium tertiary close-modal" id="reset_display">초기화</button>
-          <button type="button" class="krds-btn medium primary close-modal">설정</button>
-        </div>
-        <!-- //modal btn -->
-        <!-- close button -->
-        <button type="button" class="krds-btn medium icon btn-close close-modal">
-          <span class="sr-only">닫기</span>
-          <i class="svg-icon ico-popup-close"></i>
-        </button>
-        <!-- //close button -->
       </div>
-    </div>
-    <div class="modal-back"></div>
-  </section>
-  <!-- //글자·화면 표시 설정 모달 -->
+      <!-- //[04-4] -->
 
+      <!-- [04-5] 원본 데이터 보기 · 유관 사이트 (신규 컴포넌트 kr/html/code/ext_main_link_tile.html, Figma node 11510:62424) -->
+      <div class="cm-main-sec cm-main-links">
+        <div class="inner">
+          <section class="group origin" aria-labelledby="main_origin_tit">
+            <h2 id="main_origin_tit" class="cm-main-tit">원본 데이터 보기</h2>
+            <ul class="cm-link-tiles">
+              <li><a href="https://kosis.kr" class="cm-link-tile" target="_blank" rel="noopener noreferrer" title="새 창 열림"><span class="ico"><img src="../img/main/link_kosis.svg" alt="" width="48" height="48"><i class="badge" aria-hidden="true"></i></span><span class="txt">KOSIS<br>국가통계포털</span></a></li>
+              <li><a href="https://mdis.kostat.go.kr" class="cm-link-tile" target="_blank" rel="noopener noreferrer" title="새 창 열림"><span class="ico"><img src="../img/main/link_mdis.svg" alt="" width="48" height="48"><i class="badge" aria-hidden="true"></i></span><span class="txt">마이크로데이터<br>통합서비스</span></a></li>
+            </ul>
+          </section>
+          <section class="group related" aria-labelledby="main_related_tit">
+            <h2 id="main_related_tit" class="cm-main-tit">유관 사이트</h2>
+            <ul class="cm-link-tiles">
+              <li><a href="https://www.data.go.kr" class="cm-link-tile" target="_blank" rel="noopener noreferrer" title="새 창 열림"><span class="ico"><img src="../img/main/link_data.svg" alt="" width="48" height="48"><i class="badge" aria-hidden="true"></i></span><span class="txt">공공데이터<br>포털</span></a></li>
+              <li><a href="https://www.index.go.kr" class="cm-link-tile" target="_blank" rel="noopener noreferrer" title="새 창 열림"><span class="ico"><img src="../img/main/link_index.svg" alt="" width="48" height="48"><i class="badge" aria-hidden="true"></i></span><span class="txt">지표누리<br>e-나라지표</span></a></li>
+              <li><a href="https://edss.moe.go.kr" class="cm-link-tile" target="_blank" rel="noopener noreferrer" title="새 창 열림"><span class="ico"><img src="../img/main/link_edss.svg" alt="" width="48" height="48"><i class="badge" aria-hidden="true"></i></span><span class="txt">에듀데이터서비스<br>(EDSS)</span></a></li>
+              <li><a href="https://kess.kedi.re.kr" class="cm-link-tile" target="_blank" rel="noopener noreferrer" title="새 창 열림"><span class="ico"><img src="../img/main/link_kess.svg" alt="" width="48" height="48"><i class="badge" aria-hidden="true"></i></span><span class="txt">KESS<br>교육통계서비스</span></a></li>
+              <li><a href="https://www.moe.go.kr" class="cm-link-tile" target="_blank" rel="noopener noreferrer" title="새 창 열림"><span class="ico"><img src="../img/main/link_moe.svg" alt="" width="48" height="48"><i class="badge" aria-hidden="true"></i></span><span class="txt">교육부</span></a></li>
+              <li><a href="https://www.nise.go.kr" class="cm-link-tile" target="_blank" rel="noopener noreferrer" title="새 창 열림"><span class="ico"><img src="../img/main/link_nise.svg" alt="" width="48" height="48"><i class="badge" aria-hidden="true"></i></span><span class="txt">교육부<br>국립특수교육원</span></a></li>
+            </ul>
+          </section>
+        </div>
+      </div>
+      <!-- //[04-5] -->
+
+      <!-- [04-6] 바로가기 : 화면 오른쪽에 떠 있는 메뉴 (신규 컴포넌트 kr/html/code/ext_main_quick.html, Figma node 11510:62441)
+           본문과 겹치지 않는 넓은 화면(1840px 이상)에서만 보이고, 그보다 좁으면 공통 TOP 버튼(.page-top-button)을 씁니다. -->
+      <aside class="cm-quick" aria-labelledby="quick_tit">
+        <div class="box">
+          <h2 id="quick_tit" class="tit">바로가기</h2>
+          <ul>
+            <li><a href="https://kosis.kr" target="_blank" rel="noopener noreferrer" title="새 창 열림"><img src="../img/main/quick_kosis.svg" alt="" width="20" height="20"><span>KOSIS<br>국가통계포털</span></a></li>
+            <li><a href="https://mdis.kostat.go.kr" target="_blank" rel="noopener noreferrer" title="새 창 열림"><img src="../img/main/quick_mdis.svg" alt="" width="20" height="20"><span>마이크로데이터<br>통합서비스</span></a></li>
+            <li><a href="https://www.nise.go.kr" target="_blank" rel="noopener noreferrer" title="새 창 열림"><img src="../img/main/quick_nise.svg" alt="" width="20" height="20"><span>교육부<br>국립특수교육원</span></a></li>
+          </ul>
+        </div>
+        <button type="button" class="btn-top">TOP <i class="cm-ico-top" aria-hidden="true"></i><span class="sr-only">페이지 상단으로 이동</span></button>
+      </aside>
+      <!-- //[04-6] -->
+    </div>
+    <!-- //[04] 컨테이너 -->
+
+    <!-- [05] 푸터 · TOP 버튼 -->
+    <div data-include="footer"></div>
+  </div>
+  <!-- [E] #wrap -->
+
+  <!-- [06] 모달 (#wrap 바깥) -->
+  <div data-include="modal"></div>
+
+  <!-- ============================================================
+       [07] 스크립트
+       ============================================================ -->
+  <script src="../js/include.js"></script><!-- 공통 영역 인클루드 : KRDS 스크립트보다 먼저 -->
+  <script src="../../krds/resources/js/plugin/swiper-bundle.min.js"></script>
   <script src="../../krds/resources/js/component/ui-script.js"></script>
+  <script src="../../_common/resources/js/krds-custom.js"></script>
+  <script src="../../_common/resources/js/krds-base.js"></script>
   <script src="../js/user-custom.js"></script>
+  <script src="../js/main.js"></script><!-- 메인 화면 전용 -->
+  <!-- //[07] 스크립트 -->
 </body>
 </html>

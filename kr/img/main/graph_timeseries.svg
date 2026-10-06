@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="140" viewBox="0 0 150 140" fill="none">
+<svg x="22.995" y="28.994" width="80.070" height="66.038" viewBox="0 0 80.0652 66.0254" preserveAspectRatio="none" overflow="visible"><path d="M67.5951 0H12.4701C5.58305 0 0 5.58305 0 12.4701V53.5553C0 60.4424 5.58305 66.0254 12.4701 66.0254H67.5951C74.4821 66.0254 80.0652 60.4424 80.0652 53.5553V12.4701C80.0652 5.58305 74.4821 0 67.5951 0Z" fill="url(#p0_paint0_linear_0_136)"/>
+<defs>
+<linearGradient id="p0_paint0_linear_0_136" x1="0" y1="33.0127" x2="80.0652" y2="33.0127" gradientUnits="userSpaceOnUse">
+<stop stop-color="#94BAFF"/>
+<stop offset="1" stop-color="#3376F6"/>
+</linearGradient>
+</defs></svg>
+<svg x="35.460" y="43.442" width="93.750" height="77.308" viewBox="0 0 93.7561 77.312" preserveAspectRatio="none" overflow="visible"><path d="M79.1558 0H14.6003C6.5368 0 0 6.5368 0 14.6003V62.7117C0 70.7752 6.5368 77.312 14.6003 77.312H79.1558C87.2193 77.312 93.7561 70.7752 93.7561 62.7117V14.6003C93.7561 6.5368 87.2193 0 79.1558 0Z" fill="url(#p1_paint0_linear_0_140)"/>
+<defs>
+<linearGradient id="p1_paint0_linear_0_140" x1="0" y1="38.656" x2="93.7561" y2="38.656" gradientUnits="userSpaceOnUse">
+<stop stop-color="#C8DEFF"/>
+<stop offset="1" stop-color="#94BAFF"/>
+</linearGradient>
+</defs></svg>
+<svg x="62.085" y="73.836" width="41.115" height="39.858" viewBox="0 0 41.1102 39.8644" preserveAspectRatio="none" overflow="visible"><path d="M0 39.8644H11.8768V15.95H0V39.8644ZM14.6167 39.8644H26.4935V0H14.6167V39.8644ZM29.2334 7.78234V39.8644H41.1102V7.78234H29.2334Z" fill="url(#p2_paint0_linear_0_137)"/>
+<defs>
+<linearGradient id="p2_paint0_linear_0_137" x1="0" y1="19.9322" x2="41.1102" y2="19.9322" gradientUnits="userSpaceOnUse">
+<stop stop-color="#94BAFF"/>
+<stop offset="1" stop-color="#3376F6"/>
+</linearGradient>
+</defs></svg>
+<svg x="45.900" y="50.162" width="72.570" height="38.752" viewBox="0 0 72.5783 38.7433" preserveAspectRatio="none" overflow="visible"><g>
+<path d="M67.6201 18.512L72.5783 0L54.0662 4.95814L57.7412 8.63314L44.5486 21.8258L34.7195 11.9967L20.3684 26.3479L12.3955 18.375L0.000133168 30.7703L6.19158 36.9742L12.3955 30.7703L20.3684 38.7432L34.7195 24.392L44.5486 34.2336L63.9451 14.837L67.6201 18.512Z" fill="white"/>
+</g></svg>
+</svg>
