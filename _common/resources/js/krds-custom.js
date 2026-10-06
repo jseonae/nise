@@ -201,8 +201,11 @@ document.addEventListener("DOMContentLoaded", () => cmResearch.init());
    - KRDS 스크립트(krds_inPageNavigation.updateActiveSection)는 .scroll-check > .section-link 구조와 탭 안 섹션만 다루고
      위치를 offsetTop 으로 계산해서, 1단 본문(.cm-contents) · 탭이 섞인 화면에서는 첫 링크에 active 가 고정됩니다.
    - 여기서는 탐색 링크(href="#id")가 가리키는 섹션의 화면 위치로 판단합니다.
-       · 헤더 아래 기준선을 지난 마지막 섹션이 현재 섹션, 아직 아무 섹션도 지나지 않았으면 첫 섹션, 페이지 끝이면 마지막 섹션
+       · 헤더 아래 기준선을 지난 마지막 섹션이 현재 섹션, 아직 아무 섹션도 지나지 않았으면 첫 섹션
        · 링크를 눌러 이동할 때(KRDS applyScroll : 섹션 위 = 헤더 높이)와 같은 기준선을 씁니다.
+       · 페이지 끝의 짧은 섹션(예 : 교차분석 용어해설·유의사항·출처)은 헤더 아래까지 올라오지 못하므로,
+         끝에 가까워질수록 기준선을 화면 아래쪽으로 내려 차례로 켜지게 합니다 (맨 끝에서 기준선 = 화면 아래).
+       · 링크를 눌러 이동한 경우에는 누른 링크를 그대로 켜 두고, 사용자가 직접 스크롤하면 다시 위치로 판단합니다.
    - 현재 링크에는 aria-current="location" 도 함께 붙입니다. */
 const cmPageNav = {
   init() {
@@ -210,17 +213,20 @@ const cmPageNav = {
     const items = links.map((link) => ({ link, target: document.getElementById(link.getAttribute("href").slice(1)) })).filter((item) => item.target);
     if (!items.length) return;
     let queued = false;
+    let locked = null;
     const update = () => {
       queued = false;
       const visible = items.filter((item) => item.target.getClientRects().length);
       if (!visible.length) return;
       const header = (document.querySelector("#krds-masthead")?.clientHeight || 0) + (document.querySelector("#krds-header .header-in")?.clientHeight || 0);
-      const line = header + 8;
+      const zone = Math.max(1, window.innerHeight - header);
+      const remain = Math.max(0, document.documentElement.scrollHeight - window.innerHeight - window.scrollY);
+      const line = header + 8 + Math.max(0, zone - remain);
       let current = visible[0];
       visible.forEach((item) => {
         if (item.target.getBoundingClientRect().top <= line) current = item;
       });
-      if (window.scrollY > 0 && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = visible[visible.length - 1];
+      if (locked && visible.includes(locked)) current = locked;
       items.forEach((item) => {
         const on = item === current;
         item.link.classList.toggle("active", on);
@@ -233,6 +239,19 @@ const cmPageNav = {
       queued = true;
       requestAnimationFrame(update);
     };
+    items.forEach((item) => {
+      item.link.addEventListener("click", () => {
+        locked = item;
+        request();
+      });
+    });
+    const unlock = () => {
+      locked = null;
+    };
+    ["wheel", "touchmove"].forEach((type) => window.addEventListener(type, unlock, { passive: true }));
+    window.addEventListener("keydown", (event) => {
+      if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(event.key) && !event.target.closest(".in-page-navigation-list")) unlock();
+    });
     window.addEventListener("scroll", request, { passive: true });
     window.addEventListener("resize", request);
     update();
