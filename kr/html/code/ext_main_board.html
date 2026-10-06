@@ -1,0 +1,164 @@
+<!-- ext: 신규 컴포넌트 (KRDS에 없음, 메인 전용) / 공지사항 목록 · 연구 보고서 표지 넘김 · 알림판 배너 넘김 -->
+<!--
+  Figma : 컨텐츠 > main-확정 > 공지사항 · 연구 보고서 · 알림판 (node 11510:62368)
+  - 스타일 : kr/css/main.css 5. 공지사항 · 연구 보고서 · 알림판 / 스크립트 : kr/js/main.js cmMainReport · cmMainBanner
+  - 넘김은 KRDS 에 들어 있는 Swiper 를 씁니다. 버튼 이름 · 슬라이드 설명은 마크업에 직접 적었습니다.
+  - 연구 보고서 : 자동 넘김 없음. 알림판 : 5초마다 자동 넘김, 정지 · 재생 버튼, 쪽수. 마우스를 올리거나 초점이 들어오면 멈춥니다.
+  - 보이지 않는 슬라이드는 스크립트가 inert · aria-hidden 으로 초점과 낭독에서 뺍니다.
+  - 알림판 상자의 파인 모서리는 CSS 두 조각으로 표현했습니다. (Figma 는 한 도형)
+  - 알림판 배너는 개발 시 관리자 등록 이미지(477×288) + 대체 텍스트로 바뀝니다. 지금 배너 3종은 확인용으로 HTML 로 그렸고,
+    Figma 의 손글씨 글꼴(Ownglyph) · Gmarket Sans Medium 은 기본 글꼴로 대체했습니다.
+  - 공지 날짜 색, 배너 버튼 색(카드뉴스 보기)은 대비 4.5:1 에 맞게 Figma 보다 어둡게 보정했습니다.
+  - 모아보기 버튼은 모양만 있습니다. (눌렀을 때 화면이 Figma 에 없음)
+-->
+<div class="cm-main-sec cm-main-board">
+  <div class="inner">
+    <!-- 공지사항 : 최근 4건 (개발 시 서버 출력, 새 글은 .is-new + N 표시) -->
+    <section class="cm-main-article cm-main-notice" aria-labelledby="main_notice_tit">
+      <div class="head">
+        <h2 id="main_notice_tit" class="cm-main-tit">공지사항</h2>
+        <a href="board/notice_list.html" class="krds-btn small text cm-more">더보기<span class="sr-only"> : 공지사항</span> <i class="svg-icon ico-plus" aria-hidden="true"></i></a>
+      </div>
+      <ul class="cm-noti-list">
+        <li><a href="board/notice_view.html" class="cm-noti-item is-new"><span class="tit"><span class="txt">교육부 특수교육 실태조사 데이터 플랫폼이 오픈했습니다.</span><i class="cm-ico-new" role="img" aria-label="새 글"></i></span><span class="date"><span class="sr-only">등록일 </span>2026-08-25</span></a></li>
+        <li><a href="board/notice_view.html" class="cm-noti-item is-new"><span class="tit"><span class="txt">특수교육실태조사 데이터 플랫폼 서비스 명칭 공모 당선 발표</span><i class="cm-ico-new" role="img" aria-label="새 글"></i></span><span class="date"><span class="sr-only">등록일 </span>2026-08-25</span></a></li>
+        <li><a href="board/notice_view.html" class="cm-noti-item"><span class="tit"><span class="txt">특수교육실태조사 공동 포럼을 개최합니다.</span></span><span class="date"><span class="sr-only">등록일 </span>2026-08-19</span></a></li>
+        <li><a href="board/notice_view.html" class="cm-noti-item"><span class="tit"><span class="txt">현장특수교육 제33권 1호가 발간되었습니다.</span></span><span class="date"><span class="sr-only">등록일 </span>2026-05-30</span></a></li>
+      </ul>
+    </section>
+
+    <!-- 연구 보고서 : 표지 넘김 (KRDS 포함 Swiper, 자동 넘김 없음, kr/js/main.js cmMainReport) -->
+    <section class="cm-main-article cm-main-report" aria-labelledby="main_report_tit">
+      <div class="head">
+        <h2 id="main_report_tit" class="cm-main-tit">연구 보고서</h2>
+        <a href="board/archive_list.html" class="krds-btn small text cm-more">더보기<span class="sr-only"> : 연구 보고서</span> <i class="svg-icon ico-plus" aria-hidden="true"></i></a>
+      </div>
+      <div class="cm-report" role="group" aria-roledescription="캐러셀" aria-label="연구 보고서">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+          <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="3장 중 1번째">
+            <a href="board/archive_view.html?idx=1" class="cm-report-item">
+              <span class="cover"><img src="{{root}}kr/img/main/report_cover_01.jpg" alt="" width="159" height="221"></span>
+              <span class="tit">2026 특수교육 실태조사(VII) 예비조사</span>
+            </a>
+          </div>
+          <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="3장 중 2번째">
+            <a href="board/archive_view.html?idx=3" class="cm-report-item">
+              <span class="cover"><img src="{{root}}kr/img/board/archive/cover_03.png" alt="" width="159" height="221"></span>
+              <span class="tit">2025 특수교육통계</span>
+            </a>
+          </div>
+          <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="3장 중 3번째">
+            <a href="board/archive_view.html?idx=4" class="cm-report-item">
+              <span class="cover"><img src="{{root}}kr/img/board/archive/cover_04.png" alt="" width="159" height="221"></span>
+              <span class="tit">2023년 특수교육 실태조사 보고서</span>
+            </a>
+          </div>
+          </div>
+        </div>
+        <div class="controller">
+          <button type="button" class="cm-round-btn prev"><span class="sr-only">이전 보고서</span><i class="svg-icon ico-angle left" aria-hidden="true"></i></button>
+          <button type="button" class="cm-round-btn next"><span class="sr-only">다음 보고서</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 알림판 : 배너 넘김 (KRDS 포함 Swiper, 자동 넘김 · 정지 버튼, kr/js/main.js cmMainBanner)
+         Figma 에는 배너 3종만 있어 3종을 되풀이해 8장으로 채움. 배너는 개발 시 관리자 등록 이미지(477×288) + 대체 텍스트로 바뀝니다. -->
+    <section class="cm-main-article cm-main-banner" aria-labelledby="main_banner_tit">
+      <div class="head">
+        <h2 id="main_banner_tit" class="cm-main-tit">알림판</h2>
+        <!-- 모아보기 : 버튼만 둠 (눌렀을 때 화면은 Figma 에 없어 동작 보류) -->
+        <button type="button" class="krds-btn small icon cm-banner-all"><span class="sr-only">알림판 모아보기</span><i class="cm-ico-view-all" aria-hidden="true"></i></button>
+      </div>
+      <div class="cm-banner-area" role="group" aria-roledescription="캐러셀" aria-label="알림판">
+        <div class="controller">
+          <p class="count"><span class="sr-only">현재 배너</span><strong class="current">01</strong> <span class="slash" aria-hidden="true">/</span> <span class="sr-only">전체</span><span class="total">08</span></p>
+          <button type="button" class="cm-round-btn prev"><span class="sr-only">이전 배너</span><i class="svg-icon ico-angle left" aria-hidden="true"></i></button>
+          <button type="button" class="cm-round-btn next"><span class="sr-only">다음 배너</span><i class="svg-icon ico-angle right" aria-hidden="true"></i></button>
+          <button type="button" class="cm-round-btn toggle"><span class="sr-only">자동 넘김 정지</span><i class="svg-icon ico-swiper-stop" aria-hidden="true"></i></button>
+        </div>
+        <div class="swiper">
+          <div class="swiper-wrapper">
+          <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 1번째">
+            <!-- 배너 1 : guide -->
+            <a href="#" class="cm-banner cm-banner--guide">
+              <span class="eyebrow">처음 방문하셨나요?</span>
+              <strong class="tit">데이터 플랫폼 <em>이용안내</em></strong>
+              <span class="desc">사용자별 이용안내를 제공하고 있습니다.</span>
+              <span class="btn">자세히보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
+              <img src="{{root}}kr/img/main/banner_guide.png" alt="" class="img" width="173" height="133">
+            </a>
+          </div>
+          <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 2번째">
+            <!-- 배너 2 : privacy -->
+            <a href="#" class="cm-banner cm-banner--privacy">
+              <span class="eyebrow">내 정보, 내가 지킨다!</span>
+              <span class="lead">작은 실천 하나가</span>
+              <strong class="tit"><em>소중한 개인정보</em>를 지켜줍니다!</strong>
+              <span class="btn">카드뉴스 보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
+              <img src="{{root}}kr/img/main/banner_privacy.png" alt="" class="img" width="358" height="126">
+            </a>
+          </div>
+          <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 3번째">
+            <!-- 배너 3 : open -->
+            <a href="board/notice_view.html" class="cm-banner cm-banner--open">
+              <img src="{{root}}kr/img/main/banner_logo.svg" alt="교육부 국립특수교육원" class="logo" width="129" height="29">
+              <strong class="tit"><em>특수교육 실태조사</em> <span><em>데이터 플랫폼</em>이</span> <span>오픈 <span class="light">하였습니다.</span></span></strong>
+              <img src="{{root}}kr/img/main/banner_open.png" alt="" class="img" width="219" height="141">
+            </a>
+          </div>
+          <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 4번째">
+            <!-- 배너 4 : guide -->
+            <a href="#" class="cm-banner cm-banner--guide">
+              <span class="eyebrow">처음 방문하셨나요?</span>
+              <strong class="tit">데이터 플랫폼 <em>이용안내</em></strong>
+              <span class="desc">사용자별 이용안내를 제공하고 있습니다.</span>
+              <span class="btn">자세히보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
+              <img src="{{root}}kr/img/main/banner_guide.png" alt="" class="img" width="173" height="133">
+            </a>
+          </div>
+          <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 5번째">
+            <!-- 배너 5 : privacy -->
+            <a href="#" class="cm-banner cm-banner--privacy">
+              <span class="eyebrow">내 정보, 내가 지킨다!</span>
+              <span class="lead">작은 실천 하나가</span>
+              <strong class="tit"><em>소중한 개인정보</em>를 지켜줍니다!</strong>
+              <span class="btn">카드뉴스 보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
+              <img src="{{root}}kr/img/main/banner_privacy.png" alt="" class="img" width="358" height="126">
+            </a>
+          </div>
+          <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 6번째">
+            <!-- 배너 6 : open -->
+            <a href="board/notice_view.html" class="cm-banner cm-banner--open">
+              <img src="{{root}}kr/img/main/banner_logo.svg" alt="교육부 국립특수교육원" class="logo" width="129" height="29">
+              <strong class="tit"><em>특수교육 실태조사</em> <span><em>데이터 플랫폼</em>이</span> <span>오픈 <span class="light">하였습니다.</span></span></strong>
+              <img src="{{root}}kr/img/main/banner_open.png" alt="" class="img" width="219" height="141">
+            </a>
+          </div>
+          <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 7번째">
+            <!-- 배너 7 : guide -->
+            <a href="#" class="cm-banner cm-banner--guide">
+              <span class="eyebrow">처음 방문하셨나요?</span>
+              <strong class="tit">데이터 플랫폼 <em>이용안내</em></strong>
+              <span class="desc">사용자별 이용안내를 제공하고 있습니다.</span>
+              <span class="btn">자세히보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
+              <img src="{{root}}kr/img/main/banner_guide.png" alt="" class="img" width="173" height="133">
+            </a>
+          </div>
+          <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 8번째">
+            <!-- 배너 8 : privacy -->
+            <a href="#" class="cm-banner cm-banner--privacy">
+              <span class="eyebrow">내 정보, 내가 지킨다!</span>
+              <span class="lead">작은 실천 하나가</span>
+              <strong class="tit"><em>소중한 개인정보</em>를 지켜줍니다!</strong>
+              <span class="btn">카드뉴스 보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
+              <img src="{{root}}kr/img/main/banner_privacy.png" alt="" class="img" width="358" height="126">
+            </a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

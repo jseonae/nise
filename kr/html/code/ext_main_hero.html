@@ -1,0 +1,38 @@
+<!-- ext: 신규 컴포넌트 (KRDS에 없음, 메인 전용) / 메인 히어로 : 사이트 이름 · 소개 · 통합검색 -->
+<!--
+  Figma : 컨텐츠 > main-확정 > 히어로 (node 11510:62329)
+  - 스타일 : kr/css/main.css 2. 히어로 (.cm-hero) / 스크립트 : kr/js/main.js cmMainSearch
+  - 검색 칸은 KRDS 입력(.krds-input) · 버튼 구조를 쓰고, 알약 모양 · 그라데이션 버튼만 Figma 값으로 입혔습니다. [KRDS 와 다른 모양]
+  - 제목 글꼴 Gmarket Sans Bold 는 KRDS 글꼴이 아닙니다. (_common/resources/font/GmarketSansBold.woff)
+  - 폼 클래스 .cm-search-top-form : 빈 값 확인 · 결과 화면 이동은 통합검색 공통 스크립트를 그대로 씁니다.
+  - 추천 검색어는 헤더 통합검색(ext_search_popup)과 같은 .cm-search-recommend 를 씁니다. 누르면 바로 검색합니다.
+-->
+<section class="cm-hero" aria-labelledby="hero_tit">
+  <div class="inner">
+    <div class="cm-hero-txt">
+      <h1 id="hero_tit" class="tit"><span class="line1"><em>특수교육</em> 실태조사</span> <span class="line2">데이터 활용 플랫폼</span></h1>
+      <p class="desc">2008년부터 3년마다 조사되는 특수교육 데이터를 수집 및 가공하여, <br class="pc-only">교육 현장과 국민의 실질적인 데이터 활용을 지원합니다.</p>
+    </div>
+    <div class="cm-hero-search">
+      <!-- 통합검색 : 헤더 통합검색과 같은 결과 화면(search/search_result.html)으로 이동. 빈 값 확인 · 화면 나누기는 기존 스크립트(cmSearchResult · cmSearchDemo) 사용 -->
+      <form class="cm-search-top-form cm-hero-form" role="search" aria-label="메인 통합검색" action="search/search_result.html" method="get">
+        <input type="text" name="q" id="hero_keyword" class="krds-input" placeholder="검색어를 입력해 주세요." title="통합검색 검색어 입력" autocomplete="off">
+        <button type="submit" class="btn-submit">
+          <span class="sr-only">검색</span>
+          <i class="svg-icon ico-sch" aria-hidden="true"></i>
+        </button>
+      </form>
+      <!-- 추천 검색어 : 헤더 통합검색과 같은 목록 (누르면 바로 검색, 목록은 개발 시 서버 출력) -->
+      <div class="cm-search-recommend">
+        <p class="tit" id="hero_recommend_tit">추천 검색어</p>
+        <ul class="cm-search-chips" aria-labelledby="hero_recommend_tit">
+          <li><button type="button" class="cm-search-chip" data-keyword="특수교육대상자">#특수교육대상자</button></li>
+          <li><button type="button" class="cm-search-chip" data-keyword="통합교육">#통합교육</button></li>
+          <li><button type="button" class="cm-search-chip" data-keyword="특수학급">#특수학급</button></li>
+          <li><button type="button" class="cm-search-chip" data-keyword="장애유형">#장애유형</button></li>
+          <li><button type="button" class="cm-search-chip" data-keyword="교원">#교원</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

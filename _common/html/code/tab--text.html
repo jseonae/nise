@@ -1,0 +1,24 @@
+<!-- base: krds/html/code/tab.html (1.0.6) / 변경: 탭 버튼을 상자 없이 글자만 보이게 하고, 선택한 탭 오른쪽에 아래 화살표 표시 -->
+<!--
+  글자형 탭 (Figma: 컨텐츠 > section2-1 tab1 · tab2)
+  - KRDS 탭(.krds-tab-area.layer > .tab) 마크업과 탭 전환 스크립트(krds_tab)를 그대로 씁니다. fill · full · line 대신 .cm-tab-text 를 붙입니다.
+  - 스타일 : kr/css/main.css 3-1. 글자형 탭 (지금은 메인에서만 써서 메인 스타일에 둠. 다른 화면에서도 쓰게 되면 krds-custom.css 로 옮깁니다)
+  - 진한 배경(파란 띠) 위에 놓는 것을 기준으로 한 색입니다. 선택 : 흰색, 비선택 : primary-20
+  - "선택됨" 대체 텍스트는 KRDS 스크립트가 넣습니다. 탭 버튼 안에 다른 .sr-only 를 넣지 않습니다.
+-->
+<div class="krds-tab-area layer">
+  <div class="tab cm-tab-text">
+    <ul role="tablist">
+      <li id="tab_main_01" role="tab" aria-selected="true" aria-controls="panel_main_01" class="active">
+        <button type="button" class="btn-tab">숫자로 보는 특수교육</button><!-- "선택됨" 대체 텍스트는 KRDS 스크립트가 넣음 -->
+      </li>
+      <li id="tab_main_02" role="tab" aria-selected="false" aria-controls="panel_main_02">
+        <button type="button" class="btn-tab">실태조사변천사</button>
+      </li>
+    </ul>
+  </div>
+  <div class="tab-conts-wrap">
+    <section id="panel_main_01" aria-labelledby="tab_main_01" class="tab-conts active">…</section>
+    <section id="panel_main_02" aria-labelledby="tab_main_02" class="tab-conts">…</section>
+  </div>
+</div>

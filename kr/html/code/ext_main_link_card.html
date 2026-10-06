@@ -1,0 +1,30 @@
+<!-- ext: 신규 컴포넌트 (KRDS에 없음, 메인 전용) / 링크 카드 : 제목 · 설명 · 그림, 올리면 모서리에 화살표 버튼 -->
+<!--
+  Figma : 컨텐츠 > main-확정 > 그래프로 보는 특수교육 실태조사 (node 11510:62362)
+  - 스타일 : kr/css/main.css 4. 링크 카드 (.cm-link-cards · .cm-link-card)
+  - 카드 전체가 링크입니다. 올리거나 초점이 가면 색이 바뀌고 오른쪽 아래에 화살표 버튼이 나타납니다.
+  - Figma 는 파인 모서리를 도형 빼기로 그렸습니다. 폭이 변하는 카드라 CSS 는 본문 배경색 조각(.go)을 덧대어 표현했고, 파인 곳의 작은 역곡선은 생략했습니다.
+  - 그림 · 화살표는 꾸밈용입니다. (alt="" · aria-hidden)
+-->
+<ul class="cm-link-cards">
+  <li>
+    <a href="stat/timeseries_list.html" class="cm-link-card">
+      <span class="txt">
+        <strong class="tit"><em>시계열</em>로 보는 데이터</strong>
+        <span class="desc">2008년부터 축적된 특수교육 데이터를 연도별로 비교하고, <br class="pc-only">변화의 흐름을 한 눈에 확인할 수 있습니다.</span>
+      </span>
+      <img src="{{root}}kr/img/main/graph_timeseries.svg" alt="" class="img" width="150" height="140">
+      <span class="go" aria-hidden="true"><i class="svg-icon ico-angle right"></i></span>
+    </a>
+  </li>
+  <li>
+    <a href="stat/keydata_list.html" class="cm-link-card">
+      <span class="txt">
+        <strong class="tit">핵심데이터 <em>시각화</em></strong>
+        <span class="desc">연도별 주요 특수교육 실태조사 데이터를 시각화하여 <br class="pc-only">사용자가 쉽게 이해할 수 있도록 제공합니다.</span>
+      </span>
+      <img src="{{root}}kr/img/main/graph_keydata.svg" alt="" class="img" width="150" height="140">
+      <span class="go" aria-hidden="true"><i class="svg-icon ico-angle right"></i></span>
+    </a>
+  </li>
+</ul>
