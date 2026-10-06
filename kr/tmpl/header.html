@@ -57,13 +57,53 @@
               <span class="sr-only">특수교육 실태조사 데이터 활용 플랫폼</span>
             </a>
           </h2>
-          <!-- 헤더 버튼 : .header-actions (통계정보 · 데이터분석 · 알림마당 · 전체메뉴, 모바일에서는 아이콘 메뉴를 전체메뉴 안에 표시) -->
+          <!-- 헤더 버튼 : .header-actions (통계정보 · 데이터분석 · 알림마당 · 통합검색 · 전체메뉴, 모바일에서는 아이콘 메뉴를 전체메뉴 안에 표시) -->
           <div class="header-actions">
             <a href="{{html}}stat/survey_history_list.html" class="btn-navi cm-stat pc-only">통계정보</a>
             <a href="{{html}}analysis/cross_analysis.html" class="btn-navi cm-analysis pc-only">데이터분석</a>
             <a href="{{html}}board/survey_overview.html" class="btn-navi cm-notice pc-only">알림마당</a>
+            <!-- 통합검색 : KRDS 헤더 버튼(.btn-navi.sch), 누르면 아래 통합검색 영역(#cm_search_popup)을 열고 닫음 (krds-custom.js cmSearchPopup) -->
+            <button type="button" class="btn-navi sch" aria-expanded="false" aria-controls="cm_search_popup">통합검색</button>
             <button type="button" class="btn-navi all" aria-controls="mobile-nav">전체메뉴</button>
           </div>
+        </div>
+      </div>
+      <!-- 통합검색 영역 : 신규 컴포넌트 _common/html/code/ext_search_popup.html (Figma: 컨텐츠 > search-popup)
+           헤더 상단 바로 아래에 화면 폭 전체로 열림. 검색 결과 화면(s04통합검색)은 아직 없어 action 은 임시(#) -->
+      <div id="cm_search_popup" class="cm-search-popup" hidden>
+        <div class="inner">
+          <form class="cm-search-form" role="search" aria-label="통합검색" action="#" method="get">
+            <div class="form-group">
+              <div class="form-conts btn-ico-wrap">
+                <input type="text" name="q" id="cm_search_keyword" class="krds-input large" placeholder="검색어를 입력하세요." title="통합검색 검색어 입력" autocomplete="off">
+                <div class="btn-group">
+                  <button type="button" class="krds-btn medium icon cm-search-delete" hidden>
+                    <span class="sr-only">입력한 검색어 지우기</span>
+                    <i class="svg-icon ico-delete-fill"></i>
+                  </button>
+                  <button type="submit" class="krds-btn medium icon">
+                    <span class="sr-only">검색</span>
+                    <i class="svg-icon ico-sch"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- 추천 검색어 : 누르면 검색어 칸에 넣음 (목록은 개발 시 서버 출력) -->
+            <div class="cm-search-recommend">
+              <p class="tit" id="cm_search_recommend_tit">추천 검색어</p>
+              <ul class="cm-search-chips" aria-labelledby="cm_search_recommend_tit">
+                <li><button type="button" class="cm-search-chip" data-keyword="특수교육대상자">#특수교육대상자</button></li>
+                <li><button type="button" class="cm-search-chip" data-keyword="통합교육">#통합교육</button></li>
+                <li><button type="button" class="cm-search-chip" data-keyword="특수학급">#특수학급</button></li>
+                <li><button type="button" class="cm-search-chip" data-keyword="장애유형">#장애유형</button></li>
+                <li><button type="button" class="cm-search-chip" data-keyword="교원">#교원</button></li>
+              </ul>
+            </div>
+          </form>
+          <button type="button" class="krds-btn medium icon cm-search-close">
+            <span class="sr-only">통합검색 닫기</span>
+            <i class="svg-icon ico-popup-close"></i>
+          </button>
         </div>
       </div>
     </div>
