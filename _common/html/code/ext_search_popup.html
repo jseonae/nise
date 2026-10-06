@@ -9,11 +9,11 @@
       · 검색어가 있으면 지우기 버튼 표시, 추천 검색어를 누르면 검색어 칸에 넣음
   - 검색어 칸 : KRDS 입력(.krds-input.large) + 아이콘 버튼 묶음(.form-conts.btn-ico-wrap > .btn-group)
   - 추천 검색어 칩(.cm-search-chip) : KRDS 에 누르는 단일 칩이 없어 Figma 값(32px · 테두리 gray · 반경 6px) 그대로
-  - 검색 결과 화면이 생기면 form 의 action 을 그 주소로 바꿉니다. (지금은 "#", 이동하지 않음)
+  - 검색하면 form 의 action(통합검색 결과 화면 kr/html/search/search_result.html)으로 이동합니다. 검색어가 비어 있으면 보내지 않습니다.
 -->
 <div id="cm_search_popup" class="cm-search-popup" hidden>
   <div class="inner">
-    <form class="cm-search-form" role="search" aria-label="통합검색" action="#" method="get">
+    <form class="cm-search-form" role="search" aria-label="통합검색" action="(통합검색 결과 화면 주소)" method="get">
       <div class="form-group">
         <div class="form-conts btn-ico-wrap">
           <input type="text" name="q" id="cm_search_keyword" class="krds-input large" placeholder="검색어를 입력하세요." title="통합검색 검색어 입력" autocomplete="off">

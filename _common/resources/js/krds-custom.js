@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => cmPageNav.init());
      닫으면(닫기 버튼 · Esc · 바깥 누름) 통합검색 버튼으로 초점을 돌려줍니다.
    - 화면을 가리는 모달이 아니라 펼침 영역이라 aria-expanded 로 상태를 알립니다.
    - 검색어가 있으면 지우기 버튼을 보이고, 추천 검색어를 누르면 검색어 칸에 넣습니다.
-   - 실제 검색(결과 화면 이동)은 개발 시 form action 으로 연결합니다. */
+   - 검색하면 form action(통합검색 결과 화면)으로 이동합니다. */
 const cmSearchPopup = {
   init() {
     const popup = document.getElementById("cm_search_popup");
@@ -308,11 +308,38 @@ const cmSearchPopup = {
         input.focus();
       });
     });
-    // 검색어 없이 보내지 않음. 결과 화면이 생기기 전까지는 이동하지 않습니다(action="#").
+    // 검색어 없이 보내지 않음
     popup.querySelector("form").addEventListener("submit", (event) => {
-      if (input.value.trim() === "" || popup.querySelector("form").getAttribute("action") === "#") event.preventDefault();
-      if (input.value.trim() === "") input.focus();
+      if (input.value.trim() !== "") return;
+      event.preventDefault();
+      input.focus();
     });
   },
 };
 document.addEventListener("DOMContentLoaded", () => cmSearchPopup.init());
+
+/* 통합검색 결과 (.cm-search-result, kr/html/search/search_result.html)
+   - 전체 탭의 [더보기] : data-search-tab 에 적힌 분류 탭으로 옮기고 초점을 그 탭에 둡니다. (탭 전환 자체는 KRDS 스크립트)
+   - 검색어 입력 띠(.cm-search-top-form) : 검색어 없이 보내지 않습니다. */
+const cmSearchResult = {
+  init() {
+    document.querySelectorAll(".cm-search-more-btn[data-search-tab]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const tab = document.querySelector(`#${button.dataset.searchTab} .btn-tab`);
+        if (!tab) return;
+        tab.click();
+        tab.focus({ preventScroll: true });
+        tab.closest(".krds-tab-area").scrollIntoView({ block: "start" });
+      });
+    });
+    document.querySelectorAll(".cm-search-top-form").forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        const input = form.querySelector("input[name=q]");
+        if (input.value.trim() !== "") return;
+        event.preventDefault();
+        input.focus();
+      });
+    });
+  },
+};
+document.addEventListener("DOMContentLoaded", () => cmSearchResult.init());
