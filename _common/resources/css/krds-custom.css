@@ -481,9 +481,6 @@
 }
 
 /* [게시판] 상세 (마크업: KRDS 사이트 새소식 상세 community_01_01, 스타일: Figma s03알림마당_공지사항 view) */
-.cm-board-view {
-  gap: 0;
-}
 .cm-board-view .community-page-title {
   padding-bottom: var(--krds-number-14);
   border-bottom: 0.1rem solid var(--cm-color-line-strong);
@@ -522,7 +519,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--krds-gap-6);
-  padding-top: var(--krds-number-14);
 }
 .cm-board-view .g-description-area {
   margin-bottom: var(--krds-gap-6);
@@ -605,8 +601,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: var(--krds-gap-9);
-  padding-top: var(--krds-padding-8);
 }
 .cm-board-view .page-btn-wrap .btn-wrap,
 .cm-survey-view .page-btn-wrap .btn-wrap,
@@ -1333,9 +1327,6 @@
 }
 
 /* [통계정보] 조사 변천사 상세 (Figma: 컨텐츠 > s01통계정보_조사 변천사 view) */
-.cm-survey-view .page-btn-wrap {
-  margin-top: 0; /* .cm-contents gap(40px)이 이미 있으므로 */
-}
 /* 개요 상자 : Figma getting-started-guide (KRDS 코드 없음, 피그마 그대로)
    테두리 #bacbde 는 Figma가 원색 팔레트(secondary-20)를 직접 써서 같은 원색 토큰으로 맞춤 */
 .cm-survey-head {
@@ -1609,9 +1600,6 @@
 /* [통계정보] 시계열 시각화 상세 (Figma: 컨텐츠 > 시계열시각화-view) */
 .cm-ts-view {
   gap: var(--krds-gap-9);
-}
-.cm-ts-view .page-btn-wrap {
-  margin-top: 0;
 }
 .cm-ts-graph {
   display: flex;
@@ -2682,6 +2670,7 @@
 /* [공통] 만족도조사 (신규 컴포넌트 _common/html/code/ext_research.html · kr/tmpl/research.html, Figma: researchWrap)
    KRDS 라디오·입력창은 그대로 쓰고, 상자·평가하기 버튼 색만 Figma 그대로 */
 .cm-research {
+  margin-top: var(--krds-padding-10);
   padding: var(--krds-padding-10) var(--krds-padding-9);
   border: 0.1rem solid var(--cm-color-border-light);
   border-radius: 1rem; /* Figma radius/large1 10px (KRDS 반경 토큰에 10px 없음) */
