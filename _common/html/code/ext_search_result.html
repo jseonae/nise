@@ -1,6 +1,6 @@
 <!-- ext: 신규 컴포넌트 (KRDS 없음) / 통합검색 결과 : 검색어 입력 띠 · 검색 정보 · 분류 제목 + 검색결과 항목 · 결과 없음 안내 -->
 <!--
-  Figma : 컨텐츠 > s04통합검색_검색결과화면-전체 · s04통합검색_검색결과화면-탭선택 · s04통합검색_검색결과없음
+  Figma : 컨텐츠 > s04통합검색_검색결과화면-전체 · -탭선택 · -검색결과없음 · s04통합검색_검색결과없음
   화면 : kr/html/search/search_result.html · search_result_none.html
   스타일 : _common/resources/css/krds-custom.css [통합검색] 검색 결과
   스크립트 : _common/resources/js/krds-custom.js (cmSearchResult : 더보기 → 분류 탭 이동, 빈 검색어 막기)
@@ -77,7 +77,10 @@
   <button type="button" class="krds-btn large tertiary cm-search-more-btn" data-search-tab="tab_search_04">더보기<span class="sr-only"> : 자료실 검색결과 전체</span> <i class="svg-icon ico-plus"></i></button>
 </section>
 
-<!-- 4. 결과 없음 안내 (분류 건수가 0 이거나 검색어 전체에 결과가 없을 때, 그림은 꾸밈용 alt="") -->
+<!-- 4. 결과 없음 안내 (그림은 꾸밈용 alt="")
+     - 검색어 전체에 결과가 없을 때 (Figma: s04통합검색_검색결과화면-검색결과없음) : 분류 탭은 모두 (0), 전체 탭만 선택 · 나머지 disabled,
+       분류 제목 없이 검색 정보(.cm-search-info) 바로 아래에 둡니다. → kr/html/search/search_result_none.html
+     - 한 분류만 0건일 때 (Figma: s04통합검색_검색결과없음) : 그 분류 탭 안에서 분류 제목(.cm-search-tit) 아래에 둡니다. -->
 <div class="cm-search-none">
   <div class="conts">
     <p class="tit">검색어 <mark class="cm-search-mark">통합교육</mark>에 대한 검색결과가 없습니다.</p>

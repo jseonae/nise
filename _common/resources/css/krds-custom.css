@@ -2802,6 +2802,9 @@
   border-radius: 1rem;
   background: linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)) var(--cm-color-row-hover);
 }
+.cm-search-info + .cm-search-none {
+  margin-top: var(--krds-gap-8); /* 검색어 전체에 결과가 없을 때 : 분류 제목 없이 검색 정보 바로 아래 32px */
+}
 .cm-search-none .conts {
   display: flex;
   flex-direction: column;
