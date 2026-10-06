@@ -237,6 +237,7 @@
   background-color: var(--cm-color-surface-white);
 }
 .cm-share .tooltip-popover {
+  z-index: 20; /* 콘텐츠 내 탐색(KRDS z-index 10)보다 위 */
   /* 말풍선 위치를 Figma에 맞춤 : KRDS 기본(버튼과 16px 띄움, 꼬리가 버튼 중앙보다 왼쪽)을
      꼬리 끝이 버튼 아래에 닿고 꼬리가 버튼 가운데 오도록 조정 */
   --krds-contextual-help--bubble-arrow-position-x: -1.5rem; /* 팝업 왼쪽 끝 = 버튼 왼쪽 - 15px */
@@ -245,6 +246,18 @@
 }
 .krds-contextual-help.bottom.cm-share .tooltip-popover {
   margin-top: var(--krds-gap-4); /* 12px : 꼬리 끝이 버튼 바로 아래에 오도록 */
+}
+/* 1680px 이하 : 팝업이 화면 오른쪽 밖으로 나가지 않게 인쇄 버튼 오른쪽 끝에 맞춤 (꼬리는 공유 버튼 가운데 그대로) */
+@media (max-width: 1680px) {
+  .krds-contextual-help.left.cm-share .tooltip-popover {
+    left: auto;
+    right: calc((var(--krds-size-height-6) + var(--krds-gap-3)) * -1); /* 인쇄 버튼 폭 + 버튼 사이 간격 */
+    margin-left: 0;
+  }
+  .krds-contextual-help.left.cm-share .tooltip-popover::before {
+    left: auto;
+    right: calc(var(--krds-size-height-6) + var(--krds-gap-3) + var(--krds-size-height-6) / 2 - var(--krds-contextual-help--bubble-arrow-size) / 2);
+  }
 }
 @media (min-width: 769px) {
   .cm-share .tooltip-popover {
@@ -288,6 +301,38 @@
   gap: var(--krds-gap-9);
   padding-top: var(--krds-number-18);
   padding-bottom: var(--krds-number-20);
+}
+/* [컨텐츠] 콘텐츠 내 탐색 : KRDS in_page_navigation 위치 변형 (Figma: 컨텐츠 > *-view > in_page_navigation)
+   - KRDS 기본은 화면 고정(top 25.6rem)이라 페이지 상단(.cm-page-top) 높이와 맞지 않고 공유하기 팝업과 겹침
+   - Figma대로 본문 첫 섹션과 같은 높이에서 시작(본문 오른쪽 60px), 스크롤하면 따라오다가 본문 끝에서 멈춤
+     · 바깥(.krds-in-page-navigation-type) : 본문 높이만큼의 세로 띠, 안쪽(-area) : 그 안에서 sticky
+     · sticky 위치는 KRDS 값 그대로 : 헤더가 보일 때 25.6rem, 헤더가 숨을 때(.scroll-down) 6rem
+   - 1680px 이하 : 탐색이 들어갈 자리만큼 본문 오른쪽을 비움 (KRDS in_page_navigation 과 같은 계산)
+   - 767px 이하 : KRDS 기본(본문 흐름 안에 배치) */
+.cm-contents {
+  position: relative;
+}
+@media (min-width: 768px) {
+  .cm-contents > .krds-in-page-navigation-type {
+    position: absolute;
+    top: var(--krds-number-18); /* .cm-contents 위 여백 = 첫 섹션 시작 */
+    bottom: var(--krds-number-20);
+    left: calc(100% - var(--krds-contents-padding-x) + 6rem); /* Figma : 본문 오른쪽 + 60px */
+    width: 16rem;
+  }
+  .cm-contents > .krds-in-page-navigation-type .krds-in-page-navigation-area {
+    position: sticky;
+    right: auto;
+  }
+}
+@media (min-width: 768px) and (max-width: 1680px) {
+  .cm-contents:has(> .krds-in-page-navigation-type) {
+    padding-right: calc(16rem + var(--krds-pc-gap-layout-contents-right) + var(--krds-contents-padding-x)); /* 16rem = KRDS 탐색 폭(--krds-in-page-navigation--width) */
+  }
+  .cm-contents > .krds-in-page-navigation-type {
+    left: auto;
+    right: var(--krds-contents-padding-x);
+  }
 }
 /* 퍼블리싱 전 빈 페이지 표시 (작업 완료 시 삭제) */
 .cm-todo {
@@ -691,8 +736,8 @@
 }
 .cm-cover-item .btns .krds-btn.icon {
   flex: 0 0 auto;
-  width: var(--krds-size-height-7);
-  height: var(--krds-size-height-7);
+  width: var(--krds-size-height-6);
+  height: var(--krds-size-height-6);
   border-radius: var(--krds-radius-medium1);
 }
 .cm-cover-item .btns .krds-btn.icon .svg-icon {
