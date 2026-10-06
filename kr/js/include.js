@@ -75,6 +75,8 @@
     const nodes = [...tpl.content.childNodes];
     el.replaceWith(...nodes);
     if (name === "page-top") fillPageTop(nodes, dataset);
+    // 메인메뉴 없는 헤더 : <div data-include="header" data-gnb="none"> (통합검색처럼 메뉴에 속하지 않는 화면, Figma 헤더 160px)
+    if (name === "header" && dataset.gnb === "none") document.querySelector("#krds-header .krds-main-menu")?.remove();
   });
 
   // 2) 메인메뉴(GNB) · 모바일 메뉴 : 현재 1Depth 의 2Depth

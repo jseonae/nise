@@ -2542,6 +2542,343 @@
   }
 }
 
+/* [통합검색] 검색 결과 (Figma: 컨텐츠 > s04통합검색_검색결과화면-전체 · 탭선택 · 검색결과없음)
+   신규 컴포넌트 _common/html/code/ext_search_result.html, 스크립트 krds-custom.js (cmSearchResult)
+   - 탭 · 입력 · 배지 · 페이지네이션 · 버튼은 KRDS 그대로, 아래는 KRDS 에 없어 Figma 값 그대로 :
+       · 검색어 입력 띠(.cm-search-top) : secondary-subtler 바탕, 위아래 56px, 제목과 검색어 칸(680px) 가로 배치
+       · 분류 제목(.cm-search-tit) : 아래 4px 굵은 줄, 건수 Primary
+       · 검색결과 항목(.cm-search-item) : 테두리 상자(여백 32px · 반경 10px), 올리면 Primary 테두리 + 그림자
+       · 결과 없음 안내(.cm-search-none) : 연한 Primary 상자 + 그림
+   - 접근성 보정 : 날짜 글자색은 Figma #8a949e(대비 3.0:1) 대신 4.5:1 을 넘는 gray-50(text-disabled-on) */
+.cm-search-top {
+  padding: var(--krds-number-17) 0;
+  background-color: var(--cm-color-attach-surface);
+}
+.cm-search-top .inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--krds-gap-9);
+}
+.cm-search-top .h-tit {
+  flex: none;
+  font-size: var(--krds-pc-font-size-heading-large);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+.cm-search-top-form {
+  flex: 0 1 68rem;
+  min-width: 0;
+}
+.cm-search-top-form .krds-input {
+  border-radius: var(--krds-radius-medium3);
+  font-size: var(--krds-pc-font-size-label-large);
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-search-top-form .form-conts.btn-ico-wrap .krds-btn {
+  right: var(--krds-padding-6);
+}
+.cm-search-top-form .krds-btn .svg-icon {
+  width: var(--krds-icon--size-large);
+  height: var(--krds-icon--size-large);
+}
+/* 분류 탭 : 탭과 내용 사이 40px (자료실 탭과 같음) */
+.cm-search-result .krds-tab-area {
+  gap: var(--krds-gap-9);
+}
+/* 검색 정보 · 정렬 */
+.cm-search-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--krds-gap-4);
+}
+.cm-search-count {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--krds-gap-4);
+  font-size: var(--krds-pc-font-size-body-medium);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+}
+.cm-search-count .num {
+  color: var(--cm-color-text-primary);
+}
+.cm-search-count .total::before {
+  content: "";
+  display: inline-block;
+  width: 0.1rem;
+  height: var(--krds-number-8);
+  margin-right: var(--krds-gap-4);
+  background-color: var(--cm-color-divider);
+  vertical-align: -0.2rem;
+}
+/* 분류별 검색결과 */
+.cm-search-sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-number-18);
+  margin-top: var(--krds-gap-8);
+}
+.cm-search-section {
+  display: flex;
+  flex-direction: column;
+}
+.cm-search-tit {
+  margin-bottom: var(--krds-gap-8);
+  padding-bottom: var(--krds-padding-3);
+  border-bottom: 0.4rem solid var(--cm-color-border-gray-dark);
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+}
+.cm-search-tit .num {
+  color: var(--cm-color-text-primary);
+}
+.cm-search-tit .unit {
+  color: var(--cm-color-text-secondary);
+}
+.cm-search-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-5);
+}
+/* 검색결과 항목 : 제목 링크를 상자 크기로 넓혀 상자 어디를 눌러도 이동 (a::after), 메뉴 위치 링크는 그 위에 따로 */
+.cm-search-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-5);
+  padding: var(--krds-padding-9);
+  border: 0.1rem solid var(--cm-color-border-light);
+  border-radius: 1rem; /* Figma radius/large1 10px (KRDS 반경 토큰에 10px 없음) */
+  background-color: var(--cm-color-surface-white);
+}
+.cm-search-item:hover,
+.cm-search-item:focus-within {
+  border-color: var(--cm-color-border-primary);
+  box-shadow: 0 0 0.2rem var(--cm-color-shadow1), 0 0.4rem 0.8rem var(--cm-color-shadow2);
+}
+.cm-search-item .head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--krds-gap-2) var(--krds-gap-4);
+}
+.cm-search-item .tit {
+  font-size: var(--krds-pc-font-size-body-large);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+.cm-search-item .tit a {
+  color: inherit;
+}
+.cm-search-item .tit a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.cm-search-item:hover .tit a,
+.cm-search-item .tit a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: var(--krds-font-underline-offset);
+}
+.cm-search-item .tit a:focus-visible {
+  outline: 0;
+  box-shadow: none;
+}
+.cm-search-item .tit a:focus-visible::after {
+  outline: 0.2rem solid var(--krds-light-color-border-inverse);
+  box-shadow: var(--krds-box-shadow-outline);
+}
+.cm-search-item .date {
+  font-size: var(--krds-pc-font-size-body-medium);
+  color: var(--cm-color-text-disabled-on);
+}
+.cm-search-item .txt {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+.cm-search-mark {
+  background-color: transparent;
+  color: var(--cm-color-text-primary);
+}
+.cm-search-item .foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--krds-gap-3);
+}
+.cm-search-path {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--krds-gap-2);
+}
+.cm-search-path li {
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-2);
+}
+.cm-search-path li + li::before {
+  content: "";
+  width: var(--krds-number-8);
+  height: var(--krds-number-8);
+  background-color: var(--cm-color-text-subtle);
+  -webkit-mask: url(../../../krds/resources/img/component/icon/ico_angle.svg) no-repeat center / contain;
+  mask: url(../../../krds/resources/img/component/icon/ico_angle.svg) no-repeat center / contain;
+  transform: rotate(-90deg);
+}
+.cm-search-path a {
+  padding: 0 var(--krds-padding-2);
+  border-radius: var(--krds-radius-small2);
+  font-size: var(--krds-pc-font-size-body-small);
+  line-height: 1.6;
+  color: var(--cm-color-text-subtle);
+  text-decoration: underline;
+  text-underline-offset: var(--krds-font-underline-offset);
+}
+.cm-search-item .more {
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-4);
+  margin-left: auto;
+}
+.cm-search-attach {
+  display: inline-flex;
+}
+.cm-search-attach .svg-icon,
+.cm-search-more .svg-icon {
+  width: var(--krds-number-8);
+  height: var(--krds-number-8);
+}
+.cm-search-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: var(--krds-pc-font-size-label-small);
+  color: var(--cm-color-text-subtle);
+}
+.cm-search-attach + .cm-search-more {
+  padding-left: var(--krds-gap-4);
+  border-left: 0.1rem solid var(--cm-color-border-light);
+  line-height: 1.2rem;
+}
+/* 더보기 : KRDS 버튼(large tertiary) 을 목록 폭 전체로, 바탕 gray-subtler · 테두리 gray (Figma) */
+.cm-search-more-btn.krds-btn {
+  width: 100%;
+  margin-top: var(--krds-gap-4);
+  border-color: var(--cm-color-border-gray);
+  background-color: var(--cm-color-box-surface);
+  font-size: var(--krds-pc-font-size-label-large);
+}
+.cm-search-more-btn .svg-icon {
+  width: var(--krds-icon--size-large);
+  height: var(--krds-icon--size-large);
+}
+.cm-search-result .tab-conts .krds-pagination {
+  margin-top: var(--krds-gap-8);
+}
+/* 결과 없음 안내 : 그림은 상자 오른쪽 아래로 조금 넘침 (Figma 그대로) */
+.cm-search-none {
+  position: relative;
+  padding: var(--krds-number-17) var(--krds-number-16);
+  border: 0.1rem solid var(--cm-color-border-primary-light);
+  border-radius: 1rem;
+  background: linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)) var(--cm-color-row-hover);
+}
+.cm-search-info + .cm-search-none {
+  margin-top: var(--krds-gap-8); /* 검색어 전체에 결과가 없을 때 : 분류 제목 없이 검색 정보 바로 아래 32px */
+}
+.cm-search-none .conts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-5);
+  max-width: calc(100% - 35rem);
+}
+.cm-search-none .tit {
+  font-size: var(--krds-pc-font-size-body-large);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+}
+.cm-search-none .guide {
+  padding-left: 2.55rem;
+  list-style: decimal;
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+}
+.cm-search-none .guide li {
+  list-style: decimal;
+}
+.cm-search-none .img {
+  position: absolute;
+  top: 6.5rem;
+  right: 5.8rem;
+  width: 29.3rem;
+  height: auto;
+}
+.cm-search-ref {
+  padding: var(--krds-padding-10) 0;
+  text-align: center;
+}
+@media (max-width: 1023px) {
+  .cm-search-top {
+    padding: var(--krds-padding-9) 0;
+  }
+  .cm-search-top .inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--krds-gap-4);
+  }
+  .cm-search-top .h-tit {
+    font-size: var(--krds-mobile-font-size-heading-large);
+  }
+  .cm-search-top-form {
+    flex: none;
+  }
+  .cm-search-none .conts {
+    max-width: none;
+  }
+  .cm-search-none .img {
+    position: static;
+    display: block;
+    width: 20rem;
+    margin: var(--krds-gap-7) auto 0;
+  }
+}
+@media (max-width: 767px) {
+  .cm-search-item,
+  .cm-search-none {
+    padding: var(--krds-padding-8) var(--krds-padding-6);
+  }
+  .cm-search-sections {
+    gap: var(--krds-gap-9);
+  }
+  .cm-search-tit {
+    font-size: var(--krds-mobile-font-size-heading-medium);
+  }
+  .cm-search-item .tit {
+    font-size: var(--krds-mobile-font-size-body-large);
+  }
+}
+
 /* [공통] 빈 상태 · 준비 중 안내 (신규 컴포넌트 _common/html/code/ext_empty.html, Figma: s02데이터분석_교차분석 페이지준비중) */
 .cm-empty {
   display: flex;

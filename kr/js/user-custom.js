@@ -108,3 +108,40 @@ const cmTsFeature = {
   },
 };
 document.addEventListener("DOMContentLoaded", () => cmTsFeature.init());
+
+/* [퍼블리싱 확인용] 통합검색 : 검색어에 따라 결과 화면을 나눠 보여줌 (kr/html/search/search_result.html · search_result_none.html)
+   - 퍼블리싱에는 '통합교육' 결과 화면만 있으므로, 그 밖의 검색어로 검색하면 결과 없음 화면으로 보냅니다.
+   - 결과 없음 화면은 주소의 ?q= 값을 검색어 칸과 [data-search-keyword] 자리에 넣습니다. (Figma 예시 검색어 : 운영)
+   - 개발 시 서버 검색으로 바꾸고 이 스크립트는 지웁니다. */
+const cmSearchDemo = {
+  KEYWORD: "통합교육",
+  init() {
+    const base = document.querySelector(".cm-search-form")?.getAttribute("action") || "search_result.html";
+    const pageFor = (keyword) => (keyword === this.KEYWORD ? base : base.replace("search_result.html", "search_result_none.html"));
+    // 헤더 통합검색 · 결과 화면의 검색어 입력 띠 : 검색어에 맞는 화면으로 보냄
+    document.querySelectorAll(".cm-search-form, .cm-search-top-form").forEach((form) => {
+      form.addEventListener("submit", () => {
+        const keyword = form.querySelector("input[name=q]").value.trim();
+        if (keyword) form.setAttribute("action", pageFor(keyword));
+      });
+    });
+    const result = document.querySelector(".cm-search-result");
+    if (!result) return;
+    const keyword = (new URLSearchParams(location.search).get("q") || "").trim();
+    if (!keyword) return;
+    const isNonePage = !!result.querySelector("[data-search-keyword]");
+    // 주소로 바로 들어온 경우에도 검색어와 화면이 맞도록 옮김
+    if (isNonePage === (keyword === this.KEYWORD)) {
+      location.replace(`${keyword === this.KEYWORD ? "search_result.html" : "search_result_none.html"}?q=${encodeURIComponent(keyword)}`);
+      return;
+    }
+    if (!isNonePage) return;
+    const input = document.getElementById("search_keyword");
+    if (input) input.value = keyword;
+    result.querySelectorAll("[data-search-keyword]").forEach((el) => {
+      el.textContent = keyword;
+    });
+    document.title = document.title.replace(/^통합검색 결과 없음/, `‘${keyword}’ 통합검색 결과 없음`);
+  },
+};
+document.addEventListener("DOMContentLoaded", () => cmSearchDemo.init());

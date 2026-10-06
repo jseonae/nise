@@ -69,10 +69,10 @@
         </div>
       </div>
       <!-- 통합검색 영역 : 신규 컴포넌트 _common/html/code/ext_search_popup.html (Figma: 컨텐츠 > search-popup)
-           헤더 상단 바로 아래에 화면 폭 전체로 열림. 검색 결과 화면(s04통합검색)은 아직 없어 action 은 임시(#) -->
+           헤더 상단 바로 아래에 화면 폭 전체로 열림. 검색하면 통합검색 결과 화면(kr/html/search/search_result.html)으로 이동 -->
       <div id="cm_search_popup" class="cm-search-popup" hidden>
         <div class="inner">
-          <form class="cm-search-form" role="search" aria-label="통합검색" action="#" method="get">
+          <form class="cm-search-form" role="search" aria-label="통합검색" action="{{html}}search/search_result.html" method="get">
             <div class="form-group">
               <div class="form-conts btn-ico-wrap">
                 <input type="text" name="q" id="cm_search_keyword" class="krds-input large" placeholder="검색어를 입력하세요." title="통합검색 검색어 입력" autocomplete="off">

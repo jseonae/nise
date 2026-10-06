@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko" data-krds-mode="light">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="format-detection" content="telephone=no">
+  <title>통합검색 결과 없음 | 특수교육 실태조사 데이터 활용 플랫폼</title>
+
+  <!-- 파비콘 (KRDS 1.1.0) -->
+  <link rel="icon" type="image/svg+xml" href="../../../krds/resources/img/component/favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="512x512" href="../../../krds/resources/img/component/favicon/favicon-512x512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../../../krds/resources/img/component/favicon/favicon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../krds/resources/img/component/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="../../../krds/resources/img/component/favicon/favicon-192x192.png">
+
+  <!-- css : KRDS (원본, 수정 금지) -->
+  <link rel="stylesheet" href="../../../krds/resources/css/plugin/swiper-bundle.min.css">
+  <link rel="stylesheet" href="../../../krds/resources/css/component/output.css">
+  <!-- css : 커스텀 -->
+  <link rel="stylesheet" href="../../../_common/resources/css/krds-base.css"><!-- KRDS 기본 보정 -->
+  <link rel="stylesheet" href="../../../_common/resources/css/krds-custom.css">
+  <link rel="stylesheet" href="../../css/krds-theme.css">
+  <link rel="stylesheet" href="../../css/user-custom.css">
+
+  <!-- script : 글자·화면 표시 설정 (화면 깜빡임 방지를 위해 head에서 불러옴) -->
+  <script src="../../../_common/resources/js/krds-display.js"></script>
+</head>
+
+<body>
+  <!--
+    ==================================================================
+    통합검색 검색결과 없음 (Figma: 컨텐츠 > s04통합검색_검색결과화면-검색결과없음)
+    통합교육 외의 검색어로 검색하면 이 화면이 나옵니다. (퍼블리싱 확인용 : kr/js/user-custom.js cmSearchDemo, 개발 시 서버 검색으로 바꿈)
+    공통 영역은 kr/tmpl 에서 인클루드합니다 (kr/js/include.js). 이 파일에는 페이지 컨텐츠만 둡니다.
+      [01]~[03] 헤더             : kr/tmpl/header.html (data-gnb="none" : 메인메뉴 없는 헤더, Figma 헤더 160px)
+      [05] 푸터 · TOP 버튼        : kr/tmpl/footer.html
+      [06] 모달                   : kr/tmpl/modal.html
+    신규 컴포넌트 : _common/html/code/ext_search_result.html (검색어 입력 띠 · 검색결과 항목 · 결과 없음 안내)
+    ==================================================================
+  -->
+
+  <!-- [S] #wrap -->
+  <div id="wrap">
+    <!-- [01]~[03] 본문 바로가기 · 공식 누리집 배너 · 헤더 (메인메뉴 없음) -->
+    <div data-include="header" data-gnb="none"></div>
+
+    <!-- ============================================================
+         [04] 컨테이너 : #container
+         ============================================================ -->
+    <div id="container">
+      <!-- 페이지 상단 : 통합검색 제목 + 검색어 입력 (Figma: page-top / Property 1=통합검색, 브레드크럼 · 공유/인쇄 없음)
+           검색어 칸은 KRDS 입력(.krds-input.large) + 아이콘 버튼(.btn-ico-wrap) -->
+      <div class="cm-search-top">
+        <div class="inner">
+          <h1 class="h-tit">통합검색</h1>
+          <form class="cm-search-top-form" role="search" aria-label="통합검색" action="search_result.html" method="get">
+            <div class="form-group">
+              <div class="form-conts btn-ico-wrap">
+                <input type="text" name="q" id="search_keyword" class="krds-input large" value="운영" placeholder="검색어를 입력하세요." title="통합검색 검색어 입력" autocomplete="off">
+                <button type="submit" class="krds-btn medium icon">
+                  <span class="sr-only">검색</span>
+                  <i class="svg-icon ico-sch"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- [04-1] 컨텐츠 : .inner (Figma: 컨텐츠 > s04통합검색_검색결과화면-검색결과없음 node 11505:58810) -->
+      <div class="inner cm-contents cm-search-result">
+        <!-- 분류 탭 : KRDS 탭(fill full). 검색어 전체에 결과가 없어 모든 분류가 0건 (Figma: s04통합검색_검색결과화면-검색결과없음)
+             전체 탭만 선택 상태로 두고 나머지 분류 탭은 disabled -->
+        <div class="krds-tab-area layer">
+          <div class="tab fill full">
+            <ul role="tablist">
+              <li id="tab_search_01" role="tab" aria-selected="true" aria-controls="panel_search_01" class="active">
+                <button type="button" class="btn-tab">전체<span class="count">(0)</span></button>
+              </li>
+              <li id="tab_search_02" role="tab" aria-selected="false" aria-controls="panel_search_02">
+                <button type="button" class="btn-tab" disabled>통계자료<span class="count">(0)</span></button>
+              </li>
+              <li id="tab_search_03" role="tab" aria-selected="false" aria-controls="panel_search_03">
+                <button type="button" class="btn-tab" disabled>공지사항<span class="count">(0)</span></button>
+              </li>
+              <li id="tab_search_04" role="tab" aria-selected="false" aria-controls="panel_search_04">
+                <button type="button" class="btn-tab" disabled>자료실<span class="count">(0)</span></button>
+              </li>
+              <li id="tab_search_05" role="tab" aria-selected="false" aria-controls="panel_search_05">
+                <button type="button" class="btn-tab" disabled>기타<span class="count">(0)</span></button>
+              </li>
+            </ul>
+          </div>
+
+          <div class="tab-conts-wrap">
+            <section id="panel_search_01" aria-labelledby="tab_search_01" class="tab-conts active" data-quick-nav="false">
+              <h2 class="sr-only">전체 검색결과</h2>
+              <!-- 검색 정보 · 정렬 : 정렬은 하나만 고르는 라디오 묶음 (.cm-sort-radio, 교차분석과 같은 변형) -->
+              <div class="cm-search-info">
+                <div class="cm-search-count">
+                  <p class="keyword">적용된 검색어 <strong class="num">‘<span data-search-keyword>운영</span>’</strong></p>
+                  <p class="total">검색결과 총 <span class="num">0</span>개</p>
+                </div>
+                <div class="cm-sort-radio" role="radiogroup" aria-labelledby="search_sort_01_tit">
+                  <span class="tit" id="search_sort_01_tit">정렬기준</span>
+                  <input type="radio" name="search_sort_01" id="search_sort_01_1" value="relevance" checked><label for="search_sort_01_1">관련도순</label>
+                  <input type="radio" name="search_sort_01" id="search_sort_01_2" value="latest"><label for="search_sort_01_2">최신순</label>
+                  <input type="radio" name="search_sort_01" id="search_sort_01_3" value="popular"><label for="search_sort_01_3">인기순</label>
+                </div>
+              </div>
+              <!-- 결과 없음 안내 : 신규 컴포넌트 (ext_search_result.html .cm-search-none), 그림은 꾸밈용
+                   검색어 자리([data-search-keyword])는 퍼블리싱 확인용 스크립트(kr/js/user-custom.js cmSearchDemo)가 주소의 ?q= 값으로 바꿈 -->
+              <div class="cm-search-none">
+                <div class="conts">
+                  <p class="tit">검색어 <mark class="cm-search-mark" data-search-keyword>운영</mark>에 대한 검색결과가 없습니다.</p>
+                  <ol class="guide">
+                    <li>단어의 철자가 정확한지 확인해 주시기 바랍니다.</li>
+                    <li>한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 주시기 바랍니다.</li>
+                    <li>검색어의 단어수를 줄이거나, 보다 일반적인 검색어로 다시 검색해 주시기 바랍니다.</li>
+                    <li>두 단어 이상의 검색어의 경우, 띄어쓰기를 확인해 주시기 바랍니다.</li>
+                  </ol>
+                </div>
+                <img src="../../../_common/resources/img/common/cm_search_empty.png" alt="" class="img">
+              </div>
+            </section>
+            <section id="panel_search_02" aria-labelledby="tab_search_02" class="tab-conts" data-quick-nav="false">
+              <h2 class="sr-only">통계자료 검색결과</h2>
+              <!-- 결과가 0건인 분류 : 탭이 disabled 라 열리지 않음 (KRDS 탭 스크립트가 패널을 찾으므로 빈 패널을 둠) -->
+            </section>
+            <section id="panel_search_03" aria-labelledby="tab_search_03" class="tab-conts" data-quick-nav="false">
+              <h2 class="sr-only">공지사항 검색결과</h2>
+              <!-- 결과가 0건인 분류 : 탭이 disabled 라 열리지 않음 (KRDS 탭 스크립트가 패널을 찾으므로 빈 패널을 둠) -->
+            </section>
+            <section id="panel_search_04" aria-labelledby="tab_search_04" class="tab-conts" data-quick-nav="false">
+              <h2 class="sr-only">자료실 검색결과</h2>
+              <!-- 결과가 0건인 분류 : 탭이 disabled 라 열리지 않음 (KRDS 탭 스크립트가 패널을 찾으므로 빈 패널을 둠) -->
+            </section>
+            <section id="panel_search_05" aria-labelledby="tab_search_05" class="tab-conts" data-quick-nav="false">
+              <h2 class="sr-only">기타 검색결과</h2>
+              <!-- 결과가 0건인 분류 : 탭이 disabled 라 열리지 않음 (KRDS 탭 스크립트가 패널을 찾으므로 빈 패널을 둠) -->
+            </section>
+          </div>
+        </div>
+      </div>
+      <!-- //[04-1] 컨텐츠 -->
+    </div>
+    <!-- //[04] 컨테이너 -->
+
+    <!-- [05] 푸터 · TOP 버튼 -->
+    <div data-include="footer"></div>
+  </div>
+  <!-- [E] #wrap -->
+
+  <!-- [06] 모달 (#wrap 바깥) -->
+  <div data-include="modal"></div>
+
+  <!-- ============================================================
+       [07] 스크립트
+       ============================================================ -->
+  <script src="../../js/include.js"></script><!-- 공통 영역 인클루드 : KRDS 스크립트보다 먼저 -->
+  <script src="../../../krds/resources/js/plugin/swiper-bundle.min.js"></script>
+  <script src="../../../krds/resources/js/component/ui-script.js"></script>
+  <script src="../../../_common/resources/js/krds-custom.js"></script>
+  <script src="../../../_common/resources/js/krds-base.js"></script>
+  <script src="../../js/user-custom.js"></script>
+  <!-- //[07] 스크립트 -->
+</body>
+</html>
