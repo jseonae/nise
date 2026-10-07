@@ -268,6 +268,7 @@ const cmMainBanner = {
 /* 알림판 전체보기 : 알림판 배너를 화면 전체에 격자로 모아 보여 줌 (참고 : 당진시청 알림판 전체보기)
    - 목록은 알림판 슬라이드(순서 그대로)에서 만들어 넣으므로 배너는 한 곳에서만 관리
    - HTML 기본 dialog(showModal) : 초점이 안에 머물고 Esc 로 닫힘. 닫으면 전체보기 버튼으로 초점이 돌아감
+   - 보고 있던 스크롤 위치 그대로 그 위에 열리고, 닫으면 같은 위치로 돌아감
    - 열려 있는 동안 알림판 자동 넘김은 멈추고, 닫으면 원래 상태로 돌아감 */
 const cmMainBannerAll = {
   init() {
@@ -278,6 +279,7 @@ const cmMainBannerAll = {
     const list = modal.querySelector(".cm-banner-all-list");
     const swiper = () => area.querySelector(".swiper")?.swiper;
     let resume = false;
+    let scrollTop = 0;
 
     const build = () => {
       // loop 로 순서가 바뀌어 있을 수 있으므로 원래 순서(data-swiper-slide-index)대로 정렬
@@ -316,7 +318,9 @@ const cmMainBannerAll = {
       const instance = swiper();
       resume = !!instance?.autoplay?.running;
       if (resume) instance.autoplay.stop();
-      document.documentElement.classList.add("cm-banner-all-open");
+      // 보고 있던 위치 그대로 그 위에 열림 (닫을 때 같은 위치로 되돌림)
+      scrollTop = window.scrollY;
+      document.body.classList.add("cm-banner-all-open");
       modal.showModal();
       modal.scrollTop = 0;
     });
@@ -326,9 +330,10 @@ const cmMainBannerAll = {
       if (event.target === modal || event.target.classList.contains("inner") || event.target === list) modal.close();
     });
     modal.addEventListener("close", () => {
-      document.documentElement.classList.remove("cm-banner-all-open");
+      document.body.classList.remove("cm-banner-all-open");
       if (resume) swiper()?.autoplay.start();
-      opener.focus();
+      opener.focus({ preventScroll: true });
+      window.scrollTo({ top: scrollTop, behavior: "instant" });
     });
   },
 };

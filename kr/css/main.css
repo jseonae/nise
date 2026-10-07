@@ -1199,6 +1199,7 @@ body.cm-main {
   background-color: transparent;
 }
 .cm-banner-all-modal > .inner {
+  min-height: calc(100% + 0.1rem); /* 배너가 적어도 층 자체가 스크롤을 받아 뒤 화면으로 넘기지 않게(overscroll-behavior) */
   padding-top: 9.6rem;
   padding-bottom: 8rem;
 }
@@ -1275,8 +1276,9 @@ body.cm-main {
   outline: 0.3rem solid #fff;
   outline-offset: 0.3rem;
 }
-/* 열려 있는 동안 뒤 화면은 스크롤되지 않게 */
-html.cm-banner-all-open {
+/* 열려 있는 동안 뒤 화면은 스크롤되지 않게 : KRDS 모달과 같이 body 에 건다.
+   (html 에 걸면 이 사이트 구조에서는 화면이 맨 위로 올라가 버림) */
+body.cm-banner-all-open {
   overflow: hidden;
 }
 @media (max-width: 1279px) {
