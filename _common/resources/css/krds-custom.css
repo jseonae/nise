@@ -1473,6 +1473,10 @@
   padding-top: var(--krds-padding-6);
   border-top: 0.1rem solid var(--cm-color-divider-light);
 }
+/* 태그 사이 간격 : KRDS(.krds-tag-wrap.medium)의 간격보다 우선하도록 선택자를 같은 무게로 맞춤 */
+.krds-tag-wrap.cm-survey-tags {
+  gap: var(--krds-gap-1);
+}
 .cm-survey-tags .krds-btn-tag {
   gap: 0.3em; /* inline-flex 라 이름과 숫자 사이 공백이 사라지므로 Figma 띄어쓰기 폭만큼 */
   color: var(--cm-color-text-basic);
