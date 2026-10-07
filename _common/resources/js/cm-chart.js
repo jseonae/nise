@@ -650,7 +650,7 @@
           itemStyle: { color: set.bg },
           lineStyle: { color: set.bg, width: 2.5 },
           emphasis: { scale: 1.38, lineStyle: { width: 3 } },
-          data: s.data.map((v, i) => (v == null ? v : { value: v, label: Object.assign({ show: ctx.labels && i === li, position: "top", distance: 8, fontWeight: 700, color: ctx.colors.strong, fontSize: fs(ctx, 13), formatter: (p) => fmtNumber(p.value) }, labelBox(ctx)) })),
+          data: s.data.map((v, i) => (v == null ? v : { value: v, label: Object.assign({ show: ctx.labels && i === li, position: "top", distance: 8, fontWeight: 700, color: ctx.colors.strong, fontSize: fs(ctx, 13), formatter: (p) => fmtNumber(p.value) }, labelBox(ctx), { borderWidth: 0 }) })), // 패널 값 상자는 테두리 없이 면만
         },
       ];
       return o;
