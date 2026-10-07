@@ -3683,6 +3683,25 @@ p {
 .cm-ai-panel[hidden] {
   display: none;
 }
+/* 선명하게(어두운 배경) 모드 : 창 면이 본문과 같은 검정이고 그림자도 보이지 않아 본문과 구분되지 않음
+   → 창은 한 단계 밝은 면, 그 안의 답변 말풍선 · 입력창 · 추천 질문은 한 단계 더 밝은 면, 창 테두리는 또렷한 회색 선
+   (이 창 안에서만 면 색 별칭을 한 단계씩 올림. 빛 번짐 · 밝은 그림자는 눈부심을 만들어 쓰지 않음) */
+[data-krds-mode=high-contrast] .cm-ai-panel {
+  --cm-color-surface-white: var(--krds-high-contrast-color-surface-white-subtle);
+  --cm-color-box-surface: var(--krds-high-contrast-color-surface-gray-subtle);
+  --cm-color-attach-border: var(--krds-high-contrast-color-border-gray-light);
+  --cm-ai-suggest-surface: var(--krds-high-contrast-color-surface-gray-subtle);
+  border-color: var(--krds-high-contrast-color-border-gray-dark);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-ai-panel {
+    --cm-color-surface-white: var(--krds-high-contrast-color-surface-white-subtle);
+    --cm-color-box-surface: var(--krds-high-contrast-color-surface-gray-subtle);
+    --cm-color-attach-border: var(--krds-high-contrast-color-border-gray-light);
+    --cm-ai-suggest-surface: var(--krds-high-contrast-color-surface-gray-subtle);
+    border-color: var(--krds-high-contrast-color-border-gray-dark);
+  }
+}
 .cm-ai-head {
   display: flex;
   align-items: center;
