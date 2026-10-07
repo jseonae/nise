@@ -1373,6 +1373,17 @@
   background-color: var(--cm-color-surface-white);
   transition: var(--krds-transition-base);
 }
+/* 선명하게(어두운 배경) 모드 : 본문 배경(검정)과 같은 색이면 상자가 보이지 않아, 한 단계 밝은 면 + 옅은 테두리로 구분 */
+[data-krds-mode=high-contrast] .cm-survey-card {
+  border-color: var(--krds-high-contrast-color-border-gray-light);
+  background-color: var(--krds-high-contrast-color-surface-white-subtle);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-survey-card {
+    border-color: var(--krds-high-contrast-color-border-gray-light);
+    background-color: var(--krds-high-contrast-color-surface-white-subtle);
+  }
+}
 .cm-survey-card:hover,
 .cm-survey-card:focus-within {
   border-color: var(--cm-color-border-primary);
