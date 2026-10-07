@@ -3191,6 +3191,30 @@
   background: url(../img/common/cm_table_scroll_hint.svg) no-repeat center / contain;
   pointer-events: none;
 }
+/* 손 그림만 좌우로 살짝 움직여 "옆으로 밀 수 있음"을 알림 (참고 : nise2026 프로토타입의 표 밀기 안내, 1.5초 주기 ±3px)
+   - 바탕(원 · 화살표)은 위 배경 이미지, 손은 따로 겹쳐서 움직임
+   - 동작 줄이기 설정이면 움직이지 않음. 표를 한 번 옮기면 안내 그림 전체가 사라지므로 계속 움직이지 않음 */
+.cm-table-scroll-hint::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url(../img/common/cm_table_scroll_hint_hand.svg) no-repeat center / contain;
+  animation: cm-table-scroll-hint-swipe 1.5s ease-in-out infinite;
+}
+@keyframes cm-table-scroll-hint-swipe {
+  0%,
+  100% {
+    transform: translateX(-0.3rem);
+  }
+  50% {
+    transform: translateX(0.3rem);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-table-scroll-hint::after {
+    animation: none;
+  }
+}
 .cm-table-scroll.is-scrolled .cm-table-scroll-hint,
 .cm-table-scroll.no-scroll .cm-table-scroll-hint {
   display: none;
