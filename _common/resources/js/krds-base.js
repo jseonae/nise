@@ -27,3 +27,16 @@
   goTopTag.addEventListener("click", scrollToTop);
   toggleVisibility();
 })();
+
+/* 선택 상자 (.krds-form-select) 선택 완료 상태
+   - KRDS 는 글자 색을 기본(아직 고르지 않음 : text-disabled, 옅은 회색)과 선택 완료(.completed : text-subtle)로 나누지만
+     .completed 를 붙이는 스크립트는 패키지에 없음 → 값이 있는 선택 상자에 붙임
+   - 붙이지 않으면 값이 골라진 상자도 옅은 회색(밝은 화면 3.1:1, 선명하게 2.6:1)으로 남아 글자 대비 4.5:1 에 못 미침
+   - 값이 빈 항목("선택해 주세요" 같은 안내)이 골라져 있거나 사용할 수 없는(disabled) 상자는 KRDS 기본 색 그대로 */
+(() => {
+  const sync = (select) => select.classList.toggle("completed", select.value !== "" && !select.disabled);
+  document.querySelectorAll("select.krds-form-select").forEach(sync);
+  document.addEventListener("change", (event) => {
+    if (event.target.matches?.("select.krds-form-select")) sync(event.target);
+  });
+})();
