@@ -198,8 +198,7 @@ const cmMainReport = {
 };
 
 /* 알림판 : 자동 넘김(5초) + 정지 · 재생 버튼, 쪽수 표시
-   - 마우스를 올리거나 초점이 들어오면 멈춤, 동작 줄이기 설정이면 자동 넘김을 켜지 않음
-   - 배너는 477×288 기준으로 그리고 칸 폭에 맞춰 통째로 줄임(--cm-banner-scale) */
+   - 마우스를 올리거나 초점이 들어오면 멈춤, 동작 줄이기 설정이면 자동 넘김을 켜지 않음 */
 const cmMainBanner = {
   DELAY: 5000,
   init() {
@@ -211,13 +210,6 @@ const cmMainBanner = {
     const toggle = root.querySelector(".toggle");
     const two = (n) => String(n).padStart(2, "0");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const scale = () => {
-      const banner = container.querySelector(".cm-banner");
-      if (!banner || !container.clientWidth) return;
-      root.style.setProperty("--cm-banner-scale", String(Math.min(1, container.clientWidth / banner.offsetWidth)));
-    };
-    scale();
 
     const swiper = new Swiper(container, {
       slidesPerView: 1,
@@ -252,12 +244,6 @@ const cmMainBanner = {
     container.addEventListener("focusin", () => playing && swiper.autoplay.stop());
     container.addEventListener("focusout", () => playing && swiper.autoplay.start());
 
-    if ("ResizeObserver" in window) {
-      new ResizeObserver(() => {
-        scale();
-        swiper.update();
-      }).observe(container);
-    }
   },
   sync(swiper, current) {
     swiper.slides.forEach((slide, i) => {

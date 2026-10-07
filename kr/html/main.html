@@ -433,7 +433,8 @@
           </section>
 
           <!-- 알림판 : 배너 넘김 (KRDS 포함 Swiper, 자동 넘김 · 정지 버튼, kr/js/main.js cmMainBanner)
-               Figma 에는 배너 3종만 있어 3종을 되풀이해 8장으로 채움. 배너는 개발 시 관리자 등록 이미지(477×288) + 대체 텍스트로 바뀝니다. -->
+               배너는 디자인된 이미지(477×288 비율)를 그대로 넣고, 이미지 안의 글은 alt 에 모두 적음 (관리자 등록 시에도 대체 텍스트 필수)
+               Figma 에는 배너 3종만 있어 3종을 되풀이해 8장으로 채움 -->
           <section class="cm-main-article cm-main-banner" aria-labelledby="main_banner_tit">
             <div class="head">
               <h2 id="main_banner_tit" class="cm-main-tit">알림판</h2>
@@ -451,79 +452,35 @@
                 <div class="swiper-wrapper">
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 1번째">
                   <!-- 배너 1 : guide -->
-                  <a href="#" class="cm-banner cm-banner--guide">
-                    <span class="eyebrow">처음 방문하셨나요?</span>
-                    <strong class="tit">데이터 플랫폼 <em>이용안내</em></strong>
-                    <span class="desc">사용자별 이용안내를 제공하고 있습니다.</span>
-                    <span class="btn">자세히보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
-                    <img src="../img/main/banner_guide.png" alt="" class="img" width="173" height="133">
-                  </a>
+                  <a href="#" class="cm-banner"><img src="../img/main/banner_01_guide.png" alt="처음 방문하셨나요? 데이터 플랫폼 이용안내. 사용자별 이용안내를 제공하고 있습니다. 자세히보기" width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 2번째">
                   <!-- 배너 2 : privacy -->
-                  <a href="#" class="cm-banner cm-banner--privacy">
-                    <span class="eyebrow">내 정보, 내가 지킨다!</span>
-                    <span class="lead">작은 실천 하나가</span>
-                    <strong class="tit"><em>소중한 개인정보</em>를 지켜줍니다!</strong>
-                    <span class="btn">카드뉴스 보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
-                    <img src="../img/main/banner_privacy.png" alt="" class="img" width="358" height="126">
-                  </a>
+                  <a href="#" class="cm-banner"><img src="../img/main/banner_02_privacy.png" alt="내 정보, 내가 지킨다! 작은 실천 하나가 소중한 개인정보를 지켜줍니다! 카드뉴스 보기" width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 3번째">
                   <!-- 배너 3 : open -->
-                  <a href="board/notice_view.html" class="cm-banner cm-banner--open">
-                    <img src="../img/main/banner_logo.svg" alt="교육부 국립특수교육원" class="logo" width="129" height="29">
-                    <strong class="tit"><em>특수교육 실태조사</em> <span><em>데이터 플랫폼</em>이</span> <span>오픈 <span class="light">하였습니다.</span></span></strong>
-                    <img src="../img/main/banner_open.png" alt="" class="img" width="219" height="141">
-                  </a>
+                  <a href="board/notice_view.html" class="cm-banner"><img src="../img/main/banner_03_open.png" alt="교육부 국립특수교육원. 특수교육 실태조사 데이터 플랫폼이 오픈 하였습니다." width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 4번째">
                   <!-- 배너 4 : guide -->
-                  <a href="#" class="cm-banner cm-banner--guide">
-                    <span class="eyebrow">처음 방문하셨나요?</span>
-                    <strong class="tit">데이터 플랫폼 <em>이용안내</em></strong>
-                    <span class="desc">사용자별 이용안내를 제공하고 있습니다.</span>
-                    <span class="btn">자세히보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
-                    <img src="../img/main/banner_guide.png" alt="" class="img" width="173" height="133">
-                  </a>
+                  <a href="#" class="cm-banner"><img src="../img/main/banner_01_guide.png" alt="처음 방문하셨나요? 데이터 플랫폼 이용안내. 사용자별 이용안내를 제공하고 있습니다. 자세히보기" width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 5번째">
                   <!-- 배너 5 : privacy -->
-                  <a href="#" class="cm-banner cm-banner--privacy">
-                    <span class="eyebrow">내 정보, 내가 지킨다!</span>
-                    <span class="lead">작은 실천 하나가</span>
-                    <strong class="tit"><em>소중한 개인정보</em>를 지켜줍니다!</strong>
-                    <span class="btn">카드뉴스 보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
-                    <img src="../img/main/banner_privacy.png" alt="" class="img" width="358" height="126">
-                  </a>
+                  <a href="#" class="cm-banner"><img src="../img/main/banner_02_privacy.png" alt="내 정보, 내가 지킨다! 작은 실천 하나가 소중한 개인정보를 지켜줍니다! 카드뉴스 보기" width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 6번째">
                   <!-- 배너 6 : open -->
-                  <a href="board/notice_view.html" class="cm-banner cm-banner--open">
-                    <img src="../img/main/banner_logo.svg" alt="교육부 국립특수교육원" class="logo" width="129" height="29">
-                    <strong class="tit"><em>특수교육 실태조사</em> <span><em>데이터 플랫폼</em>이</span> <span>오픈 <span class="light">하였습니다.</span></span></strong>
-                    <img src="../img/main/banner_open.png" alt="" class="img" width="219" height="141">
-                  </a>
+                  <a href="board/notice_view.html" class="cm-banner"><img src="../img/main/banner_03_open.png" alt="교육부 국립특수교육원. 특수교육 실태조사 데이터 플랫폼이 오픈 하였습니다." width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 7번째">
                   <!-- 배너 7 : guide -->
-                  <a href="#" class="cm-banner cm-banner--guide">
-                    <span class="eyebrow">처음 방문하셨나요?</span>
-                    <strong class="tit">데이터 플랫폼 <em>이용안내</em></strong>
-                    <span class="desc">사용자별 이용안내를 제공하고 있습니다.</span>
-                    <span class="btn">자세히보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
-                    <img src="../img/main/banner_guide.png" alt="" class="img" width="173" height="133">
-                  </a>
+                  <a href="#" class="cm-banner"><img src="../img/main/banner_01_guide.png" alt="처음 방문하셨나요? 데이터 플랫폼 이용안내. 사용자별 이용안내를 제공하고 있습니다. 자세히보기" width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 8번째">
                   <!-- 배너 8 : privacy -->
-                  <a href="#" class="cm-banner cm-banner--privacy">
-                    <span class="eyebrow">내 정보, 내가 지킨다!</span>
-                    <span class="lead">작은 실천 하나가</span>
-                    <strong class="tit"><em>소중한 개인정보</em>를 지켜줍니다!</strong>
-                    <span class="btn">카드뉴스 보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
-                    <img src="../img/main/banner_privacy.png" alt="" class="img" width="358" height="126">
-                  </a>
+                  <a href="#" class="cm-banner"><img src="../img/main/banner_02_privacy.png" alt="내 정보, 내가 지킨다! 작은 실천 하나가 소중한 개인정보를 지켜줍니다! 카드뉴스 보기" width="477" height="288"></a>
                 </div>
                 </div>
               </div>

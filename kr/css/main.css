@@ -1058,155 +1058,22 @@ body.cm-main {
   overflow: hidden;
   border-radius: 1.2rem;
 }
-.cm-banner-area .swiper-slide {
-  overflow: hidden;
-  height: calc(28.8rem * var(--cm-banner-scale, 1));
-  border-radius: 1.2rem;
-}
-/* 배너 : 477×288 기준으로 그리고, 칸 폭에 맞춰 통째로 줄임 (kr/js/main.js 가 --cm-banner-scale 계산)
-   개발 시에는 관리자가 올린 배너 이미지로 바뀌므로 아래 배너별 스타일은 퍼블리싱 확인용입니다. */
+/* 배너 : 디자인된 이미지(477×288 비율)를 그대로 넣고 칸 폭에 맞춰 비율대로 줄임. 글은 이미지의 alt 로 제공 */
 .cm-banner {
-  position: relative;
   display: block;
   overflow: hidden;
-  width: 47.7rem;
-  height: 28.8rem;
   border-radius: 1.2rem;
-  color: #131416;
-  transform: scale(var(--cm-banner-scale, 1));
-  transform-origin: 0 0;
+}
+.cm-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 477 / 288;
+  object-fit: cover;
 }
 .cm-banner:focus-visible {
   outline: 0.3rem solid var(--cm-color-border-primary);
   outline-offset: -0.3rem;
-}
-.cm-banner > * {
-  position: absolute;
-  left: 5.3rem;
-  white-space: nowrap;
-}
-.cm-banner em {
-  font-style: normal;
-}
-.cm-banner .eyebrow {
-  font-size: 2rem; /* Figma 손글씨 글꼴(Ownglyph)은 넣지 않고 기본 글꼴로 대체 (노트 참고) */
-  line-height: 1.2;
-  color: #464c53;
-}
-.cm-banner .btn {
-  top: 18rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.8rem 2rem;
-  border-radius: 10rem;
-  font-size: var(--krds-pc-font-size-body-small);
-  font-weight: var(--krds-font-weight-bold);
-  line-height: 1.5;
-  color: #fff;
-}
-.cm-banner--guide {
-  background-color: #eee8ff;
-}
-.cm-banner--guide .eyebrow {
-  top: 5.5rem;
-}
-.cm-banner--guide .tit {
-  top: 8.4rem;
-  font-size: 2.8rem;
-  font-weight: 800;
-  line-height: 4rem;
-}
-.cm-banner--guide .tit em {
-  color: #7734ee;
-}
-.cm-banner--guide .desc {
-  top: 12.9rem;
-  font-size: var(--krds-pc-font-size-body-small);
-  line-height: 1.5;
-  color: #464c53;
-}
-.cm-banner--guide .btn {
-  background-color: #7734ee;
-}
-.cm-banner--guide .img {
-  top: 12.8rem;
-  left: 27.5rem;
-  width: 17.3rem;
-  height: 13.3rem;
-  filter: drop-shadow(0 0.6rem 0.87rem rgba(0, 0, 0, 0.05)) drop-shadow(0 0.6rem 1.27rem rgba(0, 0, 0, 0.08));
-}
-.cm-banner--privacy {
-  background-color: #e0eaff;
-}
-.cm-banner--privacy .eyebrow {
-  top: 5.2rem;
-}
-.cm-banner--privacy .lead {
-  top: 8.6rem;
-  font-size: 2.5rem;
-  font-weight: var(--krds-font-weight-medium); /* Figma Gmarket Sans Medium → 기본 글꼴 Medium 으로 대체 */
-  line-height: 1;
-  letter-spacing: -0.025rem;
-}
-.cm-banner--privacy .tit {
-  top: 12.1rem;
-  font-family: var(--cm-main-font-display);
-  font-size: 2.7rem;
-  line-height: 1;
-  letter-spacing: -0.027rem;
-}
-.cm-banner--privacy .tit em {
-  color: #0b50d0;
-}
-.cm-banner--privacy .btn {
-  background-color: #4a63d0; /* Figma #607ce6 은 흰 글자 대비 3.9:1 → 4.5:1 넘도록 어둡게 보정 */
-}
-.cm-banner--privacy .img {
-  top: 16.4rem;
-  left: 14.1rem;
-  width: 35.8rem;
-  height: 12.6rem;
-}
-.cm-banner--privacy .btn {
-  z-index: 1;
-}
-.cm-banner--open {
-  background-color: #f0f5fd;
-}
-.cm-banner--open .logo {
-  top: 6.4rem;
-  left: 4.7rem;
-  width: 12.9rem;
-  height: 2.9rem;
-}
-.cm-banner--open .tit {
-  top: 10rem;
-  left: 4.7rem;
-  font-family: var(--cm-main-font-display);
-  font-size: 2.7rem;
-  line-height: 1.5;
-  color: #052b57;
-}
-.cm-banner--open .tit > em,
-.cm-banner--open .tit > span {
-  display: block;
-}
-.cm-banner--open .tit em {
-  color: #0b50d0;
-}
-.cm-banner--open .tit .light {
-  font-family: "Pretendard GOV", sans-serif; /* Figma Gmarket Sans Medium → 기본 글꼴 Medium 으로 대체 */
-  font-weight: var(--krds-font-weight-medium);
-  color: #1e2124;
-}
-.cm-banner--open .img {
-  top: 8.2rem;
-  left: 27.6rem;
-  width: 21.9rem;
-  height: 14.1rem;
-  opacity: 0.68;
-  mix-blend-mode: luminosity;
 }
 
 /* --------------------------------------------------------------------------
@@ -1841,7 +1708,7 @@ body.cm-main {
 
 /* --------------------------------------------------------------------------
    9. 선명하게(고대비) 모드 · 시스템 어두운 모드
-      - 흰 바탕에 그린 그림이 들어가는 숫자 카드 · 변천사 카드 · 알림판 배너 · 바로가기는 밝은 색 그대로 둡니다.
+      - 흰 바탕에 그린 그림이 들어가는 숫자 카드 · 변천사 카드 · 바로가기와 알림판 배너 이미지는 밝은 색 그대로 둡니다.
       - 나머지 면 · 선 · 글자는 KRDS 고대비 토큰으로 바꿉니다.
    -------------------------------------------------------------------------- */
 [data-krds-mode=high-contrast] body.cm-main {
