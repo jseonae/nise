@@ -186,10 +186,41 @@ body.cm-main {
 .cm-hero.is-video .cm-hero-video {
   opacity: 0.2;
 }
+/* 배경 영상 정지 · 재생 버튼 : 아이콘 + 글자가 함께 있는 알약 모양 (Figma 에 없는 추가 요소)
+   - 아이콘만으로 뜻을 전하지 않도록 글자를 함께 보여 줌. 높이 40px, 글자 15px
+   - 흰 바탕 + 회색 테두리라 영상 위에서도 글자 대비가 유지됨 (text-basic / 흰색 = 16:1) */
 .cm-hero-toggle {
   position: absolute;
   right: var(--krds-contents-padding-x);
-  bottom: 1.6rem;
+  bottom: var(--krds-padding-6);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--krds-gap-2);
+  height: var(--krds-size-height-6);
+  padding: 0 var(--krds-padding-6) 0 var(--krds-padding-5);
+  border: 0.1rem solid var(--cm-color-border-gray);
+  border-radius: var(--krds-radius-max);
+  background-color: var(--cm-color-surface-white);
+  font-size: var(--krds-pc-font-size-label-small);
+  font-weight: var(--krds-font-weight-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+  transition: var(--krds-transition-base);
+}
+.cm-hero-toggle .svg-icon {
+  width: var(--krds-icon--size-medium, 2rem);
+  height: var(--krds-icon--size-medium, 2rem);
+  background-color: var(--cm-color-text-primary);
+}
+.cm-hero-toggle:hover {
+  border-color: var(--cm-color-border-primary);
+  background-color: var(--cm-color-row-hover);
+  color: var(--cm-color-text-primary);
+}
+.cm-hero-toggle:focus {
+  box-shadow: none;
+  outline: 0.2rem solid var(--cm-color-border-primary);
+  outline-offset: 0.2rem;
 }
 .cm-hero-toggle[hidden] {
   display: none;

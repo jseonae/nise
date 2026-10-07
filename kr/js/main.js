@@ -31,7 +31,7 @@ const cmMainHero = {
 
     let paused = false; // 사용자가 직접 멈췄는지
     const render = () => {
-      toggle.querySelector(".sr-only").textContent = paused ? "배경 영상 재생" : "배경 영상 정지";
+      toggle.querySelector(".txt").textContent = paused ? "배경 영상 재생" : "배경 영상 정지";
       toggle.querySelector(".svg-icon").className = `svg-icon ${paused ? "ico-swiper-play" : "ico-swiper-stop"}`;
     };
     const start = () => {
