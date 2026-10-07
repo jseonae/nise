@@ -531,7 +531,7 @@
       });
       const valid = growth.filter((x) => x != null);
       const gMin = Math.min(0, Math.floor(Math.min(...valid, 0) / 3) * 3);
-      const gMax = Math.max(3, Math.ceil((Math.max(...valid, 0) + 1) / 3) * 3); // 가장 높은 점 위에 레이블 자리
+      const gMax = Math.max(3, Math.ceil((Math.max(...valid, 0) * 1.8) / 3) * 3);
       const unit = ctx.unit || "명";
       const barSet = ctx.sets[5];
       const lineSet = ctx.sets[8];
@@ -539,17 +539,15 @@
       const barName = `${s.name} (${unit})`;
       const lineName = "전년 대비 증가율(%)";
       const last = (arr) => arr.reduce((li, v, i) => (v != null ? i : li), -1);
-      const labelled = (arr, color, text, box) => {
+      const labelled = (arr, color, text) => {
         const li = last(arr);
-        return arr.map((v, i) => (v == null ? v : { value: v, label: Object.assign({ show: ctx.labels, fontWeight: i === li ? 700 : 400, color, fontSize: fs(ctx, 13), formatter: text }, box) }));
+        return arr.map((v, i) => (v == null ? v : { value: v, label: { show: ctx.labels, fontWeight: i === li ? 700 : 400, color, fontSize: fs(ctx, 13), formatter: text } }));
       };
       const bar = {
         name: barName,
         type: "bar",
         itemStyle: { color: barSet.bg, decal: ctx.patterns ? decal(barSet) : null, borderRadius: 0 },
         emphasis: { itemStyle: { borderColor: FOCUS_LINE, borderWidth: 2 } },
-        xAxisIndex: 1,
-        yAxisIndex: 0,
         label: { position: "top" },
         data: labelled(s.data, ctx.colors.text, (p) => fmtNumber(p.value)),
         _set: barSet,
@@ -558,7 +556,6 @@
       const line = {
         name: lineName,
         type: "line",
-        xAxisIndex: 0,
         yAxisIndex: 1,
         connectNulls: false,
         symbol: lineStyle.symbol === "circle" ? "circle" : "rect",
@@ -568,51 +565,17 @@
         emphasis: { scale: 1.38, lineStyle: { width: 3.5 } },
         z: 10,
         label: { position: "top", distance: 8 },
-        data: labelled(growth, lineSet.bg, (p) => `${(+p.value).toFixed(1)}%`, labelBox(ctx, lineSet.bg)),
+        data: labelled(growth, lineSet.bg, (p) => `${(+p.value).toFixed(1)}%`),
         _lineStyle: { type: lineStyle.type, symbol: lineStyle.symbol === "circle" ? "circle" : "rect" },
         _unit: "%",
       };
       const o = baseOption(ctx);
       o.legend.data = [barName, lineName];
-      /* 위아래 두 칸 : 위 띠 = 전년 대비 증가율 꺾은선, 아래 = 규모 막대. 가로축(연도)은 같은 자리에 맞춤
-         → 막대 값 레이블과 증가율 레이블이 서로 다른 칸에 있어 겹치지 않음. 두 칸의 왼쪽을 맞추려고 여백을 값으로 고정 */
-      const H = ctx.height || 480;
-      const left = Math.round(64 * ctx.scale);
-      const bandTop = 40;
-      const bandH = Math.round(H * 0.2);
-      const barTop = bandTop + bandH + 64; // 띠 아래 눈금 + 막대 축 이름 + 가장 높은 막대의 값 레이블 자리
-      const axisName = { color: ctx.colors.sub, align: "right", fontSize: fs(ctx, 13) };
-      o.grid = [
-        { left, right: 24, top: bandTop, height: bandH },
-        { left, right: 24, top: barTop, bottom: 36 },
-      ];
-      o.axisPointer = { link: [{ xAxisIndex: "all" }] }; // 한 연도에 올리면 두 칸의 값이 함께 안내됨
-      /* 막대 값 레이블 : 값이 길어 이웃한 값끼리 가로로 겹칠 때(여섯 자리 값 · 좁은 막대)는 하나 걸러 하나를 윗줄로 올림
-         - 제자리 레이블(마지막 값에서 거꾸로 세어 짝수 번째)은 움직이지 않고, 그 사이 레이블만 양옆 레이블 위로 올려 줄이 계단처럼 밀리지 않음
-         - 자리를 미리 계산하려고 세로축 최댓값을 직접 정함 (가장 큰 값보다 조금 큰 깔끔한 수) */
-      const top = Math.max(...s.data.filter((v) => v != null), 1);
-      const mag = Math.pow(10, Math.floor(Math.log10(top)));
-      const yMax = [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10].map((m) => m * mag).find((m) => m >= top * 1.02);
-      const barH = H - barTop - 36;
-      const pitch = (ctx.width - left - 24) / model.categories.length;
-      const size = fs(ctx, 13);
-      const widest = Math.max(...bar.data.filter((d) => d != null).map((d) => fmtNumber(d.value)).map((t) => size * (0.62 * t.replace(/,/g, "").length + 0.3 * (t.length - t.replace(/,/g, "").length)) + 4));
-      if (widest > pitch) {
-        const lastIndex = last(s.data);
-        const barY = (i) => (bar.data[i] == null ? null : barTop + barH * (1 - bar.data[i].value / yMax));
-        bar.data.forEach((d, i) => {
-          if (d == null || (lastIndex - i) % 2 === 0) return;
-          const tops = [i - 1, i, i + 1].map(barY).filter((y) => y != null);
-          d.label.distance = barY(i) - Math.min(...tops) + 5 + size + 3; // 양옆 제자리 레이블(막대 위 5px, 글자 높이 size)보다 위
-        });
-      }
-      o.xAxis = [
-        categoryAxis(ctx, model.categories, { gridIndex: 0, axisLabel: { show: false }, axisLine: { lineStyle: { color: ctx.colors.split } } }),
-        categoryAxis(ctx, model.categories, { gridIndex: 1 }),
-      ];
+      o.grid = { left: 16, right: 16, top: 44, bottom: 8, containLabel: true };
+      o.xAxis = categoryAxis(ctx, model.categories, {});
       o.yAxis = [
-        valueAxis(ctx, { gridIndex: 1, min: 0, max: yMax, name: unit, nameTextStyle: axisName, axisLabel: { color: ctx.colors.sub, fontSize: fs(ctx, 13), formatter: axisMan } }),
-        valueAxis(ctx, { gridIndex: 0, min: gMin, max: gMax, interval: 3, name: "증가율(%)", nameTextStyle: Object.assign({}, axisName, { align: "left", padding: [0, 0, 0, -left + 8] }), axisLabel: { color: ctx.colors.sub, fontSize: fs(ctx, 13), formatter: "{value}%" } }),
+        valueAxis(ctx, { min: 0, name: unit, nameTextStyle: { color: ctx.colors.sub, align: "right", fontSize: fs(ctx, 13) }, axisLabel: { color: ctx.colors.sub, fontSize: fs(ctx, 13), formatter: axisMan } }),
+        valueAxis(ctx, { min: gMin, max: gMax, interval: 3, name: "%", nameTextStyle: { color: ctx.colors.sub, align: "left", fontSize: fs(ctx, 13) }, axisLabel: { color: ctx.colors.sub, fontSize: fs(ctx, 13), formatter: "{value}%" }, splitLine: { show: false } }),
       ];
       o.series = [bar, line];
       o.tooltip.formatter = tooltipFormatter(ctx, markersOf(ctx, o.series));
