@@ -62,6 +62,15 @@
 [data-krds-mode] #krds-header .header-container .logo a {
   background-image: url(../img/logo/logo.svg);
 }
+/* 선명하게(어두운 배경) 모드 · 시스템 어두운 모드 : 글자가 흰색인 로고 (Figma: header_templet__pc 다크모드 인스턴스) */
+[data-krds-mode=high-contrast] #krds-header .header-container .logo a {
+  background-image: url(../img/logo/logo_white.svg);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] #krds-header .header-container .logo a {
+    background-image: url(../img/logo/logo_white.svg);
+  }
+}
 #krds-header .header-container .header-branding .logo + .header-actions {
   gap: var(--krds-gap-3);
 }
@@ -3772,6 +3781,15 @@
   width: 36.6rem;
   height: 4rem;
   background-image: url(../img/logo/logo.svg);
+}
+/* 선명하게(어두운 배경) 모드 · 시스템 어두운 모드 : 푸터 로고도 글자가 흰색인 로고 */
+[data-krds-mode=high-contrast] #krds-footer .f-logo {
+  background-image: url(../img/logo/logo_white.svg);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] #krds-footer .f-logo {
+    background-image: url(../img/logo/logo_white.svg);
+  }
 }
 #krds-footer .inner {
   position: relative;
