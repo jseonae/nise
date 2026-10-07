@@ -86,12 +86,14 @@ const cmAiHelper = {
     const open = () => {
       panel.hidden = false;
       root.setAttribute("data-open", "");
+      document.body.classList.add("cm-ai-opened"); // 창에 가려지는 TOP 버튼 숨김 (krds-custom.css)
       openBtn.setAttribute("aria-expanded", "true");
       panel.querySelector(".cm-ai-title").focus({ preventScroll: true });
     };
     const close = () => {
       panel.hidden = true;
       root.removeAttribute("data-open");
+      document.body.classList.remove("cm-ai-opened");
       openBtn.setAttribute("aria-expanded", "false");
       openBtn.focus();
     };
