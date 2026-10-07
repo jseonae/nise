@@ -1441,6 +1441,15 @@
   line-height: 1.5;
   color: var(--cm-color-text-basic);
 }
+/* 선명하게(어두운 배경) 모드 : 반씩 섞은 색이 거의 검정이 되어 상자가 보이지 않으므로 KRDS 고대비 면 색으로 지정 */
+[data-krds-mode=high-contrast] .cm-survey-stat {
+  background-color: var(--krds-high-contrast-color-surface-secondary-subtler);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-survey-stat {
+    background-color: var(--krds-high-contrast-color-surface-secondary-subtler);
+  }
+}
 .cm-survey-stat > div,
 .cm-survey-stat dd {
   display: flex;
