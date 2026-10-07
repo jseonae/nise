@@ -648,7 +648,7 @@ body.cm-main {
   border-radius: 3rem;
   background-color: rgba(255, 255, 255, 0.15);
   box-shadow: 1.4rem 1.8rem 2.2rem rgba(0, 0, 0, 0.15);
-  color: #1e2124;
+  color: var(--krds-light-color-text-basic);
   opacity: 0;
   transition: background-color 0.3s ease-out, border-color 0.3s ease-out, opacity 0.3s ease-out;
 }
@@ -664,8 +664,8 @@ body.cm-main {
 }
 /* 앞 장 */
 .cm-history-item[data-offset="0"] .cm-history-slide {
-  border-color: #90b0d5;
-  background-color: #fff;
+  border-color: var(--krds-color-light-secondary-30);
+  background-color: var(--krds-light-color-surface-white);
   opacity: 1;
 }
 .cm-history-item[data-offset="0"] .cm-history-slide > * {
@@ -686,14 +686,14 @@ body.cm-main {
 /* Figma 글꼴 Ria Sans 는 넣지 않고 Pretendard GOV 로 대체 (노트 참고) */
 .cm-history-slide .eyebrow {
   line-height: 1.5;
-  color: #063a74;
+  color: var(--krds-color-light-secondary-70);
 }
 .cm-history-slide .eyebrow span {
   display: block;
 }
 .cm-history-slide .eyebrow .sub {
   font-size: 1.4rem;
-  color: #5d7ea5; /* Figma : #063a74 불투명도 40%(대비 2.7:1) → 4.5:1 되는 색으로 보정 */
+  color: var(--krds-color-light-secondary-50); /* Figma : secondary-70 불투명도 40%(대비 2.7:1) → 4.5:1 넘는 같은 계열 토큰(5.2:1) */
 }
 .cm-history-slide .eyebrow .main {
   font-size: var(--krds-pc-font-size-body-medium);
@@ -706,10 +706,10 @@ body.cm-main {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  background-color: #063a74;
+  background-color: var(--krds-color-light-secondary-70);
   font-size: var(--krds-pc-font-size-heading-small);
   font-weight: var(--krds-font-weight-bold);
-  color: #fff;
+  color: var(--krds-light-color-text-inverse-static);
 }
 .cm-history-slide .body {
   min-width: 0;
@@ -719,7 +719,7 @@ body.cm-main {
   font-size: var(--krds-pc-font-size-heading-large); /* 32px */
   font-weight: var(--krds-font-weight-bold);
   line-height: 1.5;
-  color: #052b57;
+  color: var(--krds-light-color-text-secondary);
   word-break: keep-all;
 }
 .cm-check-list {
@@ -747,7 +747,7 @@ body.cm-main {
 }
 .cm-check-list em {
   font-style: normal;
-  color: #0b50d0;
+  color: var(--krds-light-color-text-primary);
 }
 .cm-history-slide .side {
   position: absolute;
@@ -766,17 +766,17 @@ body.cm-main {
 }
 /* 자세히보기 : KRDS 버튼(medium tertiary). 카드가 항상 흰 배경이라 색은 밝은 모드 값으로 고정 */
 .cm-history-slide .krds-btn.tertiary {
-  border-color: #58616a;
+  border-color: var(--krds-light-color-button-tertiary-border);
   background-color: transparent;
-  color: #1e2124;
+  color: var(--krds-light-color-text-basic);
 }
 .cm-history-slide .krds-btn.tertiary:hover {
-  background-color: #f4f5f6;
+  background-color: var(--krds-light-color-surface-gray-subtler);
 }
 .cm-history-slide .krds-btn .svg-icon {
   width: 2rem;
   height: 2rem;
-  background-color: #1e2124;
+  background-color: var(--krds-light-color-text-basic);
 }
 .cm-history-slide .cover {
   position: absolute;
@@ -784,7 +784,7 @@ body.cm-main {
   right: 5.9rem;
   width: 31.5rem;
   padding: 3rem;
-  background-color: #f6f6f7;
+  background-color: var(--krds-light-color-surface-gray-subtler); /* Figma #f6f6f7 → 가장 가까운 토큰 gray-5 */
 }
 .cm-history-slide .cover img {
   display: block;
@@ -819,7 +819,7 @@ body.cm-main {
 }
 .cm-history-timeline::before {
   width: 100%;
-  background-color: #e4e4e4;
+  background-color: var(--krds-color-light-gray-10);
 }
 .cm-history-timeline::after {
   width: var(--cm-history-fill);
@@ -827,10 +827,10 @@ body.cm-main {
   transition: width 0.4s ease;
 }
 /* 현재 위치 표시 점 (Figma 에 없는 추가 효과) : 진행 막대 끝에 놓이는 밝은 하늘색 점 + 두근거림(하트비트)
-   - 색 : 막대의 파랑(#256ef4)과 같은 계열에서 더 밝고 눈에 띄는 하늘색. 진한 파랑 띠 위 대비 약 7:1
+   - 색 : 막대의 파랑(primary-50)과 같은 계열에서 더 밝고 눈에 띄는 하늘색(KRDS information-20). 진한 파랑 띠 위 대비 약 6.5:1
    - 막대가 움직이는 동안(.is-moving)은 숨었다가 멈추면 그 자리에 나타남 (kr/js/main.js cmMainHistory) */
 .cm-history-point {
-  --cm-history-point-color: #6fd6ff;
+  --cm-history-point-color: var(--krds-color-light-information-20); /* #9ed2fa */
   position: absolute;
   top: calc(3.3rem + 0.35rem);
   left: clamp(0.8rem, var(--cm-history-fill), calc(100% - 0.8rem));
@@ -838,10 +838,10 @@ body.cm-main {
   width: 1.6rem;
   height: 1.6rem;
   margin: -0.8rem 0 0 -0.8rem;
-  border: 0.3rem solid #fff;
+  border: 0.3rem solid var(--krds-light-color-surface-white);
   border-radius: 50%;
   background-color: var(--cm-history-point-color);
-  box-shadow: 0 0 0.8rem rgba(111, 214, 255, 0.9);
+  box-shadow: 0 0 0.8rem var(--cm-history-point-color);
   opacity: 1;
   pointer-events: none;
   transition: opacity 0.25s;
@@ -898,7 +898,7 @@ body.cm-main {
   flex-direction: column;
   align-items: center;
   line-height: 1.5;
-  color: #fff;
+  color: var(--krds-light-color-text-inverse-static);
 }
 .cm-history-timeline li:first-child button {
   align-items: flex-start;
@@ -922,7 +922,7 @@ body.cm-main {
   text-decoration: underline;
 }
 .cm-history-timeline button:focus-visible {
-  outline: 0.2rem solid #fff;
+  outline: 0.2rem solid var(--krds-light-color-text-inverse-static);
   outline-offset: 0.4rem;
 }
 .cm-history-arrows {
@@ -932,17 +932,17 @@ body.cm-main {
 }
 /* 파란 띠 위 둥근 버튼 : 항상 흰 버튼 */
 .cm-history-arrows .cm-round-btn {
-  border-color: #cdd1d5;
-  background-color: #fff;
+  border-color: var(--krds-light-color-border-gray-light);
+  background-color: var(--krds-light-color-surface-white);
 }
 .cm-history-arrows .cm-round-btn .svg-icon {
-  background-color: #1e2124;
+  background-color: var(--krds-light-color-text-basic);
 }
 .cm-history-arrows .cm-round-btn:hover {
-  background-color: #eef2f7;
+  background-color: var(--krds-light-color-action-secondary-hover);
 }
 .cm-history-arrows .cm-round-btn:focus-visible {
-  outline-color: #fff;
+  outline-color: var(--krds-light-color-text-inverse-static);
 }
 
 /* --------------------------------------------------------------------------
