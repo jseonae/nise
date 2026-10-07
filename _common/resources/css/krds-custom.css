@@ -3311,7 +3311,7 @@ p {
   display: flex;
   align-items: flex-start;
   gap: var(--krds-gap-4);
-  padding-bottom: var(--krds-padding-7);
+  padding-bottom: var(--krds-padding-8);
 }
 .cm-research-opinion .input {
   position: relative;
@@ -3320,7 +3320,7 @@ p {
 }
 .cm-research-opinion .textarea-count {
   position: absolute;
-  top: 100%;
+  bottom: -2.5rem;
   left: 0.6rem;
   justify-content: flex-start; /* KRDS 는 오른쪽 정렬, Figma 는 왼쪽 */
   gap: 0;
