@@ -335,13 +335,13 @@ body.cm-main {
   background-color: transparent;
   color: #fff;
 }
+/* 초점 : KRDS 는 눌렀을 때도 초점 테두리를 보이고(*:focus), 탭 버튼은 테두리를 안쪽(-0.4rem)으로 그림.
+   글자형 탭은 상자가 없어 안쪽 테두리가 글자와 겹치므로 버튼 바깥쪽에 그리도록 바꿈 */
 .tab.cm-tab-text .btn-tab:focus {
+  border-radius: var(--krds-radius-small2);
   box-shadow: none;
-}
-.tab.cm-tab-text .btn-tab:focus-visible {
   outline: 0.2rem solid #fff;
   outline-offset: 0.2rem;
-  border-radius: var(--krds-radius-small2, 0.4rem);
 }
 .tab.cm-tab-text .active .btn-tab {
   color: #fff;
