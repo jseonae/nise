@@ -786,7 +786,7 @@
       const label = input("label");
       const sort = t && t.querySelector("[data-chart-sort]:checked");
       return {
-        patterns: pattern ? pattern.checked && !(pattern.disabled && pattern.dataset.chartGuard !== "1") : true,
+        patterns: pattern ? pattern.checked && !pattern.disabled : true,
         labels: label ? label.checked : true,
         sortBy: sort ? sort.value : "view",
       };
@@ -1160,36 +1160,9 @@
     const pattern = tools.querySelector('[data-chart-option="pattern"]');
     const label = tools.querySelector('[data-chart-option="label"]');
     const rerender = () => charts.filter((c) => c.config.tools === tools || (c.zoom && c.source && c.source.config.tools === tools)).forEach((c) => c.rendered && c.render());
-    /* 색만 남는 상태를 막기 위해 패턴·레이블 중 하나는 늘 켜 둠 (13types reviewSyncClueButtons)
-       - 한쪽을 끄면 다른 쪽은 켜진 채 disabled, data-chart-guard="1" 로 표시
-       - 페이지가 패턴을 쓰지 않는 그래프라 disabled 로 둔 경우(꺾은선 패널)는 이 규칙을 적용하지 않음 */
-    const guard = () => {
-      if (!pattern || !label) return;
-      [pattern, label].forEach((input) => {
-        if (input.dataset.chartGuard === "1") {
-          input.disabled = false;
-          input.dataset.chartGuard = "";
-        }
-      });
-      if (pattern.disabled) return;
-      if (!pattern.checked) {
-        label.checked = true;
-        label.disabled = true;
-        label.dataset.chartGuard = "1";
-      } else if (!label.checked) {
-        pattern.disabled = true;
-        pattern.dataset.chartGuard = "1";
-      }
-    };
-    [pattern, label].forEach((input) => {
-      if (!input) return;
-      input.addEventListener("change", () => {
-        guard();
-        if (input.dataset.chartGuard !== "1" && !input.checked && !input.disabled && pattern && label) live("패턴 적용과 레이블 보기 중 하나는 항상 켜져 있어야 해서 다른 쪽은 켜진 채로 둡니다.");
-        rerender();
-      });
-    });
-    guard();
+    /* 패턴 적용 · 레이블 보기는 서로 영향을 주지 않고 각각 켜고 끔
+       (둘 다 꺼서 색만 남아도 값은 그래프 아래 통계표와 그래프 안 키보드 탐색으로 확인 가능) */
+    [pattern, label].forEach((input) => input && input.addEventListener("change", rerender));
     tools.querySelectorAll("[data-chart-sort]").forEach((radio) => radio.addEventListener("change", rerender));
     /* 그래프 종류 버튼 : aria-pressed · KRDS secondary/tertiary 전환 */
     const typeButtons = [...tools.querySelectorAll("[data-chart-type]")];
