@@ -3814,6 +3814,21 @@ p {
 .cm-ai-panel[data-state="chat"] .logo-basic {
   display: block;
 }
+/* 선명하게(어두운 배경) 모드 : 대화 화면 머리글도 어두운 면이라 컬러 로고(짙은 글자)가 묻힘 → 흰 글자 로고를 그대로 씀 */
+[data-krds-mode=high-contrast] .cm-ai-panel[data-state="chat"] .logo-inverse {
+  display: block;
+}
+[data-krds-mode=high-contrast] .cm-ai-panel[data-state="chat"] .logo-basic {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-ai-panel[data-state="chat"] .logo-inverse {
+    display: block;
+  }
+  [data-krds-mode=theme] .cm-ai-panel[data-state="chat"] .logo-basic {
+    display: none;
+  }
+}
 .cm-ai-panel[data-state="chat"] .cm-ai-reset {
   display: inline-flex !important;
 }
