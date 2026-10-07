@@ -6,6 +6,8 @@
   - 스크립트 : _common/resources/js/krds-custom.js (cmTableScroll)
       · 이전/다음 버튼으로 한 열씩 옮기고, 끝에 닿으면 버튼을 disabled 로 바꿉니다.
       · 오른쪽 손가락 그림(.cm-table-scroll-hint)은 한 번 옮기면 숨깁니다. 꾸밈용이라 aria-hidden.
+      · 손가락 그림은 손 부분만 좌우로 살짝 움직입니다(1.5초 주기 ±3px, CSS). 바탕은 cm_table_scroll_hint.svg, 손은 cm_table_scroll_hint_hand.svg.
+        동작 줄이기 설정이면 움직이지 않습니다.
   - 키보드 : 표 영역(tabindex="0")에 초점을 두고 좌우 화살표로도 옮길 수 있습니다(브라우저 기본 스크롤).
   - 첫 칸 너비는 table 의 style="--cm-first-col: 6.5rem" 처럼 지정합니다 (Figma 계 65px, 그 밖 230px).
 -->
