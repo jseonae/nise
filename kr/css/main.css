@@ -471,9 +471,9 @@ body.cm-main {
 .cm-stat-cards.is-ready .cm-stat-card:not(.is-play) .cm-stat-svg .m {
   opacity: 0;
 }
-/* 재생 : 카드 순서만큼(--cm-stat-delay) 늦게 시작 */
+/* 재생 : 카드 순서만큼(--cm-stat-delay) 늦게 시작. 전체 빠르기는 --cm-stat-speed 배율로 조절 (스크립트 cmMainStat.SPEED 가 넣음, 클수록 느림) */
 .cm-stat-cards.is-ready .cm-stat-card.is-play .cm-stat-svg .m {
-  animation: var(--cm-stat-name) var(--t, 0.6s) cubic-bezier(0.22, 1, 0.36, 1) calc(var(--d, 0s) + var(--cm-stat-delay, 0s)) both;
+  animation: var(--cm-stat-name) calc(var(--t, 0.6s) * var(--cm-stat-speed, 1)) cubic-bezier(0.22, 1, 0.36, 1) calc((var(--d, 0s) + var(--cm-stat-delay, 0s)) * var(--cm-stat-speed, 1)) both;
 }
 @keyframes cm-stat-growy {
   from {
