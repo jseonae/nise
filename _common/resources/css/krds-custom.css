@@ -1942,6 +1942,16 @@ p {
 .cm-ts-tool-btns .krds-form-toggle-switch + .krds-btn {
   margin-left: var(--krds-gap-2);
 }
+/* 다운로드 드롭다운 : KRDS 메뉴 최소 폭(13rem)에 17px 글자라 항목이 두세 줄로 꺾여 틀을 벗어남
+   → small 버튼과 같은 글자 크기(15px) + 한 줄 + 메뉴 폭은 내용에 맞춤 */
+.cm-ts-tool-btns .krds-drop-wrap .drop-menu {
+  width: max-content;
+  max-width: calc(100vw - var(--krds-padding-6) * 2);
+}
+.cm-ts-tool-btns .krds-drop-wrap .drop-menu .drop-list .item-link {
+  font-size: var(--krds-pc-font-size-body-small);
+  white-space: nowrap;
+}
 /* 차트 상자 */
 .cm-chart-box {
   display: flex;
