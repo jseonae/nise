@@ -62,6 +62,15 @@
 [data-krds-mode] #krds-header .header-container .logo a {
   background-image: url(../img/logo/logo.svg);
 }
+/* 선명하게(어두운 배경) 모드 · 시스템 어두운 모드 : 글자가 흰색인 로고 (Figma: header_templet__pc 다크모드 인스턴스) */
+[data-krds-mode=high-contrast] #krds-header .header-container .logo a {
+  background-image: url(../img/logo/logo_white.svg);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] #krds-header .header-container .logo a {
+    background-image: url(../img/logo/logo_white.svg);
+  }
+}
 #krds-header .header-container .header-branding .logo + .header-actions {
   gap: var(--krds-gap-3);
 }
@@ -180,10 +189,26 @@
 .cm-search-form {
   display: flex;
   flex-direction: column;
-  gap: var(--krds-gap-6);
+  gap: var(--krds-gap-4); /* 12px */
   width: 100%;
-  max-width: 79.2rem;
+  max-width: 80rem;
   margin: 0 auto;
+}
+/* 안내 문구 : 아이콘(48×44) + 24px Bold */
+.cm-search-guide {
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-3);
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+  word-break: keep-all;
+}
+.cm-search-guide img {
+  flex: none;
+  width: 4.9rem;
+  height: 4.4rem;
 }
 .cm-search-form .krds-input {
   padding-right: 9.6rem; /* 지우기 · 검색 버튼 자리 */
@@ -260,6 +285,13 @@
   }
   .cm-search-form .krds-input {
     font-size: var(--krds-mobile-font-size-label-large);
+  }
+  .cm-search-guide {
+    font-size: var(--krds-mobile-font-size-heading-medium);
+  }
+  .cm-search-guide img {
+    width: 3.6rem;
+    height: 3.2rem;
   }
 }
 
@@ -3770,8 +3802,20 @@
 #krds-footer .f-logo,
 [data-krds-mode] #krds-footer .f-logo {
   width: 36.6rem;
+  max-width: 100%; /* 좁은 화면(360px 등)에서 로고가 화면 밖으로 나가 가로 스크롤이 생기지 않게 */
   height: 4rem;
   background-image: url(../img/logo/logo.svg);
+  background-position: left center;
+  background-size: contain;
+}
+/* 선명하게(어두운 배경) 모드 · 시스템 어두운 모드 : 푸터 로고도 글자가 흰색인 로고 */
+[data-krds-mode=high-contrast] #krds-footer .f-logo {
+  background-image: url(../img/logo/logo_white.svg);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] #krds-footer .f-logo {
+    background-image: url(../img/logo/logo_white.svg);
+  }
 }
 #krds-footer .inner {
   position: relative;

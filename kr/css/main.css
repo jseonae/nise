@@ -186,10 +186,43 @@ body.cm-main {
 .cm-hero.is-video .cm-hero-video {
   opacity: 0.2;
 }
+/* 배경 영상 정지 · 재생 버튼 : 평소에는 작은 회색 글자 + 아이콘만 보이는 조용한 모양 (Figma 에 없는 추가 요소)
+   - 히어로 디자인을 해치지 않게 테두리 · 바탕 없이 두고, 올리거나 초점이 가면 알약 모양 바탕이 나타남
+   - 접근성 : 글자를 항상 보여 줌(아이콘만으로 뜻을 전하지 않음), 글자 · 아이콘 색은 흰 바탕 대비 4.5:1 이상인 text-subtle,
+     누르는 영역 높이 32px(기준 24px 이상), 초점 테두리는 그대로 */
 .cm-hero-toggle {
   position: absolute;
   right: var(--krds-contents-padding-x);
-  bottom: 1.6rem;
+  bottom: var(--krds-padding-5);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--krds-gap-1);
+  height: var(--krds-size-height-5); /* 32px */
+  padding: 0 var(--krds-padding-4) 0 var(--krds-padding-3);
+  border: 0.1rem solid transparent;
+  border-radius: var(--krds-radius-max);
+  background-color: transparent;
+  font-size: var(--krds-pc-font-size-body-xsmall);
+  font-weight: var(--krds-font-weight-regular);
+  line-height: 1.5;
+  color: var(--cm-color-text-subtle);
+  transition: var(--krds-transition-base);
+}
+.cm-hero-toggle .svg-icon {
+  width: var(--krds-icon--size-small, 1.6rem);
+  height: var(--krds-icon--size-small, 1.6rem);
+  background-color: currentColor;
+}
+.cm-hero-toggle:hover,
+.cm-hero-toggle:focus {
+  border-color: var(--cm-color-border-gray);
+  background-color: var(--cm-color-surface-white);
+  color: var(--cm-color-text-basic);
+}
+.cm-hero-toggle:focus {
+  box-shadow: none;
+  outline: 0.2rem solid var(--cm-color-border-primary);
+  outline-offset: 0.2rem;
 }
 .cm-hero-toggle[hidden] {
   display: none;
@@ -225,7 +258,8 @@ body.cm-main {
 }
 .cm-hero-txt .tit .line1 em {
   font-style: normal;
-  color: #2098f3; /* [Figma 고정값] 큰 글자(54px Bold)라 흰 배경 대비 3:1 기준 충족(3.1:1) */
+  color: #1a7fd6; /* Figma #2098f3 은 배경 영상의 진한 점과 겹칠 때 대비가 2.3:1 까지 떨어져, 같은 하늘색 계열에서 조금 진하게 보정.
+                     큰 글자 기준 3:1 : 흰 배경 4.2:1, 영상과 겹치는 가장 불리한 장면에서도 3:1 이상 */
 }
 .cm-hero-txt .tit .line2 {
   margin-top: -1.2rem;
@@ -294,6 +328,11 @@ body.cm-main {
 .cm-hero-search .cm-search-recommend {
   margin-top: 2.3rem;
   padding-left: 2.8rem;
+}
+/* 추천 검색어 제목 : 배경 영상 위에 바로 놓여 영상의 진한 점과 겹칠 때 대비가 3.8:1 까지 떨어짐
+   → 한 단계 진한 회색(text-subtle)으로 바꿔 가장 불리한 장면에서도 4.5:1 이상 유지 */
+.cm-hero-search .cm-search-recommend .tit {
+  color: var(--cm-color-text-subtle);
 }
 
 /* --------------------------------------------------------------------------
@@ -364,7 +403,7 @@ body.cm-main {
 }
 
 /* 3-2. 숫자 카드 (신규 컴포넌트 ext_main_stat_card)
-        인포그래픽이 흰 배경 이미지라 카드 색은 화면 모드와 관계없이 밝은 색으로 고정 */
+        선명하게(어두운 배경) 모드의 색은 맨 아래 9번에서 바꿈 */
 .cm-stat-cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -471,9 +510,9 @@ body.cm-main {
 .cm-stat-cards.is-ready .cm-stat-card:not(.is-play) .cm-stat-svg .m {
   opacity: 0;
 }
-/* 재생 : 카드 순서만큼(--cm-stat-delay) 늦게 시작 */
+/* 재생 : 카드 순서만큼(--cm-stat-delay) 늦게 시작. 전체 빠르기는 --cm-stat-speed 배율로 조절 (스크립트 cmMainStat.SPEED 가 넣음, 클수록 느림) */
 .cm-stat-cards.is-ready .cm-stat-card.is-play .cm-stat-svg .m {
-  animation: var(--cm-stat-name) var(--t, 0.6s) cubic-bezier(0.22, 1, 0.36, 1) calc(var(--d, 0s) + var(--cm-stat-delay, 0s)) both;
+  animation: var(--cm-stat-name) calc(var(--t, 0.6s) * var(--cm-stat-speed, 1)) cubic-bezier(0.22, 1, 0.36, 1) calc((var(--d, 0s) + var(--cm-stat-delay, 0s)) * var(--cm-stat-speed, 1)) both;
 }
 @keyframes cm-stat-growy {
   from {
@@ -2070,7 +2109,8 @@ body.cm-banner-all-open {
 
 /* --------------------------------------------------------------------------
    9. 선명하게(고대비) 모드 · 시스템 어두운 모드
-      - 흰 바탕에 그린 그림이 들어가는 숫자 카드 · 변천사 카드 · 바로가기와 알림판 배너 이미지는 밝은 색 그대로 둡니다.
+      - 숫자 카드 · 변천사 카드도 어두운 면으로 바꿉니다. (인포그래픽이 SVG 라 색을 바꿀 수 있음)
+      - 바로가기도 어두운 상자로 바꿉니다. 알림판 배너 이미지와 보고서 표지는 이미지라 그대로 둡니다.
       - 나머지 면 · 선 · 글자는 KRDS 고대비 토큰으로 바꿉니다.
    -------------------------------------------------------------------------- */
 [data-krds-mode=high-contrast] body.cm-main {
@@ -2087,6 +2127,122 @@ body.cm-banner-all-open {
   --cm-main-round-hover: var(--krds-high-contrast-color-surface-gray-subtler);
   --cm-main-count-bg: var(--krds-high-contrast-color-surface-gray-subtler);
   --cm-main-page-bg: var(--krds-high-contrast-color-background-white);
+}
+/* 숫자로 보는 특수교육 · 실태조사변천사 : 띠는 짙은 남색, 카드는 어두운 면으로 */
+[data-krds-mode=high-contrast] .cm-main-data {
+  background-color: var(--krds-high-contrast-color-surface-primary-subtler);
+}
+[data-krds-mode=high-contrast] .cm-stat-card {
+  border: 0.1rem solid var(--krds-high-contrast-color-border-gray-light);
+  background-color: var(--krds-high-contrast-color-surface-gray-subtler);
+  color: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-stat-card .tag {
+  border-color: var(--krds-high-contrast-color-border-gray);
+  color: var(--krds-high-contrast-color-text-subtle);
+}
+/* 인포그래픽 SVG : 그림에 적힌 색(fill · stroke 속성)을 어두운 바탕용으로 바꿈. 파란 도형과 그 안의 흰 글자는 그대로 */
+[data-krds-mode=high-contrast] .cm-stat-svg [fill="#1E2124"] {
+  fill: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-stat-svg [fill="#61758F"] {
+  fill: #8a949e;
+}
+[data-krds-mode=high-contrast] .cm-stat-svg [fill="#0B78CB"]:not(path) {
+  fill: #6cb9f7;
+}
+[data-krds-mode=high-contrast] .cm-stat-svg [stroke="#000"] {
+  stroke: #fff;
+}
+[data-krds-mode=high-contrast] .cm-stat-svg linearGradient[id="st1_c"] stop {
+  stop-color: #fff;
+}
+[data-krds-mode=high-contrast] .cm-stat-svg rect[fill="#fff"] {
+  fill: var(--krds-high-contrast-color-surface-gray-subtler);
+}
+/* 말풍선 : 어두운 바탕에서는 밝은 상자 + 어두운 글자로 뒤집음 */
+[data-krds-mode=high-contrast] .cm-stat-svg .m-pop-b [fill="#1E2124"] {
+  fill: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-stat-svg .m-pop-b [fill="#fff"] {
+  fill: #131416;
+}
+/* 화살표 : 곱하기 혼합은 어두운 바탕에서 보이지 않아 보통 혼합으로 */
+[data-krds-mode=high-contrast] .cm-stat-svg .m-wipe-right {
+  mix-blend-mode: normal !important;
+}
+/* 변천사 카드 */
+[data-krds-mode=high-contrast] .cm-history-item[data-offset="0"] .cm-history-slide {
+  border-color: var(--krds-high-contrast-color-border-gray);
+  background-color: var(--krds-high-contrast-color-surface-gray-subtler);
+}
+[data-krds-mode=high-contrast] .cm-history-slide {
+  color: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-history-slide .eyebrow {
+  color: var(--krds-high-contrast-color-text-primary);
+}
+[data-krds-mode=high-contrast] .cm-history-slide .eyebrow .sub {
+  color: #8fa9c9;
+}
+[data-krds-mode=high-contrast] .cm-history-slide .idx {
+  background-color: var(--krds-high-contrast-color-text-primary);
+  color: #020f27;
+}
+[data-krds-mode=high-contrast] .cm-history-slide .body .tit {
+  color: var(--krds-high-contrast-color-text-secondary);
+}
+[data-krds-mode=high-contrast] .cm-check-list li::before {
+  filter: invert(1);
+}
+[data-krds-mode=high-contrast] .cm-check-list em {
+  color: var(--krds-high-contrast-color-text-primary);
+}
+[data-krds-mode=high-contrast] .cm-history-slide .year {
+  color: #fff; /* 어두운 바탕에서는 큰 연도를 흰색으로 또렷하게 */
+}
+[data-krds-mode=high-contrast] .cm-history-slide .krds-btn.tertiary {
+  border-color: var(--krds-high-contrast-color-text-subtle);
+  color: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-history-slide .krds-btn.tertiary:hover {
+  background-color: var(--krds-high-contrast-color-surface-white-subtler);
+}
+[data-krds-mode=high-contrast] .cm-history-slide .krds-btn .svg-icon {
+  background-color: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-history-slide .cover {
+  background-color: var(--krds-high-contrast-color-surface-white-subtler);
+}
+/* 바로가기 : 어두운 상자 + 밝은 글자, TOP 버튼은 검은 배경에서 보이도록 밝은 버튼으로 뒤집음 */
+[data-krds-mode=high-contrast] .cm-quick .box {
+  border-color: var(--krds-high-contrast-color-border-gray-light);
+  background-color: var(--krds-high-contrast-color-surface-gray-subtler);
+  box-shadow: none;
+}
+[data-krds-mode=high-contrast] .cm-quick .tit {
+  background-color: var(--krds-high-contrast-color-surface-white-subtler);
+  color: var(--krds-high-contrast-color-text-subtle);
+}
+[data-krds-mode=high-contrast] .cm-quick li + li::before {
+  background-color: var(--krds-high-contrast-color-border-gray-light);
+}
+[data-krds-mode=high-contrast] .cm-quick li a {
+  color: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-quick li a:hover {
+  background-color: var(--krds-high-contrast-color-surface-white-subtler);
+  color: var(--krds-high-contrast-color-text-primary);
+}
+[data-krds-mode=high-contrast] .cm-quick li a img {
+  filter: brightness(1.5);
+}
+[data-krds-mode=high-contrast] .cm-quick .btn-top {
+  background-color: var(--krds-high-contrast-color-text-basic);
+  color: #131416;
+}
+[data-krds-mode=high-contrast] .cm-quick .btn-top:hover {
+  background-color: var(--krds-high-contrast-color-text-subtle);
 }
 [data-krds-mode=high-contrast] .cm-hero {
   background-image: none;
@@ -2117,6 +2273,122 @@ body.cm-banner-all-open {
     --cm-main-round-hover: var(--krds-high-contrast-color-surface-gray-subtler);
     --cm-main-count-bg: var(--krds-high-contrast-color-surface-gray-subtler);
     --cm-main-page-bg: var(--krds-high-contrast-color-background-white);
+  }
+  /* 숫자로 보는 특수교육 · 실태조사변천사 : 띠는 짙은 남색, 카드는 어두운 면으로 */
+  [data-krds-mode=theme] .cm-main-data {
+    background-color: var(--krds-high-contrast-color-surface-primary-subtler);
+  }
+  [data-krds-mode=theme] .cm-stat-card {
+    border: 0.1rem solid var(--krds-high-contrast-color-border-gray-light);
+    background-color: var(--krds-high-contrast-color-surface-gray-subtler);
+    color: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-stat-card .tag {
+    border-color: var(--krds-high-contrast-color-border-gray);
+    color: var(--krds-high-contrast-color-text-subtle);
+  }
+  /* 인포그래픽 SVG : 그림에 적힌 색(fill · stroke 속성)을 어두운 바탕용으로 바꿈. 파란 도형과 그 안의 흰 글자는 그대로 */
+  [data-krds-mode=theme] .cm-stat-svg [fill="#1E2124"] {
+    fill: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-stat-svg [fill="#61758F"] {
+    fill: #8a949e;
+  }
+  [data-krds-mode=theme] .cm-stat-svg [fill="#0B78CB"]:not(path) {
+    fill: #6cb9f7;
+  }
+  [data-krds-mode=theme] .cm-stat-svg [stroke="#000"] {
+    stroke: #fff;
+  }
+  [data-krds-mode=theme] .cm-stat-svg linearGradient[id="st1_c"] stop {
+    stop-color: #fff;
+  }
+  [data-krds-mode=theme] .cm-stat-svg rect[fill="#fff"] {
+    fill: var(--krds-high-contrast-color-surface-gray-subtler);
+  }
+  /* 말풍선 : 어두운 바탕에서는 밝은 상자 + 어두운 글자로 뒤집음 */
+  [data-krds-mode=theme] .cm-stat-svg .m-pop-b [fill="#1E2124"] {
+    fill: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-stat-svg .m-pop-b [fill="#fff"] {
+    fill: #131416;
+  }
+  /* 화살표 : 곱하기 혼합은 어두운 바탕에서 보이지 않아 보통 혼합으로 */
+  [data-krds-mode=theme] .cm-stat-svg .m-wipe-right {
+    mix-blend-mode: normal !important;
+  }
+  /* 변천사 카드 */
+  [data-krds-mode=theme] .cm-history-item[data-offset="0"] .cm-history-slide {
+    border-color: var(--krds-high-contrast-color-border-gray);
+    background-color: var(--krds-high-contrast-color-surface-gray-subtler);
+  }
+  [data-krds-mode=theme] .cm-history-slide {
+    color: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-history-slide .eyebrow {
+    color: var(--krds-high-contrast-color-text-primary);
+  }
+  [data-krds-mode=theme] .cm-history-slide .eyebrow .sub {
+    color: #8fa9c9;
+  }
+  [data-krds-mode=theme] .cm-history-slide .idx {
+    background-color: var(--krds-high-contrast-color-text-primary);
+    color: #020f27;
+  }
+  [data-krds-mode=theme] .cm-history-slide .body .tit {
+    color: var(--krds-high-contrast-color-text-secondary);
+  }
+  [data-krds-mode=theme] .cm-check-list li::before {
+    filter: invert(1);
+  }
+  [data-krds-mode=theme] .cm-check-list em {
+    color: var(--krds-high-contrast-color-text-primary);
+  }
+  [data-krds-mode=theme] .cm-history-slide .year {
+    color: #fff; /* 어두운 바탕에서는 큰 연도를 흰색으로 또렷하게 */
+  }
+  [data-krds-mode=theme] .cm-history-slide .krds-btn.tertiary {
+    border-color: var(--krds-high-contrast-color-text-subtle);
+    color: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-history-slide .krds-btn.tertiary:hover {
+    background-color: var(--krds-high-contrast-color-surface-white-subtler);
+  }
+  [data-krds-mode=theme] .cm-history-slide .krds-btn .svg-icon {
+    background-color: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-history-slide .cover {
+    background-color: var(--krds-high-contrast-color-surface-white-subtler);
+  }
+  /* 바로가기 : 어두운 상자 + 밝은 글자, TOP 버튼은 검은 배경에서 보이도록 밝은 버튼으로 뒤집음 */
+  [data-krds-mode=theme] .cm-quick .box {
+    border-color: var(--krds-high-contrast-color-border-gray-light);
+    background-color: var(--krds-high-contrast-color-surface-gray-subtler);
+    box-shadow: none;
+  }
+  [data-krds-mode=theme] .cm-quick .tit {
+    background-color: var(--krds-high-contrast-color-surface-white-subtler);
+    color: var(--krds-high-contrast-color-text-subtle);
+  }
+  [data-krds-mode=theme] .cm-quick li + li::before {
+    background-color: var(--krds-high-contrast-color-border-gray-light);
+  }
+  [data-krds-mode=theme] .cm-quick li a {
+    color: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-quick li a:hover {
+    background-color: var(--krds-high-contrast-color-surface-white-subtler);
+    color: var(--krds-high-contrast-color-text-primary);
+  }
+  [data-krds-mode=theme] .cm-quick li a img {
+    filter: brightness(1.5);
+  }
+  [data-krds-mode=theme] .cm-quick .btn-top {
+    background-color: var(--krds-high-contrast-color-text-basic);
+    color: #131416;
+  }
+  [data-krds-mode=theme] .cm-quick .btn-top:hover {
+    background-color: var(--krds-high-contrast-color-text-subtle);
   }
   [data-krds-mode=theme] .cm-hero {
     background-image: none;

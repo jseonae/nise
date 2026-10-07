@@ -31,7 +31,7 @@ const cmMainHero = {
 
     let paused = false; // 사용자가 직접 멈췄는지
     const render = () => {
-      toggle.querySelector(".sr-only").textContent = paused ? "배경 영상 재생" : "배경 영상 정지";
+      toggle.querySelector(".txt").textContent = paused ? "배경 영상 재생" : "배경 영상 정지";
       toggle.querySelector(".svg-icon").className = `svg-icon ${paused ? "ico-swiper-play" : "ico-swiper-stop"}`;
     };
     const start = () => {
@@ -81,14 +81,16 @@ const cmMainSearch = {
    - 탭을 다른 것으로 바꿨다가 다시 열면 한 번 더 재생. 스크롤로 벗어났다 돌아올 때는 다시 재생하지 않음
    - 동작 줄이기 설정이면 아무것도 하지 않아 완성된 그림이 그대로 보임 */
 const cmMainStat = {
-  DURATION: 900, // 수치가 올라가는 시간(ms)
-  STAGGER: 0.15, // 카드 사이 시작 간격(초)
+  SPEED: 1.6, // 전체 빠르기 배율. 1 이 기본 설계 속도, 클수록 느림 (그림 움직임 · 수치 올라가기에 함께 적용)
+  DURATION: 900, // 수치가 올라가는 시간(ms, 배율 적용 전)
+  STAGGER: 0.15, // 카드 사이 시작 간격(초, 배율 적용 전)
   init() {
     const list = document.querySelector(".cm-stat-cards");
     if (!list || !("IntersectionObserver" in window)) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const cards = [...list.querySelectorAll(".cm-stat-card")];
     cards.forEach((card, i) => card.style.setProperty("--cm-stat-delay", `${i * this.STAGGER}s`));
+    list.style.setProperty("--cm-stat-speed", String(this.SPEED));
     list.classList.add("is-ready");
     const observer = new IntersectionObserver(
       (entries) => {
@@ -111,13 +113,14 @@ const cmMainStat = {
     card.querySelectorAll("[data-count]").forEach((el) => {
       const target = Number(el.dataset.count);
       const decimals = Number(el.dataset.decimals || 0);
-      const delay = (Number(el.dataset.delay || 0) + index * this.STAGGER) * 1000;
+      const delay = (Number(el.dataset.delay || 0) + index * this.STAGGER) * 1000 * this.SPEED;
+      const duration = this.DURATION * this.SPEED;
       el.textContent = this.format(0, decimals);
       let start = 0;
       const step = (now) => {
         if (card.cmStatRun !== run) return; // 되돌려졌으면 멈춤
         if (!start) start = now;
-        const progress = Math.min(1, (now - start) / this.DURATION);
+        const progress = Math.min(1, (now - start) / duration);
         const eased = 1 - (1 - progress) ** 3;
         el.textContent = this.format(target * eased, decimals);
         if (progress < 1) requestAnimationFrame(step);
