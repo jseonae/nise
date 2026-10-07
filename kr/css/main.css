@@ -994,7 +994,7 @@ body.cm-main {
 
 /* 5-3. 알림판 : 배너 넘김 (KRDS 포함 Swiper)
         상자 오른쪽 위가 파이고 그 자리에 쪽수 · 이전 · 다음 · 정지 버튼이 놓임.
-        (Figma 는 한 도형으로 그림. 폭이 변하므로 CSS 는 몸통 + 왼쪽 귀 두 조각으로 표현) */
+        (Figma 는 한 도형으로 그림. 폭이 변하므로 CSS 는 몸통 + 왼쪽 귀 + 안쪽 둥근 모서리 세 조각으로 표현) */
 .cm-main-banner {
   --cm-banner-ctrl: 26.2rem; /* 파인 자리 폭 */
   isolation: isolate;
@@ -1018,9 +1018,22 @@ body.cm-main {
   top: 0;
   left: 0;
   width: calc(100% - var(--cm-banner-ctrl));
-  height: 5.4rem;
+  height: 5.3rem;
   border-bottom: 0;
   border-radius: 1.6rem 1.6rem 0 0;
+}
+/* 꺾이는 안쪽 모서리 : Figma 도형처럼 둥글게(반지름 약 21px) 파이도록 조각을 덧댐
+   귀의 오른쪽 선과 몸통 윗선이 만나는 직각 부분을 흰색으로 덮고, 그 위에 둥근 선을 그림 */
+.cm-banner-area::before {
+  content: "";
+  position: absolute;
+  top: 3.1rem;
+  left: calc(100% - var(--cm-banner-ctrl) - 0.1rem);
+  z-index: 0;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: radial-gradient(circle at 100% 0, transparent calc(2.1rem - 0.5px), var(--cm-main-line) 2.1rem, var(--cm-main-line) calc(2.2rem - 0.5px), var(--cm-color-surface-white) 2.2rem);
+  pointer-events: none;
 }
 .cm-main-banner .head {
   justify-content: flex-start;
