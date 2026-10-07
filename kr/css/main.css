@@ -258,7 +258,8 @@ body.cm-main {
 }
 .cm-hero-txt .tit .line1 em {
   font-style: normal;
-  color: #2098f3; /* [Figma 고정값] 큰 글자(54px Bold)라 흰 배경 대비 3:1 기준 충족(3.1:1) */
+  color: #1a7fd6; /* Figma #2098f3 은 배경 영상의 진한 점과 겹칠 때 대비가 2.3:1 까지 떨어져, 같은 하늘색 계열에서 조금 진하게 보정.
+                     큰 글자 기준 3:1 : 흰 배경 4.2:1, 영상과 겹치는 가장 불리한 장면에서도 3:1 이상 */
 }
 .cm-hero-txt .tit .line2 {
   margin-top: -1.2rem;
