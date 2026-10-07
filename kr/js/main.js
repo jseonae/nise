@@ -91,9 +91,11 @@ const cmMainHistory = {
     const list = root.querySelector(".cm-history-slides");
     const slides = [...list.querySelectorAll(".cm-history-item")];
     const timeline = root.querySelector(".cm-history-timeline");
-    const items = [...timeline.querySelectorAll("li")];
+    const items = [...timeline.querySelectorAll("li:not(.cm-history-point)")];
     const buttons = items.map((item) => item.querySelector("button"));
     const count = slides.length;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let moving = 0; // 현재 위치 점을 다시 보이게 하는 타이머
     let index = Math.max(0, slides.findIndex((slide) => slide.dataset.offset === "0"));
 
     const fill = () => {
@@ -106,6 +108,7 @@ const cmMainHistory = {
       timeline.style.setProperty("--cm-history-fill", `${width}px`);
     };
     const go = (next) => {
+      const moved = (next + count) % count !== index;
       index = (next + count) % count;
       slides.forEach((slide, i) => {
         const offset = (i - index + count) % count; // 앞 장에서 몇 번째 뒤인지
@@ -121,6 +124,12 @@ const cmMainHistory = {
         if (i === index) buttons[i].setAttribute("aria-current", "true");
         else buttons[i].removeAttribute("aria-current");
       });
+      // 현재 위치 점 : 막대가 움직이는 동안(0.4초) 숨겼다가 멈추면 새 자리에 나타남
+      if (moved && !reduced) {
+        timeline.classList.add("is-moving");
+        clearTimeout(moving);
+        moving = setTimeout(() => timeline.classList.remove("is-moving"), 450);
+      }
       fill();
     };
 

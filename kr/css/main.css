@@ -669,6 +669,73 @@ body.cm-main {
   background-color: var(--krds-light-color-border-primary);
   transition: width 0.4s ease;
 }
+/* 현재 위치 표시 점 (Figma 에 없는 추가 효과) : 진행 막대 끝에 놓이는 밝은 하늘색 점 + 두근거림(하트비트)
+   - 색 : 막대의 파랑(#256ef4)과 같은 계열에서 더 밝고 눈에 띄는 하늘색. 진한 파랑 띠 위 대비 약 7:1
+   - 막대가 움직이는 동안(.is-moving)은 숨었다가 멈추면 그 자리에 나타남 (kr/js/main.js cmMainHistory) */
+.cm-history-point {
+  --cm-history-point-color: #6fd6ff;
+  position: absolute;
+  top: calc(3.3rem + 0.35rem);
+  left: clamp(0.8rem, var(--cm-history-fill), calc(100% - 0.8rem));
+  z-index: 1;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin: -0.8rem 0 0 -0.8rem;
+  border: 0.3rem solid #fff;
+  border-radius: 50%;
+  background-color: var(--cm-history-point-color);
+  box-shadow: 0 0 0.8rem rgba(111, 214, 255, 0.9);
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 0.25s;
+  animation: cm-history-beat 1.6s ease-in-out infinite;
+}
+/* 퍼져 나가는 고리 2겹 */
+.cm-history-point::before,
+.cm-history-point::after {
+  content: "";
+  position: absolute;
+  inset: -0.3rem;
+  border-radius: 50%;
+  background-color: var(--cm-history-point-color);
+  opacity: 0;
+  animation: cm-history-ring 1.6s ease-out infinite;
+}
+.cm-history-point::after {
+  animation-delay: 0.28s;
+}
+.cm-history-timeline.is-moving .cm-history-point {
+  opacity: 0;
+  transition: none;
+}
+/* 두근 · 두근 : 짧게 두 번 커졌다가 쉼 */
+@keyframes cm-history-beat {
+  0%,
+  40%,
+  100% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.25);
+  }
+  20% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.18);
+  }
+}
+@keyframes cm-history-ring {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(2.8);
+  }
+}
 .cm-history-timeline button {
   display: flex;
   flex-direction: column;
@@ -1638,6 +1705,9 @@ body.cm-main {
   .cm-history-timeline::after {
     top: 3rem;
   }
+  .cm-history-point {
+    top: calc(3rem + 0.35rem);
+  }
   .cm-history-arrows {
     justify-content: center;
   }
@@ -1735,6 +1805,11 @@ body.cm-main {
   }
   .cm-history-timeline::after {
     transition: none;
+  }
+  .cm-history-point,
+  .cm-history-point::before,
+  .cm-history-point::after {
+    animation: none;
   }
 }
 
