@@ -1,11 +1,62 @@
 /* ==========================================================================
    메인 화면 전용 스크립트 (kr/html/main.html)
+   - cmMainHero    : 히어로 배경 영상 (조건이 맞을 때만 불러와 재생, 정지 · 재생 버튼)
    - cmMainSearch  : 히어로 추천 검색어 → 검색어 칸에 넣고 바로 검색
    - cmMainHistory : 실태조사변천사 카드 넘김 (이전 · 다음 · 연도 버튼, 자동 넘김 없음)
    - cmMainReport  : 연구 보고서 표지 넘김 (KRDS 포함 Swiper, 자동 넘김 없음)
    - cmMainBanner  : 알림판 배너 넘김 (KRDS 포함 Swiper, 자동 넘김 + 정지 · 재생, 쪽수)
    - cmMainQuick   : 바로가기 TOP 버튼
    ========================================================================== */
+
+/* 히어로 배경 영상 : 꾸밈용 영상(소리 없음, 반복, 약 8초 · 4MB)
+   - 동작 줄이기 설정, 데이터 절약 모드, 모바일(767px 이하), 선명하게 모드에서는 불러오지 않음 → 정지 이미지 그대로
+   - 화면이 다 뜬 뒤(load)에 불러와 첫 화면 표시를 늦추지 않음
+   - 재생이 시작되면 정지 · 재생 버튼을 보임. 화면 밖으로 나가면 멈춤 */
+const cmMainHero = {
+  init() {
+    const hero = document.querySelector(".cm-hero");
+    const video = hero?.querySelector(".cm-hero-video");
+    const toggle = hero?.querySelector(".cm-hero-toggle");
+    if (!video || !toggle) return;
+    const dark = () => {
+      const mode = document.documentElement.getAttribute("data-krds-mode");
+      return mode === "high-contrast" || (mode === "theme" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(max-width: 767px)").matches) return;
+    if (navigator.connection?.saveData) return;
+    if (dark()) return;
+
+    let paused = false; // 사용자가 직접 멈췄는지
+    const render = () => {
+      toggle.querySelector(".sr-only").textContent = paused ? "배경 영상 재생" : "배경 영상 정지";
+      toggle.querySelector(".svg-icon").className = `svg-icon ${paused ? "ico-swiper-play" : "ico-swiper-stop"}`;
+    };
+    const start = () => {
+      video.src = video.dataset.src;
+      video.addEventListener("playing", () => {
+        hero.classList.add("is-video");
+        toggle.hidden = false;
+      }, { once: true });
+      video.play().catch(() => {}); // 자동 재생이 막히면 정지 이미지 그대로
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(([entry]) => {
+          if (paused) return;
+          if (entry.isIntersecting) video.play().catch(() => {});
+          else video.pause();
+        }).observe(hero);
+      }
+    };
+    toggle.addEventListener("click", () => {
+      paused = !paused;
+      if (paused) video.pause();
+      else video.play().catch(() => {});
+      render();
+    });
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+  },
+};
 
 /* 히어로 추천 검색어 : 검색 결과 화면 이동은 기존 폼 제출(cmSearchResult · cmSearchDemo)을 그대로 씀 */
 const cmMainSearch = {
@@ -193,6 +244,7 @@ const cmMainQuick = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  cmMainHero.init();
   cmMainSearch.init();
   cmMainHistory.init();
   cmMainReport.init();

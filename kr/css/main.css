@@ -160,10 +160,42 @@ body.cm-main {
    2. 히어로 (신규 컴포넌트 ext_main_hero, Figma node 11510:62329)
    -------------------------------------------------------------------------- */
 .cm-hero {
-  /* 점무늬 배경 : Figma 배경 프레임(1920×435, 이미지 불투명도 20%)을 그대로 내려받은 이미지 */
+  position: relative;
+  /* 정지 이미지 : 영상을 재생하지 않을 때(동작 줄이기 · 데이터 절약 · 모바일 · 불러오기 전) 보이는 배경.
+     Figma 배경 프레임(1920×435, 불투명도 20%)을 그대로 내려받은 이미지 */
   background: url("../img/main/hero_bg.png") center top / max(100%, 192rem) auto no-repeat;
 }
+/* 배경 영상 : Figma 는 영상(1920×574)을 불투명도 20%로 깔아 둠. 재생이 시작되면 정지 이미지를 빼고 영상을 보임 */
+.cm-hero.is-video {
+  background-image: none;
+}
+.cm-hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.cm-hero-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+.cm-hero.is-video .cm-hero-video {
+  opacity: 0.2;
+}
+.cm-hero-toggle {
+  position: absolute;
+  right: var(--krds-contents-padding-x);
+  bottom: 1.6rem;
+}
+.cm-hero-toggle[hidden] {
+  display: none;
+}
 .cm-hero > .inner {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1792,6 +1824,10 @@ body.cm-main {
 [data-krds-mode=high-contrast] .cm-hero {
   background-image: none;
 }
+[data-krds-mode=high-contrast] .cm-hero-bg,
+[data-krds-mode=high-contrast] .cm-hero-toggle {
+  display: none;
+}
 [data-krds-mode=high-contrast] .cm-hero-txt .tit .line1 em {
   color: #6cb9f7;
 }
@@ -1817,6 +1853,10 @@ body.cm-main {
   }
   [data-krds-mode=theme] .cm-hero {
     background-image: none;
+  }
+  [data-krds-mode=theme] .cm-hero-bg,
+  [data-krds-mode=theme] .cm-hero-toggle {
+    display: none;
   }
   [data-krds-mode=theme] .cm-hero-txt .tit .line1 em {
     color: #6cb9f7;
