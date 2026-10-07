@@ -69,11 +69,14 @@ const cmEduBasis = {
     if (!select) return;
     const results = document.querySelectorAll(".cm-es-result");
     const sub = document.querySelector(".cm-es-sub");
+    const place = document.getElementById("es_place");
     const pattern = document.getElementById("es_pattern");
     const apply = () => {
       const value = select.value;
+      // 급별은 일반학교 일반학급(완전통합) 데이터만 있어, 그 밖의 배치(기본값 전체 배치 포함)는 준비 중 안내를 보여줌
+      const shown = value === "level" && place && place.value !== "full" ? "level-ready" : value;
       results.forEach((result) => {
-        result.hidden = result.dataset.basis !== value;
+        result.hidden = result.dataset.basis !== shown;
       });
       if (sub) sub.hidden = value !== "level";
       if (pattern) {
@@ -85,7 +88,11 @@ const cmEduBasis = {
       }
       window.dispatchEvent(new Event("resize"));
     };
-    select.addEventListener("change", apply);
+    select.addEventListener("change", () => {
+      if (place) place.value = "all"; // 기준을 바꿀 때마다 배치 선택은 기본값(전체 배치)으로
+      apply();
+    });
+    if (place) place.addEventListener("change", apply);
     apply();
   },
 };

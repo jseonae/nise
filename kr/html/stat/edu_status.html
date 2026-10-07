@@ -146,7 +146,7 @@
               <section id="panel_es_01" aria-labelledby="tab_es_01" class="tab-conts active" data-quick-nav="false">
                 <h3 class="sr-only">학생 수</h3>
                 <!-- 조회 도구 : 학생 수 기준을 바꾸면 아래 그래프·통계표가 바뀜
-                     퍼블리싱에서는 확인용 스크립트(kr/js/user-custom.js cmEduBasis)가 4가지 상태(.cm-es-result)를 바꿔 보여줌, 개발 시 서버 조회로 바꿈 -->
+                     퍼블리싱에서는 확인용 스크립트(kr/js/user-custom.js cmEduBasis)가 4가지 상태 + 준비 중 안내(.cm-es-result)를 바꿔 보여줌, 개발 시 서버 조회로 바꿈 -->
                 <div class="cm-ts-tool" id="es_tools">
                   <div class="cm-ts-tool-filter">
                     <div class="cm-ts-select">
@@ -162,10 +162,10 @@
                     <div class="cm-ts-select cm-es-sub" hidden>
                       <label for="es_place" class="sr-only">배치 선택</label>
                       <select id="es_place" class="krds-form-select small">
-                        <option value="all">전체 배치</option>
+                        <option value="all" selected>전체 배치</option>
                         <option value="school">특수학교</option>
                         <option value="class">일반학교 특수학급</option>
-                        <option value="full" selected>일반학교 일반학급(완전통합)</option>
+                        <option value="full">일반학교 일반학급(완전통합)</option>
                         <option value="center">특수교육지원센터</option>
                       </select>
                     </div>
@@ -304,6 +304,15 @@
                 <div class="cm-es-notes">
                   <p><strong>급별 구분 안내</strong> — 원자료에는 장애유형별 구분이 포함되어 있지 않아 배치 유형을 가로지르는 <strong>학교과정별(장애영아·유치원·초등학교·중학교·고등학교·전공과)</strong> 구분을 제공합니다.</p>
                   <p class="cm-source cm-es-source" id="es_src_level"><strong>출처 -</strong> 교육부 국립특수교육원, 특수교육통계 (2008~2026년) — 행정통계 기준으로 실태조사 결과와 집계 대상·시점이 다를 수 있습니다.</p>
+                </div>
+              </div>
+              <!-- 학생 수 기준 : 급별에서 아직 데이터가 없는 배치를 골랐을 때 (퍼블리싱에는 일반학교 일반학급(완전통합) 데이터만 있음)
+                   준비 중 안내 : 신규 컴포넌트 _common/html/code/ext_empty.html. 선택을 바꾸면 나타나는 안내라 role="status" 로 스크린리더에 알림 -->
+              <div class="cm-es-result" data-basis="level-ready" hidden>
+                <div class="cm-empty" role="status">
+                  <img src="../../../_common/resources/img/common/cm_ready.png" alt="">
+                  <h3 class="tit">데이터 준비 중입니다.</h3>
+                  <p class="txt">선택하신 배치의 급별 데이터는 준비 중입니다.</p>
                 </div>
               </div>
               <!-- 학생 수 기준 : 학생 수 기준 장애유형별 -->
