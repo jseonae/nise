@@ -11,7 +11,7 @@
   - 알림판 배너는 디자인된 이미지(477×288 비율)를 그대로 씁니다. 이미지 안의 글은 alt 에 모두 적습니다. (관리자 등록 시에도 대체 텍스트 필수)
     이미지는 칸 폭에 맞춰 비율대로 줄어듭니다.
   - 공지 날짜 색은 대비 4.5:1 에 맞게 Figma 보다 어둡게 보정했습니다. (배너는 이미지라 Figma 색 그대로)
-  - 모아보기 버튼은 모양만 있습니다. (눌렀을 때 화면이 Figma 에 없음)
+  - 전체보기 버튼을 누르면 알림판 전체보기(ext_main_banner_all.html)가 열립니다.
 -->
 <div class="cm-main-sec cm-main-board">
   <div class="inner">
@@ -70,8 +70,8 @@
     <section class="cm-main-article cm-main-banner" aria-labelledby="main_banner_tit">
       <div class="head">
         <h2 id="main_banner_tit" class="cm-main-tit">알림판</h2>
-        <!-- 모아보기 : 버튼만 둠 (눌렀을 때 화면은 Figma 에 없어 동작 보류) -->
-        <button type="button" class="krds-btn small icon cm-banner-all"><span class="sr-only">알림판 모아보기</span><i class="cm-ico-view-all" aria-hidden="true"></i></button>
+        <!-- 전체보기 : 누르면 알림판 전체보기(ext_main_banner_all.html)가 열림 -->
+      <button type="button" class="krds-btn small icon cm-banner-all" aria-haspopup="dialog" aria-controls="modal_banner_all"><span class="sr-only">알림판 전체보기</span><i class="cm-ico-view-all" aria-hidden="true"></i></button>
       </div>
       <div class="cm-banner-area" role="group" aria-roledescription="캐러셀" aria-label="알림판">
         <div class="controller">

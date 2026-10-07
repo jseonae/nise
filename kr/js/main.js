@@ -5,6 +5,7 @@
    - cmMainHistory : 실태조사변천사 카드 넘김 (이전 · 다음 · 연도 버튼, 자동 넘김 없음)
    - cmMainReport  : 연구 보고서 표지 넘김 (KRDS 포함 Swiper, 자동 넘김 없음)
    - cmMainBanner  : 알림판 배너 넘김 (KRDS 포함 Swiper, 자동 넘김 + 정지 · 재생, 쪽수)
+   - cmMainBannerAll : 알림판 전체보기 (화면 전체에 배너 격자, dialog)
    - cmMainQuick   : 바로가기 TOP 버튼
    ========================================================================== */
 
@@ -264,6 +265,79 @@ const cmMainBanner = {
   },
 };
 
+/* 알림판 전체보기 : 알림판 배너를 화면 전체에 격자로 모아 보여 줌 (참고 : 당진시청 알림판 전체보기)
+   - 목록은 알림판 슬라이드(순서 그대로)에서 만들어 넣으므로 배너는 한 곳에서만 관리
+   - HTML 기본 dialog(showModal) : 초점이 안에 머물고 Esc 로 닫힘. 닫으면 전체보기 버튼으로 초점이 돌아감
+   - 보고 있던 스크롤 위치 그대로 그 위에 열리고, 닫으면 같은 위치로 돌아감
+   - 열려 있는 동안 알림판 자동 넘김은 멈추고, 닫으면 원래 상태로 돌아감 */
+const cmMainBannerAll = {
+  init() {
+    const opener = document.querySelector(".cm-banner-all");
+    const modal = document.getElementById("modal_banner_all");
+    const area = document.querySelector(".cm-banner-area");
+    if (!opener || !modal || !area || typeof modal.showModal !== "function") return;
+    const list = modal.querySelector(".cm-banner-all-list");
+    const swiper = () => area.querySelector(".swiper")?.swiper;
+    let resume = false;
+    let scrollTop = 0;
+
+    const build = () => {
+      // loop 로 순서가 바뀌어 있을 수 있으므로 원래 순서(data-swiper-slide-index)대로 정렬
+      const slides = [...area.querySelectorAll(".swiper-slide")].sort(
+        (a, b) => Number(a.dataset.swiperSlideIndex ?? 0) - Number(b.dataset.swiperSlideIndex ?? 0),
+      );
+      list.replaceChildren(
+        ...slides.map((slide) => {
+          const source = slide.querySelector(".cm-banner");
+          const image = source.querySelector("img");
+          const item = document.createElement("li");
+          const link = document.createElement("a");
+          link.className = "item";
+          link.href = source.getAttribute("href");
+          if (source.target) {
+            link.target = source.target;
+            link.rel = "noopener noreferrer";
+            link.title = "새 창 열림";
+          }
+          const img = document.createElement("img");
+          img.src = image.getAttribute("src");
+          img.alt = image.alt;
+          img.loading = "lazy";
+          const more = document.createElement("span");
+          more.className = "more";
+          more.textContent = "자세히보기";
+          link.append(img, more);
+          item.append(link);
+          return item;
+        }),
+      );
+    };
+
+    opener.addEventListener("click", () => {
+      build();
+      const instance = swiper();
+      resume = !!instance?.autoplay?.running;
+      if (resume) instance.autoplay.stop();
+      // 보고 있던 위치 그대로 그 위에 열림 (닫을 때 같은 위치로 되돌림)
+      scrollTop = window.scrollY;
+      document.body.classList.add("cm-banner-all-open");
+      modal.showModal();
+      modal.scrollTop = 0;
+    });
+    modal.querySelector(".btn-close").addEventListener("click", () => modal.close());
+    // 배너 밖 어두운 곳을 누르면 닫힘
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal || event.target.classList.contains("inner") || event.target === list) modal.close();
+    });
+    modal.addEventListener("close", () => {
+      document.body.classList.remove("cm-banner-all-open");
+      if (resume) swiper()?.autoplay.start();
+      opener.focus({ preventScroll: true });
+      window.scrollTo({ top: scrollTop, behavior: "instant" });
+    });
+  },
+};
+
 /* 바로가기 TOP : 맨 위로 올리고 초점을 본문 바로가기 쪽(문서 처음)으로 옮김 */
 const cmMainQuick = {
   init() {
@@ -286,5 +360,6 @@ document.addEventListener("DOMContentLoaded", () => {
   cmMainHistory.init();
   cmMainReport.init();
   cmMainBanner.init();
+  cmMainBannerAll.init();
   cmMainQuick.init();
 });

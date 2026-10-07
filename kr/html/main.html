@@ -440,8 +440,8 @@
           <section class="cm-main-article cm-main-banner" aria-labelledby="main_banner_tit">
             <div class="head">
               <h2 id="main_banner_tit" class="cm-main-tit">알림판</h2>
-              <!-- 모아보기 : 버튼만 둠 (눌렀을 때 화면은 Figma 에 없어 동작 보류) -->
-              <button type="button" class="krds-btn small icon cm-banner-all"><span class="sr-only">알림판 모아보기</span><i class="cm-ico-view-all" aria-hidden="true"></i></button>
+              <!-- 전체보기 : 누르면 알림판 배너를 한 화면에 모아 보여 줌 (#modal_banner_all, kr/js/main.js cmMainBannerAll) -->
+              <button type="button" class="krds-btn small icon cm-banner-all" aria-haspopup="dialog" aria-controls="modal_banner_all"><span class="sr-only">알림판 전체보기</span><i class="cm-ico-view-all" aria-hidden="true"></i></button>
             </div>
             <div class="cm-banner-area" role="group" aria-roledescription="캐러셀" aria-label="알림판">
               <div class="controller">
@@ -541,6 +541,19 @@
 
   <!-- [06] 모달 (#wrap 바깥) -->
   <div data-include="modal"></div>
+
+  <!-- 알림판 전체보기 (신규 컴포넌트 kr/html/code/ext_main_banner_all.html, 참고 : 당진시청 알림판 전체보기)
+       화면 전체를 덮는 어두운 층 위에 배너를 격자로 모아 보여 줌. 목록은 스크립트가 알림판 슬라이드에서 만들어 넣음
+       HTML 기본 dialog 사용 : 열려 있는 동안 초점이 안에 머물고, Esc · 닫기 버튼 · 바깥 누르기로 닫힘 -->
+  <dialog id="modal_banner_all" class="cm-banner-all-modal" aria-labelledby="tit_modal_banner_all">
+    <div class="inner">
+      <h2 id="tit_modal_banner_all" class="tit">알림판 전체보기</h2>
+      <ul class="cm-banner-all-list">
+        <!-- 스크립트가 채움 : <li><a href="…" class="item"><img src="…" alt="배너 내용"><span class="more">자세히보기</span></a></li> -->
+      </ul>
+    </div>
+    <button type="button" class="btn-close"><span class="sr-only">알림판 전체보기 닫기</span><i class="svg-icon ico-popup-close" aria-hidden="true"></i></button>
+  </dialog>
 
   <!-- ============================================================
        [07] 스크립트

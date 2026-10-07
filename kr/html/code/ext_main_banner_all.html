@@ -1,0 +1,22 @@
+<!-- ext: 신규 컴포넌트 (KRDS에 없음, 메인 전용) / 알림판 전체보기 : 화면 전체를 덮는 어두운 층 + 배너 격자 -->
+<!--
+  참고 : 당진시청(dangjin.go.kr) 알림판 전체보기. Figma 에 없는 화면이라 참고 사이트 구성에 KRDS 색 · 간격 토큰을 입혔습니다.
+  - 스타일 : kr/css/main.css 5-4. 알림판 전체보기 (.cm-banner-all-modal) / 스크립트 : kr/js/main.js cmMainBannerAll
+  - 여는 버튼 : 알림판 제목 옆 .cm-banner-all (aria-haspopup="dialog")
+  - HTML 기본 dialog 를 씁니다. 열려 있는 동안 초점이 안에 머물고 뒤 화면은 읽히지 않으며, Esc · 닫기 버튼 · 바깥 누르기로 닫힙니다.
+    닫으면 전체보기 버튼으로 초점이 돌아갑니다. KRDS 모달(.krds-modal)은 가운데 상자 모양이라 화면 전체를 덮는 이 구성에는 쓰지 않았습니다.
+  - 목록은 스크립트가 알림판 슬라이드에서 만들어 넣습니다. (배너 이미지 · 대체 텍스트 · 링크를 한 곳에서만 관리)
+  - 격자 : 4열(1280px 이상) → 3열 → 2열 → 1열(599px 이하). 배너 아래 띠는 링크의 일부이고 글자는 "자세히보기" 입니다.
+  - 열려 있는 동안 알림판 자동 넘김은 멈춥니다.
+  - 모달이므로 #wrap 바깥에 둡니다.
+-->
+<dialog id="modal_banner_all" class="cm-banner-all-modal" aria-labelledby="tit_modal_banner_all">
+  <div class="inner">
+    <h2 id="tit_modal_banner_all" class="tit">알림판 전체보기</h2>
+    <ul class="cm-banner-all-list">
+      <li><a href="#" class="item"><img src="{{root}}kr/img/main/banner_01_guide.png" alt="처음 방문하셨나요? 데이터 플랫폼 이용안내. 사용자별 이용안내를 제공하고 있습니다. 자세히보기"><span class="more">자세히보기</span></a></li>
+      <!-- 배너 수만큼 반복 -->
+    </ul>
+  </div>
+  <button type="button" class="btn-close"><span class="sr-only">알림판 전체보기 닫기</span><i class="svg-icon ico-popup-close" aria-hidden="true"></i></button>
+</dialog>
