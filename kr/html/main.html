@@ -155,15 +155,14 @@
               </section>
 
               <!-- 탭 2 : 실태조사변천사 (신규 컴포넌트 kr/html/code/ext_main_history.html, Figma: 변천사3 Default~Variant7)
-                   겹쳐 쌓인 카드 7장. 다음을 누르면 앞 장이 아래로 빠지며 사라지고 뒤에 있던 장이 앞으로 나옴 (Figma 프로토타입 : 스마트 애니메이트 0.3초)
-                   KRDS 포함 Swiper 의 creative 효과 사용, 이전 · 다음 버튼과 연도 버튼으로 넘김 (자동 넘김 없음, kr/js/main.js cmMainHistory) -->
+                   겹쳐 쌓인 카드 7장이 끝없이 돎. 다음을 누르면 앞 장이 아래로 빠지며 사라지고 뒤에 있던 장이 앞으로 나오며, 맨 뒤에 새 장이 생김
+                   (Figma 프로토타입 : 스마트 애니메이트 0.3초) 카드 위치는 data-offset 으로 정함 (kr/js/main.js cmMainHistory, 자동 넘김 없음) -->
               <section id="panel_main_02" aria-labelledby="tab_main_02" class="tab-conts">
                 <h2 class="sr-only">실태조사변천사</h2>
                 <div class="cm-history" data-cm-history role="group" aria-roledescription="캐러셀" aria-label="실태조사변천사">
                   <div class="cm-history-stage">
-                    <div class="swiper">
-                    <ul class="swiper-wrapper cm-history-slides" aria-live="polite">
-                      <li class="swiper-slide cm-history-item" id="history_slide_1" role="group" aria-roledescription="슬라이드" aria-label="7장 중 1번째, 2008년">
+                    <ul class="cm-history-slides" aria-live="polite">
+                      <li class="cm-history-item" id="history_slide_1" data-offset="0" role="group" aria-roledescription="슬라이드" aria-label="7장 중 1번째, 2008년">
 
                         <div class="cm-history-slide">
                         <div class="top">
@@ -186,7 +185,7 @@
                         <div class="cover"><img src="../img/main/history_cover_2008.jpg" alt="2008 특수교육 실태조사 보고서 표지" width="255" height="346"></div>
                         </div>
                       </li>
-                          <li class="swiper-slide cm-history-item" id="history_slide_2" role="group" aria-roledescription="슬라이드" aria-label="7장 중 2번째, 2011년">
+                          <li class="cm-history-item" id="history_slide_2" data-offset="1" inert aria-hidden="true" role="group" aria-roledescription="슬라이드" aria-label="7장 중 2번째, 2011년">
 
                             <div class="cm-history-slide">
                         <div class="top">
@@ -209,7 +208,7 @@
                         <div class="cover"><img src="../img/main/history_cover_2011.jpg" alt="2011 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
                         </div>
                       </li>
-                          <li class="swiper-slide cm-history-item" id="history_slide_3" role="group" aria-roledescription="슬라이드" aria-label="7장 중 3번째, 2014년">
+                          <li class="cm-history-item" id="history_slide_3" data-offset="2" inert aria-hidden="true" role="group" aria-roledescription="슬라이드" aria-label="7장 중 3번째, 2014년">
 
                             <div class="cm-history-slide">
                         <div class="top">
@@ -232,7 +231,7 @@
                         <div class="cover"><img src="../img/main/history_cover_2014.jpg" alt="2014 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
                         </div>
                       </li>
-                          <li class="swiper-slide cm-history-item" id="history_slide_4" role="group" aria-roledescription="슬라이드" aria-label="7장 중 4번째, 2017년">
+                          <li class="cm-history-item" id="history_slide_4" data-offset="3" inert aria-hidden="true" role="group" aria-roledescription="슬라이드" aria-label="7장 중 4번째, 2017년">
 
                             <div class="cm-history-slide">
                         <div class="top">
@@ -254,7 +253,7 @@
                         <div class="cover"><img src="../img/main/history_cover_2017.jpg" alt="2017 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
                         </div>
                       </li>
-                          <li class="swiper-slide cm-history-item" id="history_slide_5" role="group" aria-roledescription="슬라이드" aria-label="7장 중 5번째, 2020년">
+                          <li class="cm-history-item" id="history_slide_5" data-offset="far" inert aria-hidden="true" role="group" aria-roledescription="슬라이드" aria-label="7장 중 5번째, 2020년">
 
                             <div class="cm-history-slide">
                         <div class="top">
@@ -277,7 +276,7 @@
                         <div class="cover"><img src="../img/main/history_cover_2020.jpg" alt="2020 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
                         </div>
                       </li>
-                          <li class="swiper-slide cm-history-item" id="history_slide_6" role="group" aria-roledescription="슬라이드" aria-label="7장 중 6번째, 2023년">
+                          <li class="cm-history-item" id="history_slide_6" data-offset="far" inert aria-hidden="true" role="group" aria-roledescription="슬라이드" aria-label="7장 중 6번째, 2023년">
 
                             <div class="cm-history-slide">
                         <div class="top">
@@ -300,7 +299,7 @@
                         <div class="cover"><img src="../img/main/history_cover_2023.jpg" alt="2023 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
                         </div>
                       </li>
-                          <li class="swiper-slide cm-history-item" id="history_slide_7" role="group" aria-roledescription="슬라이드" aria-label="7장 중 7번째, 2026년">
+                          <li class="cm-history-item" id="history_slide_7" data-offset="past" inert aria-hidden="true" role="group" aria-roledescription="슬라이드" aria-label="7장 중 7번째, 2026년">
 
                             <div class="cm-history-slide">
                         <div class="top">
@@ -324,7 +323,6 @@
                         </div>
                       </li>
                     </ul>
-                    </div>
                   </div>
                   <div class="cm-history-nav">
                     <!-- 연도 진행 막대 : 연도를 누르면 해당 카드로 이동, 현재 연도 aria-current -->

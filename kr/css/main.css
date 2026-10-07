@@ -430,22 +430,51 @@ body.cm-main {
   position: relative;
   padding-top: 9.7rem;
 }
-/* 겹쳐 쌓인 카드 : Swiper creative 효과 (kr/js/main.js cmMainHistory)
-   - 뒤 3장은 위로 조금씩 올라가고 좁아진 반투명 판으로 보임 (Figma : 폭 1244 · 1178 · 1100, 위로 36 · 69 · 97px)
-   - 넘기면 앞 장이 아래로 36px 내려가며 사라지고, 뒤 장들이 한 칸씩 앞으로 나옴 (Figma 프로토타입 스마트 애니메이트) */
-.cm-history-stage .swiper {
-  overflow: visible;
-}
+/* 겹쳐 쌓인 카드 : 카드마다 앞 장에서 몇 번째인지(data-offset)에 따라 자리를 정하고, 자리가 바뀔 때 0.3초로 움직임
+   (Figma 프로토타입 스마트 애니메이트 0.3초 ease-out, kr/js/main.js cmMainHistory)
+   - 0 : 앞 장 / 1 · 2 · 3 : 뒤에 비치는 반투명 판 (Figma : 위로 36 · 69 · 97px, 폭 1244 · 1178 · 1100 / 1320)
+   - far : 맨 뒤 자리에서 기다리는 장(안 보임) → 차례가 오면 맨 뒤에 나타남
+   - past : 방금 지나간 장. 아래로 36px 내려가며 사라짐 */
 .cm-history-slides {
-  align-items: stretch;
+  --cm-history-y1: -3.6rem;
+  --cm-history-y2: -6.9rem;
+  --cm-history-y3: -9.7rem;
+  --cm-history-s1: 0.942;
+  --cm-history-s2: 0.892;
+  --cm-history-s3: 0.833;
+  display: grid;
+  touch-action: pan-y;
 }
 .cm-history-item {
-  height: auto;
+  grid-area: 1 / 1;
+  min-width: 0;
   transform-origin: center top;
+  transition: transform 0.3s ease-out;
   pointer-events: none;
 }
 .cm-history-item[data-offset="0"] {
+  z-index: 5;
   pointer-events: auto;
+}
+.cm-history-item[data-offset="1"] {
+  z-index: 4;
+  transform: translateY(var(--cm-history-y1)) scale(var(--cm-history-s1));
+}
+.cm-history-item[data-offset="2"] {
+  z-index: 3;
+  transform: translateY(var(--cm-history-y2)) scale(var(--cm-history-s2));
+}
+.cm-history-item[data-offset="3"] {
+  z-index: 2;
+  transform: translateY(var(--cm-history-y3)) scale(var(--cm-history-s3));
+}
+.cm-history-item[data-offset="far"] {
+  z-index: 1;
+  transform: translateY(var(--cm-history-y3)) scale(var(--cm-history-s3));
+}
+.cm-history-item[data-offset="past"] {
+  z-index: 6;
+  transform: translateY(3.6rem);
 }
 .cm-history-slide {
   position: relative;
@@ -1658,6 +1687,14 @@ body.cm-main {
   .cm-history-stage {
     padding-top: 4.8rem;
   }
+  .cm-history-slides {
+    --cm-history-y1: -1.6rem;
+    --cm-history-y2: -3.2rem;
+    --cm-history-y3: -4.8rem;
+    --cm-history-s1: 0.96;
+    --cm-history-s2: 0.92;
+    --cm-history-s3: 0.88;
+  }
   .cm-history-slide {
     border-radius: 2rem;
   }
@@ -1784,6 +1821,7 @@ body.cm-main {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .cm-history-item,
   .cm-history-slide,
   .cm-history-slide > * {
     transition: none;
