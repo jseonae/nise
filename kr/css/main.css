@@ -2251,8 +2251,13 @@ body.cm-banner-all-open {
 [data-krds-mode=high-contrast] .cm-hero-toggle {
   display: none;
 }
-[data-krds-mode=high-contrast] .cm-hero-txt .tit .line1 em {
-  color: var(--krds-color-high-contrast-information-30);
+/* 히어로 제목 · 링크 카드 제목 : 어두운 바탕에서는 강조 색 없이 모두 흰색 */
+[data-krds-mode=high-contrast] .cm-hero-txt .tit .line1,
+[data-krds-mode=high-contrast] .cm-hero-txt .tit .line1 em,
+[data-krds-mode=high-contrast] .cm-hero-txt .tit .line2,
+[data-krds-mode=high-contrast] .cm-link-card .tit,
+[data-krds-mode=high-contrast] .cm-link-card .tit em {
+  color: var(--krds-color-high-contrast-gray-0);
 }
 [data-krds-mode=high-contrast] .cm-link-tile .ico img,
 [data-krds-mode=high-contrast] .cm-link-card .img {
@@ -2397,8 +2402,12 @@ body.cm-banner-all-open {
   [data-krds-mode=theme] .cm-hero-toggle {
     display: none;
   }
-  [data-krds-mode=theme] .cm-hero-txt .tit .line1 em {
-    color: var(--krds-color-high-contrast-information-30);
+  [data-krds-mode=theme] .cm-hero-txt .tit .line1,
+  [data-krds-mode=theme] .cm-hero-txt .tit .line1 em,
+  [data-krds-mode=theme] .cm-hero-txt .tit .line2,
+  [data-krds-mode=theme] .cm-link-card .tit,
+  [data-krds-mode=theme] .cm-link-card .tit em {
+    color: var(--krds-color-high-contrast-gray-0);
   }
   [data-krds-mode=theme] .cm-link-tile .ico img,
   [data-krds-mode=theme] .cm-link-card .img {
