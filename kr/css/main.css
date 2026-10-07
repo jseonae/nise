@@ -1175,6 +1175,141 @@ body.cm-main {
   outline-offset: -0.3rem;
 }
 
+/* 5-4. 알림판 전체보기 (신규 컴포넌트 ext_main_banner_all, 참고 : 당진시청 알림판 전체보기)
+        화면 전체를 덮는 어두운 층 + 배너 격자. Figma 에 없는 화면이라 참고 사이트 구성에 KRDS 색 · 간격 토큰을 입힘 */
+.cm-banner-all-modal {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0.88);
+  color: #fff;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.cm-banner-all-modal:not([open]) {
+  display: none;
+}
+.cm-banner-all-modal::backdrop {
+  background-color: transparent;
+}
+.cm-banner-all-modal > .inner {
+  padding-top: 9.6rem;
+  padding-bottom: 8rem;
+}
+.cm-banner-all-modal .tit {
+  position: absolute;
+  top: 3.2rem;
+  left: 50%;
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: #fff;
+  transform: translateX(-50%);
+}
+.cm-banner-all-modal .btn-close {
+  position: fixed;
+  top: 2.4rem;
+  right: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--krds-size-height-8);
+  height: var(--krds-size-height-8);
+  border-radius: 50%;
+}
+.cm-banner-all-modal .btn-close .svg-icon {
+  width: 3.2rem;
+  height: 3.2rem;
+  background-color: #fff;
+}
+.cm-banner-all-modal .btn-close:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+}
+.cm-banner-all-modal .btn-close:focus {
+  box-shadow: none;
+  outline: 0.2rem solid #fff;
+  outline-offset: 0.2rem;
+}
+.cm-banner-all-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--krds-gap-6);
+}
+.cm-banner-all-list .item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #fff;
+}
+.cm-banner-all-list .item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 477 / 288;
+  object-fit: cover;
+}
+.cm-banner-all-list .item .more {
+  display: flex;
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--krds-size-height-7);
+  padding: var(--krds-padding-3) var(--krds-padding-6);
+  background-color: var(--cm-main-band-bg);
+  font-size: var(--krds-pc-font-size-body-medium);
+  font-weight: var(--krds-font-weight-medium);
+  line-height: 1.5;
+  color: #fff;
+}
+.cm-banner-all-list .item:hover .more {
+  text-decoration: underline;
+}
+.cm-banner-all-list .item:focus {
+  box-shadow: none;
+  outline: 0.3rem solid #fff;
+  outline-offset: 0.3rem;
+}
+/* 열려 있는 동안 뒤 화면은 스크롤되지 않게 */
+html.cm-banner-all-open {
+  overflow: hidden;
+}
+@media (max-width: 1279px) {
+  .cm-banner-all-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 1023px) {
+  .cm-banner-all-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--krds-gap-5);
+  }
+}
+@media (max-width: 599px) {
+  .cm-banner-all-modal > .inner {
+    padding-top: 8rem;
+    padding-bottom: 4.8rem;
+  }
+  .cm-banner-all-modal .tit {
+    top: 2.4rem;
+    left: var(--krds-contents-padding-x);
+    font-size: var(--krds-mobile-font-size-heading-medium);
+    transform: none;
+  }
+  .cm-banner-all-modal .btn-close {
+    top: 1.6rem;
+    right: 1.2rem;
+  }
+  .cm-banner-all-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* --------------------------------------------------------------------------
    6. 원본 데이터 보기 · 유관 사이트 : 아이콘 타일 (신규 컴포넌트 ext_main_link_tile) [Figma 고정값]
    -------------------------------------------------------------------------- */
