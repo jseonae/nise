@@ -56,6 +56,11 @@
 
       <!-- [04-1] 히어로 : 사이트 이름 · 소개 · 통합검색 (신규 컴포넌트 kr/html/code/ext_main_hero.html, Figma node 11510:62329) -->
       <section class="cm-hero" aria-labelledby="hero_tit">
+        <!-- 배경 영상 : 꾸밈용(소리 없음, 반복). 스크립트(kr/js/main.js cmMainHero)가 조건이 맞을 때만 불러와 재생합니다.
+             동작 줄이기 설정 · 데이터 절약 모드 · 모바일(767px 이하)에서는 불러오지 않고 정지 이미지(hero_bg.png)를 씁니다. -->
+        <div class="cm-hero-bg" aria-hidden="true">
+          <video class="cm-hero-video" muted loop playsinline preload="none" tabindex="-1" data-src="../video/main_hero_loop.mp4"></video>
+        </div>
         <div class="inner">
           <div class="cm-hero-txt">
             <h1 id="hero_tit" class="tit"><span class="line1"><em>특수교육</em> 실태조사</span> <span class="line2">데이터 활용 플랫폼</span></h1>
@@ -82,6 +87,8 @@
               </ul>
             </div>
           </div>
+          <!-- 배경 영상 정지 · 재생 : 5초 넘게 움직이는 내용은 멈출 수 있어야 함. 영상이 재생될 때만 보임 -->
+          <button type="button" class="cm-round-btn cm-hero-toggle" hidden><span class="sr-only">배경 영상 정지</span><i class="svg-icon ico-swiper-stop" aria-hidden="true"></i></button>
         </div>
       </section>
       <!-- //[04-1] 히어로 -->
@@ -148,16 +155,16 @@
               </section>
 
               <!-- 탭 2 : 실태조사변천사 (신규 컴포넌트 kr/html/code/ext_main_history.html, Figma: 변천사3 Default~Variant7)
-                   카드 7장을 이전 · 다음 버튼과 연도 버튼으로 넘김 (자동 넘김 없음, kr/js/main.js cmMainHistory) -->
+                   겹쳐 쌓인 카드 7장이 끝없이 돎. 다음을 누르면 앞 장이 아래로 빠지며 사라지고 뒤에 있던 장이 앞으로 나오며, 맨 뒤에 새 장이 생김
+                   (Figma 프로토타입 : 스마트 애니메이트 0.3초) 카드 위치는 data-offset 으로 정함 (kr/js/main.js cmMainHistory, 자동 넘김 없음) -->
               <section id="panel_main_02" aria-labelledby="tab_main_02" class="tab-conts">
                 <h2 class="sr-only">실태조사변천사</h2>
                 <div class="cm-history" data-cm-history role="group" aria-roledescription="캐러셀" aria-label="실태조사변천사">
                   <div class="cm-history-stage">
-                    <span class="layer layer3" aria-hidden="true"></span>
-                    <span class="layer layer2" aria-hidden="true"></span>
-                    <span class="layer layer1" aria-hidden="true"></span>
                     <ul class="cm-history-slides" aria-live="polite">
-                      <li class="cm-history-slide is-active" id="history_slide_1" role="group" aria-roledescription="슬라이드" aria-label="7장 중 1번째, 2008년">
+                      <li class="cm-history-item" id="history_slide_1" data-offset="0" role="group" aria-roledescription="슬라이드" aria-label="7장 중 1번째, 2008년">
+
+                        <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -176,8 +183,11 @@
                           <a href="stat/survey_history_list.html?round=1" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2008년 제1차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2008.jpg" alt="2008 특수교육 실태조사 보고서 표지" width="255" height="346"></div>
+                        </div>
                       </li>
-                          <li class="cm-history-slide" id="history_slide_2" role="group" aria-roledescription="슬라이드" aria-label="7장 중 2번째, 2011년" hidden>
+                          <li class="cm-history-item" id="history_slide_2" data-offset="1" inert aria-hidden="true" role="group" aria-roledescription="슬라이드" aria-label="7장 중 2번째, 2011년">
+
+                            <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -196,8 +206,11 @@
                           <a href="stat/survey_history_list.html?round=2" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2011년 제2차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2011.jpg" alt="2011 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                        </div>
                       </li>
-                          <li class="cm-history-slide" id="history_slide_3" role="group" aria-roledescription="슬라이드" aria-label="7장 중 3번째, 2014년" hidden>
+                          <li class="cm-history-item" id="history_slide_3" data-offset="2" inert aria-hidden="true" role="group" aria-roledescription="슬라이드" aria-label="7장 중 3번째, 2014년">
+
+                            <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -216,8 +229,11 @@
                           <a href="stat/survey_history_list.html?round=3" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2014년 제3차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2014.jpg" alt="2014 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                        </div>
                       </li>
-                          <li class="cm-history-slide" id="history_slide_4" role="group" aria-roledescription="슬라이드" aria-label="7장 중 4번째, 2017년" hidden>
+                          <li class="cm-history-item" id="history_slide_4" data-offset="3" inert aria-hidden="true" role="group" aria-roledescription="슬라이드" aria-label="7장 중 4번째, 2017년">
+
+                            <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -235,8 +251,11 @@
                           <a href="stat/survey_history_list.html?round=4" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2017년 제4차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2017.jpg" alt="2017 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                        </div>
                       </li>
-                          <li class="cm-history-slide" id="history_slide_5" role="group" aria-roledescription="슬라이드" aria-label="7장 중 5번째, 2020년" hidden>
+                          <li class="cm-history-item" id="history_slide_5" data-offset="far" inert aria-hidden="true" role="group" aria-roledescription="슬라이드" aria-label="7장 중 5번째, 2020년">
+
+                            <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -255,8 +274,11 @@
                           <a href="stat/survey_history_list.html?round=5" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2020년 제5차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2020.jpg" alt="2020 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                        </div>
                       </li>
-                          <li class="cm-history-slide" id="history_slide_6" role="group" aria-roledescription="슬라이드" aria-label="7장 중 6번째, 2023년" hidden>
+                          <li class="cm-history-item" id="history_slide_6" data-offset="far" inert aria-hidden="true" role="group" aria-roledescription="슬라이드" aria-label="7장 중 6번째, 2023년">
+
+                            <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -275,8 +297,11 @@
                           <a href="stat/survey_history_list.html?round=6" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2023년 제6차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2023.jpg" alt="2023 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                        </div>
                       </li>
-                          <li class="cm-history-slide" id="history_slide_7" role="group" aria-roledescription="슬라이드" aria-label="7장 중 7번째, 2026년" hidden>
+                          <li class="cm-history-item" id="history_slide_7" data-offset="past" inert aria-hidden="true" role="group" aria-roledescription="슬라이드" aria-label="7장 중 7번째, 2026년">
+
+                            <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -295,6 +320,7 @@
                           <a href="stat/survey_history_list.html?round=7" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2026년 제7차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2026.jpg" alt="2026 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                        </div>
                       </li>
                     </ul>
                   </div>
@@ -308,6 +334,8 @@
                       <li><button type="button" data-index="4" aria-controls="history_slide_5"><span class="year">2020</span><span class="label">비대면조사도입</span></button></li>
                       <li><button type="button" data-index="5" aria-controls="history_slide_6"><span class="year">2023</span><span class="label">조사체계고도화</span></button></li>
                       <li><button type="button" data-index="6" aria-controls="history_slide_7"><span class="year">2026</span><span class="label">현재조사</span></button></li>
+                      <!-- 현재 위치 표시 점 : 진행 막대 끝에서 두근거림(꾸밈용). 막대가 움직이는 동안은 숨었다가 멈추면 나타남 -->
+                      <li class="cm-history-point" aria-hidden="true"></li>
                     </ol>
                     <div class="cm-history-arrows">
                       <button type="button" class="cm-round-btn prev"><span class="sr-only">이전 조사</span><i class="svg-icon ico-angle left" aria-hidden="true"></i></button>
@@ -338,7 +366,7 @@
               </a>
             </li>
             <li>
-              <a href="stat/keydata_list.html" class="cm-link-card">
+              <a href="stat/keydata_list.html" class="cm-link-card cm-link-card--primary">
                 <span class="txt">
                   <strong class="tit">핵심데이터 <em>시각화</em></strong>
                   <span class="desc">연도별 주요 특수교육 실태조사 데이터를 시각화하여 <br class="pc-only">사용자가 쉽게 이해할 수 있도록 제공합니다.</span>
@@ -369,7 +397,8 @@
             </ul>
           </section>
 
-          <!-- 연구 보고서 : 표지 넘김 (KRDS 포함 Swiper, 자동 넘김 없음, kr/js/main.js cmMainReport) -->
+          <!-- 연구 보고서 : 표지 넘김 (KRDS 포함 Swiper, 자동 넘김 없음, kr/js/main.js cmMainReport)
+               표지는 세로형 · 가로형 모두 비율대로 보임(2번째가 가로형 예시). 표지 없는 자료는 자료실과 같은 기본 표지를 넣음 -->
           <section class="cm-main-article cm-main-report" aria-labelledby="main_report_tit">
             <div class="head">
               <h2 id="main_report_tit" class="cm-main-tit">연구 보고서</h2>
@@ -380,19 +409,19 @@
                 <div class="swiper-wrapper">
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="3장 중 1번째">
                   <a href="board/archive_view.html?idx=1" class="cm-report-item">
-                    <span class="cover"><img src="../img/main/report_cover_01.jpg" alt="" width="159" height="221"></span>
+                    <span class="cover"><img src="../img/main/report_cover_01.jpg" alt=""></span>
                     <span class="tit">2026 특수교육 실태조사(VII) 예비조사</span>
                   </a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="3장 중 2번째">
                   <a href="board/archive_view.html?idx=3" class="cm-report-item">
-                    <span class="cover"><img src="../img/board/archive/cover_03.png" alt="" width="159" height="221"></span>
+                    <span class="cover"><img src="../img/board/archive/cover_03.png" alt=""></span>
                     <span class="tit">2025 특수교육통계</span>
                   </a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="3장 중 3번째">
                   <a href="board/archive_view.html?idx=4" class="cm-report-item">
-                    <span class="cover"><img src="../img/board/archive/cover_04.png" alt="" width="159" height="221"></span>
+                    <span class="cover"><img src="../img/board/archive/cover_04.png" alt=""></span>
                     <span class="tit">2023년 특수교육 실태조사 보고서</span>
                   </a>
                 </div>
@@ -406,7 +435,8 @@
           </section>
 
           <!-- 알림판 : 배너 넘김 (KRDS 포함 Swiper, 자동 넘김 · 정지 버튼, kr/js/main.js cmMainBanner)
-               Figma 에는 배너 3종만 있어 3종을 되풀이해 8장으로 채움. 배너는 개발 시 관리자 등록 이미지(477×288) + 대체 텍스트로 바뀝니다. -->
+               배너는 디자인된 이미지(477×288 비율)를 그대로 넣고, 이미지 안의 글은 alt 에 모두 적음 (관리자 등록 시에도 대체 텍스트 필수)
+               Figma 에는 배너 3종만 있어 3종을 되풀이해 8장으로 채움 -->
           <section class="cm-main-article cm-main-banner" aria-labelledby="main_banner_tit">
             <div class="head">
               <h2 id="main_banner_tit" class="cm-main-tit">알림판</h2>
@@ -424,79 +454,35 @@
                 <div class="swiper-wrapper">
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 1번째">
                   <!-- 배너 1 : guide -->
-                  <a href="#" class="cm-banner cm-banner--guide">
-                    <span class="eyebrow">처음 방문하셨나요?</span>
-                    <strong class="tit">데이터 플랫폼 <em>이용안내</em></strong>
-                    <span class="desc">사용자별 이용안내를 제공하고 있습니다.</span>
-                    <span class="btn">자세히보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
-                    <img src="../img/main/banner_guide.png" alt="" class="img" width="173" height="133">
-                  </a>
+                  <a href="#" class="cm-banner"><img src="../img/main/banner_01_guide.png" alt="처음 방문하셨나요? 데이터 플랫폼 이용안내. 사용자별 이용안내를 제공하고 있습니다. 자세히보기" width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 2번째">
                   <!-- 배너 2 : privacy -->
-                  <a href="#" class="cm-banner cm-banner--privacy">
-                    <span class="eyebrow">내 정보, 내가 지킨다!</span>
-                    <span class="lead">작은 실천 하나가</span>
-                    <strong class="tit"><em>소중한 개인정보</em>를 지켜줍니다!</strong>
-                    <span class="btn">카드뉴스 보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
-                    <img src="../img/main/banner_privacy.png" alt="" class="img" width="358" height="126">
-                  </a>
+                  <a href="#" class="cm-banner"><img src="../img/main/banner_02_privacy.png" alt="내 정보, 내가 지킨다! 작은 실천 하나가 소중한 개인정보를 지켜줍니다! 카드뉴스 보기" width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 3번째">
                   <!-- 배너 3 : open -->
-                  <a href="board/notice_view.html" class="cm-banner cm-banner--open">
-                    <img src="../img/main/banner_logo.svg" alt="교육부 국립특수교육원" class="logo" width="129" height="29">
-                    <strong class="tit"><em>특수교육 실태조사</em> <span><em>데이터 플랫폼</em>이</span> <span>오픈 <span class="light">하였습니다.</span></span></strong>
-                    <img src="../img/main/banner_open.png" alt="" class="img" width="219" height="141">
-                  </a>
+                  <a href="board/notice_view.html" class="cm-banner"><img src="../img/main/banner_03_open.png" alt="교육부 국립특수교육원. 특수교육 실태조사 데이터 플랫폼이 오픈 하였습니다." width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 4번째">
                   <!-- 배너 4 : guide -->
-                  <a href="#" class="cm-banner cm-banner--guide">
-                    <span class="eyebrow">처음 방문하셨나요?</span>
-                    <strong class="tit">데이터 플랫폼 <em>이용안내</em></strong>
-                    <span class="desc">사용자별 이용안내를 제공하고 있습니다.</span>
-                    <span class="btn">자세히보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
-                    <img src="../img/main/banner_guide.png" alt="" class="img" width="173" height="133">
-                  </a>
+                  <a href="#" class="cm-banner"><img src="../img/main/banner_01_guide.png" alt="처음 방문하셨나요? 데이터 플랫폼 이용안내. 사용자별 이용안내를 제공하고 있습니다. 자세히보기" width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 5번째">
                   <!-- 배너 5 : privacy -->
-                  <a href="#" class="cm-banner cm-banner--privacy">
-                    <span class="eyebrow">내 정보, 내가 지킨다!</span>
-                    <span class="lead">작은 실천 하나가</span>
-                    <strong class="tit"><em>소중한 개인정보</em>를 지켜줍니다!</strong>
-                    <span class="btn">카드뉴스 보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
-                    <img src="../img/main/banner_privacy.png" alt="" class="img" width="358" height="126">
-                  </a>
+                  <a href="#" class="cm-banner"><img src="../img/main/banner_02_privacy.png" alt="내 정보, 내가 지킨다! 작은 실천 하나가 소중한 개인정보를 지켜줍니다! 카드뉴스 보기" width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 6번째">
                   <!-- 배너 6 : open -->
-                  <a href="board/notice_view.html" class="cm-banner cm-banner--open">
-                    <img src="../img/main/banner_logo.svg" alt="교육부 국립특수교육원" class="logo" width="129" height="29">
-                    <strong class="tit"><em>특수교육 실태조사</em> <span><em>데이터 플랫폼</em>이</span> <span>오픈 <span class="light">하였습니다.</span></span></strong>
-                    <img src="../img/main/banner_open.png" alt="" class="img" width="219" height="141">
-                  </a>
+                  <a href="board/notice_view.html" class="cm-banner"><img src="../img/main/banner_03_open.png" alt="교육부 국립특수교육원. 특수교육 실태조사 데이터 플랫폼이 오픈 하였습니다." width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 7번째">
                   <!-- 배너 7 : guide -->
-                  <a href="#" class="cm-banner cm-banner--guide">
-                    <span class="eyebrow">처음 방문하셨나요?</span>
-                    <strong class="tit">데이터 플랫폼 <em>이용안내</em></strong>
-                    <span class="desc">사용자별 이용안내를 제공하고 있습니다.</span>
-                    <span class="btn">자세히보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
-                    <img src="../img/main/banner_guide.png" alt="" class="img" width="173" height="133">
-                  </a>
+                  <a href="#" class="cm-banner"><img src="../img/main/banner_01_guide.png" alt="처음 방문하셨나요? 데이터 플랫폼 이용안내. 사용자별 이용안내를 제공하고 있습니다. 자세히보기" width="477" height="288"></a>
                 </div>
                 <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="8장 중 8번째">
                   <!-- 배너 8 : privacy -->
-                  <a href="#" class="cm-banner cm-banner--privacy">
-                    <span class="eyebrow">내 정보, 내가 지킨다!</span>
-                    <span class="lead">작은 실천 하나가</span>
-                    <strong class="tit"><em>소중한 개인정보</em>를 지켜줍니다!</strong>
-                    <span class="btn">카드뉴스 보기 <i class="cm-ico-arrow" aria-hidden="true"></i></span>
-                    <img src="../img/main/banner_privacy.png" alt="" class="img" width="358" height="126">
-                  </a>
+                  <a href="#" class="cm-banner"><img src="../img/main/banner_02_privacy.png" alt="내 정보, 내가 지킨다! 작은 실천 하나가 소중한 개인정보를 지켜줍니다! 카드뉴스 보기" width="477" height="288"></a>
                 </div>
                 </div>
               </div>

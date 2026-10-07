@@ -2,8 +2,10 @@
 <!--
   Figma : 컨텐츠 > main-확정 > 그래프로 보는 특수교육 실태조사 (node 11510:62362)
   - 스타일 : kr/css/main.css 4. 링크 카드 (.cm-link-cards · .cm-link-card)
-  - 카드 전체가 링크입니다. 올리거나 초점이 가면 색이 바뀌고 오른쪽 아래에 화살표 버튼이 나타납니다.
-  - Figma 는 파인 모서리를 도형 빼기로 그렸습니다. 폭이 변하는 카드라 CSS 는 본문 배경색 조각(.go)을 덧대어 표현했고, 파인 곳의 작은 역곡선은 생략했습니다.
+  - 카드 전체가 링크입니다. 카드마다 색이 다릅니다. (기본 : 하늘색, .cm-link-card--primary : 파란색) 올려도 색은 바뀌지 않습니다.
+  - 올리거나 초점이 가면 오른쪽 아래 모서리가 파이면서 화살표 버튼이 나타납니다.
+  - Figma 는 파인 모서리를 도형 빼기로 그렸습니다. 폭이 변하는 카드라 CSS 는 본문 배경색 조각(.go)을 덧대고,
+    안쪽 둥글기(41×43)와 바깥으로 꺾이는 두 곳의 둥글기(7)를 Figma 도형 값대로 맞췄습니다.
   - 그림 · 화살표는 꾸밈용입니다. (alt="" · aria-hidden)
 -->
 <ul class="cm-link-cards">
@@ -18,7 +20,7 @@
     </a>
   </li>
   <li>
-    <a href="stat/keydata_list.html" class="cm-link-card">
+    <a href="stat/keydata_list.html" class="cm-link-card cm-link-card--primary">
       <span class="txt">
         <strong class="tit">핵심데이터 <em>시각화</em></strong>
         <span class="desc">연도별 주요 특수교육 실태조사 데이터를 시각화하여 <br class="pc-only">사용자가 쉽게 이해할 수 있도록 제공합니다.</span>
