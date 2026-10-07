@@ -539,9 +539,9 @@
       const barName = `${s.name} (${unit})`;
       const lineName = "전년 대비 증가율(%)";
       const last = (arr) => arr.reduce((li, v, i) => (v != null ? i : li), -1);
-      const labelled = (arr, color, text) => {
+      const labelled = (arr, color, text, box) => {
         const li = last(arr);
-        return arr.map((v, i) => (v == null ? v : { value: v, label: { show: ctx.labels, fontWeight: i === li ? 700 : 400, color, fontSize: fs(ctx, 13), formatter: text } }));
+        return arr.map((v, i) => (v == null ? v : { value: v, label: Object.assign({ show: ctx.labels, fontWeight: i === li ? 700 : 400, color, fontSize: fs(ctx, 13), formatter: text }, box) }));
       };
       const bar = {
         name: barName,
@@ -565,16 +565,81 @@
         emphasis: { scale: 1.38, lineStyle: { width: 3.5 } },
         z: 10,
         label: { position: "top", distance: 8 },
-        data: labelled(growth, lineSet.bg, (p) => `${(+p.value).toFixed(1)}%`),
+        data: labelled(growth, lineSet.bg, (p) => `${(+p.value).toFixed(1)}%`, labelBox(ctx, lineSet.bg)), // 파란 막대 위에서도 읽히게 상자
         _lineStyle: { type: lineStyle.type, symbol: lineStyle.symbol === "circle" ? "circle" : "rect" },
         _unit: "%",
       };
       const o = baseOption(ctx);
       o.legend.data = [barName, lineName];
-      o.grid = { left: 16, right: 16, top: 44, bottom: 8, containLabel: true };
+      /* 값 레이블이 서로 겹치지 않게 자리를 미리 계산함 (그래프 모양은 그대로 : 한 그림 영역에 막대 + 꺾은선)
+         → 그림 영역 여백과 막대 축 최댓값을 직접 정함 (가장 큰 값보다 조금 큰 깔끔한 수) */
+      const H = ctx.height || 480;
+      const size = fs(ctx, 13);
+      const left = Math.round(64 * ctx.scale);
+      const right = Math.round(56 * ctx.scale);
+      const gridTop = 64; // 축 이름 + 윗줄로 올린 막대 값 자리
+      const gridBottom = 36;
+      const plotH = H - gridTop - gridBottom;
+      const peak = Math.max(...s.data.filter((v) => v != null), 1);
+      const mag = Math.pow(10, Math.floor(Math.log10(peak)));
+      const yMax = [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10].map((m) => m * mag).find((m) => m >= peak * 1.02);
+      const pitch = (ctx.width - left - right) / model.categories.length;
+      const barY = (i) => (bar.data[i] == null ? null : gridTop + plotH * (1 - bar.data[i].value / yMax));
+      const lineY = (i) => gridTop + plotH * (1 - (growth[i] - gMin) / (gMax - gMin));
+      const textW = (t) => size * (0.62 * t.replace(/,/g, "").length + 0.3 * (t.length - t.replace(/,/g, "").length)) + 4;
+      /* ① 막대 값 : 값이 길어 이웃한 값끼리 가로로 겹칠 때(여섯 자리 값 · 좁은 막대)는 하나 걸러 하나를 윗줄로 올림
+            제자리 레이블(마지막 값에서 거꾸로 세어 짝수 번째)은 움직이지 않아 줄이 계단처럼 밀리지 않음 */
+      const lastIndex = last(s.data);
+      const barDist = bar.data.map(() => 5);
+      if (Math.max(...bar.data.filter((d) => d != null).map((d) => textW(fmtNumber(d.value)))) > pitch) {
+        bar.data.forEach((d, i) => {
+          if (d == null || (lastIndex - i) % 2 === 0) return;
+          const tops = [i - 1, i, i + 1].map(barY).filter((y) => y != null);
+          barDist[i] = barY(i) - Math.min(...tops) + 5 + size + 3; // 양옆 제자리 레이블보다 위
+        });
+      }
+      // 꺾은선(점과 그 양옆 선의 절반)이 막대 값 글자 위를 지나가면 그 막대 값을 꺾은선 위로 올림
+      bar.data.forEach((d, i) => {
+        if (d == null || growth[i] == null) return;
+        const ys = [lineY(i)];
+        [i - 1, i + 1].forEach((j) => {
+          if (growth[j] != null) ys.push((lineY(i) + lineY(j)) / 2);
+        });
+        const bottom = barY(i) - barDist[i];
+        if (!(Math.max(...ys) > bottom - size - 6 && Math.min(...ys) < bottom + 6)) return;
+        barDist[i] = barY(i) - Math.min(...ys) + 10;
+        // 올린 자리가 양옆 막대 값과 같은 높이면 그 위로 한 번 더 올림
+        [i - 1, i + 1].forEach((j) => {
+          if (barY(j) == null) return;
+          const mine = barY(i) - barDist[i];
+          const other = barY(j) - barDist[j];
+          if (mine > other - size - 3 && mine - size < other + 3) barDist[i] = barY(i) - (other - size - 3);
+        });
+      });
+      bar.data.forEach((d, i) => {
+        if (d != null) d.label.distance = barDist[i];
+      });
+      /* ② 증가율 : 점 위에 두되 막대 값(같은 해 · 양옆 해)과 만나면 점 아래로, 아래도 막히면 막대 값들 위로 올림 */
+      const boxH = size + 8;
+      const dist = 8;
+      const barLabel = (i) => (barY(i) == null ? null : { top: barY(i) - barDist[i] - size - 2, bottom: barY(i) - barDist[i] + 2 });
+      line.data.forEach((d, i) => {
+        if (d == null) return;
+        const near = [i - 1, i, i + 1].map(barLabel).filter(Boolean);
+        const hits = (top) => near.some((r) => top < r.bottom && top + boxH > r.top);
+        const y = lineY(i);
+        if (!hits(y - dist - boxH)) return; // 점 위 (기본)
+        if (!hits(y + dist)) {
+          d.label.position = "bottom";
+          d.label.distance = dist;
+          return;
+        }
+        d.label.distance = y - Math.min(...near.map((r) => r.top)) + 3;
+      });
+      o.grid = { left, right, top: gridTop, bottom: gridBottom };
       o.xAxis = categoryAxis(ctx, model.categories, {});
       o.yAxis = [
-        valueAxis(ctx, { min: 0, name: unit, nameTextStyle: { color: ctx.colors.sub, align: "right", fontSize: fs(ctx, 13) }, axisLabel: { color: ctx.colors.sub, fontSize: fs(ctx, 13), formatter: axisMan } }),
+        valueAxis(ctx, { min: 0, max: yMax, name: unit, nameTextStyle: { color: ctx.colors.sub, align: "right", fontSize: fs(ctx, 13) }, axisLabel: { color: ctx.colors.sub, fontSize: fs(ctx, 13), formatter: axisMan } }),
         valueAxis(ctx, { min: gMin, max: gMax, interval: 3, name: "%", nameTextStyle: { color: ctx.colors.sub, align: "left", fontSize: fs(ctx, 13) }, axisLabel: { color: ctx.colors.sub, fontSize: fs(ctx, 13), formatter: "{value}%" }, splitLine: { show: false } }),
       ];
       o.series = [bar, line];
