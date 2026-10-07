@@ -328,6 +328,11 @@ body.cm-main {
   margin-top: 2.3rem;
   padding-left: 2.8rem;
 }
+/* 추천 검색어 제목 : 배경 영상 위에 바로 놓여 영상의 진한 점과 겹칠 때 대비가 3.8:1 까지 떨어짐
+   → 한 단계 진한 회색(text-subtle)으로 바꿔 가장 불리한 장면에서도 4.5:1 이상 유지 */
+.cm-hero-search .cm-search-recommend .tit {
+  color: var(--cm-color-text-subtle);
+}
 
 /* --------------------------------------------------------------------------
    3. 숫자로 보는 특수교육 · 실태조사변천사 (Figma: section2-1)
