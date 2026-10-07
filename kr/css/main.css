@@ -403,7 +403,7 @@ body.cm-main {
 }
 
 /* 3-2. 숫자 카드 (신규 컴포넌트 ext_main_stat_card)
-        인포그래픽이 흰 배경 이미지라 카드 색은 화면 모드와 관계없이 밝은 색으로 고정 */
+        선명하게(어두운 배경) 모드의 색은 맨 아래 9번에서 바꿈 */
 .cm-stat-cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2109,7 +2109,8 @@ body.cm-banner-all-open {
 
 /* --------------------------------------------------------------------------
    9. 선명하게(고대비) 모드 · 시스템 어두운 모드
-      - 흰 바탕에 그린 그림이 들어가는 숫자 카드 · 변천사 카드 · 바로가기와 알림판 배너 이미지는 밝은 색 그대로 둡니다.
+      - 숫자 카드 · 변천사 카드도 어두운 면으로 바꿉니다. (인포그래픽이 SVG 라 색을 바꿀 수 있음)
+      - 바로가기와 알림판 배너 이미지, 보고서 표지는 밝은 색 그대로 둡니다.
       - 나머지 면 · 선 · 글자는 KRDS 고대비 토큰으로 바꿉니다.
    -------------------------------------------------------------------------- */
 [data-krds-mode=high-contrast] body.cm-main {
@@ -2126,6 +2127,92 @@ body.cm-banner-all-open {
   --cm-main-round-hover: var(--krds-high-contrast-color-surface-gray-subtler);
   --cm-main-count-bg: var(--krds-high-contrast-color-surface-gray-subtler);
   --cm-main-page-bg: var(--krds-high-contrast-color-background-white);
+}
+/* 숫자로 보는 특수교육 · 실태조사변천사 : 띠는 짙은 남색, 카드는 어두운 면으로 */
+[data-krds-mode=high-contrast] .cm-main-data {
+  background-color: var(--krds-high-contrast-color-surface-primary-subtler);
+}
+[data-krds-mode=high-contrast] .cm-stat-card {
+  border: 0.1rem solid var(--krds-high-contrast-color-border-gray-light);
+  background-color: var(--krds-high-contrast-color-surface-gray-subtler);
+  color: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-stat-card .tag {
+  border-color: var(--krds-high-contrast-color-border-gray);
+  color: var(--krds-high-contrast-color-text-subtle);
+}
+/* 인포그래픽 SVG : 그림에 적힌 색(fill · stroke 속성)을 어두운 바탕용으로 바꿈. 파란 도형과 그 안의 흰 글자는 그대로 */
+[data-krds-mode=high-contrast] .cm-stat-svg [fill="#1E2124"] {
+  fill: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-stat-svg [fill="#61758F"] {
+  fill: #8a949e;
+}
+[data-krds-mode=high-contrast] .cm-stat-svg [fill="#0B78CB"]:not(path) {
+  fill: #6cb9f7;
+}
+[data-krds-mode=high-contrast] .cm-stat-svg [stroke="#000"] {
+  stroke: #fff;
+}
+[data-krds-mode=high-contrast] .cm-stat-svg linearGradient[id="st1_c"] stop {
+  stop-color: #fff;
+}
+[data-krds-mode=high-contrast] .cm-stat-svg rect[fill="#fff"] {
+  fill: var(--krds-high-contrast-color-surface-gray-subtler);
+}
+/* 말풍선 : 어두운 바탕에서는 밝은 상자 + 어두운 글자로 뒤집음 */
+[data-krds-mode=high-contrast] .cm-stat-svg .m-pop-b [fill="#1E2124"] {
+  fill: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-stat-svg .m-pop-b [fill="#fff"] {
+  fill: #131416;
+}
+/* 화살표 : 곱하기 혼합은 어두운 바탕에서 보이지 않아 보통 혼합으로 */
+[data-krds-mode=high-contrast] .cm-stat-svg .m-wipe-right {
+  mix-blend-mode: normal !important;
+}
+/* 변천사 카드 */
+[data-krds-mode=high-contrast] .cm-history-item[data-offset="0"] .cm-history-slide {
+  border-color: var(--krds-high-contrast-color-border-gray);
+  background-color: var(--krds-high-contrast-color-surface-gray-subtler);
+}
+[data-krds-mode=high-contrast] .cm-history-slide {
+  color: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-history-slide .eyebrow {
+  color: var(--krds-high-contrast-color-text-primary);
+}
+[data-krds-mode=high-contrast] .cm-history-slide .eyebrow .sub {
+  color: #8fa9c9;
+}
+[data-krds-mode=high-contrast] .cm-history-slide .idx {
+  background-color: var(--krds-high-contrast-color-text-primary);
+  color: #020f27;
+}
+[data-krds-mode=high-contrast] .cm-history-slide .body .tit {
+  color: var(--krds-high-contrast-color-text-secondary);
+}
+[data-krds-mode=high-contrast] .cm-check-list li::before {
+  filter: invert(1);
+}
+[data-krds-mode=high-contrast] .cm-check-list em {
+  color: var(--krds-high-contrast-color-text-primary);
+}
+[data-krds-mode=high-contrast] .cm-history-slide .year {
+  color: rgba(205, 209, 213, 0.22);
+}
+[data-krds-mode=high-contrast] .cm-history-slide .krds-btn.tertiary {
+  border-color: var(--krds-high-contrast-color-text-subtle);
+  color: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-history-slide .krds-btn.tertiary:hover {
+  background-color: var(--krds-high-contrast-color-surface-white-subtler);
+}
+[data-krds-mode=high-contrast] .cm-history-slide .krds-btn .svg-icon {
+  background-color: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-history-slide .cover {
+  background-color: var(--krds-high-contrast-color-surface-white-subtler);
 }
 [data-krds-mode=high-contrast] .cm-hero {
   background-image: none;
@@ -2156,6 +2243,92 @@ body.cm-banner-all-open {
     --cm-main-round-hover: var(--krds-high-contrast-color-surface-gray-subtler);
     --cm-main-count-bg: var(--krds-high-contrast-color-surface-gray-subtler);
     --cm-main-page-bg: var(--krds-high-contrast-color-background-white);
+  }
+  /* 숫자로 보는 특수교육 · 실태조사변천사 : 띠는 짙은 남색, 카드는 어두운 면으로 */
+  [data-krds-mode=theme] .cm-main-data {
+    background-color: var(--krds-high-contrast-color-surface-primary-subtler);
+  }
+  [data-krds-mode=theme] .cm-stat-card {
+    border: 0.1rem solid var(--krds-high-contrast-color-border-gray-light);
+    background-color: var(--krds-high-contrast-color-surface-gray-subtler);
+    color: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-stat-card .tag {
+    border-color: var(--krds-high-contrast-color-border-gray);
+    color: var(--krds-high-contrast-color-text-subtle);
+  }
+  /* 인포그래픽 SVG : 그림에 적힌 색(fill · stroke 속성)을 어두운 바탕용으로 바꿈. 파란 도형과 그 안의 흰 글자는 그대로 */
+  [data-krds-mode=theme] .cm-stat-svg [fill="#1E2124"] {
+    fill: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-stat-svg [fill="#61758F"] {
+    fill: #8a949e;
+  }
+  [data-krds-mode=theme] .cm-stat-svg [fill="#0B78CB"]:not(path) {
+    fill: #6cb9f7;
+  }
+  [data-krds-mode=theme] .cm-stat-svg [stroke="#000"] {
+    stroke: #fff;
+  }
+  [data-krds-mode=theme] .cm-stat-svg linearGradient[id="st1_c"] stop {
+    stop-color: #fff;
+  }
+  [data-krds-mode=theme] .cm-stat-svg rect[fill="#fff"] {
+    fill: var(--krds-high-contrast-color-surface-gray-subtler);
+  }
+  /* 말풍선 : 어두운 바탕에서는 밝은 상자 + 어두운 글자로 뒤집음 */
+  [data-krds-mode=theme] .cm-stat-svg .m-pop-b [fill="#1E2124"] {
+    fill: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-stat-svg .m-pop-b [fill="#fff"] {
+    fill: #131416;
+  }
+  /* 화살표 : 곱하기 혼합은 어두운 바탕에서 보이지 않아 보통 혼합으로 */
+  [data-krds-mode=theme] .cm-stat-svg .m-wipe-right {
+    mix-blend-mode: normal !important;
+  }
+  /* 변천사 카드 */
+  [data-krds-mode=theme] .cm-history-item[data-offset="0"] .cm-history-slide {
+    border-color: var(--krds-high-contrast-color-border-gray);
+    background-color: var(--krds-high-contrast-color-surface-gray-subtler);
+  }
+  [data-krds-mode=theme] .cm-history-slide {
+    color: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-history-slide .eyebrow {
+    color: var(--krds-high-contrast-color-text-primary);
+  }
+  [data-krds-mode=theme] .cm-history-slide .eyebrow .sub {
+    color: #8fa9c9;
+  }
+  [data-krds-mode=theme] .cm-history-slide .idx {
+    background-color: var(--krds-high-contrast-color-text-primary);
+    color: #020f27;
+  }
+  [data-krds-mode=theme] .cm-history-slide .body .tit {
+    color: var(--krds-high-contrast-color-text-secondary);
+  }
+  [data-krds-mode=theme] .cm-check-list li::before {
+    filter: invert(1);
+  }
+  [data-krds-mode=theme] .cm-check-list em {
+    color: var(--krds-high-contrast-color-text-primary);
+  }
+  [data-krds-mode=theme] .cm-history-slide .year {
+    color: rgba(205, 209, 213, 0.22);
+  }
+  [data-krds-mode=theme] .cm-history-slide .krds-btn.tertiary {
+    border-color: var(--krds-high-contrast-color-text-subtle);
+    color: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-history-slide .krds-btn.tertiary:hover {
+    background-color: var(--krds-high-contrast-color-surface-white-subtler);
+  }
+  [data-krds-mode=theme] .cm-history-slide .krds-btn .svg-icon {
+    background-color: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-history-slide .cover {
+    background-color: var(--krds-high-contrast-color-surface-white-subtler);
   }
   [data-krds-mode=theme] .cm-hero {
     background-image: none;
