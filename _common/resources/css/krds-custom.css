@@ -3802,8 +3802,11 @@
 #krds-footer .f-logo,
 [data-krds-mode] #krds-footer .f-logo {
   width: 36.6rem;
+  max-width: 100%; /* 좁은 화면(360px 등)에서 로고가 화면 밖으로 나가 가로 스크롤이 생기지 않게 */
   height: 4rem;
   background-image: url(../img/logo/logo.svg);
+  background-position: left center;
+  background-size: contain;
 }
 /* 선명하게(어두운 배경) 모드 · 시스템 어두운 모드 : 푸터 로고도 글자가 흰색인 로고 */
 [data-krds-mode=high-contrast] #krds-footer .f-logo {
