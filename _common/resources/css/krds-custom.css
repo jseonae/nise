@@ -3165,6 +3165,11 @@ p {
 .cm-es-notes .cm-es-source {
   padding-top: 0;
 }
+/* 표 아래 ※ 주석 (기관 수 계 : 연도별 공표 계 산식 안내) */
+.cm-es-notes .cm-es-marks {
+  font-size: var(--krds-pc-font-size-body-small);
+  color: var(--cm-color-text-subtle);
+}
 /* 통계표 : 열 110px (Figma), 첫 칸 너비는 --cm-first-col */
 .cm-es-table .tbl.data {
   table-layout: fixed;
