@@ -3499,10 +3499,25 @@ p {
   clip-path: inset(50%);
   white-space: nowrap;
 }
-/* 차트 확대 모달 (kr/tmpl/modal.html #modal_chart_zoom, KRDS 모달) : 넓게 · 글자 크기 5단계 */
-.cm-chart-modal .modal-dialog {
-  width: calc(100% - 4rem);
-  max-width: 128rem;
+/* 차트 확대 모달 (kr/tmpl/modal.html #modal_chart_zoom, KRDS 모달) : 화면 전체 · 글자 크기 5단계 */
+/* 선택자에 .krds-modal 을 붙인 까닭 : KRDS 모바일 모달 규칙(.krds-modal:not([data-type=bottom-sheet]) .modal-dialog)의 폭 · 바깥 여백을 이기려고 */
+.krds-modal.cm-chart-modal .modal-dialog {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+}
+/* 화면 전체로 띄움 : KRDS 모달 상자(높이 최대 80% · 둥근 모서리 · 테두리)를 화면 크기에 맞춤 */
+.krds-modal.cm-chart-modal .modal-dialog .modal-content {
+  height: 100%;
+  max-height: 100%;
+  border: 0;
+  border-radius: 0;
+}
+.cm-chart-modal .modal-dialog .modal-conts {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 .cm-chart-zoom-font {
   display: flex;
@@ -3517,8 +3532,13 @@ p {
   text-align: center;
   color: var(--cm-color-text-basic);
 }
+/* 그래프는 남는 높이를 채움 (머리글 · 글자 크기 버튼 · 범례 · 여백을 뺀 값, 너무 낮아지지 않게 최소 32rem) */
 .cm-chart-zoom-body .cm-chart-plot {
-  height: min(60vh, 60rem);
+  height: max(32rem, calc(100vh - 30rem));
+}
+/* 스몰 멀티플(패널 여러 개)은 패널마다 높이를 따로 가짐 */
+.cm-chart-zoom-body .cm-chart-panels .cm-chart-plot {
+  height: 36rem;
 }
 @media (max-width: 767px) {
   .cm-chart-plot {
