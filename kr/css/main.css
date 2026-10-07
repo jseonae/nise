@@ -48,9 +48,9 @@ body.cm-main {
   --cm-main-tab-off: var(--krds-color-light-primary-20); /* #b1cefb */
   --cm-main-line: var(--krds-light-color-border-secondary-light); /* #d6e0eb */
   --cm-main-notice-bg: #f7f9fb; /* [Figma 고정값] surface-secondary-subtler 위에 흰색 50% */
-  --cm-main-card-bg: #edf7fe; /* [Figma 고정값] information-5 위에 흰색 25% */
+  --cm-main-card-bg: #edf7fe; /* [Figma 고정값] 링크 카드 1(시계열) : information-5 위에 흰색 25% */
   --cm-main-card-border: var(--krds-light-color-border-information-light, #d3ebfd);
-  --cm-main-card-hover-bg: #eef3fe; /* [Figma 고정값] primary-5 위에 흰색 10% */
+  --cm-main-card-hover-bg: #eef3fe; /* [Figma 고정값] 링크 카드 2(핵심데이터) : primary-5 위에 흰색 10% */
   --cm-main-card-hover-border: var(--krds-color-light-primary-10); /* #d8e5fd */
   --cm-main-go-bg: #123e7b; /* [Figma 고정값] 링크 카드 화살표 버튼 */
   --cm-main-tile-bg: #f0f5fc; /* [Figma 고정값] */
@@ -725,6 +725,8 @@ body.cm-main {
   margin-top: 2.4rem;
 }
 .cm-link-card {
+  --cm-link-card-bg: var(--cm-main-card-bg);
+  --cm-link-card-line: var(--cm-main-card-border);
   position: relative;
   display: flex;
   align-items: center;
@@ -732,10 +734,14 @@ body.cm-main {
   gap: 4.8rem;
   min-height: 23.8rem;
   padding: 4.8rem 4rem;
-  border: 0.1rem solid var(--cm-main-card-border);
+  border: 0.1rem solid var(--cm-link-card-line);
   border-radius: 1.6rem;
-  background-color: var(--cm-main-card-bg);
-  transition: background-color 0.2s, border-color 0.2s;
+  background-color: var(--cm-link-card-bg);
+}
+/* 두 번째 색 (핵심데이터 시각화) : 카드마다 색이 다름. 올렸을 때 색은 바뀌지 않음 */
+.cm-link-card--primary {
+  --cm-link-card-bg: var(--cm-main-card-hover-bg);
+  --cm-link-card-line: var(--cm-main-card-hover-border);
 }
 .cm-link-card .txt {
   display: flex;
@@ -764,25 +770,23 @@ body.cm-main {
   width: 15rem;
   height: auto;
 }
-/* 올렸을 때 · 초점 : 색이 바뀌고 오른쪽 아래 모서리가 파이면서 둥근 화살표 버튼이 나타남
-   (Figma 는 모서리를 도형 빼기로 그림. 폭이 변하는 카드라 CSS 로는 본문 배경색 조각을 덧대어 표현) */
+/* 올렸을 때 · 초점 : 오른쪽 아래 모서리가 파이면서 둥근 화살표 버튼이 나타남 (색은 그대로)
+   Figma 는 모서리를 도형 빼기로 그림(748×238 기준 : 파인 자리 77×79, 안쪽 둥글기 41×43, 바깥 꺾이는 두 곳 둥글기 7).
+   폭이 변하는 카드라 CSS 로는 본문 배경색 조각(.go)을 덧대고, 바깥 꺾이는 두 곳에 둥근 모서리 조각(.go::after)을 더함 */
 .cm-link-card .go {
   position: absolute;
   right: -0.1rem;
   bottom: -0.1rem;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
   width: 7.8rem;
   height: 8rem;
-  padding: 0 1.1rem 1.3rem 0;
-  border-top: 0.1rem solid var(--cm-main-card-hover-border);
-  border-left: 0.1rem solid var(--cm-main-card-hover-border);
-  border-top-left-radius: 4.3rem;
+  border-top: 0.1rem solid var(--cm-link-card-line);
+  border-left: 0.1rem solid var(--cm-link-card-line);
+  border-top-left-radius: 4.1rem 4.3rem;
   background-color: var(--cm-main-page-bg);
   opacity: 0;
   transition: opacity 0.2s;
 }
+/* 화살표 버튼 48px */
 .cm-link-card .go::before {
   content: "";
   position: absolute;
@@ -793,17 +797,26 @@ body.cm-main {
   border-radius: 50%;
   background-color: var(--cm-main-go-bg);
 }
+/* 바깥으로 꺾이는 두 곳(파인 자리 위쪽의 카드 오른쪽 변, 왼쪽의 카드 아래 변) : 반지름 7px 둥근 모서리
+   조각마다 카드 색 부분은 비워 두고, 둥근 선과 그 바깥(본문 배경색)만 그림 */
+.cm-link-card .go::after {
+  --cm-link-card-corner: radial-gradient(circle at 0 0, transparent calc(0.6rem - 0.5px), var(--cm-link-card-line) 0.6rem, var(--cm-link-card-line) calc(0.7rem - 0.5px), var(--cm-main-page-bg) 0.7rem);
+  content: "";
+  position: absolute;
+  top: -0.7rem; /* 조각의 아래 · 오른쪽 끝이 파인 자리의 선(1px)과 겹치게 */
+  right: 0;
+  bottom: 0;
+  left: -0.7rem;
+  background: var(--cm-link-card-corner) right top / 0.7rem 0.7rem no-repeat, var(--cm-link-card-corner) left bottom / 0.7rem 0.7rem no-repeat;
+  pointer-events: none;
+}
 .cm-link-card .go .svg-icon {
-  position: relative;
-  margin: 0 1.2rem 1.2rem 0;
+  position: absolute;
+  right: 2.3rem;
+  bottom: 2.5rem;
   width: 2.4rem;
   height: 2.4rem;
   background-color: #fff;
-}
-.cm-link-card:hover,
-.cm-link-card:focus-visible {
-  border-color: var(--cm-main-card-hover-border);
-  background-color: var(--cm-main-card-hover-bg);
 }
 .cm-link-card:hover .go,
 .cm-link-card:focus-visible .go {
