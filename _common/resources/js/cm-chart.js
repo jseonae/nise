@@ -565,7 +565,7 @@
         emphasis: { scale: 1.38, lineStyle: { width: 3.5 } },
         z: 10,
         label: { position: "top", distance: 8 },
-        data: labelled(growth, lineSet.bg, (p) => `${(+p.value).toFixed(1)}%`, labelBox(ctx, lineSet.bg)), // 파란 막대 위에서도 읽히게 상자
+        data: labelled(growth, lineSet.bg, (p) => `${(+p.value).toFixed(1)}%`, Object.assign(labelBox(ctx, lineSet.bg), { padding: [3, 4] })), // 파란 막대 위에서도 읽히게 상자 (옆 해의 막대 값과 닿지 않게 좁은 여백)
         _lineStyle: { type: lineStyle.type, symbol: lineStyle.symbol === "circle" ? "circle" : "rect" },
         _unit: "%",
       };
@@ -586,12 +586,21 @@
       const pitch = (ctx.width - left - right) / model.categories.length;
       const barY = (i) => (bar.data[i] == null ? null : gridTop + plotH * (1 - bar.data[i].value / yMax));
       const lineY = (i) => gridTop + plotH * (1 - (growth[i] - gMin) / (gMax - gMin));
-      const textW = (t) => size * (0.62 * t.replace(/,/g, "").length + 0.3 * (t.length - t.replace(/,/g, "").length)) + 4;
+      // 글자 너비 : 실제 글꼴로 잼 (잴 수 없으면 어림값)
+      const pen = document.createElement("canvas").getContext("2d");
+      const textW = (t, bold) => {
+        if (pen) {
+          pen.font = `${bold ? 700 : 400} ${size}px ${ctx.colors.font}`;
+          return pen.measureText(t).width;
+        }
+        return size * (0.62 * t.replace(/,/g, "").length + 0.3 * (t.length - t.replace(/,/g, "").length));
+      };
       /* ① 막대 값 : 값이 길어 이웃한 값끼리 가로로 겹칠 때(여섯 자리 값 · 좁은 막대)는 하나 걸러 하나를 윗줄로 올림
             제자리 레이블(마지막 값에서 거꾸로 세어 짝수 번째)은 움직이지 않아 줄이 계단처럼 밀리지 않음 */
       const lastIndex = last(s.data);
       const barDist = bar.data.map(() => 5);
-      if (Math.max(...bar.data.filter((d) => d != null).map((d) => textW(fmtNumber(d.value)))) > pitch) {
+      const barW = bar.data.map((d, i) => (d == null ? 0 : textW(fmtNumber(d.value), i === lastIndex)));
+      if (Math.max(...barW) + 4 > pitch) {
         bar.data.forEach((d, i) => {
           if (d == null || (lastIndex - i) % 2 === 0) return;
           const tops = [i - 1, i, i + 1].map(barY).filter((y) => y != null);
@@ -625,7 +634,9 @@
       const barLabel = (i) => (barY(i) == null ? null : { top: barY(i) - barDist[i] - size - 2, bottom: barY(i) - barDist[i] + 2 });
       line.data.forEach((d, i) => {
         if (d == null) return;
-        const near = [i - 1, i, i + 1].map(barLabel).filter(Boolean);
+        // 같은 해의 막대 값은 늘 위아래로 놓이고, 양옆 해의 막대 값은 가로로 실제 닿을 때만 따짐
+        const boxW = textW(`${(+d.value).toFixed(1)}%`, i === last(growth)) + 10; // 글자 + 안쪽 여백 4 + 테두리 1
+        const near = [i - 1, i, i + 1].filter((j) => j === i || (boxW + barW[j]) / 2 > pitch).map(barLabel).filter(Boolean);
         const hits = (top) => near.some((r) => top < r.bottom && top + boxH > r.top);
         const y = lineY(i);
         if (!hits(y - dist - boxH)) return; // 점 위 (기본)
