@@ -935,17 +935,25 @@ body.cm-main {
   height: 33.4rem;
   padding-top: 1.7rem;
 }
+/* 표지 : 세로형 · 가로형 모두 자르지 않고 비율대로 보여 줌 (자료실 목록 .cm-cover-item .thumb 와 같은 방식)
+   - 표지 자리 높이는 세로형 기준(221 + 테두리)으로 고정하고, 표지를 아래에 맞춰 남색 띠에 걸치는 모양을 유지
+   - 가로형은 폭 210px 에 맞춰 줄어듦. 표지 없는 자료는 자료실과 같은 기본 표지(cm_cover_default.png)를 넣음 */
 .cm-report-item .cover {
-  display: block;
-  padding: 0.8rem;
-  border: 0.1rem solid #b1b8be;
-  background-color: #fff;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 23.9rem;
 }
 .cm-report-item .cover img {
   display: block;
-  width: 15.9rem;
-  height: 22.1rem;
-  object-fit: cover;
+  box-sizing: content-box;
+  width: auto;
+  max-width: 21rem; /* 가로형 : 양옆 이전 · 다음 버튼과 겹치지 않는 폭 */
+  height: auto;
+  max-height: 22.1rem;
+  padding: 0.8rem;
+  border: 0.1rem solid #b1b8be;
+  background-color: #fff;
 }
 .cm-report-item .tit {
   position: absolute;
@@ -966,7 +974,7 @@ body.cm-main {
 .cm-report-item:focus-visible {
   outline: 0;
 }
-.cm-report-item:focus-visible .cover {
+.cm-report-item:focus-visible .cover img {
   outline: 0.2rem solid var(--cm-color-border-primary);
   outline-offset: 0.2rem;
 }

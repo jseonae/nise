@@ -4,6 +4,8 @@
   - 스타일 : kr/css/main.css 5. 공지사항 · 연구 보고서 · 알림판 / 스크립트 : kr/js/main.js cmMainReport · cmMainBanner
   - 넘김은 KRDS 에 들어 있는 Swiper 를 씁니다. 버튼 이름 · 슬라이드 설명은 마크업에 직접 적었습니다.
   - 연구 보고서 : 자동 넘김 없음. 알림판 : 5초마다 자동 넘김, 정지 · 재생 버튼, 쪽수. 마우스를 올리거나 초점이 들어오면 멈춥니다.
+  - 연구 보고서 표지는 세로형 · 가로형 모두 자르지 않고 비율대로 보입니다. (자료실 목록과 같은 방식, 표지 자리 높이 고정 · 아래 맞춤)
+    표지 없는 자료는 자료실과 같은 기본 표지(_common/resources/img/common/cm_cover_default.png)를 넣습니다.
   - 보이지 않는 슬라이드는 스크립트가 inert · aria-hidden 으로 초점과 낭독에서 뺍니다.
   - 알림판 상자의 파인 모서리는 CSS 두 조각으로 표현했습니다. (Figma 는 한 도형)
   - 알림판 배너는 개발 시 관리자 등록 이미지(477×288) + 대체 텍스트로 바뀝니다. 지금 배너 3종은 확인용으로 HTML 로 그렸고,
@@ -38,19 +40,19 @@
           <div class="swiper-wrapper">
           <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="3장 중 1번째">
             <a href="board/archive_view.html?idx=1" class="cm-report-item">
-              <span class="cover"><img src="{{root}}kr/img/main/report_cover_01.jpg" alt="" width="159" height="221"></span>
+              <span class="cover"><img src="{{root}}kr/img/main/report_cover_01.jpg" alt=""></span>
               <span class="tit">2026 특수교육 실태조사(VII) 예비조사</span>
             </a>
           </div>
           <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="3장 중 2번째">
             <a href="board/archive_view.html?idx=3" class="cm-report-item">
-              <span class="cover"><img src="{{root}}kr/img/board/archive/cover_03.png" alt="" width="159" height="221"></span>
+              <span class="cover"><img src="{{root}}kr/img/board/archive/cover_03.png" alt=""></span>
               <span class="tit">2025 특수교육통계</span>
             </a>
           </div>
           <div class="swiper-slide" role="group" aria-roledescription="슬라이드" aria-label="3장 중 3번째">
             <a href="board/archive_view.html?idx=4" class="cm-report-item">
-              <span class="cover"><img src="{{root}}kr/img/board/archive/cover_04.png" alt="" width="159" height="221"></span>
+              <span class="cover"><img src="{{root}}kr/img/board/archive/cover_04.png" alt=""></span>
               <span class="tit">2023년 특수교육 실태조사 보고서</span>
             </a>
           </div>
