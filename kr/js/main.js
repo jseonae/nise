@@ -73,21 +73,27 @@ const cmMainSearch = {
   },
 };
 
-/* 실태조사변천사 : 카드 한 장만 보이고, 연도 진행 막대가 현재 연도까지 채워짐
-   - 처음 · 끝에서 이전 · 다음을 누르면 반대쪽 끝으로 돌아감
-   - 연도 버튼 : 왼쪽 · 오른쪽 방향키로 이동, 현재 연도 aria-current */
+/* 실태조사변천사 : 겹쳐 쌓인 카드를 한 장씩 넘김 (KRDS 포함 Swiper, creative 효과)
+   - Figma 프로토타입(스마트 애니메이트 0.3초)대로 : 다음을 누르면 앞 장이 아래로 내려가며 사라지고 뒤 장들이 한 칸씩 앞으로 나옴
+   - 끝에서 다음을 누르면 처음으로 이어짐(loop). 자동 넘김 없음
+   - 연도 버튼 : 왼쪽 · 오른쪽 방향키로 이동, 현재 연도 aria-current. 진행 막대가 현재 연도까지 채워짐
+   - 앞 장이 아닌 카드는 inert · aria-hidden 으로 초점과 낭독에서 뺌 */
 const cmMainHistory = {
+  STACK: 3, // 뒤에 비치는 카드 수
   init() {
+    if (typeof Swiper === "undefined") return;
     document.querySelectorAll("[data-cm-history]").forEach((root) => this.setup(root));
   },
   setup(root) {
-    const slides = [...root.querySelectorAll(".cm-history-slide")];
     const timeline = root.querySelector(".cm-history-timeline");
     const items = [...timeline.querySelectorAll("li")];
     const buttons = items.map((item) => item.querySelector("button"));
-    let index = Math.max(0, slides.findIndex((slide) => slide.classList.contains("is-active")));
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const small = window.matchMedia("(max-width: 767px)").matches;
+    // 뒤 카드 한 장마다 위로 올라가는 거리 · 줄어드는 비율 (Figma : 36 → 69 → 97px, 폭 1244 → 1178 → 1100 / 1320)
+    const step = small ? 16 : 33;
 
-    const fill = () => {
+    const fill = (index) => {
       const item = items[index];
       // 채움 폭 : 첫 연도는 그 칸 폭, 마지막 연도는 끝까지, 그 사이는 칸 가운데까지
       let width = item.offsetLeft + item.offsetWidth / 2;
@@ -95,37 +101,67 @@ const cmMainHistory = {
       if (index === items.length - 1) width = timeline.offsetWidth;
       timeline.style.setProperty("--cm-history-fill", `${width}px`);
     };
-    const go = (next) => {
-      index = (next + slides.length) % slides.length;
-      slides.forEach((slide, i) => {
-        slide.hidden = i !== index;
-        slide.classList.toggle("is-active", i === index);
+    // 카드마다 앞 장에서 몇 번째 뒤인지(data-offset) 적어 모양을 정함 : 0 앞 장, 1~3 뒤에 비치는 판, 그 밖은 숨김
+    const sync = (swiper) => {
+      swiper.slides.forEach((slide, i) => {
+        // loop 는 카드 순서를 옮겨 가며 앞 장 뒤에 항상 3장을 둠(loopAdditionalSlides). 앞 장보다 앞 순서는 지나간 장
+        const offset = i - swiper.activeIndex;
+        slide.dataset.offset = offset < 0 ? "past" : offset <= this.STACK ? String(offset) : "far";
+        slide.toggleAttribute("inert", offset !== 0);
+        slide.setAttribute("aria-hidden", String(offset !== 0));
       });
+      const index = swiper.realIndex;
       items.forEach((item, i) => {
         item.classList.toggle("is-active", i === index);
         if (i === index) buttons[i].setAttribute("aria-current", "true");
         else buttons[i].removeAttribute("aria-current");
       });
-      fill();
+      fill(index);
     };
 
-    root.querySelector(".cm-history-arrows .prev").addEventListener("click", () => go(index - 1));
-    root.querySelector(".cm-history-arrows .next").addEventListener("click", () => go(index + 1));
+    // 탭이 숨겨진 동안에는 폭을 잴 수 없어 카드 위치가 계산되지 않으므로, 화면에 보일 때 처음 만듦
+    let swiper = null;
+    const create = () => new Swiper(root.querySelector(".swiper"), {
+      effect: "creative",
+      loop: true,
+      loopAdditionalSlides: this.STACK,
+      speed: reduced ? 0 : 300,
+      slidesPerView: 1,
+      watchSlidesProgress: true,
+      creativeEffect: {
+        limitProgress: this.STACK,
+        shadowPerProgress: false,
+        prev: { translate: [0, 36, 0] }, // 지나간 장 : 아래로 36px (투명도는 CSS)
+        next: { translate: [0, -step, 0], scale: small ? 0.96 : 0.945 }, // 뒤 장 : 위로 올라가고 좁아짐
+      },
+      navigation: { prevEl: root.querySelector(".cm-history-arrows .prev"), nextEl: root.querySelector(".cm-history-arrows .next") },
+      a11y: { enabled: false }, // 버튼 이름 · 슬라이드 설명은 마크업에 직접 적음
+      on: {
+        afterInit: sync,
+        slideChange: sync,
+        loopFix: sync,
+      },
+    });
+
     buttons.forEach((button, i) => {
-      button.addEventListener("click", () => go(i));
+      button.addEventListener("click", () => swiper?.slideToLoop(i));
       button.addEventListener("keydown", (event) => {
         if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
         event.preventDefault();
-        const target = buttons[(i + (event.key === "ArrowRight" ? 1 : -1) + buttons.length) % buttons.length];
-        target.focus();
-        target.click();
+        const next = (i + (event.key === "ArrowRight" ? 1 : -1) + buttons.length) % buttons.length;
+        buttons[next].focus();
+        swiper?.slideToLoop(next);
       });
     });
 
-    // 탭이 숨겨져 있을 때는 폭을 잴 수 없으므로, 보이게 되거나 폭이 바뀔 때마다 다시 계산
-    if ("ResizeObserver" in window) new ResizeObserver(fill).observe(timeline);
-    else window.addEventListener("resize", fill);
-    go(index);
+    const ready = () => {
+      if (!timeline.offsetWidth) return;
+      if (!swiper) swiper = create();
+      else fill(swiper.realIndex);
+    };
+    if ("ResizeObserver" in window) new ResizeObserver(ready).observe(timeline);
+    else window.addEventListener("resize", ready);
+    ready();
   },
 };
 

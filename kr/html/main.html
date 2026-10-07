@@ -155,16 +155,17 @@
               </section>
 
               <!-- 탭 2 : 실태조사변천사 (신규 컴포넌트 kr/html/code/ext_main_history.html, Figma: 변천사3 Default~Variant7)
-                   카드 7장을 이전 · 다음 버튼과 연도 버튼으로 넘김 (자동 넘김 없음, kr/js/main.js cmMainHistory) -->
+                   겹쳐 쌓인 카드 7장. 다음을 누르면 앞 장이 아래로 빠지며 사라지고 뒤에 있던 장이 앞으로 나옴 (Figma 프로토타입 : 스마트 애니메이트 0.3초)
+                   KRDS 포함 Swiper 의 creative 효과 사용, 이전 · 다음 버튼과 연도 버튼으로 넘김 (자동 넘김 없음, kr/js/main.js cmMainHistory) -->
               <section id="panel_main_02" aria-labelledby="tab_main_02" class="tab-conts">
                 <h2 class="sr-only">실태조사변천사</h2>
                 <div class="cm-history" data-cm-history role="group" aria-roledescription="캐러셀" aria-label="실태조사변천사">
                   <div class="cm-history-stage">
-                    <span class="layer layer3" aria-hidden="true"></span>
-                    <span class="layer layer2" aria-hidden="true"></span>
-                    <span class="layer layer1" aria-hidden="true"></span>
-                    <ul class="cm-history-slides" aria-live="polite">
-                      <li class="cm-history-slide is-active" id="history_slide_1" role="group" aria-roledescription="슬라이드" aria-label="7장 중 1번째, 2008년">
+                    <div class="swiper">
+                    <ul class="swiper-wrapper cm-history-slides" aria-live="polite">
+                      <li class="swiper-slide cm-history-item" id="history_slide_1" role="group" aria-roledescription="슬라이드" aria-label="7장 중 1번째, 2008년">
+
+                        <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -183,8 +184,11 @@
                           <a href="stat/survey_history_list.html?round=1" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2008년 제1차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2008.jpg" alt="2008 특수교육 실태조사 보고서 표지" width="255" height="346"></div>
+                        </div>
                       </li>
-                          <li class="cm-history-slide" id="history_slide_2" role="group" aria-roledescription="슬라이드" aria-label="7장 중 2번째, 2011년" hidden>
+                          <li class="swiper-slide cm-history-item" id="history_slide_2" role="group" aria-roledescription="슬라이드" aria-label="7장 중 2번째, 2011년">
+
+                            <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -203,8 +207,11 @@
                           <a href="stat/survey_history_list.html?round=2" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2011년 제2차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2011.jpg" alt="2011 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                        </div>
                       </li>
-                          <li class="cm-history-slide" id="history_slide_3" role="group" aria-roledescription="슬라이드" aria-label="7장 중 3번째, 2014년" hidden>
+                          <li class="swiper-slide cm-history-item" id="history_slide_3" role="group" aria-roledescription="슬라이드" aria-label="7장 중 3번째, 2014년">
+
+                            <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -223,8 +230,11 @@
                           <a href="stat/survey_history_list.html?round=3" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2014년 제3차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2014.jpg" alt="2014 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                        </div>
                       </li>
-                          <li class="cm-history-slide" id="history_slide_4" role="group" aria-roledescription="슬라이드" aria-label="7장 중 4번째, 2017년" hidden>
+                          <li class="swiper-slide cm-history-item" id="history_slide_4" role="group" aria-roledescription="슬라이드" aria-label="7장 중 4번째, 2017년">
+
+                            <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -242,8 +252,11 @@
                           <a href="stat/survey_history_list.html?round=4" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2017년 제4차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2017.jpg" alt="2017 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                        </div>
                       </li>
-                          <li class="cm-history-slide" id="history_slide_5" role="group" aria-roledescription="슬라이드" aria-label="7장 중 5번째, 2020년" hidden>
+                          <li class="swiper-slide cm-history-item" id="history_slide_5" role="group" aria-roledescription="슬라이드" aria-label="7장 중 5번째, 2020년">
+
+                            <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -262,8 +275,11 @@
                           <a href="stat/survey_history_list.html?round=5" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2020년 제5차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2020.jpg" alt="2020 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                        </div>
                       </li>
-                          <li class="cm-history-slide" id="history_slide_6" role="group" aria-roledescription="슬라이드" aria-label="7장 중 6번째, 2023년" hidden>
+                          <li class="swiper-slide cm-history-item" id="history_slide_6" role="group" aria-roledescription="슬라이드" aria-label="7장 중 6번째, 2023년">
+
+                            <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -282,8 +298,11 @@
                           <a href="stat/survey_history_list.html?round=6" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2023년 제6차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2023.jpg" alt="2023 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                        </div>
                       </li>
-                          <li class="cm-history-slide" id="history_slide_7" role="group" aria-roledescription="슬라이드" aria-label="7장 중 7번째, 2026년" hidden>
+                          <li class="swiper-slide cm-history-item" id="history_slide_7" role="group" aria-roledescription="슬라이드" aria-label="7장 중 7번째, 2026년">
+
+                            <div class="cm-history-slide">
                         <div class="top">
                           <div class="head">
                             <p class="eyebrow"><span class="sub">변화하는 교육 현장을 담아온</span> <span class="main">특수교육 실태조사의 기록</span></p>
@@ -302,8 +321,10 @@
                           <a href="stat/survey_history_list.html?round=7" class="krds-btn medium tertiary">자세히보기<span class="sr-only"> : 2026년 제7차 조사 변천사</span> <i class="svg-icon ico-angle right" aria-hidden="true"></i></a>
                         </div>
                         <div class="cover"><img src="../img/main/history_cover_2026.jpg" alt="2026 특수교육 실태조사 보고서 표지" width="255" height="346" loading="lazy"></div>
+                        </div>
                       </li>
                     </ul>
+                    </div>
                   </div>
                   <div class="cm-history-nav">
                     <!-- 연도 진행 막대 : 연도를 누르면 해당 카드로 이동, 현재 연도 aria-current -->

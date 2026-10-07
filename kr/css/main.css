@@ -430,53 +430,54 @@ body.cm-main {
   position: relative;
   padding-top: 9.7rem;
 }
-/* 뒤에 비치는 카드 3겹 (장식) */
-.cm-history-stage .layer {
-  position: absolute;
-  left: 50%;
-  height: 20rem;
-  border-radius: 3rem;
-  background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 1.4rem 1.8rem 2.2rem rgba(0, 0, 0, 0.15);
-  transform: translateX(-50%);
-}
-.cm-history-stage .layer3 {
-  top: 0;
-  width: 83.33%;
-}
-.cm-history-stage .layer2 {
-  top: 2.8rem;
-  width: 89.24%;
-}
-.cm-history-stage .layer1 {
-  top: 6.1rem;
-  width: 94.24%;
+/* 겹쳐 쌓인 카드 : Swiper creative 효과 (kr/js/main.js cmMainHistory)
+   - 뒤 3장은 위로 조금씩 올라가고 좁아진 반투명 판으로 보임 (Figma : 폭 1244 · 1178 · 1100, 위로 36 · 69 · 97px)
+   - 넘기면 앞 장이 아래로 36px 내려가며 사라지고, 뒤 장들이 한 칸씩 앞으로 나옴 (Figma 프로토타입 스마트 애니메이트) */
+.cm-history-stage .swiper {
+  overflow: visible;
 }
 .cm-history-slides {
-  position: relative;
+  align-items: stretch;
+}
+.cm-history-item {
+  height: auto;
+  transform-origin: center top;
+  pointer-events: none;
+}
+.cm-history-item[data-offset="0"] {
+  pointer-events: auto;
 }
 .cm-history-slide {
   position: relative;
   overflow: hidden;
   height: 43.6rem;
   padding: 7rem 8rem;
-  border: 0.1rem solid #90b0d5;
+  border: 0.1rem solid transparent;
   border-radius: 3rem;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.15);
   box-shadow: 1.4rem 1.8rem 2.2rem rgba(0, 0, 0, 0.15);
   color: #1e2124;
+  opacity: 0;
+  transition: background-color 0.3s ease-out, border-color 0.3s ease-out, opacity 0.3s ease-out;
 }
-.cm-history-slide[hidden] {
-  display: none;
+.cm-history-slide > * {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
 }
-.cm-history-slide.is-active {
-  animation: cm-history-in 0.4s ease;
+/* 뒤 3장 : 반투명 판만 보임 */
+.cm-history-item[data-offset="1"] .cm-history-slide,
+.cm-history-item[data-offset="2"] .cm-history-slide,
+.cm-history-item[data-offset="3"] .cm-history-slide {
+  opacity: 1;
 }
-@keyframes cm-history-in {
-  from {
-    opacity: 0;
-    transform: translateY(1.2rem);
-  }
+/* 앞 장 */
+.cm-history-item[data-offset="0"] .cm-history-slide {
+  border-color: #90b0d5;
+  background-color: #fff;
+  opacity: 1;
+}
+.cm-history-item[data-offset="0"] .cm-history-slide > * {
+  opacity: 1;
 }
 .cm-history-slide .top {
   display: flex;
@@ -1457,7 +1458,7 @@ body.cm-main {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 20rem;
     gap: 2.4rem 3.2rem;
-    height: auto;
+    height: 100%; /* 가장 긴 카드 높이에 맞춤 */
     min-height: 40rem;
     padding: 4.8rem 4rem;
   }
@@ -1657,16 +1658,6 @@ body.cm-main {
   .cm-history-stage {
     padding-top: 4.8rem;
   }
-  .cm-history-stage .layer3 {
-    top: 0;
-  }
-  .cm-history-stage .layer2 {
-    top: 1.4rem;
-  }
-  .cm-history-stage .layer1 {
-    top: 3rem;
-  }
-  .cm-history-stage .layer,
   .cm-history-slide {
     border-radius: 2rem;
   }
@@ -1793,8 +1784,9 @@ body.cm-main {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cm-history-slide.is-active {
-    animation: none;
+  .cm-history-slide,
+  .cm-history-slide > * {
+    transition: none;
   }
   .cm-history-timeline::after {
     transition: none;
