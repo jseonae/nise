@@ -283,17 +283,6 @@
             <div class="cm-cross-table">
               <div class="cm-cross-table-top">
                 <h3 class="tit">통계표</h3>
-                <div class="opt">
-                  <p class="desc">가중치가 적용된 데이터입니다 · 비율(%) 중심 표기 · 사례수 30 미만은 통계표로만 제시</p>
-                  <div class="krds-form-toggle-switch medium">
-                    <input type="checkbox" id="cross_weight" checked>
-                    <label for="cross_weight"><span class="switch-toggle"><i></i></span>가중치 적용</label>
-                  </div>
-                  <div class="krds-form-toggle-switch medium">
-                    <input type="checkbox" id="cross_count">
-                    <label for="cross_count"><span class="switch-toggle"><i></i></span>사례수 표시</label>
-                  </div>
-                </div>
               </div>
               <p class="cm-cross-q">귀 학급의 교육과정 운영을 가장 어렵게 하는 사항은 무엇입니까?</p>
               <div class="krds-table-wrap cm-stat-table cm-cross-stat">
@@ -371,27 +360,21 @@
                   </tbody>
                 </table>
               </div>
-              <div class="cm-cross-note">
-                <p>각 셀 = 가로 100% 기준 행 비율 · ‘계’ 열은 사례수</p>
-                <p>가중치 적용. 표본 1,808명 · 계 7,761</p>
-              </div>
             </div>
           </div>
         </section>
 
         <!-- 설명 자료 -->
         <section class="cm-cross-doc">
-          <div class="cm-cross-doc-top">
-            <h2 class="cm-history-tit">특수학교 교사 — 설명 자료</h2>
-            <p class="sub">2023 특수교육 실태조사 · MDIS 원자료 · 가중치 적용 추정</p>
-          </div>
+          <h2 class="sr-only">설명 자료</h2>
           <section id="section_03" class="cm-ts-section">
             <h3 class="tit">조사 개요</h3>
             <ul class="cm-dot-list cm-cross-list">
-              <li>2023 특수교육 실태조사의 설문 원자료(MDIS)다 — 특수학교·특수학급의 관리자/교사, 장애영아 관리자/교사/보호자, 특수교육대상자 보호자 등 응답자 유형별 8종. 응답자 1명이 1개 행이며, 가중치를 적용해 모집단 추정값으로 환산한다.</li>
-              <li>위 하위 탭에서 응답자(데이터)를 고르고 문항(분석 항목)을 선택하면 전체 응답 분포(계)가 그려진다. 왼쪽의 하위 변수(조사마다 다름 — 학교과정·장애유형·지역·기관유형 등)를 ‘분석 차원’으로 끌어다 놓으면 그 기준으로 교차분석된다.</li>
+              <li>2023 특수교육 실태조사의 설문 원자료(MDIS)다. 특수학교·특수학급의 관리자/교사, 장애영아 관리자/교사/보호자, 특수교육대상자 보호자 등 응답자 유형별 8종. 응답자 1명이 1개 행이며, 가중치를 적용해 모집단 추정값으로 환산한다.</li>
+              <li>위 하위 탭에서 응답자(데이터)를 고르고 문항(분석 항목)을 선택하면 전체 응답 분포(계)가 그려진다. 왼쪽의 하위 변수(학교과정·장애유형·지역·기관유형 등)를 ‘분석 차원’으로 끌어다 놓으면 그 기준으로 교차분석된다.</li>
             </ul>
           </section>
+          <!-- 산출 방법 · 가중치 : 사용하지 않아 주석 처리
           <section id="section_04" class="cm-ts-section">
             <h3 class="tit">산출 방법 · 가중치</h3>
             <p class="cm-kd-desc">통계는 원자료에서 직접 산출하며, 빈도는 행 수가 아니라 가중치(C263)의 합(Σweight)이다.</p>
@@ -400,6 +383,7 @@
               <li>한 변수에서 여러 값 선택 = OR, 서로 다른 변수 조건 = 상단 토글로 AND/OR.</li>
             </ul>
           </section>
+          -->
           <section id="section_05" class="cm-ts-section">
             <h3 class="tit">용어해설</h3>
             <div class="krds-table-wrap cm-term-table">
@@ -466,7 +450,7 @@
                 <li><a href="#section_01" class="active">분석 조건 검색</a></li>
                 <li><a href="#section_02">하위 변수(교차·필터)</a></li>
                 <li><a href="#section_03">조사개요</a></li>
-                <li><a href="#section_04">산출 방법 · 가중치</a></li>
+                <!-- <li><a href="#section_04">산출 방법 · 가중치</a></li> -->
                 <li><a href="#section_05">용어해설</a></li>
                 <li><a href="#section_06">유의사항</a></li>
                 <li><a href="#section_07">출처</a></li>
