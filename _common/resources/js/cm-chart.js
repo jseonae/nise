@@ -450,6 +450,7 @@
       ctx.order = ctx.order || (ctx.config.palette || ORDER_DEFAULT);
       /* 값 레이블 자리 : 항목(가로축 한 칸)마다 보이는 계열을 값 순서로 세워 위쪽 절반은 점 위, 아래쪽 절반은 점 아래에 둠
          (선이 두 개면 큰 값은 위 · 작은 값은 아래). 그래도 서로 겹치는 레이블은 겹치지 않을 때까지 세로로 밀어내고 점과 지시선으로 이음
+         밀려난 레이블이 점을 덮게 되면 점의 대각선 옆으로 뺌
          - 자리를 미리 계산하려고 그림 영역 여백과 세로축 범위를 직접 정함 */
       const shown = model.series.map((s, i) => i).filter((i) => ctx.selected[model.series[i].name] !== false);
       const values = shown.flatMap((i) => model.series[i].data.filter((v) => v != null));
@@ -469,26 +470,69 @@
       const dist = 8;
       const pixel = (v) => gridTop + (H - gridTop - gridBottom) * (1 - (v - yMin) / (yMax - yMin));
       const below = model.series.map(() => []);
-      const shift = model.series.map(() => []);
+      const shift = model.series.map(() => []); // 세로로 옮길 거리
+      const aside = model.series.map(() => []); // 가로로 옮길 거리 (옆으로 뺀 레이블)
+      const floor = H - gridBottom - 2 - boxH / 2; // 가로축 아래(항목 이름)로 내려가지 않게
+      const left = Math.round(64 * ctx.scale);
+      const pitch = (ctx.width - left - 24) / Math.max(1, model.categories.length);
+      const format = barLabelFormatter(ctx);
+      const pen = document.createElement("canvas").getContext("2d");
+      if (pen) pen.font = `${size}px ${ctx.colors.font}`;
+      const boxW = (i, k) => {
+        const text = format({ value: model.series[i].data[k], data: { raw: model.series[i].texts ? model.series[i].texts[k] : "" } });
+        return (pen ? pen.measureText(text).width : size * 0.6 * text.length) + 14; // 글자 + 안쪽 여백 · 테두리
+      };
+      // 세로 한 줄에 놓인 레이블을 겹치지 않게 : 위에서부터 밀어내고, 바닥을 넘으면 아래에서부터 다시 올림
+      const stack = (list) => {
+        list.sort((a, b) => a.natural - b.natural);
+        list.forEach((item, j) => {
+          item.center = Math.max(item.natural, j ? list[j - 1].center + boxH + gap : 2 + boxH / 2);
+        });
+        for (let j = list.length - 1; j >= 0; j--) {
+          list[j].center = Math.min(list[j].center, j === list.length - 1 ? floor : list[j + 1].center - boxH - gap);
+        }
+      };
       model.categories.forEach((c, k) => {
         const ranked = shown.filter((i) => model.series[i].data[k] != null).sort((a, b) => model.series[b].data[k] - model.series[a].data[k]);
         const items = ranked.map((i, r) => {
           const down = ranked.length > 1 && r >= Math.ceil(ranked.length / 2);
-          below[i][k] = down;
           const y = pixel(model.series[i].data[k]);
           const natural = down ? y + dist + boxH / 2 : y - dist - boxH / 2; // 밀어내기 전 레이블 가운데
-          return { i, natural, center: natural };
+          return { i, y, down, natural, center: natural, w: boxW(i, k), dx: 0 };
         });
-        items.sort((a, b) => a.natural - b.natural);
-        items.forEach((item, j) => {
-          item.center = Math.max(item.natural, j ? items[j - 1].center + boxH + gap : 2 + boxH / 2);
-        });
-        const floor = H - gridBottom - 2 - boxH / 2; // 가로축 아래(항목 이름)로 내려가지 않게
-        for (let j = items.length - 1; j >= 0; j--) {
-          items[j].center = Math.min(items[j].center, j === items.length - 1 ? floor : items[j + 1].center - boxH - gap);
+        stack(items);
+        /* 밀려난 레이블 상자가 점을 덮으면(0 근처에 선이 몰릴 때) 그 레이블을 점의 대각선 위 옆으로 뺌 : 가장 아래 두 개를 왼쪽 위 · 오른쪽 위에 나란히
+           - 옆으로 뺄 자리가 있을 때만 (항목 사이가 좁으면 옆 항목의 레이블과 겹치므로 세로로 쌓은 채 둠) */
+        // 점 아래에 둘 레이블이 가로축에 막혀 제자리에 못 놓이는 경우도 같은 상황 (올라오면서 점을 덮음)
+        const covered = items.filter((item) => (item.down && item.natural > floor) || items.some((p) => p.y > item.center - boxH / 2 - 4 && p.y < item.center + boxH / 2 + 4));
+        const widest = Math.max(0, ...items.map((item) => item.w));
+        if (covered.length && pitch >= widest * 1.5 + 12) {
+          const above = (item) => item.y - dist - boxH / 2;
+          covered.sort((a, b) => b.y - a.y);
+          const pair = covered.slice(0, 2);
+          const sides = pair.length === 2 ? [-1, 1] : [k === model.categories.length - 1 ? -1 : 1];
+          pair.forEach((item, j) => {
+            item.down = false;
+            item.dx = sides[j] * (item.w / 2 + 6);
+          });
+          // 옆으로 뺀 한 쌍은 같은 높이에 두고, 나머지 레이블과 함께 한 칸으로 쳐서 다시 세로로 정리
+          const slot = { natural: Math.min(...pair.map(above)), center: 0 };
+          const rest = items.filter((item) => !pair.includes(item));
+          rest.forEach((item) => {
+            if (!covered.includes(item)) return;
+            item.down = false;
+            item.natural = above(item);
+          });
+          stack([...rest, slot]);
+          pair.forEach((item) => {
+            item.natural = above(item);
+            item.center = slot.center;
+          });
         }
         items.forEach((item) => {
+          below[item.i][k] = item.down;
           shift[item.i][k] = Math.round(item.center - item.natural);
+          aside[item.i][k] = Math.round(item.dx);
         });
       });
       const series = model.series.map((s, i) => {
@@ -506,7 +550,7 @@
           lineStyle: { color: set.bg, width: 2.5, type: style.type },
           emphasis: { scale: 1.38, lineStyle: { width: 3 } },
           label: Object.assign({ show: ctx.labels, position: "top", distance: dist, fontSize: size, color: ctx.colors.text, formatter: barLabelFormatter(ctx) }, labelBox(ctx, set.bg)),
-          labelLayout: (p) => ({ dy: shift[i][p.dataIndex] || 0 }),
+          labelLayout: (p) => ({ dx: aside[i][p.dataIndex] || 0, dy: shift[i][p.dataIndex] || 0 }),
           labelLine: { show: true, lineStyle: { color: set.bg, width: 1 } },
           _lineStyle: style,
         };
