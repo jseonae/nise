@@ -2146,16 +2146,16 @@ body.cm-banner-all-open {
   fill: var(--krds-high-contrast-color-text-basic);
 }
 [data-krds-mode=high-contrast] .cm-stat-svg [fill="#61758F"] {
-  fill: #8a949e;
+  fill: var(--krds-color-high-contrast-gray-40);
 }
 [data-krds-mode=high-contrast] .cm-stat-svg [fill="#0B78CB"]:not(path) {
-  fill: #6cb9f7;
+  fill: var(--krds-color-high-contrast-information-30);
 }
 [data-krds-mode=high-contrast] .cm-stat-svg [stroke="#000"] {
-  stroke: #fff;
+  stroke: var(--krds-color-high-contrast-gray-0);
 }
 [data-krds-mode=high-contrast] .cm-stat-svg linearGradient[id="st1_c"] stop {
-  stop-color: #fff;
+  stop-color: var(--krds-color-high-contrast-gray-0);
 }
 [data-krds-mode=high-contrast] .cm-stat-svg rect[fill="#fff"] {
   fill: var(--krds-high-contrast-color-surface-gray-subtler);
@@ -2165,7 +2165,7 @@ body.cm-banner-all-open {
   fill: var(--krds-high-contrast-color-text-basic);
 }
 [data-krds-mode=high-contrast] .cm-stat-svg .m-pop-b [fill="#fff"] {
-  fill: #131416;
+  fill: var(--krds-color-high-contrast-gray-95);
 }
 /* 화살표 : 곱하기 혼합은 어두운 바탕에서 보이지 않아 보통 혼합으로 */
 [data-krds-mode=high-contrast] .cm-stat-svg .m-wipe-right {
@@ -2183,11 +2183,11 @@ body.cm-banner-all-open {
   color: var(--krds-high-contrast-color-text-primary);
 }
 [data-krds-mode=high-contrast] .cm-history-slide .eyebrow .sub {
-  color: #8fa9c9;
+  color: var(--krds-color-high-contrast-primary-30);
 }
 [data-krds-mode=high-contrast] .cm-history-slide .idx {
   background-color: var(--krds-high-contrast-color-text-primary);
-  color: #020f27;
+  color: var(--krds-color-high-contrast-primary-95);
 }
 [data-krds-mode=high-contrast] .cm-history-slide .body .tit {
   color: var(--krds-high-contrast-color-text-secondary);
@@ -2199,7 +2199,7 @@ body.cm-banner-all-open {
   color: var(--krds-high-contrast-color-text-primary);
 }
 [data-krds-mode=high-contrast] .cm-history-slide .year {
-  color: #fff; /* 어두운 바탕에서는 큰 연도를 흰색으로 또렷하게 */
+  color: var(--krds-color-high-contrast-gray-0); /* 어두운 바탕에서는 큰 연도를 흰색으로 또렷하게 */
 }
 [data-krds-mode=high-contrast] .cm-history-slide .krds-btn.tertiary {
   border-color: var(--krds-high-contrast-color-text-subtle);
@@ -2239,7 +2239,7 @@ body.cm-banner-all-open {
 }
 [data-krds-mode=high-contrast] .cm-quick .btn-top {
   background-color: var(--krds-high-contrast-color-text-basic);
-  color: #131416;
+  color: var(--krds-color-high-contrast-gray-95);
 }
 [data-krds-mode=high-contrast] .cm-quick .btn-top:hover {
   background-color: var(--krds-high-contrast-color-text-subtle);
@@ -2252,7 +2252,7 @@ body.cm-banner-all-open {
   display: none;
 }
 [data-krds-mode=high-contrast] .cm-hero-txt .tit .line1 em {
-  color: #6cb9f7;
+  color: var(--krds-color-high-contrast-information-30);
 }
 [data-krds-mode=high-contrast] .cm-link-tile .ico img,
 [data-krds-mode=high-contrast] .cm-link-card .img {
@@ -2292,16 +2292,16 @@ body.cm-banner-all-open {
     fill: var(--krds-high-contrast-color-text-basic);
   }
   [data-krds-mode=theme] .cm-stat-svg [fill="#61758F"] {
-    fill: #8a949e;
+    fill: var(--krds-color-high-contrast-gray-40);
   }
   [data-krds-mode=theme] .cm-stat-svg [fill="#0B78CB"]:not(path) {
-    fill: #6cb9f7;
+    fill: var(--krds-color-high-contrast-information-30);
   }
   [data-krds-mode=theme] .cm-stat-svg [stroke="#000"] {
-    stroke: #fff;
+    stroke: var(--krds-color-high-contrast-gray-0);
   }
   [data-krds-mode=theme] .cm-stat-svg linearGradient[id="st1_c"] stop {
-    stop-color: #fff;
+    stop-color: var(--krds-color-high-contrast-gray-0);
   }
   [data-krds-mode=theme] .cm-stat-svg rect[fill="#fff"] {
     fill: var(--krds-high-contrast-color-surface-gray-subtler);
@@ -2311,7 +2311,7 @@ body.cm-banner-all-open {
     fill: var(--krds-high-contrast-color-text-basic);
   }
   [data-krds-mode=theme] .cm-stat-svg .m-pop-b [fill="#fff"] {
-    fill: #131416;
+    fill: var(--krds-color-high-contrast-gray-95);
   }
   /* 화살표 : 곱하기 혼합은 어두운 바탕에서 보이지 않아 보통 혼합으로 */
   [data-krds-mode=theme] .cm-stat-svg .m-wipe-right {
@@ -2329,11 +2329,11 @@ body.cm-banner-all-open {
     color: var(--krds-high-contrast-color-text-primary);
   }
   [data-krds-mode=theme] .cm-history-slide .eyebrow .sub {
-    color: #8fa9c9;
+    color: var(--krds-color-high-contrast-primary-30);
   }
   [data-krds-mode=theme] .cm-history-slide .idx {
     background-color: var(--krds-high-contrast-color-text-primary);
-    color: #020f27;
+    color: var(--krds-color-high-contrast-primary-95);
   }
   [data-krds-mode=theme] .cm-history-slide .body .tit {
     color: var(--krds-high-contrast-color-text-secondary);
@@ -2345,7 +2345,7 @@ body.cm-banner-all-open {
     color: var(--krds-high-contrast-color-text-primary);
   }
   [data-krds-mode=theme] .cm-history-slide .year {
-    color: #fff; /* 어두운 바탕에서는 큰 연도를 흰색으로 또렷하게 */
+    color: var(--krds-color-high-contrast-gray-0); /* 어두운 바탕에서는 큰 연도를 흰색으로 또렷하게 */
   }
   [data-krds-mode=theme] .cm-history-slide .krds-btn.tertiary {
     border-color: var(--krds-high-contrast-color-text-subtle);
@@ -2385,7 +2385,7 @@ body.cm-banner-all-open {
   }
   [data-krds-mode=theme] .cm-quick .btn-top {
     background-color: var(--krds-high-contrast-color-text-basic);
-    color: #131416;
+    color: var(--krds-color-high-contrast-gray-95);
   }
   [data-krds-mode=theme] .cm-quick .btn-top:hover {
     background-color: var(--krds-high-contrast-color-text-subtle);
@@ -2398,7 +2398,7 @@ body.cm-banner-all-open {
     display: none;
   }
   [data-krds-mode=theme] .cm-hero-txt .tit .line1 em {
-    color: #6cb9f7;
+    color: var(--krds-color-high-contrast-information-30);
   }
   [data-krds-mode=theme] .cm-link-tile .ico img,
   [data-krds-mode=theme] .cm-link-card .img {
