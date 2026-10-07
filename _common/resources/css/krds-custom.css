@@ -3545,6 +3545,7 @@ p {
   --cm-ai-ask-line: transparent;
   --cm-ai-ask-text: var(--cm-color-text-inverse);
   --cm-ai-chat-icon: var(--cm-color-border-light); /* Figma 아이콘 #cdd1d5 */
+  --cm-ai-placeholder: var(--krds-light-color-element-gray-dark); /* KRDS 기본 안내 문구 색은 회색 입력창 위에서 2.8:1 → 4.5:1 이상으로 */
 }
 /* 선명하게(어두운 배경) 모드 : 넓은 파란 면(머리글 · 처음 안내 · 질문 말풍선)이 검은 화면에서 강한 빛이 되어
    눈부심을 줄이려는 모드의 목적과 맞지 않음 → 어두운 면 + 테두리로 바꿈 (모두 KRDS high-contrast 토큰)
@@ -3563,6 +3564,7 @@ p {
   --cm-ai-ask-line: var(--krds-high-contrast-color-button-secondary-border);
   --cm-ai-ask-text: var(--krds-high-contrast-color-text-basic);
   --cm-ai-chat-icon: var(--krds-high-contrast-color-text-subtle);
+  --cm-ai-placeholder: var(--krds-high-contrast-color-element-gray-dark);
 }
 @media (prefers-color-scheme: dark) {
   [data-krds-mode=theme] .cm-ai {
@@ -3577,6 +3579,7 @@ p {
     --cm-ai-ask-line: var(--krds-high-contrast-color-button-secondary-border);
     --cm-ai-ask-text: var(--krds-high-contrast-color-text-basic);
     --cm-ai-chat-icon: var(--krds-high-contrast-color-text-subtle);
+    --cm-ai-placeholder: var(--krds-high-contrast-color-element-gray-dark);
   }
 }
 .cm-ai-launcher {
@@ -3926,6 +3929,9 @@ p {
   min-width: 0;
   border-color: transparent;
   background-color: var(--cm-color-box-surface);
+}
+.cm-ai-input .krds-input::placeholder {
+  color: var(--cm-ai-placeholder);
 }
 .cm-ai-input .krds-btn {
   flex: none;
