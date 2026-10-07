@@ -3590,7 +3590,7 @@ p {
   position: fixed;
   top: min(69rem, calc(100vh - 19rem)); /* Figma : 콘텐츠 내 탐색 시작점에서 434px 아래 */
   right: calc(var(--cm-ai-inpage-right) + 13.6rem); /* 여는 버튼 가운데 = 콘텐츠 내 탐색 왼쪽 + 24px (Figma) */
-  z-index: 20;
+  z-index: 55; /* 푸터(KRDS 50)보다 위, TOP 버튼(60) · 헤더(70)보다 아래 */
   transform: translateX(50%);
 }
 .cm-ai-bubble {
@@ -3673,7 +3673,7 @@ p {
   position: fixed;
   top: clamp(2rem, calc(100vh - 66.5rem), 40.3rem);
   right: 0;
-  z-index: 30;
+  z-index: 90; /* 푸터(KRDS 50) · TOP 버튼(60) · 헤더(70)보다 위, 통합검색(110) · 모달(1010)보다 아래 */
   width: 40rem;
   max-height: calc(100vh - 4rem);
   overflow: hidden;
@@ -3685,6 +3685,10 @@ p {
 }
 .cm-ai-panel[hidden] {
   display: none;
+}
+/* 창이 열려 있는 동안 창에 가려지는 TOP 버튼은 숨김 (가려진 버튼으로 키보드 초점이 들어가지 않게) */
+.cm-ai-opened .page-top-button {
+  visibility: hidden;
 }
 /* 선명하게(어두운 배경) 모드 : 창 면이 본문과 같은 검정이고 그림자도 보이지 않아 본문과 구분되지 않음
    → 창은 한 단계 밝은 면, 그 안의 답변 말풍선 · 입력창 · 추천 질문은 한 단계 더 밝은 면, 창 테두리는 또렷한 회색 선
