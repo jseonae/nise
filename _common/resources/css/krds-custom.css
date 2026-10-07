@@ -189,10 +189,26 @@
 .cm-search-form {
   display: flex;
   flex-direction: column;
-  gap: var(--krds-gap-6);
+  gap: var(--krds-gap-4); /* 12px */
   width: 100%;
-  max-width: 79.2rem;
+  max-width: 80rem;
   margin: 0 auto;
+}
+/* 안내 문구 : 아이콘(48×44) + 24px Bold */
+.cm-search-guide {
+  display: flex;
+  align-items: center;
+  gap: var(--krds-gap-3);
+  font-size: var(--krds-pc-font-size-heading-medium);
+  font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  color: var(--cm-color-text-bolder);
+  word-break: keep-all;
+}
+.cm-search-guide img {
+  flex: none;
+  width: 4.9rem;
+  height: 4.4rem;
 }
 .cm-search-form .krds-input {
   padding-right: 9.6rem; /* 지우기 · 검색 버튼 자리 */
@@ -269,6 +285,13 @@
   }
   .cm-search-form .krds-input {
     font-size: var(--krds-mobile-font-size-label-large);
+  }
+  .cm-search-guide {
+    font-size: var(--krds-mobile-font-size-heading-medium);
+  }
+  .cm-search-guide img {
+    width: 3.6rem;
+    height: 3.2rem;
   }
 }
 
