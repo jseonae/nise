@@ -2110,7 +2110,7 @@ body.cm-banner-all-open {
 /* --------------------------------------------------------------------------
    9. 선명하게(고대비) 모드 · 시스템 어두운 모드
       - 숫자 카드 · 변천사 카드도 어두운 면으로 바꿉니다. (인포그래픽이 SVG 라 색을 바꿀 수 있음)
-      - 바로가기와 알림판 배너 이미지, 보고서 표지는 밝은 색 그대로 둡니다.
+      - 바로가기도 어두운 상자로 바꿉니다. 알림판 배너 이미지와 보고서 표지는 이미지라 그대로 둡니다.
       - 나머지 면 · 선 · 글자는 KRDS 고대비 토큰으로 바꿉니다.
    -------------------------------------------------------------------------- */
 [data-krds-mode=high-contrast] body.cm-main {
@@ -2213,6 +2213,36 @@ body.cm-banner-all-open {
 }
 [data-krds-mode=high-contrast] .cm-history-slide .cover {
   background-color: var(--krds-high-contrast-color-surface-white-subtler);
+}
+/* 바로가기 : 어두운 상자 + 밝은 글자, TOP 버튼은 검은 배경에서 보이도록 밝은 버튼으로 뒤집음 */
+[data-krds-mode=high-contrast] .cm-quick .box {
+  border-color: var(--krds-high-contrast-color-border-gray-light);
+  background-color: var(--krds-high-contrast-color-surface-gray-subtler);
+  box-shadow: none;
+}
+[data-krds-mode=high-contrast] .cm-quick .tit {
+  background-color: var(--krds-high-contrast-color-surface-white-subtler);
+  color: var(--krds-high-contrast-color-text-subtle);
+}
+[data-krds-mode=high-contrast] .cm-quick li + li::before {
+  background-color: var(--krds-high-contrast-color-border-gray-light);
+}
+[data-krds-mode=high-contrast] .cm-quick li a {
+  color: var(--krds-high-contrast-color-text-basic);
+}
+[data-krds-mode=high-contrast] .cm-quick li a:hover {
+  background-color: var(--krds-high-contrast-color-surface-white-subtler);
+  color: var(--krds-high-contrast-color-text-primary);
+}
+[data-krds-mode=high-contrast] .cm-quick li a img {
+  filter: brightness(1.5);
+}
+[data-krds-mode=high-contrast] .cm-quick .btn-top {
+  background-color: var(--krds-high-contrast-color-text-basic);
+  color: #131416;
+}
+[data-krds-mode=high-contrast] .cm-quick .btn-top:hover {
+  background-color: var(--krds-high-contrast-color-text-subtle);
 }
 [data-krds-mode=high-contrast] .cm-hero {
   background-image: none;
@@ -2329,6 +2359,36 @@ body.cm-banner-all-open {
   }
   [data-krds-mode=theme] .cm-history-slide .cover {
     background-color: var(--krds-high-contrast-color-surface-white-subtler);
+  }
+  /* 바로가기 : 어두운 상자 + 밝은 글자, TOP 버튼은 검은 배경에서 보이도록 밝은 버튼으로 뒤집음 */
+  [data-krds-mode=theme] .cm-quick .box {
+    border-color: var(--krds-high-contrast-color-border-gray-light);
+    background-color: var(--krds-high-contrast-color-surface-gray-subtler);
+    box-shadow: none;
+  }
+  [data-krds-mode=theme] .cm-quick .tit {
+    background-color: var(--krds-high-contrast-color-surface-white-subtler);
+    color: var(--krds-high-contrast-color-text-subtle);
+  }
+  [data-krds-mode=theme] .cm-quick li + li::before {
+    background-color: var(--krds-high-contrast-color-border-gray-light);
+  }
+  [data-krds-mode=theme] .cm-quick li a {
+    color: var(--krds-high-contrast-color-text-basic);
+  }
+  [data-krds-mode=theme] .cm-quick li a:hover {
+    background-color: var(--krds-high-contrast-color-surface-white-subtler);
+    color: var(--krds-high-contrast-color-text-primary);
+  }
+  [data-krds-mode=theme] .cm-quick li a img {
+    filter: brightness(1.5);
+  }
+  [data-krds-mode=theme] .cm-quick .btn-top {
+    background-color: var(--krds-high-contrast-color-text-basic);
+    color: #131416;
+  }
+  [data-krds-mode=theme] .cm-quick .btn-top:hover {
+    background-color: var(--krds-high-contrast-color-text-subtle);
   }
   [data-krds-mode=theme] .cm-hero {
     background-image: none;
