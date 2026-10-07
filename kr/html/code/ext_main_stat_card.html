@@ -1,20 +1,54 @@
-<!-- ext: 신규 컴포넌트 (KRDS에 없음, 메인 전용) / 숫자 카드 : 제목 · 큰 수치 · 꼬리표 · 인포그래픽 -->
+<!-- ext: 신규 컴포넌트 (KRDS에 없음, 메인 전용) / 숫자 카드 : 제목 · 큰 수치 · 꼬리표 · 움직이는 인포그래픽 -->
 <!--
-  Figma : 컨텐츠 > section2-1 tab1 (node 11510:63189)
-  - 스타일 : kr/css/main.css 3-2. 숫자 카드 (.cm-stat-cards · .cm-stat-card)
-  - 인포그래픽은 그림 전체가 이미지입니다. 수치는 alt 에 글로 적습니다. 수치가 바뀌면 이미지와 alt 를 함께 바꿉니다.
-  - 이미지가 흰 바탕이라 카드 색은 화면 모드(선명하게)와 관계없이 밝은 색으로 고정했습니다.
-  - 지금 이미지는 Figma 1배 크기(290×200)입니다. 고해상도 화면용으로 2배 PNG 나 SVG 로 내보낸 파일로 바꾸면 더 선명합니다. (kr/img/main/stat_01~04.png)
+  Figma : 컨텐츠 > section2-1 tab1 (node 11510:63189). 움직임은 Figma 에 없는 추가 효과입니다.
+  - 스타일 : kr/css/main.css 3-2. 숫자 카드 (.cm-stat-cards · .cm-stat-card · .cm-stat-svg) / 스크립트 : kr/js/main.js cmMainStat
+  - 인포그래픽은 Figma 그림을 부품 단위로 정리한 SVG 를 HTML 안에 직접 넣습니다. (이미지 파일 아님)
+    SVG 는 _tools/build_main_stat_svg.py 가 만듭니다. 수치를 바꿀 때는 그 파일의 값과 여기 aria-label 을 고친 뒤
+    `python3 _tools/build_main_stat_svg.py` 를 실행합니다. (main.html 의 stat-svg:N 표시 사이를 다시 채움)
+  - 화면 낭독기에는 SVG 전체가 그림 하나(role="img")로 읽히고, 내용은 aria-label 문장으로 전달합니다.
+  - 움직임 : 카드가 화면에 들어오면 한 번 재생합니다. 2008 값이 먼저 나오고 2026 값이 자라난 뒤 말풍선이 튀어나옵니다.
+      부품에 class="m m-종류" 와 시작 시각(--d) · 길이(--t)를 적어 두고 CSS 가 움직입니다.
+      m-growy · m-growx 자라남 / m-pop · m-pop-b 튀어나옴 / m-fade · m-fadeup 나타남 / m-wipe-up · m-wipe-right 드러남 / m-sweep 고리가 돌며 채워짐
+      수치([data-count])는 스크립트가 0 에서 목표 값까지 올립니다. (data-delay 시작 시각, data-decimals 소수 자리)
+  - 탭을 바꿨다가 다시 열면 한 번 더 재생합니다. 스크롤로 벗어났다 돌아올 때는 다시 재생하지 않습니다.
+  - 스크립트가 꺼져 있거나 "동작 줄이기" 설정이면 움직임 없이 완성된 그림이 바로 보입니다.
+  - 3번 카드의 도넛은 Figma 의 각도 그라데이션을 SVG 로 옮길 수 없어 짧은 호 48개를 이어 붙여 같은 색 흐름을 만들었습니다.
+  - 그림이 흰 바탕 기준이라 카드 색은 화면 모드(선명하게)와 관계없이 밝은 색으로 고정했습니다.
 -->
 <ul class="cm-stat-cards">
   <li class="cm-stat-card">
     <div class="info">
       <h3 class="tit">특수교육대상학생</h3>
-      <p class="num">73.7%</p>
+      <p class="num"><span class="sr-only">73.7%</span><span aria-hidden="true"><span data-count="73.7" data-decimals="1" data-delay="0.2">73.7</span>%</span></p>
       <p class="tag">전체 양적 성장</p>
     </div>
-    <!-- 인포그래픽 : 그림 전체를 이미지로 넣고 수치는 대체 텍스트로 제공 (수치가 바뀌면 이미지 · alt 를 함께 교체) -->
-    <div class="graph"><img src="{{root}}kr/img/main/stat_01.png" alt="특수교육대상학생 수 변화 그래프. 2008년 71,484명에서 2026년 124,195명으로 52,711명 늘어 1.74배 증가" width="290" height="200"></div>
+    <!-- 인포그래픽 : 부품 단위 SVG (움직임 : kr/css/main.css 3-2, kr/js/main.js cmMainStat). 수치는 aria-label 로 읽어 줌
+         SVG 는 _tools/build_main_stat_svg.py 가 만듭니다. 수치를 바꿀 때는 그 파일과 aria-label 을 고친 뒤 다시 실행 -->
+    <div class="graph">
+      <!-- stat-svg:1 -->
+      <svg class="cm-stat-svg" viewBox="0 0 290 200" role="img" aria-label="특수교육대상학생 수 변화 그래프. 2008년 71,484명에서 2026년 124,195명으로 52,711명 늘어 1.74배 증가" xmlns="http://www.w3.org/2000/svg" fill="none" focusable="false">
+        <defs>
+        <linearGradient id="st1_a" x1="140" y1="140" x2="140" y2="181" gradientUnits="userSpaceOnUse"><stop stop-color="#B1B8BE"/><stop offset="1" stop-color="#F4F5F6"/></linearGradient>
+        <linearGradient id="st1_b" x1="241" y1="72" x2="241" y2="181" gradientUnits="userSpaceOnUse"><stop stop-color="#256EF4"/><stop offset="1" stop-color="#D8E5FD"/></linearGradient>
+        <linearGradient id="st1_c" x1="25.6" y1="180.5" x2="284.6" y2="180.5" gradientUnits="userSpaceOnUse"><stop stop-opacity="0"/><stop offset=".485"/></linearGradient>
+        <linearGradient id="st1_d" x1="206.64" y1="62.77" x2="154.72" y2="116.25" gradientUnits="userSpaceOnUse"><stop stop-color="#256EF4"/><stop offset="1" stop-color="#fff"/></linearGradient>
+        </defs>
+        <line x1="284.6" y1="182" x2="25.6" y2="182" stroke="url(#st1_c)" stroke-opacity=".2" stroke-width="2"/>
+        <!-- 2008 막대 -->
+        <g class="m m-growy" style="--d:0s;--t:0.5s"><path d="M140 115.84c6.1 0 11.95 2.58 16.26 7.17A25.3 25.3 0 0 1 163 140.34V141h-46v-.66c0-6.5 2.42-12.73 6.74-17.33 4.31-4.59 10.16-7.17 16.26-7.17Z" fill="#B1B8BE"/><rect x="117" y="140" width="46" height="41" fill="url(#st1_a)"/></g>
+        <text x="125" y="197.62" fill="#8A949E" font-size="13" font-weight="700">2008</text>
+        <g class="m m-fade" style="--d:0.25s"><text x="93.6" y="120.83" text-anchor="end" fill="#8A949E" font-size="15" font-weight="700"><tspan data-count="71484" data-delay="0.25">71,484</tspan>명</text><line x1="282.6" y1="116" x2="95.6" y2="116" stroke="#000" stroke-opacity=".25" stroke-dasharray="4 4"/></g>
+        <!-- 2026 막대 -->
+        <g class="m m-growy" style="--d:0.5s;--t:0.8s"><path d="M241 47.84c6.1 0 11.95 2.58 16.26 7.17A25.3 25.3 0 0 1 264 72.34V73h-46v-.66c0-6.5 2.42-12.73 6.74-17.33 4.31-4.59 10.16-7.17 16.26-7.17Z" fill="#256EF4"/><path d="M218 72h46v109h-46z" fill="url(#st1_b)"/></g>
+        <text x="226" y="197.62" fill="#1E2124" font-size="13" font-weight="700">2026</text>
+        <g class="m m-fade" style="--d:0.7s"><text x="93.6" y="52.83" text-anchor="end" fill="#1E2124" font-size="15" font-weight="700"><tspan data-count="124195" data-delay="0.7">124,195</tspan>명</text><line x1="282.6" y1="48" x2="95.6" y2="48" stroke="#000" stroke-opacity=".25"/><path d="M45.60 62.22l3.76 4.37c.14.16.02.41-.19.41h-7.51c-.21 0-.33-.25-.19-.41l3.76-4.37a.25.25 0 0 1 .37 0Z" fill="#2098F3"/><text x="53.6" y="69.62" fill="#2098F3" font-size="13" font-weight="400">52,711</text></g>
+        <!-- 증가 화살표 -->
+        <path class="m m-wipe-up" style="--d:1.0s;--t:0.6s" opacity=".5" d="M208.86 47.84s3.06 5.63 3.5 6.46c.98 1.79 1.94 3.57 2.9 5.37.25.47 1.39 2.72 1.39 2.72s-2.05 0-2.72 0c-.87 0-2.27.01-3.14.01.04 2.06-.28 6.51-.55 8.5-1.58 12.17-4.17 21.99-11.79 31-1.07 1.25-3 3.23-4.18 4.35-7.26 6.85-15.27 11.06-21.5 12.1-6.22 1.04-17.67.87-17.67.87v-4.42s3.63.09 4.5.09 9.87-.3 13.67-1.31c3.81-1.01 8.8-2.88 15.71-8.4 1.79-1.45 3.99-3.41 7.29-7.42s7.58-12.84 9.2-23.02c.39-2.44.68-4.48.82-6.31.14-1.83.36-4.64.36-5.94-.58.01-1.43.01-2.02 0-1.18-.01-3.26 0-3.26 0l.71-1.36 6.79-13.29Z" fill="url(#st1_d)"/>
+        <g class="m m-pop-b" style="--d:1.5s;--t:0.5s"><rect x="191.6" y="3" width="98" height="31" rx="4" fill="#1E2124"/><path d="M234.85 32.61l4.96 6.37a1 1 0 0 0 1.58 0l4.96-6.37c.5-.66.04-1.61-.8-1.61h-9.9c-.84 0-1.3.95-.8 1.61Z" fill="#1E2124"/><text x="203.6" y="23.83" fill="#fff" font-size="15" font-weight="700">1.74배 증가</text></g>
+      </svg>
+      <!-- /stat-svg:1 -->
+    </div>
   </li>
+  <!-- 2 ~ 4번째 카드 : 같은 구조 -->
 </ul>
 <p class="cm-stat-source">출처: 교육부 국립특수교육원, 특수교육통계(2008~2026년)</p>

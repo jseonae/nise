@@ -410,10 +410,128 @@ body.cm-main {
   flex: none;
   width: 29rem;
 }
-.cm-stat-card .graph img {
+.cm-stat-card .graph img,
+.cm-stat-svg {
   display: block;
   width: 100%;
   height: auto;
+}
+/* 인포그래픽 SVG : 글자는 사이트 글꼴, 숫자는 올라가는 동안 흔들리지 않게 같은 폭 숫자 */
+.cm-stat-svg {
+  overflow: visible;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+}
+.cm-stat-card .num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 인포그래픽 움직임 (Figma 에 없는 추가 효과) : 2008 값에서 2026 값으로 자라남 → 수치가 올라감 → 말풍선으로 마무리
+   - 스크립트가 준비되면 목록에 .is-ready, 카드가 화면에 들어오면 카드에 .is-play 를 붙임 (kr/js/main.js cmMainStat)
+   - 부품마다 class="m m-종류" 와 시작 시각(--d) · 길이(--t)를 SVG 에 적어 둠 (_tools/build_main_stat_svg.py)
+   - 스크립트가 꺼져 있거나 동작 줄이기 설정이면 .is-ready 가 붙지 않아 완성된 그림이 그대로 보임 */
+.cm-stat-svg .m {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+.cm-stat-svg .m-growy {
+  --cm-stat-name: cm-stat-growy;
+  transform-origin: 50% 100%;
+}
+.cm-stat-svg .m-growx {
+  --cm-stat-name: cm-stat-growx;
+  transform-origin: 0 50%;
+}
+.cm-stat-svg .m-pop {
+  --cm-stat-name: cm-stat-pop;
+}
+.cm-stat-svg .m-pop-b {
+  --cm-stat-name: cm-stat-pop;
+  transform-origin: 50% 100%;
+}
+.cm-stat-svg .m-fade {
+  --cm-stat-name: cm-stat-fade;
+}
+.cm-stat-svg .m-fadeup {
+  --cm-stat-name: cm-stat-fadeup;
+}
+.cm-stat-svg .m-wipe-up {
+  --cm-stat-name: cm-stat-wipe-up;
+}
+.cm-stat-svg .m-wipe-right {
+  --cm-stat-name: cm-stat-wipe-right;
+}
+/* 고리 가림막 : 12시에서 시작하도록 SVG 에서 돌려 둔(rotate) 원이라 기준 상자를 바꾸지 않음 */
+.cm-stat-svg .m-sweep {
+  --cm-stat-name: cm-stat-sweep;
+  transform-box: view-box;
+  transform-origin: 0 0;
+}
+/* 재생 전 : 움직이는 부품을 숨김 */
+.cm-stat-cards.is-ready .cm-stat-card:not(.is-play) .cm-stat-svg .m {
+  opacity: 0;
+}
+/* 재생 : 카드 순서만큼(--cm-stat-delay) 늦게 시작 */
+.cm-stat-cards.is-ready .cm-stat-card.is-play .cm-stat-svg .m {
+  animation: var(--cm-stat-name) var(--t, 0.6s) cubic-bezier(0.22, 1, 0.36, 1) calc(var(--d, 0s) + var(--cm-stat-delay, 0s)) both;
+}
+@keyframes cm-stat-growy {
+  from {
+    transform: scaleY(0);
+  }
+}
+@keyframes cm-stat-growx {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes cm-stat-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes cm-stat-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes cm-stat-fadeup {
+  from {
+    opacity: 0;
+    transform: translateY(0.8rem);
+  }
+}
+@keyframes cm-stat-wipe-up {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes cm-stat-wipe-right {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes cm-stat-sweep {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 .cm-stat-source {
   margin-top: 1.6rem;

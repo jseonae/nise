@@ -2,6 +2,7 @@
    메인 화면 전용 스크립트 (kr/html/main.html)
    - cmMainHero    : 히어로 배경 영상 (조건이 맞을 때만 불러와 재생, 정지 · 재생 버튼)
    - cmMainSearch  : 히어로 추천 검색어 → 검색어 칸에 넣고 바로 검색
+   - cmMainStat    : 숫자로 보는 특수교육 인포그래픽 움직임 (화면에 들어오면 재생, 수치 올리기)
    - cmMainHistory : 실태조사변천사 카드 넘김 (이전 · 다음 · 연도 버튼, 자동 넘김 없음)
    - cmMainReport  : 연구 보고서 표지 넘김 (KRDS 포함 Swiper, 자동 넘김 없음)
    - cmMainBanner  : 알림판 배너 넘김 (KRDS 포함 Swiper, 자동 넘김 + 정지 · 재생, 쪽수)
@@ -70,6 +71,65 @@ const cmMainSearch = {
         input.value = chip.dataset.keyword || chip.textContent.replace(/^#/, "").trim();
         form.requestSubmit();
       });
+    });
+  },
+};
+
+/* 숫자로 보는 특수교육 : 인포그래픽 움직임
+   - 카드가 화면에 들어오면 한 번 재생 (.is-play). 그림 부품의 움직임은 CSS 가 맡고(kr/css/main.css 3-2), 여기서는 시작 신호와 수치 올리기만 함
+   - 수치([data-count])는 0 에서 목표 값까지 올라감. data-delay(초) 뒤에 시작, data-decimals 는 소수 자리 수
+   - 탭을 다른 것으로 바꿨다가 다시 열면 한 번 더 재생. 스크롤로 벗어났다 돌아올 때는 다시 재생하지 않음
+   - 동작 줄이기 설정이면 아무것도 하지 않아 완성된 그림이 그대로 보임 */
+const cmMainStat = {
+  DURATION: 900, // 수치가 올라가는 시간(ms)
+  STAGGER: 0.15, // 카드 사이 시작 간격(초)
+  init() {
+    const list = document.querySelector(".cm-stat-cards");
+    if (!list || !("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const cards = [...list.querySelectorAll(".cm-stat-card")];
+    cards.forEach((card, i) => card.style.setProperty("--cm-stat-delay", `${i * this.STAGGER}s`));
+    list.classList.add("is-ready");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(({ target, isIntersecting }) => {
+          if (isIntersecting) this.play(target, cards.indexOf(target));
+          else if (target.offsetParent === null) this.reset(target); // 탭이 닫혀 안 보이게 된 경우만 되돌림
+        });
+      },
+      { threshold: 0.3 },
+    );
+    cards.forEach((card) => observer.observe(card));
+  },
+  format(value, decimals) {
+    return value.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+  },
+  play(card, index) {
+    if (card.classList.contains("is-play")) return;
+    card.classList.add("is-play");
+    const run = (card.cmStatRun = (card.cmStatRun || 0) + 1);
+    card.querySelectorAll("[data-count]").forEach((el) => {
+      const target = Number(el.dataset.count);
+      const decimals = Number(el.dataset.decimals || 0);
+      const delay = (Number(el.dataset.delay || 0) + index * this.STAGGER) * 1000;
+      el.textContent = this.format(0, decimals);
+      let start = 0;
+      const step = (now) => {
+        if (card.cmStatRun !== run) return; // 되돌려졌으면 멈춤
+        if (!start) start = now;
+        const progress = Math.min(1, (now - start) / this.DURATION);
+        const eased = 1 - (1 - progress) ** 3;
+        el.textContent = this.format(target * eased, decimals);
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      setTimeout(() => requestAnimationFrame(step), delay);
+    });
+  },
+  reset(card) {
+    card.classList.remove("is-play");
+    card.cmStatRun = (card.cmStatRun || 0) + 1;
+    card.querySelectorAll("[data-count]").forEach((el) => {
+      el.textContent = this.format(Number(el.dataset.count), Number(el.dataset.decimals || 0));
     });
   },
 };
@@ -357,6 +417,7 @@ const cmMainQuick = {
 document.addEventListener("DOMContentLoaded", () => {
   cmMainHero.init();
   cmMainSearch.init();
+  cmMainStat.init();
   cmMainHistory.init();
   cmMainReport.init();
   cmMainBanner.init();
