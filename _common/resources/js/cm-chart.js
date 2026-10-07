@@ -68,7 +68,7 @@
   const isYear = (v) => /^\d{4}$/.test(String(v).trim());
   const yearLabel = (v) => (isYear(v) ? `${String(v).trim()}년` : String(v));
   const toNumber = (text) => {
-    const t = String(text == null ? "" : text).replace(/[,%\s명개]/g, "");
+    const t = String(text == null ? "" : text).replace(/[,%\s명개※]/g, ""); // ※ : 표 아래 주석 표시
     if (t === "" || t === "-" || t === "미집계") return null;
     const n = Number(t);
     return Number.isFinite(n) ? n : null;
@@ -245,7 +245,7 @@
       .map((tr) => {
         const cells = [...tr.children];
         const texts = cols.map((c) => (cells[c.i] ? cells[c.i].textContent.replace(/\s+/g, " ").trim() : ""));
-        return { name: cells[0].textContent.replace(/\s+/g, " ").trim(), values: texts.map(toNumber), texts };
+        return { name: cells[0].textContent.replace(/\s+/g, " ").trim(), values: texts.map(toNumber), texts, unit: tr.dataset.chartUnit || "" };
       });
     return { cols: cols.map((c) => c.name), rows };
   };
@@ -254,7 +254,7 @@
     if (config.data) return JSON.parse(JSON.stringify(config.data));
     const t = readTable(config.table);
     const from = config.seriesFrom || SERIES_FROM[type];
-    if (from === "row") return { categories: t.cols, series: t.rows.map((r) => ({ name: r.name, data: r.values, texts: r.texts })) };
+    if (from === "row") return { categories: t.cols, series: t.rows.map((r) => ({ name: r.name, data: r.values, texts: r.texts, unit: r.unit })) };
     return { categories: t.rows.map((r) => r.name), series: t.cols.map((c, j) => ({ name: c, data: t.rows.map((r) => r.values[j]), texts: t.rows.map((r) => r.texts[j]) })) };
   };
 
@@ -546,7 +546,7 @@
       o.tooltip.axisPointer = { type: "line", lineStyle: { color: ctx.colors.axis, type: "dashed" } };
       o.tooltip.formatter = (ps) => {
         const q = ps[0];
-        return `<div style="font-weight:700;margin-bottom:6px">${esc(s.name)}</div>${esc(q.axisValue)}년 : <b>${esc(fmtValue(q.value, ctx.unit))}</b>`;
+        return `<div style="font-weight:700;margin-bottom:6px">${esc(s.name)}</div>${esc(q.axisValue)}년 : <b>${esc(fmtValue(q.value, s.unit || ctx.unit))}</b>`;
       };
       o.grid = { left: 12, right: 36, top: 28, bottom: 8, containLabel: true };
       o.xAxis = categoryAxis(ctx, model.categories, {
@@ -904,13 +904,13 @@
         const card = cards[i];
         const plot = card.querySelector(".cm-chart-plot");
         const li = s.data.reduce((a, v, k) => (v != null ? k : a), -1);
-        card.querySelector(".cm-chart-panel-tit").innerHTML = `${esc(s.name)} · <b>${esc(fmtValue(s.data[li], ctx.unit))}</b>`;
+        card.querySelector(".cm-chart-panel-tit").innerHTML = `${esc(s.name)} · <b>${esc(fmtValue(s.data[li], s.unit || ctx.unit))}</b>`;
         let chart = this.instances[i];
         if (!chart || chart.isDisposed()) {
           chart = echarts.init(plot, null, { renderer: "svg" });
           this.instances[i] = chart;
         }
-        chart._cmUnit = ctx.unit;
+        chart._cmUnit = s.unit || ctx.unit;
         chart.setOption(BUILD.panel(ctx, s), { notMerge: true });
         chart.resize();
         keyboard(chart, plot, `${this.config.title} - ${s.name}`);
@@ -1026,7 +1026,7 @@
           { type: "line", silent: true, z: -28, shape: { x1: x + 1, y1: y + headH + 0.5, x2: x + pw - 1, y2: y + headH + 0.5 }, style: { stroke: ctx.colors.border, lineWidth: 1 } },
         );
         o.title.push({
-          text: `{n|${s.name} · }{v|${fmtValue(s.data[li], ctx.unit)}}`,
+          text: `{n|${s.name} · }{v|${fmtValue(s.data[li], s.unit || ctx.unit)}}`,
           left: x + pw / 2,
           top: y + headH / 2,
           textAlign: "center",

@@ -60,33 +60,49 @@ const cmTsFilter = {
 };
 document.addEventListener("DOMContentLoaded", () => cmTsFilter.init());
 
-/* [퍼블리싱 확인용] 특수교육 현황 학생 수 기준 (kr/html/stat/edu_status.html)
-   선택에 맞는 그래프·통계표(.cm-es-result[data-basis])를 보여주고, 급별일 때 배치 선택을 보이며, 꺾은선 그래프에서는 패턴 적용을 끔.
+/* [퍼블리싱 확인용] 특수교육 현황 학생 수 · 기관 수 기준 (kr/html/stat/edu_status.html)
+   탭(학생 수 · 기관 수)마다 기준 선택([data-es-basis])에 맞는 그래프·통계표(.cm-es-result[data-basis])를 보여주고,
+   급별일 때는 배치 선택([data-es-place])을 보이며 고른 배치의 결과(.cm-es-result[data-place])를 보여줌. 꺾은선 그래프에서는 패턴 적용을 끔.
+   탭을 바꾸면 제목 · 설명([data-es-title] · [data-es-desc])도 그 탭의 것으로 바꿈 (화면설계서 : 기관 수일 때 "특수교육기관 수 추이").
    개발 시 서버 조회로 바꾸고 이 코드는 지웁니다. */
 const cmEduBasis = {
   init() {
-    const select = document.getElementById("es_basis");
-    if (!select) return;
-    const results = document.querySelectorAll(".cm-es-result");
-    const sub = document.querySelector(".cm-es-sub");
-    const pattern = document.getElementById("es_pattern");
-    const apply = () => {
-      const value = select.value;
-      results.forEach((result) => {
-        result.hidden = result.dataset.basis !== value;
+    document.querySelectorAll("[data-es-basis]").forEach((select) => {
+      const panel = select.closest(".tab-conts");
+      const results = panel.querySelectorAll(".cm-es-result");
+      const sub = panel.querySelector(".cm-es-sub");
+      const place = panel.querySelector("[data-es-place]");
+      const pattern = panel.querySelector('[data-chart-option="pattern"]');
+      const apply = () => {
+        const value = select.value;
+        results.forEach((result) => {
+          result.hidden = result.dataset.basis !== value || (value === "level" && result.dataset.place !== place.value);
+        });
+        if (sub) sub.hidden = value !== "level";
+        if (pattern) {
+          // 꺾은선 패널(배치·급별·장애유형별)은 패턴을 쓰지 않음. 그래프 모듈(cm-chart.js)이 바뀐 값을 읽도록 change 를 보냄
+          pattern.disabled = value !== "total";
+          pattern.checked = value === "total";
+          pattern.dispatchEvent(new Event("change"));
+        }
+        window.dispatchEvent(new Event("resize"));
+      };
+      select.addEventListener("change", () => {
+        if (place) place.value = "all"; // 기준을 바꿀 때마다 배치 선택은 기본값(전체 배치)으로
+        apply();
       });
-      if (sub) sub.hidden = value !== "level";
-      if (pattern) {
-        // 꺾은선 패널(배치·급별·장애유형별)은 패턴을 쓰지 않음. 그래프 모듈(cm-chart.js)이 바뀐 값을 읽도록 change 를 보냄
-        pattern.dataset.chartGuard = "";
-        pattern.disabled = value !== "total";
-        pattern.checked = value === "total";
-        pattern.dispatchEvent(new Event("change"));
-      }
-      window.dispatchEvent(new Event("resize"));
+      if (place) place.addEventListener("change", apply);
+      apply();
+    });
+    // 탭(학생 수 · 기관 수)을 바꾸면 제목 · 설명 · 콘텐츠 내 탐색 이름을 그 탭의 것으로 바꿈
+    const tabs = document.querySelectorAll(".cm-es-tab [role=tab][data-es-title]");
+    const syncTitle = () => {
+      const tab = [...tabs].find((item) => item.getAttribute("aria-selected") === "true");
+      if (!tab) return;
+      document.querySelectorAll("[data-es-title]:not([role=tab])").forEach((el) => (el.textContent = tab.dataset.esTitle));
+      document.querySelectorAll("[data-es-desc]:not([role=tab])").forEach((el) => (el.textContent = tab.dataset.esDesc));
     };
-    select.addEventListener("change", apply);
-    apply();
+    tabs.forEach((tab) => new MutationObserver(syncTitle).observe(tab, { attributes: true, attributeFilter: ["aria-selected"] }));
   },
 };
 document.addEventListener("DOMContentLoaded", () => cmEduBasis.init());
