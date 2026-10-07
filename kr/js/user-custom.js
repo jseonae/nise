@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => cmTsFilter.init());
 /* [퍼블리싱 확인용] 특수교육 현황 학생 수 · 기관 수 기준 (kr/html/stat/edu_status.html)
    탭(학생 수 · 기관 수)마다 기준 선택([data-es-basis])에 맞는 그래프·통계표(.cm-es-result[data-basis])를 보여주고,
    급별일 때는 배치 선택([data-es-place])을 보이며 고른 배치의 결과(.cm-es-result[data-place])를 보여줌. 꺾은선 그래프에서는 패턴 적용을 끔.
+   탭을 바꾸면 제목 · 설명([data-es-title] · [data-es-desc])도 그 탭의 것으로 바꿈 (화면설계서 : 기관 수일 때 "특수교육기관 수 추이").
    개발 시 서버 조회로 바꾸고 이 코드는 지웁니다. */
 const cmEduBasis = {
   init() {
@@ -93,6 +94,15 @@ const cmEduBasis = {
       if (place) place.addEventListener("change", apply);
       apply();
     });
+    // 탭(학생 수 · 기관 수)을 바꾸면 제목 · 설명 · 콘텐츠 내 탐색 이름을 그 탭의 것으로 바꿈
+    const tabs = document.querySelectorAll(".cm-es-tab [role=tab][data-es-title]");
+    const syncTitle = () => {
+      const tab = [...tabs].find((item) => item.getAttribute("aria-selected") === "true");
+      if (!tab) return;
+      document.querySelectorAll("[data-es-title]:not([role=tab])").forEach((el) => (el.textContent = tab.dataset.esTitle));
+      document.querySelectorAll("[data-es-desc]:not([role=tab])").forEach((el) => (el.textContent = tab.dataset.esDesc));
+    };
+    tabs.forEach((tab) => new MutationObserver(syncTitle).observe(tab, { attributes: true, attributeFilter: ["aria-selected"] }));
   },
 };
 document.addEventListener("DOMContentLoaded", () => cmEduBasis.init());

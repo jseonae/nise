@@ -125,19 +125,20 @@
           </div>
         </section>
 
-        <!-- 특수교육대상자 수 추이 -->
+        <!-- 특수교육대상자 수 추이 · 특수교육기관 수 추이
+             제목 · 설명 · 콘텐츠 내 탐색 이름([data-es-title] · [data-es-desc])은 고른 탭의 data-es-title · data-es-desc 로 바뀜 (화면설계서 sub_0102, kr/js/user-custom.js cmEduBasis) -->
         <section id="section_02" class="cm-es-section">
           <div class="cm-es-section-top">
-            <h2 class="cm-cross-tit">특수교육대상자 수 추이</h2>
-            <p class="desc">학생 수 기준으로 본 특수교육대상자 연도별 지표 입니다.</p>
+            <h2 class="cm-cross-tit" data-es-title>특수교육대상자 수 추이</h2>
+            <p class="desc" data-es-desc>학생 수 기준으로 본 특수교육대상자 연도별 지표 입니다.</p>
           </div>
           <div class="krds-tab-area layer cm-es-tab">
             <div class="tab fill full">
               <ul role="tablist">
-                <li id="tab_es_01" role="tab" aria-selected="true" aria-controls="panel_es_01" class="active">
+                <li id="tab_es_01" role="tab" aria-selected="true" aria-controls="panel_es_01" class="active" data-es-title="특수교육대상자 수 추이" data-es-desc="학생 수 기준으로 본 특수교육대상자 연도별 지표 입니다.">
                   <button type="button" class="btn-tab">학생 수</button>
                 </li>
-                <li id="tab_es_02" role="tab" aria-selected="false" aria-controls="panel_es_02">
+                <li id="tab_es_02" role="tab" aria-selected="false" aria-controls="panel_es_02" data-es-title="특수교육기관 수 추이" data-es-desc="기관 수 기준으로 본 특수교육기관 연도별 지표 입니다.">
                   <button type="button" class="btn-tab">기관 수</button>
                 </li>
               </ul>
@@ -846,7 +847,7 @@
             <nav class="in-page-navigation-list" aria-label="이 페이지의 구성">
               <ul>
                 <li><a href="#section_01" class="active">숫자로 보는 특수교육</a></li>
-                <li><a href="#section_02">특수교육대상자 수 추이</a></li>
+                <li><a href="#section_02" data-es-title>특수교육대상자 수 추이</a></li>
               </ul>
             </nav>
           </div>
