@@ -2199,7 +2199,7 @@ body.cm-banner-all-open {
   color: var(--krds-high-contrast-color-text-primary);
 }
 [data-krds-mode=high-contrast] .cm-history-slide .year {
-  color: rgba(205, 209, 213, 0.22);
+  color: #fff; /* 어두운 바탕에서는 큰 연도를 흰색으로 또렷하게 */
 }
 [data-krds-mode=high-contrast] .cm-history-slide .krds-btn.tertiary {
   border-color: var(--krds-high-contrast-color-text-subtle);
@@ -2315,7 +2315,7 @@ body.cm-banner-all-open {
     color: var(--krds-high-contrast-color-text-primary);
   }
   [data-krds-mode=theme] .cm-history-slide .year {
-    color: rgba(205, 209, 213, 0.22);
+    color: #fff; /* 어두운 바탕에서는 큰 연도를 흰색으로 또렷하게 */
   }
   [data-krds-mode=theme] .cm-history-slide .krds-btn.tertiary {
     border-color: var(--krds-high-contrast-color-text-subtle);
