@@ -3640,9 +3640,15 @@ p {
   border: 0;
   border-radius: 0;
 }
+/* 아주 넓은 화면에서 그래프가 지나치게 늘어나지 않게 머리글 · 내용의 최대 폭을 둠 */
+.cm-chart-modal .modal-dialog .modal-header {
+  max-width: 160rem; /* 1600px */
+}
 .cm-chart-modal .modal-dialog .modal-conts {
   flex: 1 1 auto;
   min-height: 0;
+  max-width: 160rem; /* 1600px */
+  padding-bottom: var(--krds-number-20);
 }
 .cm-chart-zoom-font {
   display: flex;
@@ -3659,7 +3665,7 @@ p {
 }
 /* 그래프는 남는 높이를 채움 (머리글 · 글자 크기 버튼 · 범례 · 여백을 뺀 값, 너무 낮아지지 않게 최소 32rem) */
 .cm-chart-zoom-body .cm-chart-plot {
-  height: max(32rem, calc(100vh - 30rem));
+  height: max(32rem, calc(100vh - 32rem)); /* 내용 아래 여백(number-20)까지 넣고도 세로 스크롤이 생기지 않는 높이 */
 }
 /* 스몰 멀티플(패널 여러 개)은 패널마다 높이를 따로 가짐 */
 .cm-chart-zoom-body .cm-chart-panels .cm-chart-plot {
