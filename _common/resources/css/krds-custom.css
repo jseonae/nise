@@ -3417,6 +3417,15 @@ p {
   flex: 1 1 auto;
   min-width: 0;
 }
+/* 선명하게(어두운 배경) 모드 : 의견 입력창 바탕을 검정으로 (KRDS 입력창 변수만 다시 지정) */
+[data-krds-mode=high-contrast] .cm-research-opinion .krds-input {
+  --krds-input--color-surface: var(--krds-high-contrast-color-background-white);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-research-opinion .krds-input {
+    --krds-input--color-surface: var(--krds-high-contrast-color-background-white);
+  }
+}
 .cm-research-opinion .textarea-count {
   position: absolute;
   bottom: -2.5rem;
