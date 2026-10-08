@@ -1,28 +1,29 @@
-<!-- ext: 신규 컴포넌트 (KRDS에 없음) / 빈 상태 · 준비 중 안내 : 그림 + 제목 + 설명 -->
+<!-- ext: 신규 컴포넌트 (KRDS에 없음) / 상태 안내 : 준비 중 · 자료 없음 · 불러오기 실패 -->
 <!--
-  Figma : 컨텐츠 > s02데이터분석_교차분석 페이지준비중
-  - 스타일 : _common/resources/css/krds-custom.css [공통] 빈 상태 · 준비 중 안내 (.cm-empty)
-  - 그림은 꾸밈용이라 alt="" (그림 투명도 55%는 Figma 그대로)
-  - 제목 수준(h2·h3)은 놓이는 자리에 맞게 바꿉니다.
+  모든 상태가 같은 틀입니다 : 상자 + 동그란 아이콘 + 제목(.tit) + 설명(.txt) (+ 버튼). 상태는 아이콘과 문구로만 구분합니다.
+  - 스타일 : _common/resources/css/krds-custom.css .cm-empty (높이를 같게 두어 상태가 바뀌어도 화면이 출렁이지 않음)
+  - 아이콘은 CSS 가 그립니다(꾸밈, 화면낭독기에 읽히지 않음). 지금은 [임시] 선 그림 _common/resources/img/common/cm_state_ready · none · error.svg
+    디자인한 그림이 나오면 CSS 의 --cm-empty-icon 파일만 바꾸면 됩니다. 마크업은 그대로입니다.
+  - 제목 수준(p · h2 · h3)은 놓이는 자리에 맞게 바꿉니다.
+  - 목록 · 페이지네이션 자리에 넣고, 목록 상단(개수 · 검색)은 그대로 둡니다.
+  - 통합검색 결과 없음은 Figma 에 따로 디자인이 있어 별도 컴포넌트(ext_search_result.html .cm-search-none)를 씁니다.
 -->
-<div class="cm-empty">
-  <img src="{{root}}_common/resources/img/common/cm_ready.png" alt="">
-  <h2 class="tit">준비중입니다.</h2>
+
+<!-- 준비 중 (.is-ready) : 아직 제공하지 않는 자료 · 화면 -->
+<div class="cm-empty is-ready">
+  <p class="tit">준비 중입니다.</p>
   <p class="txt">현재 화면은 준비 중입니다.</p>
 </div>
 
-<!-- 변형 : 오류 안내 (.cm-empty.is-error)
-     Figma : 컨텐츠 > s03알림마당_자료실 list-목록불러오기 실패 > errorBox
-     - 그림 없이 문구 + 버튼(KRDS large tertiary). 목록 조회에 실패했을 때 목록 · 페이지네이션 자리에 넣습니다.
-     - 화면이 바뀌며 나타나는 안내라 role="alert" 로 스크린리더에 알립니다. -->
+<!-- 자료 없음 (.is-none) : 등록된 자료가 0건. 다음에 할 수 있는 일을 설명에 적습니다. -->
+<div class="cm-empty is-none">
+  <p class="tit">등록된 자료가 없습니다.</p>
+  <p class="txt">다른 분류를 선택하거나 검색어를 바꿔 보세요.</p>
+</div>
+
+<!-- 불러오기 실패 (.is-error) : 조회 실패. 화면이 바뀌며 나타나는 안내라 role="alert" 로 스크린리더에 알리고, [다시시도]에 재조회를 연결합니다. -->
 <div class="cm-empty is-error" role="alert">
   <p class="tit">목록을 불러오지 못했습니다.</p>
   <p class="txt">잠시 후 다시 시도해 주세요.</p>
-  <button type="button" class="krds-btn large tertiary">다시시도</button>
-</div>
-
-<!-- 변형 : 빈 목록 안내 (.cm-empty.is-none)
-     - 그림 없이 문구만. 등록된 자료가 없을 때 목록 · 페이지네이션 자리에 넣습니다. (Figma에 화면 없음, 오류 안내와 같은 여백) -->
-<div class="cm-empty is-none">
-  <p class="tit">등록된 자료가 없습니다.</p>
+  <button type="button" class="krds-btn medium tertiary">다시시도</button>
 </div>
