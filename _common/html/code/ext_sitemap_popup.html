@@ -1,0 +1,56 @@
+<!-- ext: 신규 컴포넌트 (KRDS에 없음) / 전체메뉴 팝업 : 화면 전체를 덮는 사이트맵 -->
+<!--
+  Figma : 컨텐츠 > sitemap_popup (참고 : 공공데이터포털 · 재정경제부 전체메뉴)
+  - 실제 마크업은 kr/tmpl/modal.html [06-3] 에 있습니다. (모달은 #wrap 바깥)
+  - 여는 버튼 : <button type="button" class="krds-btn small text open-modal" data-target="modal_sitemap">전체메뉴 <i class="svg-icon ico-all"></i></button>
+  - KRDS 모달(krds-modal)이라 열기 · 닫기 · Esc · 초점 가두기 · 닫은 뒤 초점 되돌리기 · 배경 스크롤 잠금은 KRDS 스크립트가 맡습니다.
+  - 스타일 : _common/resources/css/krds-custom.css [전체메뉴 팝업] (.cm-sitemap). 화면 전체로 띄우는 보정 + 안쪽 배치
+  - 메뉴(.cm-sitemap-menu)는 kr/js/include.js 의 MENU 로 만듭니다 : 1Depth 는 누를 수 없는 제목(h3), 2Depth 는 링크. 현재 화면은 aria-current="page"
+  - PC(1024px 이상) 전용 : 그 아래에서는 헤더 유틸리티가 숨겨져 모바일 전체메뉴(#mobile-nav)를 씁니다.
+  - {{root}} 는 저장소 루트 경로입니다.
+-->
+<!-- [06-3] 전체메뉴 팝업 : #modal_sitemap (신규 컴포넌트 _common/html/code/ext_sitemap_popup.html, Figma: 컨텐츠 > sitemap_popup)
+       PC 헤더 유틸리티의 [전체메뉴] 버튼이 엶 (1024px 미만은 유틸리티가 숨겨져 모바일 전체메뉴 #mobile-nav 를 씀)
+       KRDS 모달이라 열기 · 닫기 · Esc · 초점 가두기 · 배경 스크롤 잠금은 KRDS 스크립트가 맡고, 화면 전체로 띄우는 것만 CSS 로 보정 -->
+  <section id="modal_sitemap" class="krds-modal fade cm-sitemap" aria-labelledby="tit_modal_sitemap">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="tit_modal_sitemap" class="modal-title sr-only">전체메뉴</h2>
+        </div>
+        <div class="modal-conts">
+          <div class="conts-area cm-sitemap-inner">
+            <!-- 로고 : 모드에 따라 바뀌도록 CSS 배경으로 넣음 (헤더 로고와 같은 방식) -->
+            <p class="cm-sitemap-logo"><span class="sr-only">특수교육 실태조사 데이터 활용 플랫폼</span></p>
+            <!-- 메뉴 : 1Depth 제목 + 2Depth 목록. kr/js/include.js 가 채움 (현재 화면 aria-current="page") -->
+            <nav class="cm-sitemap-menu" aria-label="전체메뉴"></nav>
+            <!-- 안내 링크 · 기관 정보 · 공식 SNS (이용안내 · 개인정보처리방침 · SNS 주소는 정해지면 연결) -->
+            <div class="cm-sitemap-foot">
+              <div class="info">
+                <ul class="links">
+                  <li><a href="#" class="krds-btn medium text">이용안내 <i class="svg-icon ico-angle right"></i></a></li>
+                  <li><a href="#" class="krds-btn medium text">개인정보처리방침 <i class="svg-icon ico-angle right"></i></a></li>
+                  <li><a href="https://www.mois.go.kr/frt/sub/popup/p_taegugki_banner/screen.do" class="krds-btn medium text" target="_blank" title="새 창 열림">국가상징 알아보기 <i class="svg-icon ico-go"></i></a></li>
+                </ul>
+                <ul class="addr">
+                  <li>(31470) 충청남도 아산시 배방읍 공원로 40</li>
+                  <li><strong>대표전화</strong> 041-537-1500</li>
+                  <li><strong>팩스</strong> 041-531-6412</li>
+                </ul>
+              </div>
+              <ul class="cm-sitemap-sns">
+                <li><a href="#" target="_blank" title="새 창 열림"><img src="{{root}}_common/resources/img/sns/cm_sns_youtube.svg" alt="국립특수교육원 유튜브"></a></li>
+                <li><a href="#" target="_blank" title="새 창 열림"><img src="{{root}}_common/resources/img/sns/cm_share_band.svg" alt="국립특수교육원 네이버 밴드"></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="krds-btn large icon btn-close close-modal">
+          <span class="sr-only">전체메뉴 닫기</span>
+          <i class="svg-icon ico-popup-close"></i>
+        </button>
+      </div>
+    </div>
+    <div class="modal-back"></div>
+  </section>
+  <!-- //[06-3] 전체메뉴 팝업 -->

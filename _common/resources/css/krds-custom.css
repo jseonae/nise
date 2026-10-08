@@ -289,7 +289,7 @@ p {
 }
 @media (max-width: 1023px) {
   .cm-search-popup {
-    padding: var(--krds-number-16) 0 var(--krds-padding-8);
+    padding: var(--krds-number-16) 0 var(--krds-padding-10);
   }
   .cm-search-close {
     top: calc(var(--krds-padding-3) - var(--krds-number-16));
@@ -322,27 +322,206 @@ p {
   width: 100%;
 }
 
-/* [모바일 전체메뉴] 1단 링크 목록 (KRDS 기본 탭+하위메뉴 구조 대신 사용, 스크립트 보정: _common/resources/js/krds-custom.js) */
-.krds-main-menu-mobile .gnb-wrap .gnb-body .cm-mobile-menu {
+/* [모바일 전체메뉴] KRDS main_menu_mobile 보정 (Figma: 컨텐츠 > main_menu__mo / Type=bar, 스크립트 krds-custom.js cmMobileMenu)
+   - KRDS 는 오른쪽 목록 전체가 한 번에 스크롤되지만, 이 사업은 고른 1Depth 의 목록만 보이므로 좌우 칸이 따로 스크롤 */
+.krds-main-menu-mobile .gnb-wrap .gnb-body {
+  overflow: hidden;
+}
+.krds-main-menu-mobile .gnb-wrap .gnb-body .gnb-menu {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.krds-main-menu-mobile .gnb-wrap .gnb-body .gnb-menu .menu-wrap,
+.krds-main-menu-mobile .gnb-wrap .gnb-body .gnb-menu .submenu-wrap {
+  overflow-y: auto;
+}
+.krds-main-menu-mobile .gnb-wrap .gnb-body .gnb-menu .submenu-wrap .gnb-sub-list[hidden] {
+  display: none;
+}
+/* 선명하게(어두운 배경) 모드 : 메뉴 바탕(머리글 포함)을 Figma 대로 surface-white-subtle 로 (KRDS 는 검정이라 오른쪽 칸과 머리글 색이 달라짐) */
+[data-krds-mode=high-contrast] .krds-main-menu-mobile {
+  --krds-main-menu-mobile--color-surface: var(--krds-high-contrast-color-surface-white-subtle);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .krds-main-menu-mobile {
+    --krds-main-menu-mobile--color-surface: var(--krds-high-contrast-color-surface-white-subtle);
+  }
+}
+
+/* [전체메뉴 팝업] 신규 컴포넌트 (KRDS 없음) : _common/html/code/ext_sitemap_popup.html, 마크업 kr/tmpl/modal.html [06-3]
+   Figma: 컨텐츠 > sitemap_popup (1920×1080, 내용 폭 1200px). KRDS 모달을 화면 전체로 띄우고 안쪽만 배치
+   - 색은 Figma 변수와 같은 KRDS 토큰. 선명하게(어두운 배경) 모드는 Figma 에 없어 같은 토큰의 high-contrast 값을 씀 */
+.cm-sitemap {
+  --cm-sitemap-surface: var(--krds-light-color-surface-secondary-subtler);
+  --cm-sitemap-line: var(--krds-light-color-border-gray-light);
+  --cm-sitemap-on: var(--krds-light-color-action-secondary-pressed);
+  --cm-sitemap-logo: url(../img/logo/logo.svg);
+}
+[data-krds-mode=high-contrast] .cm-sitemap {
+  --cm-sitemap-surface: var(--krds-high-contrast-color-surface-secondary-subtler);
+  --cm-sitemap-line: var(--krds-high-contrast-color-border-gray-light);
+  --cm-sitemap-on: var(--krds-high-contrast-color-action-secondary-pressed);
+  --cm-sitemap-logo: url(../img/logo/logo_white.svg);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-sitemap {
+    --cm-sitemap-surface: var(--krds-high-contrast-color-surface-secondary-subtler);
+    --cm-sitemap-line: var(--krds-high-contrast-color-border-gray-light);
+    --cm-sitemap-on: var(--krds-high-contrast-color-action-secondary-pressed);
+    --cm-sitemap-logo: url(../img/logo/logo_white.svg);
+  }
+}
+/* 화면 전체로 띄움 (차트 확대 모달과 같은 보정 : 폭 · 높이 · 바깥 여백 · 테두리 · 둥근 모서리) */
+.krds-modal.cm-sitemap .modal-dialog {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+}
+.krds-modal.cm-sitemap .modal-dialog .modal-content {
+  height: 100%;
+  max-height: 100%;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--cm-sitemap-surface);
+}
+.cm-sitemap .modal-dialog .modal-header {
+  padding: 0; /* 제목은 화면에 보이지 않음(sr-only) */
+}
+.cm-sitemap .modal-dialog .modal-conts {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 12.4rem var(--krds-contents-padding-x) var(--krds-number-20); /* Figma : 위 68 + 닫기 40 + 16 = 124px 에서 로고 시작 */
+}
+/* 닫기 : 내용(1200px)의 오른쪽 위, 화면 위에서 68px (Figma 40px 아이콘) */
+.cm-sitemap .modal-dialog .btn-close {
+  top: 6.8rem;
+  right: max(var(--krds-contents-padding-x), calc((100% - 120rem) / 2));
+}
+.cm-sitemap .modal-dialog .btn-close,
+.cm-sitemap .modal-dialog .btn-close .svg-icon {
+  width: var(--krds-number-14);
+  height: var(--krds-number-14);
+}
+.cm-sitemap .modal-dialog .modal-conts .cm-sitemap-inner {
   display: flex;
   flex-direction: column;
-  padding: var(--krds-main-menu-mobile--sub-menu-padding);
+  gap: 0; /* KRDS conts-area 의 기본 간격 대신 아래 요소별 간격을 씀 (선택자를 KRDS 만큼 길게) */
+  width: 100%;
+  max-width: 120rem;
+  margin: 0 auto;
 }
-.krds-main-menu-mobile .gnb-wrap .gnb-body .cm-mobile-menu a {
+.cm-sitemap-logo {
+  width: 50.8rem;
+  max-width: 100%;
+  height: 5.6rem;
+  background: var(--cm-sitemap-logo) no-repeat left center / contain;
+}
+/* 메뉴 : 세 열 (열 368px, 사이 48px) */
+.cm-sitemap-menu {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--krds-number-16);
+  margin-top: var(--krds-number-14);
+}
+.cm-sitemap-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-7);
+}
+.cm-sitemap-col .tit {
   display: flex;
   align-items: center;
-  padding: var(--krds-main-menu-mobile--sub-menu-trigger-padding-y) var(--krds-main-menu-mobile--sub-menu-trigger-padding-x);
-  border-radius: var(--krds-main-menu-mobile--sub-menu-trigger-border-radius);
-  font-size: var(--krds-main-menu-mobile--sub-menu-trigger-font-size-active);
+  justify-content: center;
+  min-height: 5.6rem;
+  padding: 0 var(--krds-padding-2);
+  border: 0.1rem solid var(--cm-sitemap-line);
+  border-radius: var(--krds-radius-medium3);
+  font-size: var(--krds-pc-font-size-heading-medium);
   font-weight: var(--krds-font-weight-bold);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--cm-color-text-basic);
+}
+.cm-sitemap-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-4);
+}
+.cm-sitemap-col a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5rem;
+  padding: var(--krds-padding-5) var(--krds-padding-6);
+  border-radius: var(--krds-radius-medium3);
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--cm-color-text-basic);
   transition: var(--krds-transition-base);
 }
-.krds-main-menu-mobile .gnb-wrap .gnb-body .cm-mobile-menu a:hover {
-  background-color: var(--krds-main-menu-mobile--sub-menu-trigger-color-action-hover);
+/* 강조 : 올렸을 때 · 초점 · 현재 화면 (Figma state=hover : action/secondary-pressed 바탕 + 굵은 글자) */
+.cm-sitemap-col a:hover,
+.cm-sitemap-col a:focus,
+.cm-sitemap-col a[aria-current=page] {
+  background-color: var(--cm-sitemap-on);
+  font-weight: var(--krds-font-weight-bold);
 }
-.krds-main-menu-mobile .gnb-wrap .gnb-body .cm-mobile-menu a[aria-current=page] {
-  color: var(--krds-main-menu-mobile--sub-menu-trigger-color-text);
-  background-color: var(--krds-main-menu-mobile--sub-menu-trigger-color-action-active);
+/* 아래 영역 : 안내 링크 · 기관 정보 / 공식 SNS */
+.cm-sitemap-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--krds-gap-7);
+  margin-top: var(--krds-number-18);
+  padding-top: var(--krds-padding-8);
+  border-top: 0.1rem solid var(--cm-sitemap-line);
+}
+.cm-sitemap-foot .info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--krds-gap-5);
+  min-width: 0;
+}
+.cm-sitemap-foot .links,
+.cm-sitemap-foot .addr {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.cm-sitemap-foot .links {
+  gap: var(--krds-gap-2) var(--krds-gap-4);
+}
+.cm-sitemap-foot .addr {
+  gap: var(--krds-gap-2) var(--krds-gap-5);
+  font-size: var(--krds-pc-font-size-body-medium);
+  line-height: 1.5;
+  color: var(--cm-color-text-basic);
+}
+.cm-sitemap-foot .addr li:first-child {
+  margin-right: var(--krds-gap-3); /* 주소와 전화 사이 16 + 8 = 24px */
+}
+.cm-sitemap-foot .addr strong {
+  margin-right: var(--krds-gap-3);
+  font-weight: var(--krds-font-weight-bold);
+}
+.cm-sitemap-sns {
+  display: flex;
+  flex: none;
+  gap: var(--krds-gap-7);
+}
+.cm-sitemap-sns a {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--krds-radius-max);
+}
+.cm-sitemap-sns img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* [페이지 상단] 브레드크럼 · 공유/인쇄 · 페이지 제목 (사이드메뉴 없는 1단 레이아웃) */

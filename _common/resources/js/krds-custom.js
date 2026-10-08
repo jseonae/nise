@@ -4,16 +4,42 @@
    - ui-script.js 다음, DOMContentLoaded 전에 불러옵니다.
    ========================================================================== */
 
-/* 모바일 전체메뉴 : 1단 링크 목록(.cm-mobile-menu)을 쓸 때
-   KRDS는 탭 메뉴(.menu-wrap .gnb-main-trigger)가 있다고 가정해 첫 탭을 활성화하므로,
-   탭 메뉴가 없으면 이 단계를 건너뜁니다. (건너뛰지 않으면 오류로 이후 KRDS 초기화가 멈춤) */
+/* 모바일 전체메뉴 (cmMobileMenu) : 1Depth 를 누르면 그 메뉴의 2Depth 만 오른쪽에 보임 (Figma: main_menu__mo)
+   - KRDS 기본은 오른쪽에 모든 2Depth 목록이 이어져 있고, 1Depth 를 누르면 그 위치로 스크롤 · 스크롤 위치에 따라 1Depth 가 바뀜
+   - 이 사업은 스크롤 방식이 아니라 전환 방식이라, 스크롤로 1Depth 를 고르는 단계(setupAnchorScroll)를 끄고
+     KRDS 가 붙인 탭 속성(role="tab" · aria-controls · aria-selected)은 그대로 쓰면서 고른 메뉴의 목록만 남기고 나머지는 hidden 처리
+   - 1Depth 가 없는 마크업이면 KRDS 초기화가 오류로 멈추지 않게 건너뜀 */
 if (typeof krds_mainMenuMobile !== "undefined") {
+  krds_mainMenuMobile.setupAnchorScroll = function () {};
   const krdsSetupAnchorLinks = krds_mainMenuMobile.setupAnchorLinks;
   krds_mainMenuMobile.setupAnchorLinks = function (mobileGnb) {
-    if (!mobileGnb.querySelector(".menu-wrap .gnb-main-trigger")) return;
-    return krdsSetupAnchorLinks.call(this, mobileGnb);
+    const tabs = [...mobileGnb.querySelectorAll(".menu-wrap .gnb-main-trigger")];
+    if (!tabs.length) return;
+    krdsSetupAnchorLinks.call(this, mobileGnb);
+    const select = (tab) => {
+      tabs.forEach((item) => {
+        const on = item === tab;
+        item.classList.toggle("active", on);
+        item.setAttribute("aria-selected", String(on));
+        const panel = document.getElementById(item.getAttribute("href").slice(1));
+        if (panel) panel.hidden = !on;
+      });
+    };
+    tabs.forEach((tab) => tab.addEventListener("click", () => select(tab)));
+    select(tabs.find((tab) => tab.classList.contains("active")) || tabs[0]);
   };
 }
+
+/* 모달 Esc 닫기 보정 (모든 KRDS 모달)
+   - KRDS 는 모달을 열 때 Esc 처리를 { once: true } 로 한 번만 걸어 두어, 모달 안에서 다른 키(Tab 등)를 먼저 누르면 그 뒤로는 Esc 가 듣지 않음
+   - 열려 있는 모달 중 맨 위(나중에 연 것)를 닫기 버튼(.close-modal)으로 닫음. KRDS 가 먼저 닫았으면 열린 모달이 없어 아무 일도 하지 않음 */
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape" && event.key !== "Esc") return;
+  const opened = [...document.querySelectorAll(".krds-modal.shown")];
+  if (!opened.length) return;
+  const top = opened.reduce((a, b) => (Number(getComputedStyle(b).zIndex) >= Number(getComputedStyle(a).zIndex) ? b : a));
+  top.querySelector(".close-modal")?.click();
+});
 
 /* 가로 스크롤 탭 (.krds-tab-area.cm-tab-scroll, 마크업 _common/html/code/tab--scroll.html)
    - 탭 전환은 KRDS 스크립트(krds_tab)가 맡고, 여기서는 넘칠 때 좌우 이동 버튼 표시·스크롤만 처리합니다.
