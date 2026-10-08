@@ -3981,7 +3981,7 @@ p {
   align-items: center;
   gap: var(--krds-gap-1);
   position: fixed;
-  top: min(66rem, calc(100vh - 19rem));
+  bottom: 16%;
   right: calc(var(--cm-ai-inpage-right) + 10.6rem); /* 여는 버튼 가운데 = 콘텐츠 내 탐색 왼쪽 + 34px */
   z-index: 55; /* 푸터(KRDS 50)보다 위, TOP 버튼(60) · 헤더(70)보다 아래 */
   transform: translateX(50%);
@@ -4351,7 +4351,6 @@ p {
 }
 @media (max-width: 1023px) {
   .cm-ai-launcher {
-    top: auto;
     right: var(--krds-padding-6);
     bottom: 10rem;
     transform: none;
@@ -4375,11 +4374,14 @@ p {
   }
 }
 
-/* [푸터] 사이트 로고 · 기관 정보 한 줄 배치 · 웹 접근성 인증마크 */
+/* [푸터] 사이트 로고 · 기관 정보 한 줄 배치 · 웹 접근성 인증마크 (Figma: footerWrap > footer__pc, 1920×250)
+   - PC 세로 간격 : 위 48 · 로고와 기관 정보 사이 24 · 기관 정보와 하단 사이 40 · 하단 선 아래 16 · 아래 32 */
 @media (min-width: 1024px) {
   #krds-footer > .inner {
-    padding-left: var(--krds-contents-padding-x);
-    padding-right: var(--krds-contents-padding-x);
+    padding: var(--krds-number-16) var(--krds-contents-padding-x) var(--krds-number-12);
+  }
+  #krds-footer .f-cnt {
+    margin-top: calc(var(--krds-gap-7) - var(--krds-gap-9)); /* KRDS 요소 간격 40px 을 로고 아래만 24px 로 */
   }
   #krds-footer .f-cnt .f-info {
     flex-direction: row;
@@ -4413,9 +4415,26 @@ p {
 #krds-footer .inner {
   position: relative;
 }
+/* 하단 정책 메뉴 : 15px, 사이 12px. 개인정보처리방침은 굵게 + text-secondary (Figma footer_copyright__atomic) */
+@media (min-width: 1024px) {
+  #krds-footer .f-btm .f-btm-text {
+    align-items: center; /* 정책 메뉴와 저작권 문구를 한 줄에서 세로 가운데로 */
+  }
+}
+#krds-footer .f-btm .f-btm-text .f-menu {
+  gap: var(--krds-gap-2) var(--krds-gap-4);
+}
+#krds-footer .f-btm .f-btm-text .f-menu a {
+  font-size: var(--krds-pc-font-size-body-small);
+  line-height: 1.5;
+}
+#krds-footer .f-btm .f-btm-text .f-menu a.point {
+  font-weight: var(--krds-font-weight-bold);
+  color: var(--cm-color-text-secondary);
+}
 #krds-footer .cm-wa-mark {
   position: absolute;
-  top: calc(var(--krds-padding-10) + var(--krds-number-13));
+  top: 7rem; /* Figma : 푸터 위에서 70px (기관 정보 줄과 아래 끝을 맞춤) */
   right: var(--krds-contents-padding-x);
   width: 10rem;
 }
