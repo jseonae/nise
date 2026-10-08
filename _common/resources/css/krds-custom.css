@@ -1890,6 +1890,11 @@ p {
   border-radius: var(--krds-radius-medium3);
   background-color: var(--cm-color-box-surface);
 }
+/* 도구 상자(회색 바탕) 안의 tertiary 버튼 : KRDS 는 바탕이 투명이라 회색이 비침 → 흰 바탕으로 (선명하게 모드에서는 그 모드의 바탕색)
+   KRDS 버튼 변수만 바꿔 hover · pressed · disabled 색은 KRDS 그대로 */
+.cm-ts-tool .krds-btn.tertiary {
+  --krds-button--color-tertiary-fill: var(--cm-color-surface-white);
+}
 .cm-ts-tool-filter,
 .cm-ts-tool-btns,
 .cm-ts-select,
