@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => cmTabScroll.init());
 
 /* AI 해설 도우미 (.cm-ai, 마크업 _common/html/code/ext_ai_helper.html, 화면마다 페이지에 둠)
    - 여는 버튼 → 대화 창(처음 안내). 질문 예시를 누르거나 질문을 보내면 대화 진행 화면으로 바뀜
-   - Esc · 닫기 버튼으로 닫고 초점을 여는 버튼으로 되돌림, "오늘 하루 열지 않기"는 말풍선만 하루 숨김
+   - Esc · 닫기 버튼으로 닫고 초점을 여는 버튼으로 되돌림. 닫았다 다시 열면 대화 중이었어도 처음 안내 화면으로 열림, "오늘 하루 열지 않기"는 말풍선만 하루 숨김
    - [퍼블리싱 확인용] 대화 진행 화면에는 Figma 예시 대화가 들어 있고, 새로 보낸 질문에는 Figma의 "답변을 만들지 못했어요."를 붙임
      개발 시 질문 전송·답변 받기로 바꿈 */
 const cmAiHelper = {
@@ -92,6 +92,7 @@ const cmAiHelper = {
     };
     const close = () => {
       panel.hidden = true;
+      panel.dataset.state = "intro"; // 다시 열면 처음 안내 화면부터
       root.removeAttribute("data-open");
       document.body.classList.remove("cm-ai-opened");
       openBtn.setAttribute("aria-expanded", "false");
