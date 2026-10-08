@@ -3467,47 +3467,45 @@ p {
   margin-left: auto;
   font-size: inherit; /* 글자색은 KRDS 기본(text-subtle, 숫자는 text-primary) */
 }
-/* 평가하기 : Figma button/tertiary-border(#58616a) 채운 버튼 (KRDS 버튼 종류에 없는 색) */
+/* 평가하기 : Figma researchWrap 버튼 = secondary-60 채움 + 흰 글자 (KRDS 버튼 종류에 없는 색이라 따로 지정)
+   - 올리면 secondary-70, 누르면 secondary-80 으로 한 단계씩 진하게
+   - 선명하게(어두운 배경) 모드는 high-contrast secondary 색(이 모드의 탭 · 강조에 쓰는 청록 계열)을 한 단계 밝게 : 50 → 60 → 70
+     (60 부터 쓰면 버튼 면이 상자 바탕과 3:1 이 안 됨) */
 .cm-research-submit {
+  --cm-research-submit-fill: var(--krds-color-light-secondary-60);
+  --cm-research-submit-fill-hover: var(--krds-color-light-secondary-70);
+  --cm-research-submit-fill-pressed: var(--krds-color-light-secondary-80);
   flex: none;
   min-width: 7.8rem;
-  border-color: var(--cm-color-border-gray-dark);
-  background-color: var(--cm-color-border-gray-dark);
-  color: var(--cm-color-text-inverse);
 }
-.cm-research-submit:hover,
-.cm-research-submit:active {
-  border-color: var(--cm-color-text-basic);
-  background-color: var(--cm-color-text-basic);
-  color: var(--cm-color-text-inverse);
-}
-/* 선명하게(어두운 배경) 모드 : 위 hover 색(text-basic)이 이 모드에서는 거의 흰색이라 흰 글자가 보이지 않음
-   → KRDS primary 버튼의 선명하게 모드 색을 씀 (기본 primary-50, 올리면 primary-60, 누르면 primary-70. 흰 글자 대비 4.5:1 이상) */
 [data-krds-mode=high-contrast] .cm-research-submit {
-  border-color: var(--krds-high-contrast-color-button-primary-fill);
-  background-color: var(--krds-high-contrast-color-button-primary-fill);
-}
-[data-krds-mode=high-contrast] .cm-research-submit:hover {
-  border-color: var(--krds-high-contrast-color-button-primary-fill-hover);
-  background-color: var(--krds-high-contrast-color-button-primary-fill-hover);
-}
-[data-krds-mode=high-contrast] .cm-research-submit:active {
-  border-color: var(--krds-high-contrast-color-button-primary-fill-pressed);
-  background-color: var(--krds-high-contrast-color-button-primary-fill-pressed);
+  --cm-research-submit-fill: var(--krds-color-high-contrast-secondary-50);
+  --cm-research-submit-fill-hover: var(--krds-color-high-contrast-secondary-60);
+  --cm-research-submit-fill-pressed: var(--krds-color-high-contrast-secondary-70);
 }
 @media (prefers-color-scheme: dark) {
   [data-krds-mode=theme] .cm-research-submit {
-    border-color: var(--krds-high-contrast-color-button-primary-fill);
-    background-color: var(--krds-high-contrast-color-button-primary-fill);
+    --cm-research-submit-fill: var(--krds-color-high-contrast-secondary-50);
+    --cm-research-submit-fill-hover: var(--krds-color-high-contrast-secondary-60);
+    --cm-research-submit-fill-pressed: var(--krds-color-high-contrast-secondary-70);
   }
-  [data-krds-mode=theme] .cm-research-submit:hover {
-    border-color: var(--krds-high-contrast-color-button-primary-fill-hover);
-    background-color: var(--krds-high-contrast-color-button-primary-fill-hover);
-  }
-  [data-krds-mode=theme] .cm-research-submit:active {
-    border-color: var(--krds-high-contrast-color-button-primary-fill-pressed);
-    background-color: var(--krds-high-contrast-color-button-primary-fill-pressed);
-  }
+}
+/* 선택자에 .krds-btn 을 겹친 까닭 : KRDS 의 모드별 버튼 규칙([data-krds-mode] .krds-btn)보다 앞서게 */
+.krds-btn.cm-research-submit,
+[data-krds-mode] .krds-btn.cm-research-submit {
+  border-color: var(--cm-research-submit-fill);
+  background-color: var(--cm-research-submit-fill);
+  color: var(--cm-color-text-inverse);
+}
+.krds-btn.cm-research-submit:hover,
+[data-krds-mode] .krds-btn.cm-research-submit:hover {
+  border-color: var(--cm-research-submit-fill-hover);
+  background-color: var(--cm-research-submit-fill-hover);
+}
+.krds-btn.cm-research-submit:active,
+[data-krds-mode] .krds-btn.cm-research-submit:active {
+  border-color: var(--cm-research-submit-fill-pressed);
+  background-color: var(--cm-research-submit-fill-pressed);
 }
 @media (max-width: 767px) {
   .cm-research {
