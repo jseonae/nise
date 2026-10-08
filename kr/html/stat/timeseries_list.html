@@ -98,43 +98,44 @@
             <section id="panel_ts_02" aria-labelledby="tab_ts_02" class="tab-conts" data-quick-nav="false">
               <h2 class="sr-only">조사대상자별 분류</h2>
               <!-- Figma에 조사대상자별 선택 화면이 없어 조사 변천사의 조사 대상자 목록으로 채움
-                   건수는 주제별 칩과 같은 표기. 전체(86)만 주제별과 같고 나머지는 [임시] 값(합계 86). 0건인 칩은 고를 수 없게 disabled -->
+                   건수는 주제별 칩과 같은 표기. 전체(86)만 주제별과 같고 나머지는 [임시] 값(합계 86). 0건인 칩은 고를 수 없게 disabled
+                   조사대상자별 카드는 아직 없어, 이 탭에서는 어느 칩을 골라도 아래에 목록 불러오기 실패 안내가 나옴 (cmTsFilter) -->
               <fieldset class="krds-check-area cm-chip-box">
                 <legend class="sr-only">조사대상자 선택</legend>
                 <div class="krds-form-chip medium">
-                  <input type="radio" class="radio" name="ts_target" id="ts_target_0" value="0" checked>
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_0" value="0" data-total="86" data-pages="6" checked>
                   <label class="krds-form-chip-outline" for="ts_target_0">전체 (86)</label>
                 </div>
                 <div class="krds-form-chip medium">
-                  <input type="radio" class="radio" name="ts_target" id="ts_target_1" value="1">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_1" value="1" data-total="24" data-pages="2">
                   <label class="krds-form-chip-outline" for="ts_target_1">특수교육대상자 보호자 (24)</label>
                 </div>
                 <div class="krds-form-chip medium">
-                  <input type="radio" class="radio" name="ts_target" id="ts_target_2" value="2">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_2" value="2" data-total="9" data-pages="1">
                   <label class="krds-form-chip-outline" for="ts_target_2">장애영아 보호자 (9)</label>
                 </div>
                 <div class="krds-form-chip medium">
-                  <input type="radio" class="radio" name="ts_target" id="ts_target_3" value="3">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_3" value="3" data-total="11" data-pages="1">
                   <label class="krds-form-chip-outline" for="ts_target_3">특수학교 관리자 (11)</label>
                 </div>
                 <div class="krds-form-chip medium">
-                  <input type="radio" class="radio" name="ts_target" id="ts_target_4" value="4">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_4" value="4" data-total="10" data-pages="1">
                   <label class="krds-form-chip-outline" for="ts_target_4">특수학급 관리자 (10)</label>
                 </div>
                 <div class="krds-form-chip medium">
-                  <input type="radio" class="radio" name="ts_target" id="ts_target_5" value="5">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_5" value="5" data-total="14" data-pages="1">
                   <label class="krds-form-chip-outline" for="ts_target_5">특수학교 담임교사 (14)</label>
                 </div>
                 <div class="krds-form-chip medium">
-                  <input type="radio" class="radio" name="ts_target" id="ts_target_6" value="6">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_6" value="6" data-total="13" data-pages="1">
                   <label class="krds-form-chip-outline" for="ts_target_6">특수학급 교사 (13)</label>
                 </div>
                 <div class="krds-form-chip medium">
-                  <input type="radio" class="radio" name="ts_target" id="ts_target_7" value="7" disabled>
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_7" value="7" data-total="0" data-pages="1" disabled>
                   <label class="krds-form-chip-outline" for="ts_target_7">장애영아 관리자 (0)</label>
                 </div>
                 <div class="krds-form-chip medium">
-                  <input type="radio" class="radio" name="ts_target" id="ts_target_8" value="8">
+                  <input type="radio" class="radio" name="ts_target" id="ts_target_8" value="8" data-total="5" data-pages="1">
                   <label class="krds-form-chip-outline" for="ts_target_8">장애영아 교사 (5)</label>
                 </div>
               </fieldset>
@@ -476,7 +477,7 @@
           </ul>
           <!-- 목록 불러오기 실패 안내 : 빈 상태 컴포넌트 변형 _common/html/code/ext_empty.html (.cm-empty.is-error, 그림 없이 문구 + 버튼)
                Figma: 컨텐츠 > s03알림마당_자료실 list-목록불러오기 실패 (자료실 목록과 같은 배치 : 목록 상단은 그대로, 카드 목록 · 페이지네이션 자리에 표시)
-               퍼블리싱에서는 카드가 없는 주제(관련서비스 · 행정조직)를 고르면 보임 (kr/js/user-custom.js cmTsFilter).
+               퍼블리싱에서는 카드가 없는 주제(관련서비스 · 행정조직)를 고르거나 조사대상자별 탭을 고르면 보임 (kr/js/user-custom.js cmTsFilter).
                개발 시 목록 조회 실패 때만 출력하고 [다시시도]에 재조회를 연결. 화면이 바뀌며 나타나는 안내라 role="alert" -->
           <div class="cm-empty is-error" role="alert" data-ts-error hidden>
             <p class="tit">목록을 불러오지 못했습니다.</p>
