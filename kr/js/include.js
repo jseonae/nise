@@ -88,12 +88,21 @@
       return `<li><a href="${pageUrl(section, item)}" class="gnb-main-trigger${on ? " cm-current" : ""}" data-trigger="gnb"${on ? ' aria-current="page"' : ""}>${item.name}</a></li>`;
     }).join(""));
   }
-  const mobile = document.querySelector(".cm-mobile-menu");
-  if (mobile) {
-    mobile.insertAdjacentHTML("beforeend", section.items.map((item) => {
-      const on = current && item === current.item;
-      return `<li><a href="${pageUrl(section, item)}"${on ? ' aria-current="page"' : ""}>${item.name}</a></li>`;
-    }).join(""));
+  // 모바일 전체메뉴 : 왼쪽에 1Depth 전체, 오른쪽에 1Depth 마다 2Depth 목록 (KRDS main_menu_mobile 마크업)
+  // 현재 화면이 속한 1Depth 에 .active, 현재 화면에 .selected · aria-current. 메뉴에 속하지 않은 화면은 첫 1Depth 를 고른 상태로 엶
+  const mobileTabs = document.querySelector("#mobile-nav .menu-wrap ul");
+  const mobilePanels = document.querySelector("#mobile-nav .submenu-wrap");
+  if (mobileTabs && mobilePanels) {
+    const opened = current ? current.section : MENU[0];
+    MENU.forEach((sec, i) => {
+      const id = `mGnb-anchor${i + 1}`;
+      mobileTabs.insertAdjacentHTML("beforeend", `<li><a href="#${id}" class="gnb-main-trigger${sec === opened ? " active" : ""}">${sec.name}</a></li>`);
+      const links = sec.items.map((item) => {
+        const on = current && item === current.item;
+        return `<li><a href="${pageUrl(sec, item)}" class="gnb-sub-trigger${on ? " selected" : ""}"${on ? ' aria-current="page"' : ""}>${item.name}</a></li>`;
+      }).join("");
+      mobilePanels.insertAdjacentHTML("beforeend", `<div class="gnb-sub-list" id="${id}"><h2 class="sub-title">${sec.name}</h2><ul>${links}</ul></div>`);
+    });
   }
 
   // 3) 페이지 상단 : 브레드크럼 · 제목 · 설명 (data-title · data-desc 로 바꿀 수 있음)

@@ -58,7 +58,7 @@
               <span class="sr-only">특수교육 실태조사 데이터 활용 플랫폼</span>
             </a>
           </h2>
-          <!-- 헤더 버튼 : .header-actions (통계정보 · 데이터분석 · 알림마당 · 통합검색 · 전체메뉴, 모바일에서는 아이콘 메뉴를 전체메뉴 안에 표시) -->
+          <!-- 헤더 버튼 : .header-actions (통계정보 · 데이터분석 · 알림마당 · 통합검색 · 전체메뉴, 모바일에서는 통합검색 · 전체메뉴만 보이고 나머지 메뉴는 전체메뉴 안에서 이동) -->
           <div class="header-actions">
             <a href="{{html}}stat/survey_history_list.html" class="btn-navi cm-stat pc-only">통계정보</a>
             <a href="{{html}}analysis/cross_analysis.html" class="btn-navi cm-analysis pc-only">데이터분석</a>
@@ -125,21 +125,34 @@
   </div>
   <!-- //[03-1] 헤더 컨텐츠 -->
 
-  <!-- [03-2] 메인메뉴(GNB) 모바일 : #mobile-nav -->
+  <!-- [03-2] 메인메뉴(GNB) 모바일 : #mobile-nav (KRDS main_menu_mobile 구조, Figma: 컨텐츠 > main_menu__mo / Type=bar)
+       - 머리글 : 글자·화면 설정 + 닫기 (KRDS 샘플의 로그인 · 서비스 메뉴 · 메뉴 검색은 디자인에 없어 넣지 않음)
+       - 본문 : 왼쪽 1Depth(.menu-wrap) + 오른쪽 2Depth(.submenu-wrap). 목록은 kr/js/include.js 가 채움
+       - 1Depth 를 누르면 그 메뉴의 2Depth 만 오른쪽에 보임 (_common/resources/js/krds-custom.js cmMobileMenu) -->
   <div id="mobile-nav" class="krds-main-menu-mobile">
     <div class="gnb-wrap">
       <div class="gnb-header">
-        <div class="gnb-service-menu">
-          <a href="{{html}}stat/survey_history_list.html" class="link cm-stat">통계정보</a>
-          <a href="{{html}}analysis/cross_analysis.html" class="link cm-analysis">데이터분석</a>
-          <a href="{{html}}board/survey_overview.html" class="link cm-notice">알림마당</a>
+        <div class="gnb-utils">
+          <ul class="utility-list">
+            <li>
+              <button type="button" class="krds-btn medium text open-modal" data-target="modal_adjust_display">
+                <i class="svg-icon ico-view-mode"></i> 글자·화면 설정
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
-      <!-- 1단 메뉴 목록 : .cm-mobile-menu (KRDS 탭+하위메뉴 구조 대신 사용) -->
       <div class="gnb-body">
-        <ul class="cm-mobile-menu">
-          <!-- 2Depth 메뉴 : kr/js/include.js 가 채움 (현재 메뉴 aria-current="page") -->
-        </ul>
+        <div class="gnb-menu">
+          <div class="menu-wrap">
+            <ul>
+              <!-- 1Depth : kr/js/include.js 가 채움 (현재 메뉴 .active) -->
+            </ul>
+          </div>
+          <div class="submenu-wrap">
+            <!-- 1Depth 별 2Depth 목록(.gnb-sub-list) : kr/js/include.js 가 채움 (현재 화면 .selected · aria-current="page") -->
+          </div>
+        </div>
       </div>
       <button type="button" class="krds-btn medium icon" id="close-nav">
         <span class="sr-only">전체메뉴 닫기</span>

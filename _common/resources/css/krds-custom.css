@@ -322,27 +322,30 @@ p {
   width: 100%;
 }
 
-/* [모바일 전체메뉴] 1단 링크 목록 (KRDS 기본 탭+하위메뉴 구조 대신 사용, 스크립트 보정: _common/resources/js/krds-custom.js) */
-.krds-main-menu-mobile .gnb-wrap .gnb-body .cm-mobile-menu {
-  display: flex;
-  flex-direction: column;
-  padding: var(--krds-main-menu-mobile--sub-menu-padding);
+/* [모바일 전체메뉴] KRDS main_menu_mobile 보정 (Figma: 컨텐츠 > main_menu__mo / Type=bar, 스크립트 krds-custom.js cmMobileMenu)
+   - KRDS 는 오른쪽 목록 전체가 한 번에 스크롤되지만, 이 사업은 고른 1Depth 의 목록만 보이므로 좌우 칸이 따로 스크롤 */
+.krds-main-menu-mobile .gnb-wrap .gnb-body {
+  overflow: hidden;
 }
-.krds-main-menu-mobile .gnb-wrap .gnb-body .cm-mobile-menu a {
-  display: flex;
-  align-items: center;
-  padding: var(--krds-main-menu-mobile--sub-menu-trigger-padding-y) var(--krds-main-menu-mobile--sub-menu-trigger-padding-x);
-  border-radius: var(--krds-main-menu-mobile--sub-menu-trigger-border-radius);
-  font-size: var(--krds-main-menu-mobile--sub-menu-trigger-font-size-active);
-  font-weight: var(--krds-font-weight-bold);
-  transition: var(--krds-transition-base);
+.krds-main-menu-mobile .gnb-wrap .gnb-body .gnb-menu {
+  flex: 1 1 auto;
+  min-height: 0;
 }
-.krds-main-menu-mobile .gnb-wrap .gnb-body .cm-mobile-menu a:hover {
-  background-color: var(--krds-main-menu-mobile--sub-menu-trigger-color-action-hover);
+.krds-main-menu-mobile .gnb-wrap .gnb-body .gnb-menu .menu-wrap,
+.krds-main-menu-mobile .gnb-wrap .gnb-body .gnb-menu .submenu-wrap {
+  overflow-y: auto;
 }
-.krds-main-menu-mobile .gnb-wrap .gnb-body .cm-mobile-menu a[aria-current=page] {
-  color: var(--krds-main-menu-mobile--sub-menu-trigger-color-text);
-  background-color: var(--krds-main-menu-mobile--sub-menu-trigger-color-action-active);
+.krds-main-menu-mobile .gnb-wrap .gnb-body .gnb-menu .submenu-wrap .gnb-sub-list[hidden] {
+  display: none;
+}
+/* 선명하게(어두운 배경) 모드 : 메뉴 바탕(머리글 포함)을 Figma 대로 surface-white-subtle 로 (KRDS 는 검정이라 오른쪽 칸과 머리글 색이 달라짐) */
+[data-krds-mode=high-contrast] .krds-main-menu-mobile {
+  --krds-main-menu-mobile--color-surface: var(--krds-high-contrast-color-surface-white-subtle);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .krds-main-menu-mobile {
+    --krds-main-menu-mobile--color-surface: var(--krds-high-contrast-color-surface-white-subtle);
+  }
 }
 
 /* [페이지 상단] 브레드크럼 · 공유/인쇄 · 페이지 제목 (사이드메뉴 없는 1단 레이아웃) */
