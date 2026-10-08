@@ -35,11 +35,11 @@
     <div class="header-container">
       <div class="inner">
         <!-- 유틸리티 메뉴 : .header-utility (전체메뉴 · 국가상징 · 글자·화면 설정)
-             전체메뉴 : Figma header_templet__pc 에서 "사이트맵 >" 이 "전체메뉴 ≡"(KRDS ico-all)로 바뀜. 전체메뉴(사이트맵) 화면이 생기면 href 를 연결 -->
+             전체메뉴 : 화면 전체를 덮는 전체메뉴 팝업(#modal_sitemap, kr/tmpl/modal.html [06-3])을 엶 -->
         <div class="header-utility">
           <ul class="utility-list">
             <li>
-              <a href="#" class="krds-btn small text">전체메뉴 <i class="svg-icon ico-all"></i></a>
+              <button type="button" class="krds-btn small text open-modal" data-target="modal_sitemap" aria-haspopup="dialog">전체메뉴 <i class="svg-icon ico-all"></i></button>
             </li>
             <li>
               <a href="https://www.mois.go.kr/frt/sub/popup/p_taegugki_banner/screen.do" class="krds-btn small text" target="_blank" title="새 창 열림">국가상징 알아보기 <i class="svg-icon ico-go"></i></a>

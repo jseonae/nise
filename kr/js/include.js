@@ -105,6 +105,18 @@
     });
   }
 
+  // 전체메뉴 팝업(#modal_sitemap) : 1Depth 제목(h3) + 2Depth 링크 목록, 현재 화면은 aria-current="page"
+  const sitemap = document.querySelector("#modal_sitemap .cm-sitemap-menu");
+  if (sitemap) {
+    sitemap.insertAdjacentHTML("beforeend", MENU.map((sec) => {
+      const links = sec.items.map((item) => {
+        const on = current && item === current.item;
+        return `<li><a href="${pageUrl(sec, item)}"${on ? ' aria-current="page"' : ""}>${item.name}</a></li>`;
+      }).join("");
+      return `<div class="cm-sitemap-col"><h3 class="tit">${sec.name}</h3><ul>${links}</ul></div>`;
+    }).join(""));
+  }
+
   // 3) 페이지 상단 : 브레드크럼 · 제목 · 설명 (data-title · data-desc 로 바꿀 수 있음)
   function fillPageTop(nodes, dataset) {
     const top = nodes.find((n) => n.nodeType === 1 && n.classList.contains("cm-page-top"));

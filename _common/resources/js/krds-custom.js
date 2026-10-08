@@ -30,6 +30,17 @@ if (typeof krds_mainMenuMobile !== "undefined") {
   };
 }
 
+/* 모달 Esc 닫기 보정 (모든 KRDS 모달)
+   - KRDS 는 모달을 열 때 Esc 처리를 { once: true } 로 한 번만 걸어 두어, 모달 안에서 다른 키(Tab 등)를 먼저 누르면 그 뒤로는 Esc 가 듣지 않음
+   - 열려 있는 모달 중 맨 위(나중에 연 것)를 닫기 버튼(.close-modal)으로 닫음. KRDS 가 먼저 닫았으면 열린 모달이 없어 아무 일도 하지 않음 */
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape" && event.key !== "Esc") return;
+  const opened = [...document.querySelectorAll(".krds-modal.shown")];
+  if (!opened.length) return;
+  const top = opened.reduce((a, b) => (Number(getComputedStyle(b).zIndex) >= Number(getComputedStyle(a).zIndex) ? b : a));
+  top.querySelector(".close-modal")?.click();
+});
+
 /* 가로 스크롤 탭 (.krds-tab-area.cm-tab-scroll, 마크업 _common/html/code/tab--scroll.html)
    - 탭 전환은 KRDS 스크립트(krds_tab)가 맡고, 여기서는 넘칠 때 좌우 이동 버튼 표시·스크롤만 처리합니다.
    - 처음 열 때와 탭을 고를 때 선택된 탭이 보이도록 스크롤합니다. */

@@ -111,5 +111,50 @@
     <div class="modal-back"></div>
   </section>
   <!-- //[06-2] 차트 확대 -->
+  <!-- [06-3] 전체메뉴 팝업 : #modal_sitemap (신규 컴포넌트 _common/html/code/ext_sitemap_popup.html, Figma: 컨텐츠 > sitemap_popup)
+       PC 헤더 유틸리티의 [전체메뉴] 버튼이 엶 (1024px 미만은 유틸리티가 숨겨져 모바일 전체메뉴 #mobile-nav 를 씀)
+       KRDS 모달이라 열기 · 닫기 · Esc · 초점 가두기 · 배경 스크롤 잠금은 KRDS 스크립트가 맡고, 화면 전체로 띄우는 것만 CSS 로 보정 -->
+  <section id="modal_sitemap" class="krds-modal fade cm-sitemap" aria-labelledby="tit_modal_sitemap">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="tit_modal_sitemap" class="modal-title sr-only">전체메뉴</h2>
+        </div>
+        <div class="modal-conts">
+          <div class="conts-area cm-sitemap-inner">
+            <!-- 로고 : 모드에 따라 바뀌도록 CSS 배경으로 넣음 (헤더 로고와 같은 방식) -->
+            <p class="cm-sitemap-logo"><span class="sr-only">특수교육 실태조사 데이터 활용 플랫폼</span></p>
+            <!-- 메뉴 : 1Depth 제목 + 2Depth 목록. kr/js/include.js 가 채움 (현재 화면 aria-current="page") -->
+            <nav class="cm-sitemap-menu" aria-label="전체메뉴"></nav>
+            <!-- 안내 링크 · 기관 정보 · 공식 SNS (이용안내 · 개인정보처리방침 · SNS 주소는 정해지면 연결) -->
+            <div class="cm-sitemap-foot">
+              <div class="info">
+                <ul class="links">
+                  <li><a href="#" class="krds-btn medium text">이용안내 <i class="svg-icon ico-angle right"></i></a></li>
+                  <li><a href="#" class="krds-btn medium text">개인정보처리방침 <i class="svg-icon ico-angle right"></i></a></li>
+                  <li><a href="https://www.mois.go.kr/frt/sub/popup/p_taegugki_banner/screen.do" class="krds-btn medium text" target="_blank" title="새 창 열림">국가상징 알아보기 <i class="svg-icon ico-go"></i></a></li>
+                </ul>
+                <ul class="addr">
+                  <li>(31470) 충청남도 아산시 배방읍 공원로 40</li>
+                  <li><strong>대표전화</strong> 041-537-1500</li>
+                  <li><strong>팩스</strong> 041-531-6412</li>
+                </ul>
+              </div>
+              <ul class="cm-sitemap-sns">
+                <li><a href="#" target="_blank" title="새 창 열림"><img src="{{root}}_common/resources/img/sns/cm_sns_youtube.svg" alt="국립특수교육원 유튜브"></a></li>
+                <li><a href="#" target="_blank" title="새 창 열림"><img src="{{root}}_common/resources/img/sns/cm_share_band.svg" alt="국립특수교육원 네이버 밴드"></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="krds-btn large icon btn-close close-modal">
+          <span class="sr-only">전체메뉴 닫기</span>
+          <i class="svg-icon ico-popup-close"></i>
+        </button>
+      </div>
+    </div>
+    <div class="modal-back"></div>
+  </section>
+  <!-- //[06-3] 전체메뉴 팝업 -->
 </div>
 <!-- //[06] 모달 -->
