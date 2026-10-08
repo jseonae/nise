@@ -3417,6 +3417,18 @@ p {
   flex: 1 1 auto;
   min-width: 0;
 }
+/* 안내 문구(placeholder) : KRDS 기본 색은 대비가 3:1 남짓이라 4.5:1 이상인 색으로 (AI 해설 도우미 입력창과 같은 토큰) */
+.cm-research-opinion .krds-input::placeholder {
+  color: var(--krds-light-color-element-gray-dark);
+}
+[data-krds-mode=high-contrast] .cm-research-opinion .krds-input::placeholder {
+  color: var(--krds-high-contrast-color-element-gray-dark);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-research-opinion .krds-input::placeholder {
+    color: var(--krds-high-contrast-color-element-gray-dark);
+  }
+}
 /* 선명하게(어두운 배경) 모드 : 의견 입력창 바탕을 검정으로 (KRDS 입력창 변수만 다시 지정) */
 [data-krds-mode=high-contrast] .cm-research-opinion .krds-input {
   --krds-input--color-surface: var(--krds-high-contrast-color-background-white);
