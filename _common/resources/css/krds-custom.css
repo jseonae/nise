@@ -2301,7 +2301,28 @@ p {
 }
 /* 분석 조건 검색 : 분류 탭(.cm-ts-filter 와 같은 붙은 탭) + 칩 · 문항 상자 */
 .cm-cross-tab {
+  position: relative; /* 조사연도 선택(.cm-cross-year)의 기준 */
   gap: var(--krds-gap-6);
+}
+/* 조사연도 선택 : 탭 줄(높이 5rem)의 오른쪽 끝, 세로 가운데 (Figma : 글자 15px, 간격 4px, 선택 상자 100×40)
+   .cm-inline-select(아래쪽에 정의)의 간격 · 선택 상자 최소 폭을 이기려고 클래스를 겹쳐 씀 */
+.cm-inline-select.cm-cross-year {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 5rem;
+  gap: var(--krds-gap-2);
+}
+.cm-inline-select.cm-cross-year .krds-form-select {
+  min-width: 10rem;
+}
+/* 좁은 화면 : 탭과 나란히 둘 자리가 없어 탭 아래 줄의 오른쪽에 둠 */
+@media (max-width: 767px) {
+  .cm-inline-select.cm-cross-year {
+    position: static;
+    align-self: flex-end;
+    height: auto;
+  }
 }
 .cm-cross-filter.tab-conts.active {
   gap: var(--krds-gap-7);
