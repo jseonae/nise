@@ -3267,9 +3267,9 @@ p {
 
 /* [공통] 빈 상태 · 준비 중 안내 (신규 컴포넌트 _common/html/code/ext_empty.html, Figma: s02데이터분석_교차분석 페이지준비중) */
 .cm-empty {
-  /* 상태 안내 (준비 중 · 자료 없음 · 불러오기 실패) : 모든 상태가 같은 틀 = 동그란 아이콘 + 제목 + 설명 (+ 버튼). 바탕 상자는 두지 않음
+  /* 상태 안내 (준비 중 · 자료 없음 · 불러오기 실패) : 모든 상태가 같은 틀 = 아이콘 + 제목 + 설명 (+ 버튼). 바탕 상자 · 아이콘 바탕은 두지 않음
      - 상태는 아이콘과 문구로만 구분 : .is-ready(기본) 시계 · .is-none 문서 · .is-error 경고
-     - 아이콘은 [임시] 선 그림(cm_state_*.svg, mask 로 색 입힘). 디자인한 그림이 나오면 --cm-empty-icon 의 파일만 바꾸거나 ::after 를 그림으로 교체
+     - 아이콘은 [임시] 선 그림(cm_state_*.svg, mask 로 색 입힘). 디자인한 그림이 나오면 --cm-empty-icon 의 파일만 바꾸거나 ::before 를 그림으로 교체
      - 높이를 같게(min-height) 두어 탭 · 칩을 바꿔 상태가 달라져도 화면이 출렁이지 않음 */
   --cm-empty-icon: url(../img/common/cm_state_ready.svg);
   display: flex;
@@ -3293,27 +3293,13 @@ p {
 .krds-pagination[hidden] {
   display: none;
 }
-/* 아이콘 : 동그란 바탕(::before) 위에 선 그림(::after). 꾸밈이라 화면낭독기에는 읽히지 않음
-   - 둘 다 흐름 안에 두고(order 로 맨 앞) 선 그림을 위로 당겨 동그라미 가운데에 겹침 → 안내가 세로 가운데 정렬이어도 어긋나지 않음
-     당기는 거리 = 동그라미 아래에서 그림 위까지 4.8rem + 요소 간격(gap-3) */
+/* 아이콘 : 선 그림만 (mask 로 색을 입힘). 꾸밈이라 화면낭독기에는 읽히지 않음 */
 .cm-empty::before {
   content: "";
   flex: none;
-  order: -2;
-  width: 6.4rem;
-  height: 6.4rem;
-  border: 0.1rem solid var(--cm-color-border-light);
-  border-radius: var(--krds-radius-max);
-  background-color: var(--cm-color-surface-white);
-}
-.cm-empty::after {
-  content: "";
-  flex: none;
-  order: -1;
-  width: 3.2rem;
-  height: 3.2rem;
-  margin-top: calc(-4.8rem - var(--krds-gap-3));
-  margin-bottom: 2.4rem; /* 동그라미 아래 끝까지 1.6rem + 제목과의 여유 0.8rem */
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: var(--krds-gap-3);
   background-color: var(--cm-color-text-secondary);
   -webkit-mask: var(--cm-empty-icon) center / contain no-repeat;
   mask: var(--cm-empty-icon) center / contain no-repeat;
