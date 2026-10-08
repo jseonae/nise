@@ -3453,6 +3453,10 @@ p {
   .cm-es-chart:has([data-cm-chart="combo"]) {
     padding: var(--krds-padding-10) var(--krds-number-8);
   }
+  /* 그 상자의 안내 문구는 좌우를 더 들여 다른 그래프 상자의 안내 문구와 비슷한 자리에서 시작 (기관 수 계) */
+  .cm-es-chart:has([data-cm-chart="combo"]) > .cm-es-desc {
+    padding: 0 var(--krds-padding-7);
+  }
 }
 .cm-es-desc {
   font-size: var(--krds-pc-font-size-body-small);
