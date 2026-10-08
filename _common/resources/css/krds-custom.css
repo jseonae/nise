@@ -3481,6 +3481,34 @@ p {
   background-color: var(--cm-color-text-basic);
   color: var(--cm-color-text-inverse);
 }
+/* 선명하게(어두운 배경) 모드 : 위 hover 색(text-basic)이 이 모드에서는 거의 흰색이라 흰 글자가 보이지 않음
+   → KRDS primary 버튼의 선명하게 모드 색을 씀 (기본 primary-50, 올리면 primary-60, 누르면 primary-70. 흰 글자 대비 4.5:1 이상) */
+[data-krds-mode=high-contrast] .cm-research-submit {
+  border-color: var(--krds-high-contrast-color-button-primary-fill);
+  background-color: var(--krds-high-contrast-color-button-primary-fill);
+}
+[data-krds-mode=high-contrast] .cm-research-submit:hover {
+  border-color: var(--krds-high-contrast-color-button-primary-fill-hover);
+  background-color: var(--krds-high-contrast-color-button-primary-fill-hover);
+}
+[data-krds-mode=high-contrast] .cm-research-submit:active {
+  border-color: var(--krds-high-contrast-color-button-primary-fill-pressed);
+  background-color: var(--krds-high-contrast-color-button-primary-fill-pressed);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-research-submit {
+    border-color: var(--krds-high-contrast-color-button-primary-fill);
+    background-color: var(--krds-high-contrast-color-button-primary-fill);
+  }
+  [data-krds-mode=theme] .cm-research-submit:hover {
+    border-color: var(--krds-high-contrast-color-button-primary-fill-hover);
+    background-color: var(--krds-high-contrast-color-button-primary-fill-hover);
+  }
+  [data-krds-mode=theme] .cm-research-submit:active {
+    border-color: var(--krds-high-contrast-color-button-primary-fill-pressed);
+    background-color: var(--krds-high-contrast-color-button-primary-fill-pressed);
+  }
+}
 @media (max-width: 767px) {
   .cm-research {
     padding: var(--krds-padding-8) var(--krds-padding-6);
