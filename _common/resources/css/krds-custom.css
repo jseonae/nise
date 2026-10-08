@@ -3275,6 +3275,11 @@ p {
   text-align: center;
   color: var(--cm-color-text-subtle);
 }
+/* hidden 속성으로 숨길 때 : display 를 지정한 요소는 hidden 이 듣지 않아 따로 숨김 (목록 상태에 따라 안내 · 페이지네이션을 바꿔 보여 줄 때) */
+.cm-empty[hidden],
+.krds-pagination[hidden] {
+  display: none;
+}
 .cm-empty img {
   width: 16.4rem;
   height: auto;

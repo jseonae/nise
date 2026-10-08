@@ -37,7 +37,8 @@ document.addEventListener("click", (event) => {
 
 /* [퍼블리싱 확인용] 시계열 시각화 목록 주제 칩 (kr/html/stat/timeseries_list.html)
    고른 주제의 카드만 보여 줍니다. 개발 시 서버 조회로 바꾸고 이 코드는 지웁니다.
-   전체 : data-all 카드(Figma 시계열시각화-list), 그 밖 : data-topic 이 같은 카드(Figma 시계열시각화-list-교육과정) */
+   전체 : data-all 카드(Figma 시계열시각화-list), 그 밖 : data-topic 이 같은 카드(Figma 시계열시각화-list-교육과정)
+   카드가 없는 주제는 목록 불러오기 실패 안내([data-ts-error])를 보여 줌 (Figma s03알림마당_자료실 list-목록불러오기 실패) */
 const cmTsFilter = {
   init() {
     const radios = document.querySelectorAll('input[name="ts_topic"]');
@@ -49,6 +50,14 @@ const cmTsFilter = {
         cards.forEach((card) => {
           card.hidden = value === "all" ? card.dataset.all !== "y" : card.dataset.topic !== value;
         });
+        // 보여 줄 카드가 없는 주제(관련서비스 · 행정조직) : 목록 · 페이지네이션 대신 목록 불러오기 실패 안내를 보여 줌
+        const empty = ![...cards].some((card) => !card.hidden);
+        const list = document.querySelector(".cm-ts-list");
+        const error = document.querySelector(".cm-timeseries [data-ts-error]");
+        const paging = document.querySelector(".cm-timeseries .krds-pagination");
+        if (list) list.hidden = empty;
+        if (error) error.hidden = !empty;
+        if (paging) paging.hidden = empty;
         const count = document.querySelector(".cm-timeseries .cm-board-count");
         if (count) {
           count.querySelector(".total .num").textContent = radio.dataset.total;

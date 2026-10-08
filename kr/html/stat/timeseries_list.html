@@ -473,9 +473,18 @@
               <span class="krds-btn small tertiary cm-ts-more" aria-hidden="true">자세히보기 <i class="svg-icon ico-sch-plus"></i></span>
             </li>
           </ul>
+          <!-- 목록 불러오기 실패 안내 : 빈 상태 컴포넌트 변형 _common/html/code/ext_empty.html (.cm-empty.is-error, 그림 없이 문구 + 버튼)
+               Figma: 컨텐츠 > s03알림마당_자료실 list-목록불러오기 실패 (자료실 목록과 같은 배치 : 목록 상단은 그대로, 카드 목록 · 페이지네이션 자리에 표시)
+               퍼블리싱에서는 카드가 없는 주제(관련서비스 · 행정조직)를 고르면 보임 (kr/js/user-custom.js cmTsFilter).
+               개발 시 목록 조회 실패 때만 출력하고 [다시시도]에 재조회를 연결. 화면이 바뀌며 나타나는 안내라 role="alert" -->
+          <div class="cm-empty is-error" role="alert" data-ts-error hidden>
+            <p class="tit">목록을 불러오지 못했습니다.</p>
+            <p class="txt">잠시 후 다시 시도해 주세요.</p>
+            <button type="button" class="krds-btn large tertiary">다시시도</button>
+          </div>
         </div>
 
-        <!-- 페이지네이션 : KRDS pagination -->
+        <!-- 페이지네이션 : KRDS pagination (목록 불러오기 실패 안내가 보일 때는 숨김) -->
         <div class="krds-pagination">
           <span class="page-navi prev disabled">이전</span>
           <div class="page-links">
