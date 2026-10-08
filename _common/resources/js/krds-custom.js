@@ -65,7 +65,8 @@ document.addEventListener("DOMContentLoaded", () => cmTabScroll.init());
    - 여는 버튼 → 대화 창(처음 안내). 질문 예시를 누르거나 질문을 보내면 대화 진행 화면으로 바뀜
    - Esc · 닫기 버튼으로 닫고 초점을 여는 버튼으로 되돌림. 닫았다 다시 열면 대화 중이었어도 처음 안내 화면으로 열림, "오늘 하루 열지 않기"는 말풍선만 하루 숨김
    - 처음 안내에서 질문 예시를 누르거나 질문을 보내면 새 대화(빈 화면 + 그 질문)로 시작함
-   - [퍼블리싱 확인용] 페이지의 Figma 예시 대화는 질문별 답변 사전으로만 쓰고, 사전에 없는 질문에는 Figma의 "답변을 만들지 못했어요."를 붙임
+   - [퍼블리싱 확인용] 페이지의 Figma 예시 대화는 첫 질문 예시를 누르면 전체가 그대로 보이고(답변 종류별 예시), 그 밖에는 질문별 답변 사전으로 씀.
+     사전에 없는 질문에는 Figma의 "답변을 만들지 못했어요."를 붙임
      개발 시 질문 전송·답변 받기로 바꿈 */
 const cmAiHelper = {
   hideKey: "cmAiBubbleHide",
@@ -99,13 +100,16 @@ const cmAiHelper = {
       openBtn.setAttribute("aria-expanded", "false");
       openBtn.focus();
     };
-    /* [퍼블리싱 확인용] 페이지에 적어 둔 Figma 예시 대화를 "질문 → 답변" 사전으로 옮기고 대화 목록은 비움
-       → 대화는 늘 빈 화면에서 시작하고, 예시와 같은 질문을 보내면 예시 답변이, 그 밖의 질문에는 "답변을 만들지 못했어요."가 붙음 */
+    /* [퍼블리싱 확인용] 페이지에 적어 둔 Figma 예시 대화를 따로 간직하고 대화 목록은 비움
+       → 예시 대화의 첫 질문과 같은 질문 예시를 누르면 예시 대화 전체가 그대로 보임 (답변 종류별 예시 확인용)
+       → 그 밖에는 빈 화면에서 새 대화로 시작하고, 예시와 같은 질문을 보내면 예시 답변이, 다른 질문에는 "답변을 만들지 못했어요."가 붙음 */
     const askText = (item) => {
       const bubble = item.querySelector(".bubble").cloneNode(true);
       bubble.querySelectorAll(".sr-only").forEach((el) => el.remove());
       return bubble.textContent.replace(/\s+/g, " ").trim();
     };
+    const example = [...list.children].map((item) => item.cloneNode(true)); // 예시 대화 전체 (첫 질문 예시를 누르면 그대로 보여 줌)
+    const exampleAsk = example.length && example[0].classList.contains("ask") ? askText(example[0]) : "";
     const samples = new Map();
     list.querySelectorAll(":scope > .ask").forEach((item) => {
       const answer = item.nextElementSibling;
@@ -151,8 +155,13 @@ const cmAiHelper = {
     });
     panel.querySelectorAll(".cm-ai-suggest button").forEach((button) =>
       button.addEventListener("click", () => {
+        const text = button.textContent.replace(/\s+/g, " ").trim();
         showChat();
-        addAsk(button.textContent.replace(/\s+/g, " ").trim()); // 고른 질문 예시를 첫 질문으로 보냄
+        if (text === exampleAsk) {
+          // 예시 대화의 첫 질문과 같은 질문 예시 : Figma 예시 대화 전체를 보여 줌 (답변 종류별 모양을 개발팀이 확인하는 화면)
+          list.replaceChildren(...example.map((item) => item.cloneNode(true)));
+          chat.scrollTop = chat.scrollHeight;
+        } else addAsk(text); // 그 밖의 질문 예시는 첫 질문으로 보냄
         input.focus();
       })
     );
