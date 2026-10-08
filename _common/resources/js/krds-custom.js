@@ -64,7 +64,8 @@ document.addEventListener("DOMContentLoaded", () => cmTabScroll.init());
 /* AI 해설 도우미 (.cm-ai, 마크업 _common/html/code/ext_ai_helper.html, 화면마다 페이지에 둠)
    - 여는 버튼 → 대화 창(처음 안내). 질문 예시를 누르거나 질문을 보내면 대화 진행 화면으로 바뀜
    - Esc · 닫기 버튼으로 닫고 초점을 여는 버튼으로 되돌림. 닫았다 다시 열면 대화 중이었어도 처음 안내 화면으로 열림, "오늘 하루 열지 않기"는 말풍선만 하루 숨김
-   - [퍼블리싱 확인용] 대화 진행 화면에는 Figma 예시 대화가 들어 있고, 새로 보낸 질문에는 Figma의 "답변을 만들지 못했어요."를 붙임
+   - 처음 안내에서 질문 예시를 누르거나 질문을 보내면 새 대화(빈 화면 + 그 질문)로 시작함
+   - [퍼블리싱 확인용] 페이지의 Figma 예시 대화는 질문별 답변 사전으로만 쓰고, 사전에 없는 질문에는 Figma의 "답변을 만들지 못했어요."를 붙임
      개발 시 질문 전송·답변 받기로 바꿈 */
 const cmAiHelper = {
   hideKey: "cmAiBubbleHide",
@@ -98,19 +99,38 @@ const cmAiHelper = {
       openBtn.setAttribute("aria-expanded", "false");
       openBtn.focus();
     };
+    /* [퍼블리싱 확인용] 페이지에 적어 둔 Figma 예시 대화를 "질문 → 답변" 사전으로 옮기고 대화 목록은 비움
+       → 대화는 늘 빈 화면에서 시작하고, 예시와 같은 질문을 보내면 예시 답변이, 그 밖의 질문에는 "답변을 만들지 못했어요."가 붙음 */
+    const askText = (item) => {
+      const bubble = item.querySelector(".bubble").cloneNode(true);
+      bubble.querySelectorAll(".sr-only").forEach((el) => el.remove());
+      return bubble.textContent.replace(/\s+/g, " ").trim();
+    };
+    const samples = new Map();
+    list.querySelectorAll(":scope > .ask").forEach((item) => {
+      const answer = item.nextElementSibling;
+      if (answer && answer.classList.contains("answer")) samples.set(askText(item), answer.cloneNode(true));
+    });
+    list.replaceChildren();
     const showChat = () => {
+      // 처음 안내에서 넘어올 때는 새 대화로 시작 (앞서 나눈 대화를 비움)
+      if (panel.dataset.state !== "chat") list.replaceChildren();
       panel.dataset.state = "chat";
-      chat.scrollTop = chat.scrollHeight;
     };
     const addAsk = (text) => {
       const ask = document.createElement("li");
       ask.className = "ask";
       ask.innerHTML = '<p class="bubble"><span class="sr-only">질문 : </span></p>';
       ask.querySelector(".bubble").append(text);
-      const answer = document.createElement("li");
-      answer.className = "answer";
-      answer.innerHTML = '<div class="bubble"><span class="sr-only">답변 : </span>답변을 만들지 못했어요.</div>';
+      let answer;
+      if (samples.has(text)) answer = samples.get(text).cloneNode(true);
+      else {
+        answer = document.createElement("li");
+        answer.className = "answer";
+        answer.innerHTML = '<div class="bubble"><span class="sr-only">답변 : </span>답변을 만들지 못했어요.</div>';
+      }
       list.append(ask, answer);
+      chat.scrollTop = chat.scrollHeight;
     };
 
     openBtn.addEventListener("click", open);
@@ -132,15 +152,17 @@ const cmAiHelper = {
     panel.querySelectorAll(".cm-ai-suggest button").forEach((button) =>
       button.addEventListener("click", () => {
         showChat();
+        addAsk(button.textContent.replace(/\s+/g, " ").trim()); // 고른 질문 예시를 첫 질문으로 보냄
         input.focus();
       })
     );
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const text = input.value.trim();
-      if (text) addAsk(text);
       input.value = "";
+      if (!text) return; // 빈 질문으로는 대화를 시작하지 않음
       showChat();
+      addAsk(text);
     });
   },
 };
