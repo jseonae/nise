@@ -1909,6 +1909,17 @@ p {
     --krds-button--color-tertiary-fill-pressed: var(--krds-color-high-contrast-gray-70);
   }
 }
+/* 같은 도구 상자 안의 칩(고르지 않은 것)도 버튼과 같은 면 · 테두리로 맞춤. 고른 칩은 KRDS 선택 색 그대로 */
+[data-krds-mode=high-contrast] .cm-ts-tool .krds-form-chip {
+  --krds-form-chip--color-action: var(--krds-high-contrast-color-surface-gray-subtle);
+  --krds-form-chip--color-border: var(--krds-high-contrast-color-button-tertiary-border);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-ts-tool .krds-form-chip {
+    --krds-form-chip--color-action: var(--krds-high-contrast-color-surface-gray-subtle);
+    --krds-form-chip--color-border: var(--krds-high-contrast-color-button-tertiary-border);
+  }
+}
 .cm-ts-tool-filter,
 .cm-ts-tool-btns,
 .cm-ts-select,
