@@ -1998,10 +1998,15 @@ p {
   flex: 1 1 auto;
   min-width: 40rem; /* Figma btnrap 최소 400px */
   justify-content: flex-end;
-  gap: var(--krds-gap-3);
+  /* 줄 사이 gap-3, 묶음 사이 gap-3 + gap-2 (묶음을 나누기 전 토글과 버튼 사이 간격 그대로) */
+  gap: var(--krds-gap-3) calc(var(--krds-gap-3) + var(--krds-gap-2));
 }
-.cm-ts-tool-btns .krds-form-toggle-switch + .krds-btn {
-  margin-left: var(--krds-gap-2);
+/* 묶음 : 패턴 적용 · 레이블 보기 / 차트 확대 · 다운로드 · 인쇄. 좁은 화면에서 낱개가 아니라 묶음째로 줄바꿈 */
+.cm-ts-tool-group {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--krds-gap-3);
 }
 /* 다운로드 드롭다운 : KRDS 메뉴 최소 폭(13rem)에 17px 글자라 항목이 두세 줄로 꺾여 틀을 벗어남
    → small 버튼과 같은 글자 크기(15px) + 한 줄 + 메뉴 폭은 내용에 맞춤 */
@@ -2574,6 +2579,13 @@ p {
   align-items: center;
   gap: var(--krds-gap-4);
 }
+.cm-cross-tool .cm-ts-tool-group {
+  gap: var(--krds-gap-4);
+}
+/* 토글 묶음과 버튼 묶음 사이만 gap-2 만큼 더 띄움 (묶음을 나누기 전 간격 그대로) */
+.cm-cross-tool .cm-ts-tool-group + .cm-ts-tool-group {
+  margin-left: var(--krds-gap-2);
+}
 /* 정렬기준 : KRDS 정렬 라디오 코드 없음 → 라디오 + Figma 글자 버튼 모양 (고른 항목 밑줄 · 옅은 바탕) */
 .cm-sort-radio {
   display: flex;
@@ -2702,6 +2714,9 @@ p {
   .cm-cross-tool .cm-ts-tool-btns {
     flex-wrap: wrap;
     justify-content: flex-start;
+  }
+  .cm-cross-tool .cm-ts-tool-group + .cm-ts-tool-group {
+    margin-left: 0; /* 줄바꿈되면 들여쓰기처럼 보이므로 없앰 */
   }
   .cm-cross-item-row {
     flex-direction: column;
