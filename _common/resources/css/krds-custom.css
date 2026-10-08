@@ -3238,6 +3238,7 @@ p {
   padding: var(--krds-padding-10) var(--krds-number-6); /* 좌우 여백을 줄여 그래프를 넓게 (Figma 는 number-16) */
 }
 .cm-es-desc {
+  padding: 0 var(--krds-mobile-padding-card-small);
   font-size: var(--krds-pc-font-size-body-small);
   line-height: 1.5;
   color: var(--cm-color-text-subtle);
