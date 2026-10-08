@@ -248,7 +248,7 @@
     const index = data && data.index;
     if (!index || !index.rounds.length) {
       root.querySelector(".tab").hidden = true;
-      wrap.innerHTML = errorBox("목록을 불러오지 못했습니다.", "잠시 후 다시 시도해 주세요.", `<button type="button" class="krds-btn large tertiary" onclick="location.reload()">다시시도</button>`);
+      wrap.innerHTML = errorBox("목록을 불러오지 못했습니다.", "잠시 후 다시 시도해 주세요.", `<button type="button" class="krds-btn medium tertiary" onclick="location.reload()">다시시도</button>`);
       return;
     }
     // 처음 보여 줄 차수 : 주소의 ?round=N, 없으면 공개된 차수 중 가장 최근
@@ -285,7 +285,7 @@
       root.querySelectorAll("#section_01, #section_02, .page-btn-wrap, .krds-in-page-navigation-type").forEach((el) => el.remove());
       root.insertAdjacentHTML(
         "afterbegin",
-        errorBox("조사 문항을 불러오지 못했습니다.", "주소가 바뀌었거나 없는 자료입니다. 목록에서 다시 선택해 주세요.", `<a href="survey_history_list.html" class="krds-btn large tertiary">목록으로</a>`),
+        errorBox("조사 문항을 불러오지 못했습니다.", "주소가 바뀌었거나 없는 자료입니다. 목록에서 다시 선택해 주세요.", `<a href="survey_history_list.html" class="krds-btn medium tertiary">목록으로</a>`),
       );
       return;
     }

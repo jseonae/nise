@@ -252,6 +252,9 @@ const cmResearch = {
       };
       input.addEventListener("input", update);
       update();
+      // [퍼블리싱 확인용] 저장 주소가 없어 제출하면 오류 페이지로 넘어가므로 제출을 막음 (의견 입력창에서 Enter 를 누를 때)
+      // 개발 시 평가하기 버튼을 type="submit" 으로 바꾸면서 아래 한 줄을 지웁니다.
+      box.querySelector("form")?.addEventListener("submit", (event) => event.preventDefault());
     });
   },
 };

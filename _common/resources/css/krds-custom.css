@@ -3267,36 +3267,55 @@ p {
 
 /* [공통] 빈 상태 · 준비 중 안내 (신규 컴포넌트 _common/html/code/ext_empty.html, Figma: s02데이터분석_교차분석 페이지준비중) */
 .cm-empty {
+  /* 상태 안내 (준비 중 · 자료 없음 · 불러오기 실패) : 모든 상태가 같은 틀 = 아이콘 + 제목 + 설명 (+ 버튼). 바탕 상자 · 아이콘 바탕은 두지 않음
+     - 상태는 아이콘과 문구로만 구분 : .is-ready(기본) 시계 · .is-none 문서 · .is-error 경고
+     - 아이콘은 [임시] 선 그림(cm_state_*.svg, mask 로 색 입힘). 디자인한 그림이 나오면 --cm-empty-icon 의 파일만 바꾸거나 ::before 를 그림으로 교체
+     - 높이를 같게(min-height) 두어 탭 · 칩을 바꿔 상태가 달라져도 화면이 출렁이지 않음 */
+  --cm-empty-icon: url(../img/common/cm_state_ready.svg);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: var(--krds-gap-3);
-  padding: var(--krds-padding-10) 0 10rem; /* Figma 40px 0 100px */
+  min-height: 30rem;
+  padding: var(--krds-padding-10) var(--krds-padding-6);
   text-align: center;
   color: var(--cm-color-text-subtle);
 }
-.cm-empty img {
-  width: 16.4rem;
-  height: auto;
-  opacity: 0.55; /* Figma 그림 투명도 */
+.cm-empty.is-none {
+  --cm-empty-icon: url(../img/common/cm_state_none.svg);
+}
+.cm-empty.is-error {
+  --cm-empty-icon: url(../img/common/cm_state_error.svg);
+}
+/* hidden 속성으로 숨길 때 : display 를 지정한 요소는 hidden 이 듣지 않아 따로 숨김 (목록 상태에 따라 안내 · 페이지네이션을 바꿔 보여 줄 때) */
+.cm-empty[hidden],
+.krds-pagination[hidden] {
+  display: none;
+}
+/* 아이콘 : 선 그림만 (mask 로 색을 입힘). 꾸밈이라 화면낭독기에는 읽히지 않음 */
+.cm-empty::before {
+  content: "";
+  flex: none;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: var(--krds-gap-3);
+  background-color: var(--cm-color-text-secondary);
+  -webkit-mask: var(--cm-empty-icon) center / contain no-repeat;
+  mask: var(--cm-empty-icon) center / contain no-repeat;
 }
 .cm-empty .tit {
-  font-size: var(--krds-pc-font-size-heading-medium);
+  font-size: var(--krds-pc-font-size-heading-small);
   font-weight: var(--krds-font-weight-bold);
   line-height: 1.5;
+  color: var(--cm-color-text-basic);
 }
 .cm-empty .txt {
   font-size: var(--krds-pc-font-size-body-medium);
   line-height: 1.5;
 }
-/* 오류 안내 변형 (Figma: s03알림마당_자료실 list-목록불러오기 실패 > errorBox) : 그림 없이 문구 + 버튼, 위아래 40px, 문구와 버튼 사이 32px
-   빈 목록 안내 변형(.is-none) : 그림 없이 문구만, 오류 안내와 같은 여백 (Figma에 화면 없음) */
-.cm-empty.is-error,
-.cm-empty.is-none {
-  padding-bottom: var(--krds-padding-10);
-}
 .cm-empty .krds-btn {
-  margin-top: var(--krds-gap-7); /* 문구 간격 8px + 24px = 32px */
+  margin-top: var(--krds-gap-5);
 }
 
 /* [통계정보] 특수교육 현황 (Figma: 컨텐츠 > 특수교육현황-학생수기준-계 · 배치 · 급별 · 장애유형별) */

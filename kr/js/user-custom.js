@@ -35,27 +35,42 @@ document.addEventListener("click", (event) => {
   if (shareUrls[type]) button.setAttribute("href", shareUrls[type]);
 });
 
-/* [퍼블리싱 확인용] 시계열 시각화 목록 주제 칩 (kr/html/stat/timeseries_list.html)
-   고른 주제의 카드만 보여 줍니다. 개발 시 서버 조회로 바꾸고 이 코드는 지웁니다.
-   전체 : data-all 카드(Figma 시계열시각화-list), 그 밖 : data-topic 이 같은 카드(Figma 시계열시각화-list-교육과정) */
+/* [퍼블리싱 확인용] 시계열 시각화 목록 칩 (kr/html/stat/timeseries_list.html)
+   고른 탭(주제별 · 조사대상자별)의 고른 칩에 맞춰 아래 목록을 바꿔 보여 줍니다. 개발 시 서버 조회로 바꾸고 이 코드는 지웁니다.
+   - 주제별 : 전체는 data-all 카드(Figma 시계열시각화-list), 그 밖은 data-topic 이 같은 카드(Figma 시계열시각화-list-교육과정)
+   - 조사대상자별 : 카드가 아직 없음
+   - 보여 줄 카드가 없으면 목록 · 페이지네이션 대신 목록 불러오기 실패 안내([data-ts-error])를 보여 줌 (Figma s03알림마당_자료실 list-목록불러오기 실패)
+   - 목록 상단의 개수 · 페이지 수는 고른 칩의 data-total · data-pages */
 const cmTsFilter = {
   init() {
-    const radios = document.querySelectorAll('input[name="ts_topic"]');
+    const root = document.querySelector(".cm-timeseries");
     const cards = document.querySelectorAll(".cm-ts-list > .cm-ts-card");
-    if (!radios.length || !cards.length) return;
-    radios.forEach((radio) =>
-      radio.addEventListener("change", () => {
-        const value = radio.value;
-        cards.forEach((card) => {
-          card.hidden = value === "all" ? card.dataset.all !== "y" : card.dataset.topic !== value;
-        });
-        const count = document.querySelector(".cm-timeseries .cm-board-count");
-        if (count) {
-          count.querySelector(".total .num").textContent = radio.dataset.total;
-          count.querySelector(".page .last").textContent = radio.dataset.pages;
-        }
-      })
-    );
+    const panels = root ? root.querySelectorAll(".cm-ts-filter .tab-conts, .krds-tab-area .tab-conts") : [];
+    if (!root || !cards.length || !panels.length) return;
+    const list = root.querySelector(".cm-ts-list");
+    const error = root.querySelector("[data-ts-error]");
+    const paging = root.querySelector(".krds-pagination");
+    const count = root.querySelector(".cm-board-count");
+    const apply = () => {
+      const panel = [...panels].find((item) => item.classList.contains("active")) || panels[0];
+      const radio = panel.querySelector("input[type=radio]:checked");
+      if (!radio) return;
+      const byTopic = radio.name === "ts_topic";
+      cards.forEach((card) => {
+        card.hidden = !byTopic || (radio.value === "all" ? card.dataset.all !== "y" : card.dataset.topic !== radio.value);
+      });
+      const empty = ![...cards].some((card) => !card.hidden);
+      if (list) list.hidden = empty;
+      if (error) error.hidden = !empty;
+      if (paging) paging.hidden = empty;
+      if (count) {
+        count.querySelector(".total .num").textContent = radio.dataset.total;
+        count.querySelector(".page .last").textContent = radio.dataset.pages;
+      }
+    };
+    root.querySelectorAll('input[name="ts_topic"], input[name="ts_target"]').forEach((radio) => radio.addEventListener("change", apply));
+    // 탭 전환 : KRDS 탭이 패널의 active 를 바꾼 뒤에 다시 맞춤
+    panels.forEach((panel) => new MutationObserver(apply).observe(panel, { attributes: true, attributeFilter: ["class"] }));
   },
 };
 document.addEventListener("DOMContentLoaded", () => cmTsFilter.init());
