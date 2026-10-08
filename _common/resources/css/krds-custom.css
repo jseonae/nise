@@ -1895,6 +1895,20 @@ p {
 .cm-ts-tool .krds-btn.tertiary {
   --krds-button--color-tertiary-fill: var(--cm-color-surface-white);
 }
+/* 선명하게(어두운 배경) 모드 : 버튼 바탕이 도구 상자보다 어두우면 상자에 구멍이 난 것처럼 보임
+   → 도구 상자(gray-95)보다 한 단계 밝은 면(gray-90), 올리면 gray-80 · 누르면 gray-70 으로 점점 밝게 */
+[data-krds-mode=high-contrast] .cm-ts-tool .krds-btn.tertiary {
+  --krds-button--color-tertiary-fill: var(--krds-high-contrast-color-surface-gray-subtle);
+  --krds-button--color-tertiary-fill-hover: var(--krds-high-contrast-color-button-tertiary-fill-pressed);
+  --krds-button--color-tertiary-fill-pressed: var(--krds-color-high-contrast-gray-70);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-ts-tool .krds-btn.tertiary {
+    --krds-button--color-tertiary-fill: var(--krds-high-contrast-color-surface-gray-subtle);
+    --krds-button--color-tertiary-fill-hover: var(--krds-high-contrast-color-button-tertiary-fill-pressed);
+    --krds-button--color-tertiary-fill-pressed: var(--krds-color-high-contrast-gray-70);
+  }
+}
 .cm-ts-tool-filter,
 .cm-ts-tool-btns,
 .cm-ts-select,
