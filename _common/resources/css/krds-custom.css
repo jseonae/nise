@@ -374,6 +374,24 @@ p {
   border-color: var(--cm-color-border-light);
   border-radius: var(--krds-radius-medium1);
 }
+/* 선명하게(어두운 배경) 모드 : 버튼 바탕(검정)이 페이지 상단(gray-95)보다 어두워 구멍처럼 보임
+   → 도구 상자 안 버튼(.cm-ts-tool .krds-btn.tertiary)과 같게 한 단계 밝은 면 + 또렷한 테두리, 올리면 더 밝게 */
+[data-krds-mode=high-contrast] .cm-page-top .cm-btn-group .krds-btn.icon.border {
+  border-color: var(--krds-high-contrast-color-button-tertiary-border);
+  background-color: var(--krds-high-contrast-color-surface-gray-subtle);
+}
+[data-krds-mode=high-contrast] .cm-page-top .cm-btn-group .krds-btn.icon.border:hover {
+  background-color: var(--krds-high-contrast-color-button-tertiary-fill-pressed);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-page-top .cm-btn-group .krds-btn.icon.border {
+    border-color: var(--krds-high-contrast-color-button-tertiary-border);
+    background-color: var(--krds-high-contrast-color-surface-gray-subtle);
+  }
+  [data-krds-mode=theme] .cm-page-top .cm-btn-group .krds-btn.icon.border:hover {
+    background-color: var(--krds-high-contrast-color-button-tertiary-fill-pressed);
+  }
+}
 .cm-page-top .cm-btn-group .krds-btn.icon.border .svg-icon {
   width: var(--krds-icon--size-medium);
   height: var(--krds-icon--size-medium);
@@ -400,6 +418,21 @@ p {
 .cm-share .tooltip-action .tooltip-btn.krds-btn.icon.border {
   justify-content: center;
   background-color: var(--cm-color-surface-white);
+}
+/* 선명하게(어두운 배경) 모드 : 인쇄 버튼과 같은 면 (위 [페이지 상단] 버튼 규칙과 같은 값, 이 규칙의 바탕색을 이기려고 따로 적음) */
+[data-krds-mode=high-contrast] .cm-share .tooltip-action .tooltip-btn.krds-btn.icon.border {
+  background-color: var(--krds-high-contrast-color-surface-gray-subtle);
+}
+[data-krds-mode=high-contrast] .cm-share .tooltip-action .tooltip-btn.krds-btn.icon.border:hover {
+  background-color: var(--krds-high-contrast-color-button-tertiary-fill-pressed);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-share .tooltip-action .tooltip-btn.krds-btn.icon.border {
+    background-color: var(--krds-high-contrast-color-surface-gray-subtle);
+  }
+  [data-krds-mode=theme] .cm-share .tooltip-action .tooltip-btn.krds-btn.icon.border:hover {
+    background-color: var(--krds-high-contrast-color-button-tertiary-fill-pressed);
+  }
 }
 .cm-share .tooltip-popover {
   z-index: 20; /* 콘텐츠 내 탐색(KRDS z-index 10)보다 위 */
