@@ -1916,7 +1916,7 @@ p {
 .cm-ts-tool {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: var(--krds-gap-3);
   padding: var(--krds-padding-6);
@@ -1962,9 +1962,7 @@ p {
   align-items: center;
 }
 .cm-ts-tool-filter {
-  flex: none;
-  max-width: 80rem; /* Figma step1-select 최대 800px : 칩이 많을 때(장애유형별 등) 칩 묶음 안에서 줄바꿈 */
-  flex-wrap: nowrap;
+  max-width: 66rem; /* 칩이 많을 때(장애유형별 등) 이 폭 안에서 줄바꿈 */
   gap: var(--krds-gap-3);
 }
 .cm-ts-select {
