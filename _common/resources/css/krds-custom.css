@@ -374,6 +374,24 @@ p {
   border-color: var(--cm-color-border-light);
   border-radius: var(--krds-radius-medium1);
 }
+/* 선명하게(어두운 배경) 모드 : 버튼 바탕(검정)이 페이지 상단(gray-95)보다 어두워 구멍처럼 보임
+   → 도구 상자 안 버튼(.cm-ts-tool .krds-btn.tertiary)과 같게 한 단계 밝은 면 + 또렷한 테두리, 올리면 더 밝게 */
+[data-krds-mode=high-contrast] .cm-page-top .cm-btn-group .krds-btn.icon.border {
+  border-color: var(--krds-high-contrast-color-button-tertiary-border);
+  background-color: var(--krds-high-contrast-color-surface-gray-subtle);
+}
+[data-krds-mode=high-contrast] .cm-page-top .cm-btn-group .krds-btn.icon.border:hover {
+  background-color: var(--krds-high-contrast-color-button-tertiary-fill-pressed);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-page-top .cm-btn-group .krds-btn.icon.border {
+    border-color: var(--krds-high-contrast-color-button-tertiary-border);
+    background-color: var(--krds-high-contrast-color-surface-gray-subtle);
+  }
+  [data-krds-mode=theme] .cm-page-top .cm-btn-group .krds-btn.icon.border:hover {
+    background-color: var(--krds-high-contrast-color-button-tertiary-fill-pressed);
+  }
+}
 .cm-page-top .cm-btn-group .krds-btn.icon.border .svg-icon {
   width: var(--krds-icon--size-medium);
   height: var(--krds-icon--size-medium);
@@ -400,6 +418,21 @@ p {
 .cm-share .tooltip-action .tooltip-btn.krds-btn.icon.border {
   justify-content: center;
   background-color: var(--cm-color-surface-white);
+}
+/* 선명하게(어두운 배경) 모드 : 인쇄 버튼과 같은 면 (위 [페이지 상단] 버튼 규칙과 같은 값, 이 규칙의 바탕색을 이기려고 따로 적음) */
+[data-krds-mode=high-contrast] .cm-share .tooltip-action .tooltip-btn.krds-btn.icon.border {
+  background-color: var(--krds-high-contrast-color-surface-gray-subtle);
+}
+[data-krds-mode=high-contrast] .cm-share .tooltip-action .tooltip-btn.krds-btn.icon.border:hover {
+  background-color: var(--krds-high-contrast-color-button-tertiary-fill-pressed);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-share .tooltip-action .tooltip-btn.krds-btn.icon.border {
+    background-color: var(--krds-high-contrast-color-surface-gray-subtle);
+  }
+  [data-krds-mode=theme] .cm-share .tooltip-action .tooltip-btn.krds-btn.icon.border:hover {
+    background-color: var(--krds-high-contrast-color-button-tertiary-fill-pressed);
+  }
 }
 .cm-share .tooltip-popover {
   z-index: 20; /* 콘텐츠 내 탐색(KRDS z-index 10)보다 위 */
@@ -465,7 +498,7 @@ p {
   flex-direction: column;
   gap: var(--krds-gap-9);
   padding-top: var(--krds-number-18);
-  padding-bottom: var(--krds-number-20);
+  padding-bottom: var(--krds-number-21);
 }
 /* [컨텐츠] 콘텐츠 내 탐색 : KRDS in_page_navigation 위치 변형 (Figma: 컨텐츠 > *-view > in_page_navigation)
    - KRDS 기본은 화면 고정(top 25.6rem)이라 페이지 상단(.cm-page-top) 높이와 맞지 않고 공유하기 팝업과 겹침
@@ -481,7 +514,7 @@ p {
   .cm-contents > .krds-in-page-navigation-type {
     position: absolute;
     top: var(--krds-number-18); /* .cm-contents 위 여백 = 첫 섹션 시작 */
-    bottom: var(--krds-number-20);
+    bottom: var(--krds-number-21); /* .cm-contents 아래 여백과 같은 값 */
     left: calc(100% - var(--krds-contents-padding-x) + 6rem); /* Figma : 본문 오른쪽 + 60px */
     width: 16rem;
   }
@@ -1890,6 +1923,36 @@ p {
   border-radius: var(--krds-radius-medium3);
   background-color: var(--cm-color-box-surface);
 }
+/* 도구 상자(회색 바탕) 안의 tertiary 버튼 : KRDS 는 바탕이 투명이라 회색이 비침 → 흰 바탕으로 (선명하게 모드에서는 그 모드의 바탕색)
+   KRDS 버튼 변수만 바꿔 hover · pressed · disabled 색은 KRDS 그대로 */
+.cm-ts-tool .krds-btn.tertiary {
+  --krds-button--color-tertiary-fill: var(--cm-color-surface-white);
+}
+/* 선명하게(어두운 배경) 모드 : 버튼 바탕이 도구 상자보다 어두우면 상자에 구멍이 난 것처럼 보임
+   → 도구 상자(gray-95)보다 한 단계 밝은 면(gray-90), 올리면 gray-80 · 누르면 gray-70 으로 점점 밝게 */
+[data-krds-mode=high-contrast] .cm-ts-tool .krds-btn.tertiary {
+  --krds-button--color-tertiary-fill: var(--krds-high-contrast-color-surface-gray-subtle);
+  --krds-button--color-tertiary-fill-hover: var(--krds-high-contrast-color-button-tertiary-fill-pressed);
+  --krds-button--color-tertiary-fill-pressed: var(--krds-color-high-contrast-gray-70);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-ts-tool .krds-btn.tertiary {
+    --krds-button--color-tertiary-fill: var(--krds-high-contrast-color-surface-gray-subtle);
+    --krds-button--color-tertiary-fill-hover: var(--krds-high-contrast-color-button-tertiary-fill-pressed);
+    --krds-button--color-tertiary-fill-pressed: var(--krds-color-high-contrast-gray-70);
+  }
+}
+/* 같은 도구 상자 안의 칩(고르지 않은 것)도 버튼과 같은 면 · 테두리로 맞춤. 고른 칩은 KRDS 선택 색 그대로 */
+[data-krds-mode=high-contrast] .cm-ts-tool .krds-form-chip {
+  --krds-form-chip--color-action: var(--krds-high-contrast-color-surface-gray-subtle);
+  --krds-form-chip--color-border: var(--krds-high-contrast-color-button-tertiary-border);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-ts-tool .krds-form-chip {
+    --krds-form-chip--color-action: var(--krds-high-contrast-color-surface-gray-subtle);
+    --krds-form-chip--color-border: var(--krds-high-contrast-color-button-tertiary-border);
+  }
+}
 .cm-ts-tool-filter,
 .cm-ts-tool-btns,
 .cm-ts-select,
@@ -2301,7 +2364,28 @@ p {
 }
 /* 분석 조건 검색 : 분류 탭(.cm-ts-filter 와 같은 붙은 탭) + 칩 · 문항 상자 */
 .cm-cross-tab {
+  position: relative; /* 조사연도 선택(.cm-cross-year)의 기준 */
   gap: var(--krds-gap-6);
+}
+/* 조사연도 선택 : 탭 줄(높이 5rem)의 오른쪽 끝, 세로 가운데 (Figma : 글자 15px, 간격 4px, 선택 상자 100×40)
+   .cm-inline-select(아래쪽에 정의)의 간격 · 선택 상자 최소 폭을 이기려고 클래스를 겹쳐 씀 */
+.cm-inline-select.cm-cross-year {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 5rem;
+  gap: var(--krds-gap-2);
+}
+.cm-inline-select.cm-cross-year .krds-form-select {
+  min-width: 10rem;
+}
+/* 좁은 화면 : 탭과 나란히 둘 자리가 없어 탭 아래 줄의 오른쪽에 둠 */
+@media (max-width: 767px) {
+  .cm-inline-select.cm-cross-year {
+    position: static;
+    align-self: flex-end;
+    height: auto;
+  }
 }
 .cm-cross-filter.tab-conts.active {
   gap: var(--krds-gap-7);
@@ -3326,21 +3410,43 @@ p {
   display: flex;
   align-items: flex-start;
   gap: var(--krds-gap-4);
-  padding-bottom: var(--krds-padding-8);
 }
 .cm-research-opinion .input {
-  position: relative;
   flex: 1 1 auto;
   min-width: 0;
 }
-.cm-research-opinion .textarea-count {
-  position: absolute;
-  bottom: -2.5rem;
-  left: 0.6rem;
-  justify-content: flex-start; /* KRDS 는 오른쪽 정렬, Figma 는 왼쪽 */
-  gap: 0;
+/* 선명하게(어두운 배경) 모드 : 의견 입력창 바탕을 검정으로 (KRDS 입력창 변수만 다시 지정) */
+[data-krds-mode=high-contrast] .cm-research-opinion .krds-input {
+  --krds-input--color-surface: var(--krds-high-contrast-color-background-white);
+}
+@media (prefers-color-scheme: dark) {
+  [data-krds-mode=theme] .cm-research-opinion .krds-input {
+    --krds-input--color-surface: var(--krds-high-contrast-color-background-white);
+  }
+}
+/* 입력창 아래 한 줄 : 왼쪽 도움말 · 오른쪽 글자 수 (Figma researchWrap : 13px, 입력창과 8px)
+   - 도움말 글자색 : Figma 는 #6d7882(상자 바탕 위 4.2:1)이라 글자 대비 4.5:1 에 못 미쳐 한 단계 진한 text-subtle 로 */
+.cm-research-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--krds-gap-1) var(--krds-gap-5);
+  margin-top: var(--krds-gap-3);
   font-size: var(--krds-pc-font-size-body-xsmall);
-  color: var(--cm-color-line-strong); /* Figma text/disabled-on */
+  line-height: 1.5;
+}
+.cm-research-hint .form-hint {
+  flex: 1 1 28rem;
+  font-size: inherit;
+  color: var(--cm-color-text-subtle);
+}
+.cm-research-hint .textarea-count {
+  flex: none;
+  width: auto; /* KRDS 는 100% (입력창 아래 한 줄을 다 씀) */
+  gap: 0;
+  margin-left: auto;
+  font-size: inherit; /* 글자색은 KRDS 기본(text-subtle, 숫자는 text-primary) */
 }
 /* 평가하기 : Figma button/tertiary-border(#58616a) 채운 버튼 (KRDS 버튼 종류에 없는 색) */
 .cm-research-submit {
@@ -3613,7 +3719,7 @@ p {
   align-items: center;
   gap: var(--krds-gap-1);
   position: fixed;
-  top: min(69rem, calc(100vh - 19rem)); /* Figma : 콘텐츠 내 탐색 시작점에서 434px 아래 */
+  top: min(66rem, calc(100vh - 19rem));
   right: calc(var(--cm-ai-inpage-right) + 10.6rem); /* 여는 버튼 가운데 = 콘텐츠 내 탐색 왼쪽 + 34px */
   z-index: 55; /* 푸터(KRDS 50)보다 위, TOP 버튼(60) · 헤더(70)보다 아래 */
   transform: translateX(50%);

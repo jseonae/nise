@@ -69,6 +69,20 @@
                 </li>
               </ul>
             </div>
+            <!-- 조사연도 선택 : 탭 줄의 오른쪽 끝 (Figma fillterBox > selectwrap, KRDS select small)
+                 탭 구조(.tab + .tab-conts-wrap)는 그대로 두고 그 사이에 넣어 CSS 로 자리를 잡음. 연도 목록은 개발 시 서버 값으로 바꿈 -->
+            <div class="cm-inline-select cm-cross-year">
+              <label for="cross_year">조사연도</label>
+              <select id="cross_year" class="krds-form-select small">
+                <option value="2026" selected>2026</option>
+                <option value="2023">2023</option>
+                <option value="2020">2020</option>
+                <option value="2017">2017</option>
+                <option value="2014">2014</option>
+                <option value="2011">2011</option>
+                <option value="2008">2008</option>
+              </select>
+            </div>
             <div class="tab-conts-wrap">
               <section id="panel_cross_01" aria-labelledby="tab_cross_01" class="tab-conts active cm-cross-filter" data-quick-nav="false">
                 <h3 class="sr-only">주제별 탐색</h3>
