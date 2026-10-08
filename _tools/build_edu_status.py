@@ -147,29 +147,33 @@ def institution_tools():
                   </div>
                   <div class="cm-ts-tool-btns">
                     <!-- 꺾은선 그래프(배치·급별)에서는 패턴을 쓰지 않아 disabled -->
-                    <div class="krds-form-toggle-switch medium">
-                      <input type="checkbox" id="es2_pattern" data-chart-option="pattern" checked>
-                      <label for="es2_pattern"><span class="switch-toggle"><i></i></span>패턴 적용</label>
-                    </div>
-                    <div class="krds-form-toggle-switch medium">
-                      <input type="checkbox" id="es2_label" data-chart-option="label" checked>
-                      <label for="es2_label"><span class="switch-toggle"><i></i></span>레이블 보기</label>
-                    </div>
-                    <button type="button" class="krds-btn small tertiary" data-chart-action="zoom">차트 확대</button>
-                    <!-- 다운로드 : KRDS 드롭다운(krds-drop-wrap), 그래프 이미지(PNG·SVG) · 통계표(CSV) -->
-                    <div class="krds-drop-wrap">
-                      <button type="button" class="krds-btn small tertiary drop-btn">다운로드 <i class="svg-icon ico-angle"></i></button>
-                      <div class="drop-menu">
-                        <div class="drop-in">
-                          <ul class="drop-list">
-                            <li><a href="#" class="item-link" data-chart-download="png">그래프 이미지(PNG)</a></li>
-                            <li><a href="#" class="item-link" data-chart-download="svg">그래프 벡터 이미지(SVG)</a></li>
-                            <li><a href="#" class="item-link" data-chart-download="csv">통계표(CSV)</a></li>
-                          </ul>
-                        </div>
+                    <div class="cm-ts-tool-group">
+                      <div class="krds-form-toggle-switch medium">
+                        <input type="checkbox" id="es2_pattern" data-chart-option="pattern" checked>
+                        <label for="es2_pattern"><span class="switch-toggle"><i></i></span>패턴 적용</label>
+                      </div>
+                      <div class="krds-form-toggle-switch medium">
+                        <input type="checkbox" id="es2_label" data-chart-option="label" checked>
+                        <label for="es2_label"><span class="switch-toggle"><i></i></span>레이블 보기</label>
                       </div>
                     </div>
-                    <button type="button" class="krds-btn small tertiary" data-chart-action="print">인쇄</button>
+                    <div class="cm-ts-tool-group">
+                      <button type="button" class="krds-btn small tertiary" data-chart-action="zoom">차트 확대</button>
+                      <!-- 다운로드 : KRDS 드롭다운(krds-drop-wrap), 그래프 이미지(PNG·SVG) · 통계표(CSV) -->
+                      <div class="krds-drop-wrap">
+                        <button type="button" class="krds-btn small tertiary drop-btn">다운로드 <i class="svg-icon ico-angle"></i></button>
+                        <div class="drop-menu">
+                          <div class="drop-in">
+                            <ul class="drop-list">
+                              <li><a href="#" class="item-link" data-chart-download="png">그래프 이미지(PNG)</a></li>
+                              <li><a href="#" class="item-link" data-chart-download="svg">그래프 벡터 이미지(SVG)</a></li>
+                              <li><a href="#" class="item-link" data-chart-download="csv">통계표(CSV)</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <button type="button" class="krds-btn small tertiary" data-chart-action="print">인쇄</button>
+                    </div>
                   </div>
                 </div>""" % "\n".join(
         '                        <option value="%s"%s>%s</option>' % (v, " selected" if v == "all" else "", n) for v, n, _ in PLACES)
