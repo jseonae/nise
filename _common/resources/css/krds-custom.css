@@ -3410,10 +3410,8 @@ p {
   display: flex;
   align-items: flex-start;
   gap: var(--krds-gap-4);
-  padding-bottom: var(--krds-padding-8);
 }
 .cm-research-opinion .input {
-  position: relative;
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -3426,14 +3424,29 @@ p {
     --krds-input--color-surface: var(--krds-high-contrast-color-background-white);
   }
 }
-.cm-research-opinion .textarea-count {
-  position: absolute;
-  bottom: -2.5rem;
-  left: 0.6rem;
-  justify-content: flex-start; /* KRDS 는 오른쪽 정렬, Figma 는 왼쪽 */
-  gap: 0;
+/* 입력창 아래 한 줄 : 왼쪽 도움말 · 오른쪽 글자 수 (Figma researchWrap : 13px, 입력창과 8px)
+   - 도움말 글자색 : Figma 는 #6d7882(상자 바탕 위 4.2:1)이라 글자 대비 4.5:1 에 못 미쳐 한 단계 진한 text-subtle 로 */
+.cm-research-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--krds-gap-1) var(--krds-gap-5);
+  margin-top: var(--krds-gap-3);
   font-size: var(--krds-pc-font-size-body-xsmall);
-  color: var(--cm-color-line-strong); /* Figma text/disabled-on */
+  line-height: 1.5;
+}
+.cm-research-hint .form-hint {
+  flex: 1 1 28rem;
+  font-size: inherit;
+  color: var(--cm-color-text-subtle);
+}
+.cm-research-hint .textarea-count {
+  flex: none;
+  width: auto; /* KRDS 는 100% (입력창 아래 한 줄을 다 씀) */
+  gap: 0;
+  margin-left: auto;
+  font-size: inherit; /* 글자색은 KRDS 기본(text-subtle, 숫자는 text-primary) */
 }
 /* 평가하기 : Figma button/tertiary-border(#58616a) 채운 버튼 (KRDS 버튼 종류에 없는 색) */
 .cm-research-submit {
