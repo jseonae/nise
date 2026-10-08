@@ -3235,10 +3235,15 @@ p {
 }
 .cm-es-chart {
   align-items: stretch;
-  padding: var(--krds-padding-10) var(--krds-number-6); /* 좌우 여백을 줄여 그래프를 넓게 (Figma 는 number-16) */
+  padding: var(--krds-padding-10) var(--krds-number-14);
+}
+/* 계(막대 + 꺾은선, combo) 그래프는 좌우 여백을 줄여 넓게 : 막대 값 · 증가율 레이블이 들어갈 자리 (767px 이하는 아래 모바일 여백 그대로) */
+@media (min-width: 768px) {
+  .cm-es-chart:has([data-cm-chart="combo"]) {
+    padding: var(--krds-padding-10) var(--krds-number-8);
+  }
 }
 .cm-es-desc {
-  padding: 0 var(--krds-mobile-padding-card-small);
   font-size: var(--krds-pc-font-size-body-small);
   line-height: 1.5;
   color: var(--cm-color-text-subtle);
