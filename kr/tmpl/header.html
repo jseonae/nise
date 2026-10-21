@@ -61,7 +61,9 @@
           <!-- 헤더 버튼 : .header-actions (통계정보 · 데이터분석 · 알림마당 · 통합검색 · 전체메뉴, 모바일에서는 통합검색 · 전체메뉴만 보이고 나머지 메뉴는 전체메뉴 안에서 이동) -->
           <div class="header-actions">
             <a href="{{html}}stat/survey_history_list.html" class="btn-navi cm-stat pc-only">통계정보</a>
+            <!-- 데이터분석 : 기획팀 해제 요청 전까지 숨김 (kr/js/include.js MENU 의 hidden 과 함께 해제)
             <a href="{{html}}analysis/cross_analysis.html" class="btn-navi cm-analysis pc-only">데이터분석</a>
+            -->
             <a href="{{html}}board/survey_overview.html" class="btn-navi cm-notice pc-only">알림마당</a>
             <!-- 통합검색 : KRDS 헤더 버튼(.btn-navi.sch), 누르면 아래 통합검색 영역(#cm_search_popup)을 열고 닫음 (krds-custom.js cmSearchPopup) -->
             <button type="button" class="btn-navi sch" aria-expanded="false" aria-controls="cm_search_popup">통합검색</button>

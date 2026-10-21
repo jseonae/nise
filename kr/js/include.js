@@ -20,7 +20,8 @@
       ],
     },
     {
-      name: "데이터분석", dir: "analysis",
+      // hidden : 메뉴(모바일 전체메뉴 · 전체메뉴 팝업)에서 숨김. 기획팀 해제 요청 전까지 데이터분석 숨김
+      name: "데이터분석", dir: "analysis", hidden: true,
       items: [
         { name: "교차분석", file: "cross_analysis", desc: "특수교육 실태조사 원자료로 문항 응답을 응답자 특성별로 교차분석할 수 있습니다. 가중치를 적용한 그래프와 통계표를 제공합니다." },
       ],
@@ -41,6 +42,8 @@
   const htmlBase = new URL("html/", krBase).href; // kr/html/
   const rootBase = new URL("../", krBase).href; // 저장소 루트
   const tmplBase = new URL("tmpl/", krBase).href;
+
+  const NAV = MENU.filter((sec) => !sec.hidden); // 메뉴에 보이는 1Depth (hidden 제외)
 
   const pageUrl = (section, item) => `${htmlBase}${section.dir}/${item.list ? `${item.file}_list` : item.file}.html`;
 
@@ -93,8 +96,8 @@
   const mobileTabs = document.querySelector("#mobile-nav .menu-wrap ul");
   const mobilePanels = document.querySelector("#mobile-nav .submenu-wrap");
   if (mobileTabs && mobilePanels) {
-    const opened = current ? current.section : MENU[0];
-    MENU.forEach((sec, i) => {
+    const opened = current && NAV.includes(current.section) ? current.section : NAV[0];
+    NAV.forEach((sec, i) => {
       const id = `mGnb-anchor${i + 1}`;
       mobileTabs.insertAdjacentHTML("beforeend", `<li><a href="#${id}" class="gnb-main-trigger${sec === opened ? " active" : ""}">${sec.name}</a></li>`);
       const links = sec.items.map((item) => {
@@ -108,7 +111,7 @@
   // 전체메뉴 팝업(#modal_sitemap) : 1Depth 제목(h3) + 2Depth 링크 목록, 현재 화면은 aria-current="page"
   const sitemap = document.querySelector("#modal_sitemap .cm-sitemap-menu");
   if (sitemap) {
-    sitemap.insertAdjacentHTML("beforeend", MENU.map((sec) => {
+    sitemap.insertAdjacentHTML("beforeend", NAV.map((sec) => {
       const links = sec.items.map((item) => {
         const on = current && item === current.item;
         return `<li><a href="${pageUrl(sec, item)}"${on ? ' aria-current="page"' : ""}>${item.name}</a></li>`;
